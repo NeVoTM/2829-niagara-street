@@ -189,23 +189,27 @@
 
         .stat-item {
             text-align: center;
-            padding: 20px;
+            padding: 15px 10px;
             background: rgba(255, 215, 0, 0.1);
             border-radius: 15px;
             border: 1px solid rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            word-wrap: break-word;
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--gold);
             display: block;
+            line-height: 1.1;
         }
 
         .stat-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
             margin-top: 5px;
+            line-height: 1.2;
         }
 
         /* Chart container */
@@ -240,9 +244,10 @@
 
         .feature-list li {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.4;
         }
 
         .feature-list li:last-child {
@@ -439,7 +444,7 @@
             
             <div class="stats-grid" style="margin-top: 40px;">
                 <div class="stat-item">
-                    <span class="stat-number">$37.4M</span>
+                    <span class="stat-number">$38M</span>
                     <span class="stat-label">Total Revenue</span>
                 </div>
                 <div class="stat-item">
@@ -456,9 +461,9 @@
 
     <!-- WNYMM Model Section -->
     <section id="model" class="section">
-        <div class="card">
-            <h2>🏦 WNY Makers Model</h2>
-            <p style="color: var(--text-light); margin-bottom: 20px;">
+        <div class="card" style="text-align: left;">
+            <h2 style="text-align: center;">🏦 WNY Makers Model</h2>
+            <p style="color: var(--text-light); margin-bottom: 20px; text-align: center;">
                 Revolutionary partnership approach with <strong style="color: var(--gold);">$35M+ projected revenue</strong>
             </p>
             
@@ -493,7 +498,7 @@
             <h2>📈 Financial Overview</h2>
             
             <div class="chart-container">
-                <div class="chart-title">Revenue Breakdown - $37.4M</div>
+                <div class="chart-title">Revenue Breakdown - $38M</div>
                 <div style="position: relative; height: 280px; width: 100%;">
                     <canvas id="mobileRevenueChart" width="300" height="280"></canvas>
                 </div>
@@ -566,7 +571,7 @@
             <h2>🏢 Project Specs</h2>
             <h3>Phase 1: Base Development</h3>
             <ul class="feature-list">
-                <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
+                <li><strong>Location:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;2829 Niagara Street, Tonawanda, NY</li>
                 <li><strong>Type:</strong> 4-Floor Mixed-Use Building</li>
                 <li><strong>Size:</strong> 143,997 sq ft development</li>
                 <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
@@ -614,11 +619,11 @@
                     <span id="mobileImageCounter">1/20</span>
                 </div>
                 
-                <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;" onclick="event.stopPropagation(); prevMobileImage()">
+                <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255, 215, 0, 0.9); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; color: #1a1a2e; font-weight: bold;" onclick="event.stopPropagation(); prevMobileImage()">
                     ◀
                 </div>
                 
-                <div style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;" onclick="event.stopPropagation(); nextMobileImage()">
+                <div style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255, 215, 0, 0.9); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; color: #1a1a2e; font-weight: bold;" onclick="event.stopPropagation(); nextMobileImage()">
                     ▶
                 </div>
             </div>
@@ -630,18 +635,18 @@
             </div>
             
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 25px;">
-                <div>
-                    <h3>🏢 Building Features</h3>
-                    <ul class="feature-list">
+                <div style="padding-left: 10px;">
+                    <h3 style="margin-left: -10px;">🏢 Building Features</h3>
+                    <ul class="feature-list" style="margin-left: 0;">
                         <li>Dramatic evening exteriors</li>
                         <li>Modern waterfront integration</li>
                         <li>Premium dining concepts</li>
                         <li>Full-service spa facilities</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>🏗️ Amenities</h3>
-                    <ul class="feature-list">
+                <div style="padding-left: 10px;">
+                    <h3 style="margin-left: -10px;">🏗️ Amenities</h3>
+                    <ul class="feature-list" style="margin-left: 0;">
                         <li>Rooftop entertainment decks</li>
                         <li>Pet-friendly dog park</li>
                         <li>Fitness centers (2 locations)</li>
@@ -661,8 +666,8 @@
                 <h3>Partnership Inquiries</h3>
                 <p><strong>Tiffany Durilla</strong></p>
                 <p>Development Partner</p>
-                <a href="mailto:durillaprop@gmail.com">📧 durillaprop@gmail.com</a><br>
-                <a href="tel:+17164211210">📱 716-421-1210</a>
+                <a href="mailto:durillaprop@gmail.com" style="font-size: 1.1rem; margin: 10px 0; display: inline-block;">📧 durillaprop@gmail.com</a><br>
+                <a href="tel:+17164211210" style="font-size: 1.1rem; margin: 10px 0; display: inline-block;">📱 716-421-1210</a>
             </div>
         </div>
 
@@ -671,10 +676,10 @@
             <p style="text-align: center; margin-bottom: 20px;">Join the "Partners Not Paychecks" revolution</p>
             
             <div style="text-align: center;">
-                <a href="mailto:durillaprop@gmail.com?subject=2829 Niagara Partnership Interest" class="cta-button" style="margin: 10px;">
+                <a href="mailto:durillaprop@gmail.com?subject=2829 Niagara Partnership Interest" class="cta-button" style="margin: 10px; font-size: 1.1rem;">
                     📧 Express Interest
                 </a><br>
-                <a href="tel:+17164211210" class="cta-button" style="margin: 10px;">
+                <a href="tel:+17164211210" class="cta-button" style="margin: 10px; font-size: 1.1rem;">
                     📞 Call Now
                 </a>
             </div>
@@ -919,9 +924,20 @@
                     navItems.forEach(nav => nav.classList.remove('active'));
                     item.classList.add('active');
                     
-                    // Smooth scroll to section
+                    // Smooth scroll to TOP of section
                     if (targetSection) {
-                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                        // Small delay to ensure we're at the very top
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: targetSection.offsetTop - 20,
+                                behavior: 'smooth'
+                            });
+                        }, 100);
                     }
                 });
             });
