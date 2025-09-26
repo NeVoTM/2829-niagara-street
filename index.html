@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2829 Niagara Street - Master Development Dashboard v1.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-section p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            background: rgba(255,255,255,0.9);
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .tab-button:hover {
+            background: rgba(52,152,219,0.1);
+            color: var(--secondary-color);
+        }
+
+        .tab-button.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Video Section */
+        .video-hero {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .video-placeholder {
+            aspect-ratio: 16/9;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid var(--secondary-color);
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            background: var(--success-color);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Highlight */
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+
+        .contact-card a {
+            color: #74b9ff;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                min-width: auto;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1>2829 Niagara Street Development</h1>
+                <p>MMM Master Dashboard v1.0 - Tonawanda, NY</p>
+            </div>
+            <div class="status-badge">
+                🚀 Partners Wanted • Development Ready
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-tabs">
+        <button class="tab-button active" onclick="showTab('overview')">🏗️ MMM Model Overview</button>
+        <button class="tab-button" onclick="showTab('financials')">💰 Financials</button>
+        <button class="tab-button" onclick="showTab('project')">🏢 Project Details</button>
+        <button class="tab-button" onclick="showTab('partners')">🤝 Partners</button>
+        <button class="tab-button" onclick="showTab('renderings')">🎨 Renderings</button>
+        <button class="tab-button" onclick="showTab('contact')">📞 Contact</button>
+    </div>
+
+    <div class="container">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <!-- Video Hero -->
+            <div class="video-hero">
+                <h2>🎬 2829 Niagara Street Development Vision</h2>
+                <p style="margin-bottom: 25px; color: #666;">Watch our 3-story mixed-use development proposal with major expansion potential</p>
+                
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div>
+                            <div class="play-button" onclick="openVideo()"></div>
+                            <p style="margin-top: 20px;">2829 Niagara Development Presentation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 15px; font-style: italic; color: #666;">
+                    Click to view complete development proposal and expansion strategies
+                </p>
+            </div>
+
+            <!-- MMM Model Introduction -->
+            <div class="card">
+                <h2>🏗️ Miami Makers Model (MMM)</h2>
+                <h3>Revolutionary "Partners Not Paychecks, Partners Not Investors" Development Approach</h3>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>🎯 Model Introduction</h3>
+                        <p>The Miami Makers Model (MMM) revolutionizes real estate development by transforming traditional contractor relationships into equity partnerships.</p>
+                        
+                        <ul class="feature-list">
+                            <li><strong>Core Innovation:</strong> Transforms contractors into equity partners</li>
+                            <li><strong>"Partners Not Paychecks" approach:</strong> Direct stakes in developments</li>
+                            <li><strong>Active Participation:</strong> Partners vote on key decisions</li>
+                            <li><strong>SEC Compliance:</strong> Howey Test approved structure</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🔄 Revolutionary Benefits</h3>
+                        <ul class="feature-list">
+                            <li>2x+ efficiency from ownership motivation</li>
+                            <li>Eliminates passive investor limitations</li>
+                            <li>Higher quality through partner accountability</li>
+                            <li>Scalable to developments worldwide</li>
+                            <li>Proven success in Miami market</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Stats -->
+            <div class="card">
+                <h2>📊 2829 Niagara Street Project Stats</h2>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Story Mixed-Use Base</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Partner Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Expansion Potential</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">SEC Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financials Tab -->
+        <div id="financials" class="tab-content">
+            <div class="card">
+                <h2>💰 Financial Overview</h2>
+                <p>Revolutionary financing structure through partner equity participation</p>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>🏦 Traditional vs MMM Model</h3>
+                        <ul class="feature-list">
+                            <li><strong>Traditional:</strong> High interest loans + contractor markups</li>
+                            <li><strong>MMM Model:</strong> Partner equity + shared ownership</li>
+                            <li><strong>Result:</strong> 40-60% cost reduction</li>
+                            <li><strong>Quality:</strong> 200%+ improvement through ownership</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>💹 Investment Structure</h3>
+                        <ul class="feature-list">
+                            <li>Cash Partners: Capital contribution</li>
+                            <li>Service Partners: Labor equity</li>
+                            <li>Material Partners: Supply equity</li>
+                            <li>Land Partners: Property equity</li>
+                            <li>Technical Partners: Specialized skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📈 ROI Projections</h2>
+                <div class="grid grid-3">
+                    <div class="stat-card">
+                        <div class="stat-number">2-3x</div>
+                        <div class="stat-label">Traditional ROI</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5-10x</div>
+                        <div class="stat-label">MMM Model ROI</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12-24</div>
+                        <div class="stat-label">Months to Complete</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Details Tab -->
+        <div id="project" class="tab-content">
+            <div class="card">
+                <h2>🏢 Project Specifications</h2>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>🏗️ Phase 1: Base Development</h3>
+                        <ul class="feature-list">
+                            <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
+                            <li><strong>Type:</strong> 3-Story Mixed-Use Building</li>
+                            <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
+                            <li><strong>Upper Floors:</strong> Residential/Office Units</li>
+                            <li><strong>Parking:</strong> On-site parking solution</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🚀 Expansion Potential</h3>
+                        <ul class="feature-list">
+                            <li>Zoning allows for larger development</li>
+                            <li>Additional adjoining properties available</li>
+                            <li>Infrastructure supports major expansion</li>
+                            <li>Market demand supports growth</li>
+                            <li>Partner model scales efficiently</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏘️ Location Advantages</h2>
+                <div class="grid grid-3">
+                    <div>
+                        <h3>🚗 Transportation</h3>
+                        <ul class="feature-list">
+                            <li>Major highway access</li>
+                            <li>Public transportation</li>
+                            <li>Buffalo proximity</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🏬 Commerce</h3>
+                        <ul class="feature-list">
+                            <li>Established business district</li>
+                            <li>Growing retail corridor</li>
+                            <li>Mixed-use zoning</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🏡 Community</h3>
+                        <ul class="feature-list">
+                            <li>Established neighborhood</li>
+                            <li>Schools and services nearby</li>
+                            <li>Growth-oriented community</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partners Tab -->
+        <div id="partners" class="tab-content">
+            <div class="card">
+                <h2>🤝 Partner Categories</h2>
+                <p>Join the revolution - be a partner, not a paycheck recipient</p>
+                
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>💵 Cash Partners</h3>
+                        <ul class="feature-list">
+                            <li>Private capital investors</li>
+                            <li>Family offices</li>
+                            <li>Angel investors</li>
+                            <li>Equity participation in all phases</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactPartner('cash')">💰 Join as Cash Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🔧 Service Partners</h3>
+                        <ul class="feature-list">
+                            <li>General contractors</li>
+                            <li>Architects & engineers</li>
+                            <li>Construction managers</li>
+                            <li>Specialty trades</li>
+                        </ul>
+                        <button class="btn btn-success" onclick="contactPartner('service')">🏗️ Join as Service Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>⚡ MEP Technical Partners</h3>
+                        <ul class="feature-list">
+                            <li>Electrical contractors</li>
+                            <li>Plumbing specialists</li>
+                            <li>HVAC experts</li>
+                            <li>Smart building integrators</li>
+                        </ul>
+                        <button class="btn btn-warning" onclick="contactPartner('technical')">⚡ Join as Technical Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏗️ Material Partners</h3>
+                        <ul class="feature-list">
+                            <li>Steel suppliers</li>
+                            <li>Concrete providers</li>
+                            <li>Fixture suppliers</li>
+                            <li>Building materials</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactPartner('material')">🧱 Join as Material Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏡 Land Partners</h3>
+                        <ul class="feature-list">
+                            <li>Property owners</li>
+                            <li>Land developers</li>
+                            <li>Real estate holders</li>
+                            <li>Adjacent property owners</li>
+                        </ul>
+                        <button class="btn btn-success" onclick="contactPartner('land')">🏘️ Join as Land Partner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Renderings Tab -->
+        <div id="renderings" class="tab-content">
+            <div class="card">
+                <h2>🎨 Project Renderings & Visualizations</h2>
+                <p>Visual representations of the 2829 Niagara Street development</p>
+                
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>🏢 Building Renderings</h3>
+                        <div style="aspect-ratio: 16/9; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; margin: 15px 0;">
+                            <div style="text-align: center;">
+                                <p>3D Building Visualization</p>
+                                <p style="font-size: 0.8rem; opacity: 0.8;">Upload renderings to /images/ folder</p>
+                            </div>
+                        </div>
+                        <p>Professional architectural renderings showing the 3-story mixed-use development</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🗺️ Site Plans</h3>
+                        <div style="aspect-ratio: 16/9; background: linear-gradient(45deg, #764ba2, #667eea); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; margin: 15px 0;">
+                            <div style="text-align: center;">
+                                <p>Site Layout & Planning</p>
+                                <p style="font-size: 0.8rem; opacity: 0.8;">Upload plans to /images/ folder</p>
+                            </div>
+                        </div>
+                        <p>Detailed site plans showing layout, parking, and expansion possibilities</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📐 Technical Drawings</h2>
+                <div class="grid grid-3">
+                    <div class="stat-card">
+                        <div class="stat-number">📋</div>
+                        <div class="stat-label">Floor Plans</div>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">Available in /docs/ folder</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🔧</div>
+                        <div class="stat-label">MEP Drawings</div>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">Technical specifications</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">📏</div>
+                        <div class="stat-label">Structural Plans</div>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">Engineering details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Tab -->
+        <div id="contact" class="tab-content">
+            <div class="card">
+                <h2>📞 Contact & Partnership Information</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h4>👥 Partnership Inquiries</h4>
+                        <p><strong>Tiffany Durilla</strong></p>
+                        <p>Development Partner</p>
+                        <p>📧 <a href="mailto:durillaprop@gmail.com">durillaprop@gmail.com</a></p>
+                        <p>📱 <a href="tel:+17164211210">716-421-1210</a></p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>🏗️ Project Location</h4>
+                        <p><strong>2829 Niagara Street</strong></p>
+                        <p>Tonawanda, NY</p>
+                        <p>Mixed-Use Development Site</p>
+                        <p>📍 Ready for Development</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>💼 Investment Office</h4>
+                        <p><strong>MMM Development Partners</strong></p>
+                        <p>Tonawanda Operations</p>
+                        <p>Partnership Structure</p>
+                        <p>🚀 Expansion Ready</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🚀 Ready to Join?</h2>
+                <div style="text-align: center; padding: 20px;">
+                    <p style="font-size: 1.1rem; margin-bottom: 25px;">Be part of the "Partners Not Paychecks" revolution in Tonawanda's premier development opportunity.</p>
+                    
+                    <button class="btn btn-primary" onclick="window.open('mailto:durillaprop@gmail.com?subject=2829 Niagara Street Partnership Interest', '_blank')">
+                        📧 Express Partnership Interest
+                    </button>
+                    <button class="btn btn-success" onclick="window.open('tel:+17164211210', '_blank')">
+                        📞 Call Development Team
+                    </button>
+                    <button class="btn btn-warning" onclick="openVideo()">
+                        🎬 Watch Development Video
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function openVideo() {
+            // Direct link to Google Drive video
+            window.open('https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/view?usp=sharing', '_blank');
+        }
+
+        function contactPartner(partnerType) {
+            const messages = {
+                cash: "I'm interested in joining as a Cash Partner for the 2829 Niagara Street development.",
+                service: "I'm interested in joining as a Service Partner for the 2829 Niagara Street development.",
+                technical: "I'm interested in joining as a Technical Partner for the 2829 Niagara Street development.",
+                material: "I'm interested in joining as a Material Partner for the 2829 Niagara Street development.",
+                land: "I'm interested in joining as a Land Partner for the 2829 Niagara Street development."
+            };
+            
+            const subject = `2829 Niagara Street - ${partnerType.charAt(0).toUpperCase() + partnerType.slice(1)} Partnership Interest`;
+            window.open(`mailto:durillaprop@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(messages[partnerType])}`, '_blank');
+        }
+
+        // Auto-load functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('2829 Niagara Street MMM Dashboard Loaded');
+            console.log('Version: 1.0 - Full Multi-Page Portal');
+            console.log('Based on: Nevo Tower Portal Structure');
+        });
+    </script>
+</body>
+</html>

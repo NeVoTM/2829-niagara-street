@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2829 Niagara Street - Premier Mixed-Use Development</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/></svg>');
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .status-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .video-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .video-placeholder {
+            aspect-ratio: 16/9;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+        }
+        
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid #667eea;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-list li:hover {
+            background: #f8f9fa;
+            padding-left: 10px;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .cta-section {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .contact-info {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .container { margin-top: -30px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>2829 Niagara Street</h1>
+        <p>Premier Mixed-Use Development • Tonawanda, NY</p>
+        <div class="status-badge">🚀 Development Ready • Partners Wanted</div>
+    </div>
+
+    <div class="container">
+        <!-- Video Section -->
+        <div class="video-section">
+            <h2 style="color: #2c3e50; margin-bottom: 20px; font-size: 2rem;">🎬 Project Vision</h2>
+            <p style="margin-bottom: 25px; color: #666; font-size: 1.1rem;">Watch our 3-story mixed-use development proposal with expansion potential</p>
+            
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <div>
+                        <div class="play-button" onclick="openVideo()"></div>
+                        <p style="margin-top: 20px; font-size: 1.1rem;">2829 Niagara Development Video</p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Click to view full development proposal</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; font-style: italic; color: #666;">
+                <strong>Watch:</strong> Complete development proposal and expansion strategies
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>🏗️ Development Overview</h2>
+                <ul class="feature-list">
+                    <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
+                    <li><strong>Type:</strong> 3-Story Mixed-Use with Expansion Potential</li>
+                    <li><strong>Model:</strong> <span class="highlight">Partners Not Paychecks</span></li>
+                    <li><strong>Status:</strong> Seeking Development Partners</li>
+                    <li><strong>Scalability:</strong> Expandable to Much Larger Development</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>💰 Investment Opportunity</h2>
+                <ul class="feature-list">
+                    <li><span class="highlight">Revolutionary Approach:</span> Partners, not passive investors</li>
+                    <li><span class="highlight">SEC Compliant:</span> Howey Test approved structure</li>
+                    <li><span class="highlight">Active Participation:</span> Decision-making voting rights</li>
+                    <li><span class="highlight">Proven Model:</span> Miami Makers Model (MMM) success</li>
+                    <li><span class="highlight">Higher Returns:</span> 2x+ efficiency from ownership motivation</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🤝 Partner Categories</h2>
+                <ul class="feature-list">
+                    <li><span class="highlight">Cash Partners:</span> Private capital, family offices</li>
+                    <li><span class="highlight">General Service:</span> Contractors, architects, engineers</li>
+                    <li><span class="highlight">MEP Technical:</span> Electrical, plumbing, HVAC specialists</li>
+                    <li><span class="highlight">Material Partners:</span> Steel, concrete, fixture suppliers</li>
+                    <li><span class="highlight">Land Owner:</span> Property equity participation</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>📈 Development Phases</h2>
+                <ul class="feature-list">
+                    <li><strong>Phase 1:</strong> 3-Story Mixed-Use Foundation</li>
+                    <li><strong>Phase 2:</strong> Partner Onboarding & Voting System</li>
+                    <li><strong>Phase 3:</strong> Construction with Partner Oversight</li>
+                    <li><strong>Phase 4:</strong> Expansion Potential Assessment</li>
+                    <li><strong>Phase 5:</strong> Scale to Larger Development</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="margin-bottom: 20px;">🚀 Ready to Join the Revolution?</h2>
+            <p style="margin-bottom: 25px; font-size: 1.1rem;">Be part of the "Partners Not Paychecks" movement in Tonawanda's premier development opportunity.</p>
+            
+            <button class="cta-button" onclick="window.open('mailto:durillaprop@gmail.com?subject=2829 Niagara Street Partnership Interest', '_blank')">
+                📧 Partner Interest
+            </button>
+            <button class="cta-button" onclick="window.open('tel:+17164211210', '_blank')">
+                📞 Call Now
+            </button>
+            <button class="cta-button" onclick="openVideo()">
+                🎬 Watch Video
+            </button>
+        </div>
+
+        <div class="contact-info">
+            <h3 style="margin-bottom: 15px; color: #ecf0f1;">📞 Contact Information</h3>
+            <p><strong>Tiffany Durilla</strong> - Development Partner</p>
+            <p>📧 Email: <a href="mailto:durillaprop@gmail.com" style="color: #74b9ff;">durillaprop@gmail.com</a></p>
+            <p>📱 Phone: <a href="tel:+17164211210" style="color: #74b9ff;">716-421-1210</a></p>
+            <p>📍 Location: 2829 Niagara Street, Tonawanda, NY</p>
+        </div>
+    </div>
+
+    <script>
+        function openVideo() {
+            // Direct link to Google Drive video
+            window.open('https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/view?usp=sharing', '_blank');
+        }
+        
+        // Auto-notification system
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('2829 Niagara Street Development Dashboard Loaded');
+            console.log('Contact: Tiffany Durilla - durillaprop@gmail.com - 716-421-1210');
+        });
+    </script>
+</body>
+</html>
