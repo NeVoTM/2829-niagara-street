@@ -30,11 +30,36 @@
         /* Full-screen sections */
         .section {
             min-height: 100vh;
+            max-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 20px;
+            padding-bottom: 100px; /* Account for nav bar */
             position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* Prevent infinite scrolling by constraining content */
+        .section > .card:last-child {
+            margin-bottom: 20px;
+        }
+        
+        /* Fix for Project section layout issues */
+        #project {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        #project .card {
+            max-height: none;
+        }
+        
+        /* Ensure no repeating background patterns */
+        #project::before,
+        #project::after {
+            display: none;
         }
 
         /* Fixed bottom navigation */
@@ -139,6 +164,7 @@
             padding: 25px;
             margin: 15px 0;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
         }
 
         .card h2 {
@@ -189,6 +215,8 @@
             padding: 20px;
             margin: 20px 0;
             text-align: center;
+            max-height: 350px;
+            overflow: hidden;
         }
 
         .chart-title {
@@ -200,6 +228,7 @@
 
         canvas {
             max-width: 100% !important;
+            max-height: 280px !important;
             height: auto !important;
         }
 
@@ -335,10 +364,36 @@
             
             .section {
                 padding: 15px;
+                padding-bottom: 120px;
             }
             
             .card {
                 padding: 20px;
+                background: rgba(255, 255, 255, 0.15);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            .card h2, .card h3 {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            
+            .card p, .card li {
+                color: #ffffff !important;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            }
+            
+            .chart-container {
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .chart-title {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            
+            .stat-item {
+                background: rgba(255, 215, 0, 0.2);
+                border: 2px solid rgba(255, 215, 0, 0.4);
             }
         }
     </style>
@@ -439,7 +494,9 @@
             
             <div class="chart-container">
                 <div class="chart-title">Revenue Breakdown - $37.4M</div>
-                <canvas id="mobileRevenueChart" width="300" height="300"></canvas>
+                <div style="position: relative; height: 280px; width: 100%;">
+                    <canvas id="mobileRevenueChart" width="300" height="280"></canvas>
+                </div>
             </div>
             
             <div class="stats-grid">
@@ -480,7 +537,9 @@
             <h2>💰 Cost Analysis</h2>
             <div class="chart-container">
                 <div class="chart-title">Development Costs - $25.7M</div>
-                <canvas id="mobileCostChart" width="300" height="250"></canvas>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="mobileCostChart" width="300" height="250"></canvas>
+                </div>
             </div>
         </div>
         
@@ -488,7 +547,9 @@
             <h2>📊 Market Comparables</h2>
             <div class="chart-container">
                 <div class="chart-title">Tonawanda Market Analysis</div>
-                <canvas id="mobileComparablesChart" width="300" height="250"></canvas>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="mobileComparablesChart" width="300" height="250"></canvas>
+                </div>
             </div>
             <ul class="feature-list">
                 <li><strong>Rental Range:</strong> $1.84 - $2.94/sq ft annually</li>
@@ -542,8 +603,8 @@
             <h2>🎨 Project Renderings</h2>
             <p style="color: var(--text-light); margin-bottom: 20px;">Professional architectural visualizations</p>
             
-            <div id="mobileSlideshow" style="position: relative; background: #000; border-radius: 15px; overflow: hidden; cursor: pointer; margin: 20px 0;" onclick="toggleMobileSlideshow()">
-                <img id="mobileImage" src="" alt="2829 Niagara Renderings" style="width: 100%; height: auto; display: block; min-height: 200px;">
+            <div id="mobileSlideshow" style="position: relative; background: #000; border-radius: 15px; overflow: hidden; cursor: pointer; margin: 20px 0; height: 250px;" onclick="toggleMobileSlideshow()">
+                <img id="mobileImage" src="" alt="2829 Niagara Renderings" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 
                 <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; max-width: 90%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     <span id="mobileImageTitle">Loading...</span>
@@ -646,6 +707,9 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        layout: {
+                            padding: 10
+                        },
                         plugins: {
                             legend: {
                                 position: 'bottom',
