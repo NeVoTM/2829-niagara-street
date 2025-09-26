@@ -11,20 +11,32 @@
 
 ### 1. **READ CRITICAL FILES (PRIORITY ORDER)**
 
-**🔴 ESSENTIAL - Read immediately:**
+**🔴 ESSENTIAL - Read immediately from GitHub (master source):**
 ```
-1. DEBUGGING-CHECKLIST.md - Quality assurance and problem solutions
-2. README-UNIVERSAL-TEMPLATE.md - Universal project documentation template
-3. TODO-LIST.md - Current open items and pending work
-4. project-data.json - Master data source for all project content
+1. https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
+   - Quality assurance and problem solutions with numbered references
+   
+2. https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md
+   - Universal project documentation template for all projects
+   
+3. https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
+   - Current open items and pending work across all projects
+   
+4. project-data.json (local) - Master data source for THIS project's content
 ```
 
 **🔵 IMPORTANT - Read for context:**
 ```
-5. PROJECT-DOCUMENTATION.md - Complete project specifications
-6. DATA-SYSTEM-README.md - Centralized data system instructions
-7. README.md - Current project overview
+5. PROJECT-DOCUMENTATION.md (local) - Complete project specifications
+6. DATA-SYSTEM-README.md (local) - Centralized data system instructions
+7. README.md (local) - Current project overview
 ```
+
+**📋 GitHub Master Files (Source of Truth):**
+- **DEBUGGING-CHECKLIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
+- **README-UNIVERSAL-TEMPLATE.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md
+- **TODO-LIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
+- **WarpSpeed.ps1**: https://github.com/NeVoTM/2829-niagara-street/blob/main/WarpSpeed.ps1
 
 ### 2. **VALIDATE CURRENT PROJECT STATE**
 
@@ -169,9 +181,10 @@ WarpSpeed
 - Navigation scrolls to section tops, not arbitrary positions
 
 ### **File Management:**
-- GitHub is source of truth for universal templates
-- Copy universal files FROM GitHub TO local drive
-- Each project maintains its own project-data.json
+- **GitHub is MASTER source** for universal templates (DEBUGGING-CHECKLIST.md, README-UNIVERSAL-TEMPLATE.md, TODO-LIST.md)
+- **Always read latest from GitHub URLs** listed above - don't rely on local copies
+- **Copy universal files FROM GitHub TO local drive** when starting new projects
+- Each project maintains its own project-data.json locally
 - Universal templates apply across all projects
 
 ---

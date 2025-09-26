@@ -95,7 +95,7 @@ APPLY UNIVERSAL DEBUGGING SYSTEM:
 
 ## 🎯 **UNIVERSAL CATEGORIES: IMPLEMENT IN EVERY PROJECT**
 
-### **🔴 SECTION #1: DATA/TEXT MASTER CONTROL SYSTEM** 
+### **1.0 🔴 DATA/TEXT MASTER CONTROL SYSTEM**
 **🎡 UNIVERSAL FOR ALL PROJECTS - IMPERATIVE TO IMPLEMENT**
 
 **What Warp Will See:**
@@ -191,7 +191,7 @@ See working example: https://github.com/NeVoTM/2829-niagara-street/blob/main/pro
 
 ---
 
-### **🔵 SECTION #2: MOBILE-FIRST DESIGN SYSTEM**
+### **2.0 🔵 MOBILE-FIRST DESIGN SYSTEM**
 **🎡 UNIVERSAL FOR ALL PROJECTS - IMPERATIVE TO IMPLEMENT**
 
 **What Warp Will See:**
@@ -268,7 +268,7 @@ See working example: https://github.com/NeVoTM/2829-niagara-street/blob/main/mob
 
 ---
 
-### **🟿 SECTION #3: NODE.JS SCRIPT USAGE INSTRUCTIONS**
+### **3.0 🟿 NODE.JS SCRIPT USAGE INSTRUCTIONS**
 **🎡 UNIVERSAL FOR ALL PROJECTS - FIXING COMMAND SYNTAX**
 
 **What Warp Will See:**
@@ -338,7 +338,7 @@ After making changes to project-data.json:
 
 ---
 
-### **🔶 SECTION #4: INFINITE SCROLL PREVENTION**
+### **4.0 🔶 CRITICAL MOBILE ISSUES**
 **🎡 UNIVERSAL FOR ALL PROJECTS - CRITICAL IMPLEMENTATION**
 
 ### **ISSUE #4.1: INFINITE SCROLLING PROBLEM**
@@ -725,7 +725,7 @@ In mobile-design.html, lines 688-690 show version in Contact tab only.
 
 ---
 
-### **🟪 SECTION #5: README TEMPLATE SYSTEM**
+### **5.0 🟪 README TEMPLATE SYSTEM**
 **🎡 UNIVERSAL FOR ALL PROJECTS - DOCUMENTATION STANDARDIZATION**
 
 **What Warp Will See:**
@@ -985,40 +985,58 @@ See `HOW-TO-DEPLOY.md` for detailed instructions.
 
 **Individual Issues:**
 ```
-Apply solution from ISSUE #4.3 (ALIGNMENT NIGHTMARES) to fix the address formatting.
-Apply SECTION #1 (DATA/TEXT MASTER CONTROL SYSTEM) to centralize our data.
-Fix ISSUE #4.1 (INFINITE SCROLLING PROBLEM) on all dashboard pages.
+Apply solution from ISSUE 4.3 (ALIGNMENT NIGHTMARES) to fix the address formatting.
+Apply SECTION 1.0 (DATA/TEXT MASTER CONTROL) to centralize our data.
+Fix ISSUE 4.1 (INFINITE SCROLLING) on all dashboard pages.
+Implement SECTION 2.0 (MOBILE-FIRST DESIGN) for mobile optimization.
 ```
 
 **Multiple Issues:**
 ```
-Apply fixes for ISSUE #4.1, #4.2, and #4.5 to solve infinite scrolling, chart sizing, and navigation problems.
-Implement SECTION #2 (MOBILE-FIRST DESIGN) and ISSUE #4.7 (MOBILE USABILITY) for complete mobile optimization.
+Apply fixes for ISSUE 4.1, 4.2, and 4.5 to solve infinite scrolling, chart sizing, and navigation problems.
+Implement SECTION 2.0 (MOBILE-FIRST) and ISSUE 4.7 (MOBILE USABILITY) for complete mobile optimization.
+Check all items in SECTION 6.1 (CHARTS) and 6.3 (IPHONE OPTIMIZATION) for quality assurance.
 ```
 
-**Section Overview:**
-- **SECTION #1:** Centralized data management system
-- **SECTION #2:** Mobile-first design implementation  
-- **SECTION #3:** Node.js script usage and commands
-- **SECTION #4:** Critical mobile issues (9 specific problems)
-- **SECTION #5:** Universal README template system
+**Complete Numbering System:**
+- **1.0:** Centralized data management system
+- **2.0:** Mobile-first design implementation  
+- **3.0:** Node.js script usage and commands
+- **4.0:** Critical mobile issues (9 specific problems)
+- **5.0:** Universal README template system
+- **6.0:** Quality assurance checklists (7 categories)
+- **7.0:** Critical failure points and testing protocols
 
-**Quick Issue Reference:**
-- **#4.1:** Infinite scrolling prevention
-- **#4.2:** Chart sizing disasters
-- **#4.3:** Alignment nightmares
-- **#4.4:** Text visibility disasters
-- **#4.5:** Navigation positioning failures
-- **#4.6:** Data integrity problems
-- **#4.7:** Mobile usability failures
-- **#4.8:** Video container overflow
-- **#4.9:** Version management chaos
+**Quick Issue Reference (Section 4.0):**
+- **4.1:** Infinite scrolling prevention
+- **4.2:** Chart sizing disasters
+- **4.3:** Alignment nightmares
+- **4.4:** Text visibility disasters
+- **4.5:** Navigation positioning failures
+- **4.6:** Data integrity problems
+- **4.7:** Mobile usability failures
+- **4.8:** Video container overflow
+- **4.9:** Version management chaos
+
+**Quality Checklist Reference (Section 6.0):**
+- **6.1:** Charts & Visualizations
+- **6.2:** Buttons & Navigation
+- **6.3:** iPhone Optimization
+- **6.4:** Images & Slideshow
+- **6.5:** Links & Integration
+- **6.6:** Professional Appearance
+- **6.7:** Technical Testing
 
 ### **Last Updated**
 
 September 26, 2025
 
-### **📈 CHARTS & VISUALIZATIONS**
+---
+
+## **6.0 🔍 QUALITY ASSURANCE CHECKLISTS**
+**🎡 COMPREHENSIVE TESTING REQUIREMENTS FOR ALL PROJECTS**
+
+### **6.1 📈 CHARTS & VISUALIZATIONS**
 - [ ] Revenue breakdown chart working and visible
 - [ ] Cost analysis chart displaying properly
 - [ ] Market comparables chart functional
@@ -1030,7 +1048,7 @@ September 26, 2025
 - [ ] Charts don't cause infinite scrolling or layout breaks
 - [ ] Chart containers have proper overflow controls
 
-### **🔘 BUTTONS & NAVIGATION**
+### **6.2 🔘 BUTTONS & NAVIGATION**
 - [ ] All navigation buttons visible
 - [ ] Video play button functional
 - [ ] Contact buttons working (email, phone) with LARGE icons
@@ -1042,7 +1060,7 @@ September 26, 2025
 - [ ] Navigation arrows have good contrast (not white on light)
 - [ ] All tabs default to top of their respective sections
 
-### **📱 IPHONE OPTIMIZATION**
+### **6.3 📱 IPHONE OPTIMIZATION**
 - [ ] Header compact and professional
 - [ ] All text readable without zooming and fits in containers
 - [ ] Charts scale properly on iPhone with height limits
@@ -1054,7 +1072,7 @@ September 26, 2025
 - [ ] Section padding accounts for bottom navigation (120px)
 - [ ] Text has proper contrast with shadows for visibility
 
-### **🖼️ IMAGES & SLIDESHOW**
+### **6.4 🖼️ IMAGES & SLIDESHOW**
 - [ ] All 20 rendering images included
 - [ ] Slideshow navigation working
 - [ ] Captions not covering images
@@ -1064,7 +1082,7 @@ September 26, 2025
 - [ ] Counter displaying correctly
 - [ ] Previous/Next buttons functional
 
-### **🔗 LINKS & INTEGRATION**
+### **6.5 🔗 LINKS & INTEGRATION**
 - [ ] Video link working (Google Drive)
 - [ ] All 3 website versions cross-linked
 - [ ] Email links opening mail client
@@ -1073,7 +1091,7 @@ September 26, 2025
 - [ ] No broken or missing links
 - [ ] Proper link styling and hover effects
 
-### **🎨 PROFESSIONAL APPEARANCE**
+### **6.6 🎨 PROFESSIONAL APPEARANCE**
 - [ ] Consistent typography throughout
 - [ ] Proper spacing and alignment (data aligned to data, not page edges)
 - [ ] Color scheme cohesive
@@ -1087,7 +1105,7 @@ September 26, 2025
 - [ ] Green checkmarks consistently aligned
 - [ ] All sections have professional alignment standards
 
-### **🔧 TECHNICAL TESTING**
+### **6.7 🔧 TECHNICAL TESTING**
 - [ ] Page loads completely
 - [ ] No JavaScript errors in console
 - [ ] Responsive design works on all sizes
@@ -1099,9 +1117,10 @@ September 26, 2025
 
 ---
 
-## 🚨 **CRITICAL FAILURE POINTS TO AVOID**
+## **7.0 🚨 CRITICAL FAILURE POINTS TO AVOID**
+**🎡 UNIVERSAL TESTING PROTOCOLS AND STANDARDS**
 
-### **MAJOR ISSUES:**
+### **7.1 MAJOR ISSUES:**
 - Charts cut off or not visible (ALWAYS set max-height)
 - Missing financial data or wrong numbers
 - Broken navigation or buttons
@@ -1111,7 +1130,7 @@ September 26, 2025
 - Blank sections due to CSS issues
 - Navigation not scrolling to section tops
 
-### **COMMON OVERSIGHTS:**
+### **7.2 COMMON OVERSIGHTS:**
 - Forgetting to test on iPhone specifically
 - Not checking all tabs/sections
 - Missing contact information
@@ -1124,7 +1143,7 @@ September 26, 2025
 - Small contact icons on mobile
 - Revenue not rounded for marketing appeal
 
-### **PROFESSIONAL STANDARDS:**
+### **7.3 PROFESSIONAL STANDARDS:**
 - Every element must serve a purpose
 - No placeholder or dummy content
 - Consistent styling throughout
