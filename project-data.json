@@ -67,22 +67,64 @@
       "cta_button": "🚀 Join the Revolution"
     },
     "model": {
-      "title": "🏦 WNY Makers Model",
+      "title": "🏦 The New Way to Build Without Banks",
+      "subtitle": "Simple. Fair. Revolutionary.",
       "description": "Revolutionary partnership approach with <strong style=\"color: var(--gold);\">${total_revenue}+ projected revenue</strong>",
-      "how_it_works_title": "💡 How It Works",
-      "how_it_works": [
-        "<strong>In-Kind Investment:</strong> Your expertise = Direct equity",
-        "<strong>Profit Share:</strong> Pro-rata share of profits",
-        "<strong>Debt-Free:</strong> No traditional bank loans",
-        "<strong>6-12 Months Faster:</strong> Accelerated timeline"
+      "what_it_is_title": "💡 What Is It?",
+      "what_it_is": [
+        "Instead of borrowing money from banks, we team up with builders and professionals",
+        "Everyone who helps build gets to own a piece of the building",
+        "When the building makes money, everyone gets paid"
       ],
-      "benefits_title": "🎯 Your Benefits",
-      "benefits": [
-        "<strong>Wealth Building:</strong> Long-term equity growth",
-        "<strong>Tax Advantages:</strong> Depreciation benefits",
-        "<strong>Future Projects:</strong> Scalable investment model",
-        "<strong>Active Role:</strong> Marketing & partner recruitment"
+      "how_to_join_title": "🤝 How You Join",
+      "how_to_join": [
+        "<strong>Your Work = Your Share:</strong> Do plumbing? Get ownership. Do marketing? Get ownership.",
+        "<strong>No Money Needed:</strong> Just bring your skills",
+        "<strong>Simple Math:</strong> $10,000 of work = $10,000 of ownership",
+        "<strong>You Help Decide:</strong> Have a say in things you know about"
       ],
+      "how_you_make_money_title": "💰 How You Make Money",
+      "how_you_make_money": [
+        "<strong>Monthly Income:</strong> Get paid every month from rent collected",
+        "<strong>Sale Profits:</strong> Get paid when building sells",
+        "<strong>Value Growth:</strong> Your share grows in value over time",
+        "<strong>Tax Savings:</strong> Save money on taxes (like any business owner)"
+      ],
+      "why_its_faster_title": "⚡ Why It's Faster",
+      "why_its_faster": [
+        "<strong>No Bank Delays:</strong> No waiting for bank approvals (saves 6-12 months)",
+        "<strong>No Paperwork:</strong> No bank paperwork or meetings",
+        "<strong>Quick Start:</strong> Everyone starts working right away",
+        "<strong>Fast Decisions:</strong> Decisions made quickly by the team"
+      ],
+      "real_examples_title": "📈 Real Examples",
+      "real_examples": [
+        "<strong>Miami Building:</strong> 75 apartments, expecting $38 million in sales",
+        "<strong>Buffalo Project:</strong> 5 buildings on Niagara Street",
+        "<strong>Your Future:</strong> Join one project, then another, build wealth"
+      ],
+      "who_can_join_title": "👥 Who Can Join",
+      "who_can_join": [
+        "Electricians, plumbers, builders",
+        "Lawyers, accountants",
+        "Marketing people, salespeople",
+        "Anyone with useful skills"
+      ],
+      "why_it_works_title": "✨ Why It Works",
+      "why_it_works": [
+        "<strong>Everyone Invested:</strong> Everyone wants the project to succeed (we all own it!)",
+        "<strong>Better Quality:</strong> Better work quality (protecting our investment)",
+        "<strong>Community Impact:</strong> Neighbors happy (local people involved)",
+        "<strong>No Debt Stress:</strong> No debt hanging over the project"
+      ],
+      "bottom_line_title": "🎯 Bottom Line",
+      "bottom_line": [
+        "You work, you own, you earn",
+        "No banks, no debt, no delays",
+        "Build wealth without needing cash upfront",
+        "Be a business owner, not just a worker"
+      ],
+      "simple_summary": "It's simple: We're all partners building together, sharing the profits together!",
       "video_title": "🎬 Watch Project Vision"
     },
     "financials": {
@@ -125,6 +167,55 @@
       "next_steps_description": "Join the \"Partners Not Paychecks\" revolution",
       "express_interest": "📧 Express Interest",
       "call_now": "📞 Call Now"
+    },
+    "gage_exclusive": {
+      "title": "👑 Gage - Exclusive Ground-Level Partnership",
+      "subtitle": "Current Tenant | Future Pillar Partner",
+      "intro_title": "🎯 Your Unique Advantage",
+      "intro_description": "As our current tenant at 2829 Niagara, you have first-hand knowledge of this location's potential. We're offering you an exclusive ground-level partnership opportunity in what could become a multi-billion dollar scalable development model.",
+      "current_situation_title": "🏢 Current Building Solutions",
+      "current_building_benefits": [
+        "<strong>Hot Sauna & Massage Buildout:</strong> We'll provide website development and marketing assistance",
+        "<strong>Long-term Lease Security:</strong> Guaranteed lease until new development begins",
+        "<strong>Pro-rata Protection:</strong> If excavation starts early, you'll receive proportional compensation",
+        "<strong>Zero Investment Risk:</strong> We help you grow your current business while planning future partnership"
+      ],
+      "partnership_advantages_title": "💎 Ground-Level Partnership Advantages",
+      "partnership_benefits": [
+        "<strong>Founding Partner Status:</strong> Get in on the ground floor of a revolutionary development model",
+        "<strong>Commission Structure:</strong> Earn commissions on every partner you bring to the table",
+        "<strong>Sub-contractor Network:</strong> Convert your existing sub-contractors into partners",
+        "<strong>Prime Commercial Space:</strong> Lucrative rental terms in the new building for your wellness business",
+        "<strong>STR Hotel Unit Access:</strong> Take advantage of short-term rental opportunities",
+        "<strong>Tax Benefits:</strong> Depreciation advantages and investment tax benefits",
+        "<strong>Equity Growth:</strong> Share in $38M+ projected revenue as a founding partner",
+        "<strong>Future Projects:</strong> Priority access to upcoming developments in the scalable model"
+      ],
+      "financial_opportunity_title": "📈 Financial Opportunity Overview",
+      "financial_highlights": [
+        "<strong>Project Value:</strong> $38M total revenue projection",
+        "<strong>Your Equity Share:</strong> Based on contribution level (cash, services, or hybrid)",
+        "<strong>Partner Recruitment Bonus:</strong> Commission on successful partner referrals",
+        "<strong>Commercial Space ROI:</strong> Premium location for wellness/spa services",
+        "<strong>STR Revenue Share:</strong> Participate in hotel room revenue streams"
+      ],
+      "scaling_vision_title": "🚀 The Multi-Billion Dollar Vision",
+      "scaling_description": "This isn't just one building - it's a proven model that can scale across multiple markets. As a ground-level partner, you'll have opportunities in future developments, creating a portfolio of equity positions.",
+      "next_steps_title": "⚡ Your Next Steps",
+      "action_items": [
+        "<strong>Current Business Protection:</strong> Let's discuss your sauna/massage buildout plans",
+        "<strong>Partnership Structure:</strong> Review contribution options (cash, services, hybrid)",
+        "<strong>Network Assessment:</strong> Identify sub-contractors who could become partners",
+        "<strong>Timeline Planning:</strong> Align your business growth with development schedule"
+      ],
+      "exclusive_offer_title": "🎁 Exclusive Tenant-to-Partner Offer",
+      "exclusive_terms": [
+        "<strong>No Upfront Risk:</strong> Continue current operations while we plan transition",
+        "<strong>Marketing Support:</strong> Website and promotional assistance for current business",
+        "<strong>Lease Protection:</strong> Guaranteed terms until construction begins",
+        "<strong>Priority Positioning:</strong> First choice of commercial space in new building",
+        "<strong>Founding Partner Benefits:</strong> Enhanced profit sharing as early adopter"
+      ]
     }
   },
   "features": {
