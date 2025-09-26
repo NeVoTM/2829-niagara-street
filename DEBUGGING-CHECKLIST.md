@@ -95,7 +95,7 @@ APPLY UNIVERSAL DEBUGGING SYSTEM:
 
 ## 🎯 **UNIVERSAL CATEGORIES: IMPLEMENT IN EVERY PROJECT**
 
-### **🔴 CATEGORY 1: DATA/TEXT MASTER CONTROL SYSTEM** 
+### **🔴 SECTION #1: DATA/TEXT MASTER CONTROL SYSTEM** 
 **🎡 UNIVERSAL FOR ALL PROJECTS - IMPERATIVE TO IMPLEMENT**
 
 **What Warp Will See:**
@@ -191,7 +191,7 @@ See working example: https://github.com/NeVoTM/2829-niagara-street/blob/main/pro
 
 ---
 
-### **🔵 CATEGORY 2: MOBILE-FIRST DESIGN SYSTEM**
+### **🔵 SECTION #2: MOBILE-FIRST DESIGN SYSTEM**
 **🎡 UNIVERSAL FOR ALL PROJECTS - IMPERATIVE TO IMPLEMENT**
 
 **What Warp Will See:**
@@ -268,7 +268,7 @@ See working example: https://github.com/NeVoTM/2829-niagara-street/blob/main/mob
 
 ---
 
-### **🟿 CATEGORY 3: NODE.JS SCRIPT USAGE INSTRUCTIONS**
+### **🟿 SECTION #3: NODE.JS SCRIPT USAGE INSTRUCTIONS**
 **🎡 UNIVERSAL FOR ALL PROJECTS - FIXING COMMAND SYNTAX**
 
 **What Warp Will See:**
@@ -338,10 +338,10 @@ After making changes to project-data.json:
 
 ---
 
-### **🔶 CATEGORY 4: INFINITE SCROLL PREVENTION**
+### **🔶 SECTION #4: INFINITE SCROLL PREVENTION**
 **🎡 UNIVERSAL FOR ALL PROJECTS - CRITICAL IMPLEMENTATION**
 
-### **1️⃣ INFINITE SCROLLING PROBLEM**
+### **ISSUE #4.1: INFINITE SCROLLING PROBLEM**
 
 **What Warp Will See:**
 - User reports "infinite scrolling" or "page won't stop scrolling"
@@ -373,7 +373,7 @@ In mobile-design.html, lines 31-43 show this exact solution working.
 
 ---
 
-### **2️⃣ CHART SIZING DISASTERS**
+### **ISSUE #4.2: CHART SIZING DISASTERS**
 
 **What Warp Will See:**
 - User reports "charts are huge" or "charts break layout"
@@ -420,7 +420,7 @@ In mobile-design.html, lines 215-237 show this exact solution working.
 
 ---
 
-### **3️⃣ ALIGNMENT NIGHTMARES**
+### **ISSUE #4.3: ALIGNMENT NIGHTMARES**
 
 **What Warp Will See:**
 - User reports "alignment is off" or "text doesn't line up properly"
@@ -470,7 +470,7 @@ In mobile-design.html, lines 640-702 show this table-based solution working for 
 
 ---
 
-### **4️⃣ TEXT VISIBILITY CRISIS**
+### **ISSUE #4.4: TEXT VISIBILITY DISASTERS**
 
 **What Warp Will See:**
 - User reports "can't read text" or "text is too light"
@@ -509,7 +509,7 @@ In mobile-design.html, lines 365-403 show this exact solution working.
 
 ---
 
-### **5️⃣ NAVIGATION DISASTERS**
+### **ISSUE #4.5: NAVIGATION POSITIONING FAILURES**
 
 **What Warp Will See:**
 - User reports "clicking tab doesn't go to top" or "navigation jumps to middle"
@@ -561,7 +561,7 @@ In mobile-design.html, lines 916-943 show this exact solution working.
 
 ---
 
-### **6️⃣ DATA INTEGRITY PROBLEMS**
+### **ISSUE #4.6: DATA INTEGRITY PROBLEMS**
 
 **What Warp Will See:**
 - User reports number inconsistencies like "35M vs 38M" 
@@ -605,7 +605,7 @@ Update-ProjectData.ps1 provides validation functionality.
 
 ---
 
-### **7️⃣ MOBILE USABILITY FAILURES**
+### **ISSUE #4.7: MOBILE USABILITY FAILURES**
 
 **What Warp Will See:**
 - User reports "icons too small" or "hard to click on phone"
@@ -653,7 +653,7 @@ In mobile-design.html, lines 670-675 show enlarged contact icons working.
 
 ---
 
-### **8️⃣ VIDEO CONTAINER OVERFLOW**
+### **ISSUE #4.8: VIDEO CONTAINER OVERFLOW**
 
 **What Warp Will See:**
 - User reports "video box cuts off" or "video shows on other tabs"
@@ -691,7 +691,7 @@ In mobile-design.html, lines 279-290 show this video container solution.
 
 ---
 
-### **9️⃣ VERSION MANAGEMENT CHAOS**
+### **ISSUE #4.9: VERSION MANAGEMENT CHAOS**
 
 **What Warp Will See:**
 - User wants version info in specific locations only
@@ -725,7 +725,7 @@ In mobile-design.html, lines 688-690 show version in Contact tab only.
 
 ---
 
-### **🟪 CATEGORY 5: README TEMPLATE SYSTEM**
+### **🟪 SECTION #5: README TEMPLATE SYSTEM**
 **🎡 UNIVERSAL FOR ALL PROJECTS - DOCUMENTATION STANDARDIZATION**
 
 **What Warp Will See:**
@@ -979,19 +979,40 @@ See `HOW-TO-DEPLOY.md` for detailed instructions.
 4. **Verify Using Example References**: Check the cited line numbers in mobile-design.html
 5. **Run Validation**: Use Update-ProjectData.ps1 to check data consistency
 
-### **For Warp AI:**
+### **For Warp AI - Quick Reference System:**
 
-You can ask Warp to apply specific fixes by referencing the section number:
+**You can now ask Warp to apply specific fixes by referencing the numbered sections:**
 
+**Individual Issues:**
 ```
-Please apply solution from Section 3 (ALIGNMENT NIGHTMARES) to fix the address formatting.
+Apply solution from ISSUE #4.3 (ALIGNMENT NIGHTMARES) to fix the address formatting.
+Apply SECTION #1 (DATA/TEXT MASTER CONTROL SYSTEM) to centralize our data.
+Fix ISSUE #4.1 (INFINITE SCROLLING PROBLEM) on all dashboard pages.
 ```
 
-Or combine multiple fixes:
+**Multiple Issues:**
+```
+Apply fixes for ISSUE #4.1, #4.2, and #4.5 to solve infinite scrolling, chart sizing, and navigation problems.
+Implement SECTION #2 (MOBILE-FIRST DESIGN) and ISSUE #4.7 (MOBILE USABILITY) for complete mobile optimization.
+```
 
-```
-Please apply the fixes from Sections 1, 2, and 5 to solve the infinite scrolling, chart sizing, and navigation issues.
-```
+**Section Overview:**
+- **SECTION #1:** Centralized data management system
+- **SECTION #2:** Mobile-first design implementation  
+- **SECTION #3:** Node.js script usage and commands
+- **SECTION #4:** Critical mobile issues (9 specific problems)
+- **SECTION #5:** Universal README template system
+
+**Quick Issue Reference:**
+- **#4.1:** Infinite scrolling prevention
+- **#4.2:** Chart sizing disasters
+- **#4.3:** Alignment nightmares
+- **#4.4:** Text visibility disasters
+- **#4.5:** Navigation positioning failures
+- **#4.6:** Data integrity problems
+- **#4.7:** Mobile usability failures
+- **#4.8:** Video container overflow
+- **#4.9:** Version management chaos
 
 ### **Last Updated**
 
