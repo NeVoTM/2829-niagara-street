@@ -60,6 +60,73 @@
     "email": "durillaprop@gmail.com",
     "phone": "716-421-1210"
   },
+  "text_content": {
+    "hero": {
+      "title": "2829 Niagara Street",
+      "subtitle": "4-Floor Mixed-Use Development<br>Tonawanda, NY",
+      "cta_button": "🚀 Join the Revolution"
+    },
+    "model": {
+      "title": "🏦 WNY Makers Model",
+      "description": "Revolutionary partnership approach with <strong style=\"color: var(--gold);\">${total_revenue}+ projected revenue</strong>",
+      "how_it_works_title": "💡 How It Works",
+      "how_it_works": [
+        "<strong>In-Kind Investment:</strong> Your expertise = Direct equity",
+        "<strong>Profit Share:</strong> Pro-rata share of profits",
+        "<strong>Debt-Free:</strong> No traditional bank loans",
+        "<strong>6-12 Months Faster:</strong> Accelerated timeline"
+      ],
+      "benefits_title": "🎯 Your Benefits",
+      "benefits": [
+        "<strong>Wealth Building:</strong> Long-term equity growth",
+        "<strong>Tax Advantages:</strong> Depreciation benefits",
+        "<strong>Future Projects:</strong> Scalable investment model",
+        "<strong>Active Role:</strong> Marketing & partner recruitment"
+      ],
+      "video_title": "🎬 Watch Project Vision"
+    },
+    "financials": {
+      "title": "📈 Financial Overview",
+      "chart_title": "Revenue Breakdown - ${total_revenue}",
+      "investment_title": "💰 Investment Highlights",
+      "cost_analysis_title": "💰 Cost Analysis",
+      "cost_chart_title": "Development Costs - ${development_costs}",
+      "market_title": "📈 Market Comparables",
+      "market_chart_title": "Tonawanda Market Analysis",
+      "market_points": [
+        "<strong>Rental Range:</strong> $1.84 - $2.94/sq ft annually",
+        "<strong>Sale Range:</strong> $250 - $451/sq ft",
+        "<strong>Days on Market:</strong> 9-12 days average",
+        "<strong>Market Growth:</strong> 10-18% year-over-year"
+      ]
+    },
+    "project": {
+      "title": "🏢 Project Specs",
+      "phase_title": "Phase 1: Base Development",
+      "specs": [
+        "<strong>Location:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${address}",
+        "<strong>Type:</strong> ${type}",
+        "<strong>Size:</strong> ${size}",
+        "<strong>Ground Floor:</strong> Commercial/Retail Space",
+        "<strong>Upper Floors:</strong> Residential & STR Units"
+      ],
+      "partner_categories_title": "🎯 Partner Categories"
+    },
+    "renderings": {
+      "title": "🎨 Project Renderings",
+      "description": "Professional architectural visualizations",
+      "building_features_title": "🏢 Building Features",
+      "amenities_title": "🏗️ Amenities"
+    },
+    "contact": {
+      "ready_title": "📞 Ready to Partner?",
+      "partnership_title": "Partnership Inquiries",
+      "next_steps_title": "🚀 Next Steps",
+      "next_steps_description": "Join the \"Partners Not Paychecks\" revolution",
+      "express_interest": "📧 Express Interest",
+      "call_now": "📞 Call Now"
+    }
+  },
   "features": {
     "building": [
       "Dramatic evening exteriors",
@@ -70,15 +137,42 @@
     "amenities": [
       "Rooftop entertainment decks",
       "Pet-friendly dog park",
-      "Fitness centers",
+      "Fitness centers (2 locations)",
       "Hotel-quality reception"
     ]
   },
   "partner_categories": [
-    "Cash Partners",
-    "Service Partners",
-    "Technical Partners",
-    "Material Partners"
+    {
+      "name": "Cash Partners",
+      "icon": "💵",
+      "description": "Private capital investors"
+    },
+    {
+      "name": "Service Partners", 
+      "icon": "🔧",
+      "description": "Contractors & specialists"
+    },
+    {
+      "name": "Technical Partners",
+      "icon": "⚡",
+      "description": "MEP & technical experts"
+    },
+    {
+      "name": "Material Partners",
+      "icon": "🧧",
+      "description": "Suppliers & materials"
+    }
   ],
+  "labels": {
+    "residential_label": "Residential",
+    "str_label": "STR Hotel Rooms",
+    "retail_label": "Retail",
+    "gross_profit_label": "Gross Profit",
+    "roi_label": "ROI",
+    "interest_costs_label": "Interest Costs",
+    "total_units_label": "Total Units",
+    "profit_margin_label": "Profit Margin",
+    "total_revenue_label": "Total Revenue"
+  },
   "version": "v2.0-mobile"
 }

@@ -124,9 +124,24 @@ cd "C:\Users\17274\ME\2829-Niagara-Street"
 ```
 
 **Node.js Version (Optional):**
-```bash
+
+**Step 1: Check if Node.js is installed**
+```powershell
+node --version
+# If not installed, download from: https://nodejs.org/
+```
+
+**Step 2: Navigate to project folder**
+```powershell
+cd "C:\Users\17274\ME\2829-Niagara-Street"
+```
+
+**Step 3: Run the script (CORRECT SYNTAX - no spaces)**
+```powershell
 node update-project-data.js
 ```
+
+**IMPORTANT:** The filename has NO SPACES. Do not type `node update - project - data.js`
 
 **What the Scripts Check:**
 - ✅ Revenue components add up to total revenue
