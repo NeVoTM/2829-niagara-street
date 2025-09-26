@@ -519,6 +519,15 @@
             .contact-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Fix chart containers on mobile */
+            .chart-wrapper {
+                padding: 15px;
+            }
+            
+            .chart-wrapper div[style*="height"] {
+                height: 250px !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -532,14 +541,45 @@
             
             .dashboard-card {
                 padding: 16px;
+                margin-bottom: 15px;
             }
             
             .stats-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .stat-box {
+                padding: 12px;
+            }
+            
+            .stat-number {
+                font-size: 1.3rem;
             }
             
             .chart-wrapper {
-                padding: 16px;
+                padding: 12px;
+                margin: 15px 0;
+            }
+            
+            .chart-wrapper div[style*="height"] {
+                height: 220px !important;
+            }
+            
+            .feature-grid {
+                gap: 8px;
+            }
+            
+            .feature-item {
+                padding: 8px 0;
+            }
+            
+            .feature-title {
+                font-size: 0.9rem;
+            }
+            
+            .feature-desc {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -570,7 +610,7 @@
         <!-- Dashboard overview -->
         <div class="dashboard-grid">
             <!-- Hero stats -->
-            <div class="dashboard-card" style="grid-column: span 2;">
+            <div class="dashboard-card">
                 <div class="card-header">
                     <div class="card-title">
                         <div class="card-icon">🚀</div>

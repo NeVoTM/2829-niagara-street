@@ -298,16 +298,21 @@
             scroll-behavior: smooth;
         }
 
-        /* Hide sections initially */
+        /* Show all sections by default */
         .section {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             transition: all 0.6s ease;
         }
 
         .section.active {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* Hide inactive sections only when navigation is used */
+        .section.hidden {
+            display: none;
         }
 
         /* Version info */
@@ -833,6 +838,12 @@
             const navItems = document.querySelectorAll('.nav-item');
             const sections = document.querySelectorAll('.section');
             
+            // Show all sections initially
+            sections.forEach(section => {
+                section.classList.add('active');
+                section.style.display = 'flex';
+            });
+            
             // Navigation click handlers
             navItems.forEach(item => {
                 item.addEventListener('click', (e) => {
@@ -845,7 +856,9 @@
                     item.classList.add('active');
                     
                     // Smooth scroll to section
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
                 });
             });
 
@@ -853,10 +866,16 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
+                        // Update active nav based on visible section
+                        const sectionId = entry.target.id;
+                        const correspondingNav = document.querySelector(`a[href="#${sectionId}"]`);
+                        if (correspondingNav) {
+                            navItems.forEach(nav => nav.classList.remove('active'));
+                            correspondingNav.classList.add('active');
+                        }
                     }
                 });
-            }, { threshold: 0.3 });
+            }, { threshold: 0.5 });
 
             sections.forEach(section => {
                 observer.observe(section);
