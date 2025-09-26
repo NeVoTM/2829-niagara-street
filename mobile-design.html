@@ -279,12 +279,15 @@
             background: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
             aspect-ratio: 16/9;
+            max-height: 200px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 20px 0;
             cursor: pointer;
             transition: transform 0.3s ease;
+            overflow: hidden;
         }
 
         .video-placeholder:hover {
@@ -404,8 +407,6 @@
     </style>
 </head>
 <body>
-    <!-- Version Info -->
-    <div class="version-info">v2.0-mobile</div>
 
     <!-- Navigation -->
     <nav class="nav-bar">
@@ -464,7 +465,7 @@
         <div class="card" style="text-align: left;">
             <h2 style="text-align: center;">🏦 WNY Makers Model</h2>
             <p style="color: var(--text-light); margin-bottom: 20px; text-align: center;">
-                Revolutionary partnership approach with <strong style="color: var(--gold);">$35M+ projected revenue</strong>
+                Revolutionary partnership approach with <strong style="color: var(--gold);">$38M+ projected revenue</strong>
             </p>
             
             <h3>💡 How It Works</h3>
@@ -511,7 +512,7 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">72</span>
-                    <span class="stat-label">STR Hotels<br>$15.1M</span>
+                    <span class="stat-label">STR Hotel Rooms<br>$15.1M</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">13</span>
@@ -524,7 +525,7 @@
             <h2>💰 Investment Highlights</h2>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number">$11.7M</span>
+                    <span class="stat-number">$12M</span>
                     <span class="stat-label">Gross Profit</span>
                 </div>
                 <div class="stat-item">
@@ -570,13 +571,41 @@
         <div class="card">
             <h2>🏢 Project Specs</h2>
             <h3>Phase 1: Base Development</h3>
-            <ul class="feature-list">
-                <li><strong>Location:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;2829 Niagara Street, Tonawanda, NY</li>
-                <li><strong>Type:</strong> 4-Floor Mixed-Use Building</li>
-                <li><strong>Size:</strong> 143,997 sq ft development</li>
-                <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
-                <li><strong>Upper Floors:</strong> Residential & STR Units</li>
-            </ul>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <tr>
+                    <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                        <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                    </td>
+                    <td style="padding: 8px 0; color: var(--text); vertical-align: top;">
+                        <strong>Location:</strong><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2829 Niagara Street, Tonawanda, NY
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                        <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                    </td>
+                    <td style="padding: 8px 0; color: var(--text); vertical-align: top;"><strong>Type:</strong> 4-Floor Mixed-Use Building</td>
+                </tr>
+                <tr>
+                    <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                        <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                    </td>
+                    <td style="padding: 8px 0; color: var(--text); vertical-align: top;"><strong>Size:</strong> 143,997 sq ft development</td>
+                </tr>
+                <tr>
+                    <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                        <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                    </td>
+                    <td style="padding: 8px 0; color: var(--text); vertical-align: top;"><strong>Ground Floor:</strong> Commercial/Retail Space</td>
+                </tr>
+                <tr>
+                    <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                        <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                    </td>
+                    <td style="padding: 8px 0; color: var(--text); vertical-align: top;"><strong>Upper Floors:</strong> Residential & STR Units</td>
+                </tr>
+            </table>
         </div>
 
         <div class="card">
@@ -634,25 +663,71 @@
                 </button>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 25px;">
-                <div style="padding-left: 10px;">
-                    <h3 style="margin-left: -10px;">🏢 Building Features</h3>
-                    <ul class="feature-list" style="margin-left: 0;">
-                        <li>Dramatic evening exteriors</li>
-                        <li>Modern waterfront integration</li>
-                        <li>Premium dining concepts</li>
-                        <li>Full-service spa facilities</li>
-                    </ul>
-                </div>
-                <div style="padding-left: 10px;">
-                    <h3 style="margin-left: -10px;">🏗️ Amenities</h3>
-                    <ul class="feature-list" style="margin-left: 0;">
-                        <li>Rooftop entertainment decks</li>
-                        <li>Pet-friendly dog park</li>
-                        <li>Fitness centers (2 locations)</li>
-                        <li>Hotel-quality reception</li>
-                    </ul>
-                </div>
+            <!-- Separate tables for better alignment -->
+            <div style="margin-top: 25px;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <tr>
+                        <td colspan="2" style="padding-bottom: 10px;">
+                            <h3 style="text-align: center; color: var(--gold);">🏢 Building Features</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Dramatic evening exteriors</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Modern waterfront integration</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Premium dining concepts</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Full-service spa facilities</td>
+                    </tr>
+                </table>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td colspan="2" style="padding-bottom: 10px;">
+                            <h3 style="text-align: center; color: var(--gold);">🏗️ Amenities</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Rooftop entertainment decks</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Pet-friendly dog park</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Fitness centers (2 locations)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30px; vertical-align: top; padding: 8px 10px 8px 0;">
+                            <span style="background: var(--success); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">✓</span>
+                        </td>
+                        <td style="padding: 8px 0; color: var(--text); vertical-align: top;">Hotel-quality reception</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </section>
@@ -666,8 +741,12 @@
                 <h3>Partnership Inquiries</h3>
                 <p><strong>Tiffany Durilla</strong></p>
                 <p>Development Partner</p>
-                <a href="mailto:durillaprop@gmail.com" style="font-size: 1.1rem; margin: 10px 0; display: inline-block;">📧 durillaprop@gmail.com</a><br>
-                <a href="tel:+17164211210" style="font-size: 1.1rem; margin: 10px 0; display: inline-block;">📱 716-421-1210</a>
+                <a href="mailto:durillaprop@gmail.com" style="font-size: 1.3rem; margin: 15px 0; display: inline-block;">
+                    <span style="font-size: 1.8rem; margin-right: 8px;">📧</span>durillaprop@gmail.com
+                </a><br>
+                <a href="tel:+17164211210" style="font-size: 1.3rem; margin: 15px 0; display: inline-block;">
+                    <span style="font-size: 1.8rem; margin-right: 8px;">📱</span>716-421-1210
+                </a>
             </div>
         </div>
 
@@ -682,6 +761,10 @@
                 <a href="tel:+17164211210" class="cta-button" style="margin: 10px; font-size: 1.1rem;">
                     📞 Call Now
                 </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; color: var(--text-light); font-size: 0.8rem;">
+                v2.0-mobile
             </div>
         </div>
     </section>

@@ -208,13 +208,34 @@ APPLY FULL QC CHECKLIST:
 - Data should align to data, not page edges
 - Addresses: "Location:" then indented continuation
 - Green checkmarks consistently aligned
-- Contact icons must be large enough for mobile
+- Contact icons must be large enough for mobile (1.8rem icons)
+- **ALIGNMENT SOLUTION**: Use separate tables for complex layouts (as learned from Nevo Tower)
+- Address alignment: Use table structure with proper column widths
+- Feature lists: Use individual tables for each section for better control
 
 ### **INFINITE SCROLL PREVENTION:**
 - Always set section max-heights
 - Control chart container overflow
 - Add proper background constraints
 - Prevent CSS background repeating patterns
+
+### **VIDEO CONTAINER FIXES:**
+- Always set max-height on video placeholders (200px max)
+- Add overflow: hidden to prevent residue on other tabs
+- Use proper aspect-ratio with width constraints
+
+### **VERSION MANAGEMENT:**
+- Version info should ONLY appear on Contact tab
+- Remove version displays from all other sections
+- Increment version with each significant change
+
+### **DATA INTEGRITY SYSTEM:**
+- **Master Data File**: project-data.json contains all project values
+- **Update Script**: update-project-data.js validates and updates HTML
+- **Validation Rules**: Revenue components must add up, costs must balance
+- **Usage**: Always run `node update-project-data.js` after data changes
+- **Data Conflicts**: Script will report mismatches between data sources
+- **Centralized Control**: Edit project-data.json instead of HTML directly
 
 ---
 

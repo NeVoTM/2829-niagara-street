@@ -1,0 +1,84 @@
+{
+  "project": {
+    "name": "2829 Niagara Street",
+    "address": "2829 Niagara Street, Tonawanda, NY",
+    "type": "4-Floor Mixed-Use Building",
+    "size": "143,997 sq ft development"
+  },
+  "financial": {
+    "total_revenue": "$38M",
+    "total_revenue_numeric": 38000000,
+    "gross_profit": "$12M",
+    "gross_profit_numeric": 12000000,
+    "development_costs": "$25.7M",
+    "development_costs_numeric": 25700000,
+    "profit_margin": "31%",
+    "roi": "46%",
+    "interest_costs": "$0"
+  },
+  "units": {
+    "total": 150,
+    "residential": {
+      "count": 65,
+      "revenue": "$15.8M"
+    },
+    "str_hotel_rooms": {
+      "count": 72,
+      "revenue": "$15.1M"
+    },
+    "retail": {
+      "count": 13,
+      "revenue": "$6.5M"
+    }
+  },
+  "costs": {
+    "hard_construction": {
+      "amount": "$21.4M",
+      "numeric": 21400000
+    },
+    "soft_costs": {
+      "amount": "$4.3M",
+      "numeric": 4300000
+    }
+  },
+  "market_analysis": {
+    "rental_range": "$1.84 - $2.94/sq ft annually",
+    "sale_range": "$250 - $451/sq ft",
+    "days_on_market": "9-12 days average",
+    "market_growth": "10-18% year-over-year",
+    "comparables": {
+      "600_river": 2.42,
+      "622_river": 2.02,
+      "exchange": 2.15,
+      "buffalo": 2.11,
+      "target_2829": 2.35
+    }
+  },
+  "contact": {
+    "name": "Tiffany Durilla",
+    "title": "Development Partner",
+    "email": "durillaprop@gmail.com",
+    "phone": "716-421-1210"
+  },
+  "features": {
+    "building": [
+      "Dramatic evening exteriors",
+      "Modern waterfront integration",
+      "Premium dining concepts",
+      "Full-service spa facilities"
+    ],
+    "amenities": [
+      "Rooftop entertainment decks",
+      "Pet-friendly dog park",
+      "Fitness centers (2 locations)",
+      "Hotel-quality reception"
+    ]
+  },
+  "partner_categories": [
+    "Cash Partners",
+    "Service Partners",
+    "Technical Partners",
+    "Material Partners"
+  ],
+  "version": "v2.0-mobile"
+}
