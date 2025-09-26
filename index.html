@@ -374,7 +374,7 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
+        /* iPhone and Mobile Responsive */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -388,14 +388,151 @@
             
             .tab-button {
                 min-width: auto;
+                padding: 12px 20px;
+                font-size: 0.9rem;
             }
             
             .container {
-                padding: 20px 15px;
+                padding: 20px 10px;
             }
             
             .grid-2, .grid-3 {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .card h2 {
+                font-size: 1.3rem;
+            }
+            
+            /* Chart containers for mobile */
+            canvas {
+                max-width: 100% !important;
+                max-height: 350px !important;
+            }
+        }
+        
+        /* iPhone specific optimizations */
+        @media (max-width: 414px) {
+            .header-content {
+                padding: 0 10px;
+            }
+            
+            .logo-section h1 {
+                font-size: 1.4rem;
+            }
+            
+            .logo-section p {
+                font-size: 0.8rem;
+            }
+            
+            .status-badge {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .container {
+                padding: 15px 8px;
+            }
+            
+            .card {
+                padding: 15px 12px;
+                margin-bottom: 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.1rem;
+            }
+            
+            .card h3 {
+                font-size: 1rem;
+            }
+            
+            /* Charts on iPhone */
+            canvas {
+                max-width: 100% !important;
+                max-height: 280px !important;
+                width: 100% !important;
+            }
+            
+            .stat-card {
+                padding: 15px 10px;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .feature-list li {
+                font-size: 0.9rem;
+                padding: 10px 0;
+            }
+            
+            /* Fix slideshow caption overlay on iPhone */
+            .slideshow-container {
+                position: relative;
+                margin: 10px auto;
+                border-radius: 8px;
+            }
+            
+            #imageSlideshow img {
+                width: 100%;
+                height: auto;
+                min-height: 200px;
+                border-radius: 8px;
+            }
+            
+            /* Position caption below image on iPhone */
+            .image-caption {
+                position: static !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: none !important;
+                margin: 10px auto !important;
+                background: rgba(44, 62, 80, 0.95) !important;
+                text-align: center;
+                border-radius: 8px !important;
+                max-width: 90%;
+                font-size: 0.8rem !important;
+                padding: 6px 12px !important;
+            }
+            
+            /* Adjust navigation buttons for iPhone */
+            .nav-prev, .nav-next {
+                width: 35px !important;
+                height: 35px !important;
+                font-size: 0.8rem;
+            }
+            
+            .nav-prev {
+                left: 5px !important;
+            }
+            
+            .nav-next {
+                right: 5px !important;
+            }
+            
+            .image-counter {
+                top: 5px !important;
+                right: 5px !important;
+                font-size: 0.7rem !important;
+                padding: 3px 8px !important;
+            }
+            
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+                margin: 3px;
             }
         }
     </style>
@@ -430,7 +567,7 @@
             <!-- Video Hero -->
             <div class="video-hero">
                 <h2>🎬 2829 Niagara Street Development Vision</h2>
-                <p style="margin-bottom: 25px; color: #666;">Watch our 3-story mixed-use development proposal with major expansion potential</p>
+                <p style="margin-bottom: 25px; color: #666;">Watch our 4-floor mixed-use development proposal with major expansion potential</p>
                 
                 <div class="video-container">
                     <div class="video-placeholder">
@@ -482,8 +619,8 @@
                 <h2>📊 2829 Niagara Street Project Stats</h2>
                 <div class="stat-grid">
                     <div class="stat-card">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Story Mixed-Use Base</div>
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Floor Mixed-Use Base</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">5+</div>
@@ -508,7 +645,7 @@
                 <h2>📈 Project Revenue Breakdown - $37.4M Total</h2>
                 <div class="grid grid-2">
                     <div>
-                        <canvas id="revenueChart" width="400" height="300" style="max-width: 400px; max-height: 300px;"></canvas>
+                        <canvas id="revenueChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
                     </div>
                     <div>
                         <div class="stat-grid">
@@ -537,7 +674,7 @@
                 <h2>💰 Development Cost Analysis - $25.7M Total</h2>
                 <div class="grid grid-2">
                     <div>
-                        <canvas id="costChart" width="400" height="300" style="max-width: 400px; max-height: 300px;"></canvas>
+                        <canvas id="costChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
                     </div>
                     <div>
                         <h3>Cost Breakdown</h3>
@@ -545,7 +682,7 @@
                             <li><strong>Hard Construction:</strong> $21,428,105 (83%)</li>
                             <li><strong>Soft Costs:</strong> $4,285,621 (17%)</li>
                             <li><strong>Cost per Sq Ft:</strong> $125 NSF</li>
-                            <li><strong>Net Square Footage:</strong> 143,997 sq ft</li>
+                            <li><strong>Net Square Footage:</strong> 143,997 sq ft (4-floor development)</li>
                         </ul>
                         <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
                             <h4 style="color: #e74c3c; margin-bottom: 10px;">MMM Model Advantage</h4>
@@ -560,7 +697,7 @@
                 <h2>📉 Tonawanda Market Comparables Analysis</h2>
                 <div class="grid grid-2">
                     <div>
-                        <canvas id="comparablesChart" width="400" height="300" style="max-width: 400px; max-height: 300px;"></canvas>
+                        <canvas id="comparablesChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
                     </div>
                     <div>
                         <h3>Market Data (Per Sq Ft)</h3>
@@ -634,7 +771,7 @@
                         <h3>🏗️ Phase 1: Base Development</h3>
                         <ul class="feature-list">
                             <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
-                            <li><strong>Type:</strong> 3-Story Mixed-Use Building</li>
+                            <li><strong>Type:</strong> 4-Floor Mixed-Use Building</li>
                             <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
                             <li><strong>Upper Floors:</strong> Residential/Office Units</li>
                             <li><strong>Parking:</strong> On-site parking solution</li>
@@ -762,22 +899,22 @@
                     <h3>🖼️ Interactive Image Gallery</h3>
                     <p style="margin-bottom: 20px;">Professional architectural renderings - auto-advancing slideshow (click to pause/resume):</p>
                     
-                    <div id="imageSlideshow" style="position: relative; max-width: 800px; margin: 0 auto; background: #000; border-radius: 10px; overflow: hidden; cursor: pointer;" onclick="toggleSlideshow()">
+                    <div id="imageSlideshow" class="slideshow-container" style="position: relative; max-width: 800px; margin: 0 auto; background: #000; border-radius: 10px; overflow: hidden; cursor: pointer;" onclick="toggleSlideshow()">
                         <img id="slideshowImage" src="" alt="2829 Niagara Street Renderings" style="width: 100%; height: auto; display: block;">
                         
-                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+                        <div id="imageCaption" class="image-caption" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
                             <span id="imageTitle">Loading...</span>
                         </div>
                         
-                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
+                        <div class="image-counter" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
                             <span id="imageCounter">1/20</span>
                         </div>
                         
-                        <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); prevImage()">
+                        <div class="nav-prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); prevImage()">
                             ◀
                         </div>
                         
-                        <div style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); nextImage()">
+                        <div class="nav-next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); nextImage()">
                             ▶
                         </div>
                     </div>
@@ -925,7 +1062,7 @@
 
         function openVideo() {
             // Direct link to Google Drive video
-            window.open('https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/preview', '_blank');
+            window.open('https://drive.google.com/file/d/1MZm39BrwNxBRoqSg_ooco4PSCqcMMksk/view?usp=sharing', '_blank');
         }
 
         function contactPartner(partnerType) {
