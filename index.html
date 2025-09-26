@@ -503,8 +503,8 @@
         <!-- Financials Tab -->
         <div id="financials" class="tab-content">
             <div class="card">
-                <h2>💰 Financial Overview</h2>
-                <p>Based on detailed market analysis and comparable properties in Tonawanda, NY</p>
+                <h2>💰 Financial Overview - Actual Project Data</h2>
+                <p>Based on comprehensive project analysis of the 2829 Niagara Street development (1.312 acres)</p>
                 
                 <div style="text-align: center; margin: 20px 0;">
                     <button class="btn btn-success" onclick="window.open('https://drive.google.com/drive/folders/1XLTkQpuDjWANpr_eeTtlIHg-112914fn?usp=sharing', '_blank')" style="margin-right: 10px;">
@@ -517,41 +517,41 @@
                 
                 <div class="grid grid-2">
                     <div>
-                        <h3>🏦 Development Costs</h3>
+                        <h3>🏦 Actual Development Costs</h3>
                         <ul class="feature-list">
-                            <li><strong>Traditional Model:</strong> $2.8M - $3.2M total cost</li>
-                            <li><strong>MMM Partner Model:</strong> $1.8M - $2.2M effective cost</li>
-                            <li><strong>Cost Savings:</strong> 35-40% through partner equity</li>
-                            <li><strong>Quality Premium:</strong> Partner ownership = superior results</li>
+                            <li><strong>Hard Construction Costs:</strong> $21,428,105 ($125/sq ft NSF)</li>
+                            <li><strong>Soft Costs (20%):</strong> $4,285,621</li>
+                            <li><strong>Total Development Cost:</strong> $25,713,726</li>
+                            <li><strong>Net Square Footage:</strong> 143,997 sq ft (3-story development)</li>
                         </ul>
                     </div>
                     
                     <div>
-                        <h3>📈 Revenue Projections</h3>
+                        <h3>📈 Revenue Projections by Unit Type</h3>
                         <ul class="feature-list">
-                            <li><strong>Ground Floor Commercial:</strong> $18-25/sq ft annually</li>
-                            <li><strong>Upper Floor Mixed-Use:</strong> $15-22/sq ft annually</li>
-                            <li><strong>Wellness Center Premium:</strong> $28-35/sq ft annually</li>
-                            <li><strong>Total Annual Revenue:</strong> $420K - $580K projected</li>
+                            <li><strong>Residential Units:</strong> 65 units @ $242K avg = $15,839,655</li>
+                            <li><strong>Retail Space:</strong> 13 units @ $510K avg = $6,479,859</li>
+                            <li><strong>STR Hospitality Suites:</strong> 72 units @ $210K avg = $15,119,671</li>
+                            <li><strong>Total Project Sale Value:</strong> $37,439,185</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>📉 Market Analysis - Tonawanda Comparables</h2>
+                <h2>📉 Market Analysis - Real Tonawanda Comparables</h2>
                 <div class="grid grid-3">
                     <div class="stat-card">
-                        <div class="stat-number">$16-24</div>
-                        <div class="stat-label">Market Rate per Sq Ft</div>
+                        <div class="stat-number">$1.84-2.94</div>
+                        <div class="stat-label">Rental Rate per Sq Ft</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">92%</div>
-                        <div class="stat-label">Area Occupancy Rate</div>
+                        <div class="stat-number">$250-451</div>
+                        <div class="stat-label">Sale Price per Sq Ft</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">3-5%</div>
-                        <div class="stat-label">Annual Appreciation</div>
+                        <div class="stat-number">31%</div>
+                        <div class="stat-label">Project Profit Margin</div>
                     </div>
                 </div>
                 
@@ -579,19 +579,19 @@
             </div>
 
             <div class="card">
-                <h2>📈 MMM Model ROI Analysis</h2>
+                <h2>📈 Actual Project ROI Analysis</h2>
                 <div class="grid grid-3">
                     <div class="stat-card">
-                        <div class="stat-number">18-24%</div>
-                        <div class="stat-label">Annual Cash-on-Cash Return</div>
+                        <div class="stat-number">$37.4M</div>
+                        <div class="stat-label">Total Project Sale Value</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">3.2-4.8x</div>
-                        <div class="stat-label">5-Year Total Return Multiple</div>
+                        <div class="stat-number">$11.7M</div>
+                        <div class="stat-label">Gross Profit</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">12-18</div>
-                        <div class="stat-label">Months to Stabilization</div>
+                        <div class="stat-number">150</div>
+                        <div class="stat-label">Total Units (Mixed-Use)</div>
                     </div>
                 </div>
                 
@@ -752,12 +752,35 @@
                 <p>Visual representations of the 2829 Niagara Street development</p>
                 
                 <div class="card">
-                    <h3>🖼️ Complete Image Gallery</h3>
-                    <p style="margin-bottom: 20px;">View all professional architectural renderings in our Google Drive gallery:</p>
+                    <h3>🖼️ Interactive Image Gallery</h3>
+                    <p style="margin-bottom: 20px;">Professional architectural renderings - auto-advancing slideshow (click to pause/resume):</p>
                     
-                    <div style="text-align: center; margin: 25px 0;">
-                        <button class="btn btn-primary" onclick="window.open('https://drive.google.com/drive/folders/1KpMmORdc9WSm8--_iXL51NO6mw6HD61r?usp=sharing', '_blank')" style="font-size: 1.1rem; padding: 15px 30px;">
-                            🖼️ Open Image Gallery
+                    <div id="imageSlideshow" style="position: relative; max-width: 800px; margin: 0 auto; background: #000; border-radius: 10px; overflow: hidden; cursor: pointer;" onclick="toggleSlideshow()">
+                        <img id="slideshowImage" src="" alt="2829 Niagara Street Renderings" style="width: 100%; height: auto; display: block;">
+                        
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+                            <span id="imageTitle">Loading...</span>
+                        </div>
+                        
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
+                            <span id="imageCounter">1/20</span>
+                        </div>
+                        
+                        <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); prevImage()">
+                            ◀
+                        </div>
+                        
+                        <div style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); nextImage()">
+                            ▶
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn btn-success" onclick="window.open('https://drive.google.com/drive/folders/1KpMmORdc9WSm8--_iXL51NO6mw6HD61r?usp=sharing', '_blank')" style="margin-right: 10px;">
+                            🖼️ View in Google Drive
+                        </button>
+                        <button class="btn btn-primary" onclick="toggleSlideshow()">
+                            <span id="slideshowToggle">⏸️ Pause Slideshow</span>
                         </button>
                     </div>
                 </div>
@@ -919,7 +942,98 @@
             console.log('2829 Niagara Street MMM Dashboard Loaded');
             console.log('Version: 1.0 - Full Multi-Page Portal');
             console.log('Based on: Nevo Tower Portal Structure');
+
+            // Initialize image slideshow after DOM is ready
+            initSlideshow();
         });
+
+        // =========================
+        // Image Slideshow (Auto-advance)
+        // =========================
+        let slideshowImages = [
+            '2829 Mixed-use building exterior - twilight.png',
+            '2829 Mixed-use building exterior.jpg',
+            '2829 Modern waterfront development.png',
+            '2829 Restaurant.png',
+            '2829 Cafe - Health Bar with view.png',
+            '2829 Clotihng Boutique.png',
+            '2829 Reception - STR - Hotel.png',
+            '2829 Fitness Center 1.png',
+            '2829 Fitness Center 2.png',
+            '2829 Spa 1.png',
+            '2829 Spa 2.png',
+            '2829 Spa 3.png',
+            '2829 Spa - Massage.png',
+            '2829 Salon with View.png',
+            '2829 3rd floor view 2.png',
+            '2829 Rooftop 1.png',
+            '2829 Rooftop 2.png',
+            '2829 Rooftop 3 - dog park.png',
+            '2829 Rooftop 4 - dog park.png',
+            '2829 Rooftop 5 - dog park with view.png'
+        ];
+
+        let slideshowIndex = 0;
+        let slideshowTimer = null;
+        let isPaused = false;
+
+        function initSlideshow() {
+            const imgEl = document.getElementById('slideshowImage');
+            const titleEl = document.getElementById('imageTitle');
+            const counterEl = document.getElementById('imageCounter');
+            if (!imgEl || !titleEl || !counterEl) return;
+            showImage(slideshowIndex);
+            startSlideshow();
+        }
+
+        function getDisplayTitle(filename) {
+            return filename.replace(/\.(png|jpg|jpeg)$/i, '').replace(/[-_]/g, ' ');
+        }
+
+        function showImage(index) {
+            const imgEl = document.getElementById('slideshowImage');
+            const titleEl = document.getElementById('imageTitle');
+            const counterEl = document.getElementById('imageCounter');
+            if (!imgEl) return;
+            const file = slideshowImages[index % slideshowImages.length];
+            imgEl.src = file; // images are stored in the repo root alongside index.html
+            if (titleEl) titleEl.textContent = getDisplayTitle(file);
+            if (counterEl) counterEl.textContent = `${(index % slideshowImages.length) + 1}/${slideshowImages.length}`;
+        }
+
+        function nextImage() {
+            slideshowIndex = (slideshowIndex + 1) % slideshowImages.length;
+            showImage(slideshowIndex);
+        }
+
+        function prevImage() {
+            slideshowIndex = (slideshowIndex - 1 + slideshowImages.length) % slideshowImages.length;
+            showImage(slideshowIndex);
+        }
+
+        function startSlideshow(intervalMs = 3000) {
+            clearInterval(slideshowTimer);
+            slideshowTimer = setInterval(() => {
+                if (!isPaused) nextImage();
+            }, intervalMs);
+            const toggle = document.getElementById('slideshowToggle');
+            if (toggle) toggle.textContent = '⏸️ Pause Slideshow';
+            isPaused = false;
+        }
+
+        function pauseSlideshow() {
+            isPaused = true;
+            const toggle = document.getElementById('slideshowToggle');
+            if (toggle) toggle.textContent = '▶️ Resume Slideshow';
+        }
+
+        function toggleSlideshow() {
+            if (isPaused) {
+                startSlideshow();
+            } else {
+                pauseSlideshow();
+            }
+        }
     </script>
 </body>
 </html>
