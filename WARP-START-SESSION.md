@@ -7,9 +7,9 @@
 
 ---
 
-## 📋 **IMMEDIATE ACTIONS FOR WARP**
+## 1.0 📋 **IMMEDIATE ACTIONS FOR WARP**
 
-### 1. **READ CRITICAL FILES (PRIORITY ORDER)**
+### 1.1 **READ CRITICAL FILES (PRIORITY ORDER)**
 
 **🔴 ESSENTIAL - Read immediately from GitHub (master source):**
 ```
@@ -38,7 +38,7 @@
 - **TODO-LIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
 - **WarpSpeed.ps1**: https://github.com/NeVoTM/2829-niagara-street/blob/main/WarpSpeed.ps1
 
-### 2. **VALIDATE CURRENT PROJECT STATE**
+### 1.2 **VALIDATE CURRENT PROJECT STATE**
 
 **Run validation script:**
 ```powershell
@@ -51,7 +51,7 @@ git status
 git log --oneline -5
 ```
 
-### 3. **UNDERSTAND WORK COMPLETED**
+### 1.3 **UNDERSTAND WORK COMPLETED**
 
 **✅ COMPLETED BY WARP (Previous Sessions):**
 - Updated mobile-design.html with centralized data system
@@ -70,16 +70,16 @@ git log --oneline -5
 
 ---
 
-## 🎯 **PROJECT CONTEXT & ENVIRONMENT**
+## 2.0 🎯 **PROJECT CONTEXT & ENVIRONMENT**
 
-### **Technical Environment:**
+### 2.1 **Technical Environment:**
 - **OS:** Windows with PowerShell 7.5.3 (pwsh)
 - **Development:** HTML, CSS, JavaScript, Chart.js
 - **Deployment:** GitHub Pages
 - **Data Management:** Centralized JSON system
 - **Validation:** PowerShell scripts (no Node.js required)
 
-### **Project Structure:**
+### 2.2 **Project Structure:**
 ```
 C:\Users\17274\ME\2829-Niagara-Street\
 ├── mobile-design.html     # ✅ UPDATED - Primary mobile interface
@@ -93,7 +93,7 @@ C:\Users\17274\ME\2829-Niagara-Street\
 └── Update-ProjectData.ps1 # ✅ VALIDATION SCRIPT
 ```
 
-### **Key Data Standards:**
+### 2.3 **Key Data Standards:**
 - **Financial Figures:** Revenue rounded UP for marketing appeal ($37.4M → $38M)
 - **Text Labels:** "STR Hotel Rooms" (not "STR Hotels")
 - **Mobile-First:** iPhone viewport optimization priority
@@ -101,21 +101,21 @@ C:\Users\17274\ME\2829-Niagara-Street\
 
 ---
 
-## 🔧 **WORKFLOW GUIDELINES**
+## 3.0 🔧 **WORKFLOW GUIDELINES**
 
-### **For Data Changes:**
+### 3.1 **For Data Changes:**
 1. Edit `project-data.json` (single source of truth)
 2. Run validation: `.\Update-ProjectData.ps1 -ValidateOnly`
 3. Update affected HTML files if needed
 4. Test on mobile viewport (iPhone 12 Pro in browser dev tools)
 
-### **For Code Changes:**
+### 3.2 **For Code Changes:**
 1. Follow mobile-first principles
 2. Apply DEBUGGING-CHECKLIST.md solutions
 3. Maintain consistency across all dashboard versions
 4. Test infinite scroll prevention and chart sizing
 
-### **For New Projects:**
+### 3.3 **For New Projects:**
 1. Copy README-UNIVERSAL-TEMPLATE.md to README.md
 2. Replace [bracketed placeholders] with project data
 3. Create project-data.json for centralized data
@@ -123,25 +123,25 @@ C:\Users\17274\ME\2829-Niagara-Street\
 
 ---
 
-## 📊 **RELATED PROJECTS & REFERENCES**
+## 4.0 📊 **RELATED PROJECTS & REFERENCES**
 
-### **Portfolio Links:**
+### 4.1 **Portfolio Links:**
 - **Nevo Tower Portal:** https://nevotm.github.io/nevo-tower-portal/ (Template source)
 - **Current Project Live:** https://nevotm.github.io/2829-niagara-street/mobile-design.html
 
-### **Contact Information:**
+### 4.2 **Contact Information:**
 - **Developer:** Tiffany Durilla
 - **Email:** durillaprop@gmail.com
 - **Phone:** 716-421-1210
 
-### **Documentation Locations:**
+### 4.3 **Documentation Locations:**
 - **AI Teaching Reference:** C:\Users\17274\ME\AI-Teaching\AI-Teaching-Reference.md
 - **Command Reference:** C:\Users\17274\ME\Scripts\SMLF-Senior-Memory-List.md
 - **Projects List:** C:\Users\17274\ME\Projects-and-Links-Master-List.md
 
 ---
 
-## ⚡ **QUICK COMMANDS REFERENCE**
+## 5.0 ⚡ **QUICK COMMANDS REFERENCE**
 
 **Validate project data:**
 ```powershell
@@ -166,21 +166,21 @@ WarpSpeed
 
 ---
 
-## 🚨 **CRITICAL REMINDERS**
+## 6.0 🚨 **CRITICAL REMINDERS**
 
-### **Universal Standards:**
+### 6.1 **Universal Standards:**
 - Always maintain mobile-first approach
 - Apply DEBUGGING-CHECKLIST.md solutions for consistency
 - Use centralized data management (project-data.json)
 - Follow marketing rounding rules for financial figures
 
-### **Quality Checklist:**
+### 6.2 **Quality Checklist:**
 - Text visibility on mobile (proper contrast/shadows)
 - Chart height constraints (max 280px to prevent infinite scroll)
 - Touch targets minimum 44px for accessibility
 - Navigation scrolls to section tops, not arbitrary positions
 
-### **File Management:**
+### 6.3 **File Management:**
 - **GitHub is MASTER source** for universal templates (DEBUGGING-CHECKLIST.md, README-UNIVERSAL-TEMPLATE.md, TODO-LIST.md)
 - **Always read latest from GitHub URLs** listed above - don't rely on local copies
 - **Copy universal files FROM GitHub TO local drive** when starting new projects

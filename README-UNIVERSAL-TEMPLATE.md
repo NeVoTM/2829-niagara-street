@@ -1,6 +1,8 @@
 # PROJECT NAME - Universal README Template
 
-## 🎯 **PROJECT OVERVIEW**
+---
+
+## 1.0 🎯 **PROJECT OVERVIEW**
 **Copy this template for every new project and customize the sections below**
 
 **Project Name:** [PROJECT NAME]  
@@ -17,21 +19,21 @@
 
 ---
 
-## 💻 **COMPLETE PROJECT ENVIRONMENT**
+## 2.0 💻 **COMPLETE PROJECT ENVIRONMENT**
 
-### **Repository Information**
+### 2.1 **Repository Information**
 - **GitHub Repository:** https://github.com/NeVoTM/[PROJECT-NAME]
 - **Live URL:** https://nevotm.github.io/[PROJECT-NAME]/mobile-design.html
 - **Local Path:** `C:\Users\17274\ME\[PROJECT-FOLDER]\`
 
-### **Development Tools & Languages**
+### 2.2 **Development Tools & Languages**
 - **HTML5:** Mobile-responsive design with tab navigation
 - **CSS3:** Advanced mobile optimization with gradient themes
 - **JavaScript:** Chart.js integration, slideshow functionality
 - **JSON:** Centralized data management system (project-data.json)
 - **PowerShell:** Deployment and validation scripts
 
-### **File Structure Overview**
+### 2.3 **File Structure Overview**
 ```
 [PROJECT-NAME]/
 ├── 📱 INTERFACES
@@ -57,21 +59,21 @@
 
 ---
 
-## 📊 **PROJECT SPECIFICATIONS**
+## 3.0 📊 **PROJECT SPECIFICATIONS**
 
-### **Development Details**
+### 3.1 **Development Details**
 - **Type:** [X]-Floor Mixed-Use Building
 - **Size:** [XXX,XXX] sq ft development
 - **Total Units:** [XXX] mixed-use units
 - **Unit Mix:** [XX] residential + [XX] STR + [XX] retail
 
-### **Financial Projections**
+### 3.2 **Financial Projections**
 - **Total Revenue:** $[XX]M (Marketing rounded from $[XX.X]M)
 - **Gross Profit:** $[XX]M (Marketing rounded from $[XX.X]M)
 - **Development Costs:** $[XX.X]M
 - **Profit Margin:** [XX]%
 
-### **Key Features**
+### 3.3 **Key Features**
 - [Feature 1]
 - [Feature 2] 
 - [Feature 3]
@@ -79,9 +81,9 @@
 
 ---
 
-## 🔧 **DATA MANAGEMENT SYSTEM**
+## 4.0 🔧 **DATA MANAGEMENT SYSTEM**
 
-### **Master Data Source: project-data.json**
+### 4.1 **Master Data Source: project-data.json**
 This file contains ALL project text, financial data, and configuration:
 
 ```bash
@@ -92,7 +94,7 @@ This file contains ALL project text, financial data, and configuration:
 4. Deploy: git add . && git commit -m "Update data" && git push
 ```
 
-### **Data Categories Included:**
+### 4.2 **Data Categories Included:**
 - **Project Info:** Name, address, specifications
 - **Financial Data:** Revenue, costs, profits (with marketing rounding)
 - **Contact Info:** All contact details and roles
@@ -101,14 +103,14 @@ This file contains ALL project text, financial data, and configuration:
 
 ---
 
-## 🚀 **DEPLOYMENT & LIVE ACCESS**
+## 5.0 🚀 **DEPLOYMENT & LIVE ACCESS**
 
-### **Live Websites**
+### 5.1 **Live Websites**
 - **Mobile Interface:** https://nevotm.github.io/[PROJECT-NAME]/mobile-design.html
 - **Desktop Interface:** https://nevotm.github.io/[PROJECT-NAME]/[DASHBOARD-NAME].html (if exists)
 - **Main Entry:** https://nevotm.github.io/[PROJECT-NAME]/
 
-### **Quick Deploy**
+### 5.2 **Quick Deploy**
 ```powershell
 git add .
 git commit -m "Update project"
@@ -118,7 +120,7 @@ git push origin main
 
 ---
 
-## 📞 **CONTACT INFORMATION**
+## 6.0 📞 **CONTACT INFORMATION**
 
 **Primary Contact:** [NAME]  
 **Role:** [TITLE]  
@@ -128,47 +130,60 @@ git push origin main
 
 ---
 
-## 🎡 **UNIVERSAL DEBUGGING SYSTEM**
+## 7.0 🎡 **UNIVERSAL DEBUGGING SYSTEM**
 
 This project implements the **Universal Project Debugging & Setup System**:
 
-### **Applied Universal Categories:**
+### 7.1 **Applied Universal Categories:**
 - ✅ **Data/Text Master Control System** - Centralized in project-data.json
 - ✅ **Mobile-First Design System** - mobile-design.html as primary
 - ✅ **Data Integrity & Marketing Rules** - Revenue rounded UP
 - ✅ **Professional Alignment System** - Table-based layouts
 - ✅ **Complete Documentation System** - All docs included
 
-### **For Debugging Issues:**
+### 7.2 **For Debugging Issues:**
 Reference `DEBUGGING-CHECKLIST.md` and apply solutions by category number.
+
+### 7.3 **Universal System Files (GitHub Master Source):**
+- **DEBUGGING-CHECKLIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
+- **README-UNIVERSAL-TEMPLATE.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md
+- **TODO-LIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
+- **WARP-START-SESSION.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/WARP-START-SESSION.md
+- **WarpSpeed.ps1**: https://github.com/NeVoTM/2829-niagara-street/blob/main/WarpSpeed.ps1
+
+### 7.4 **Local Project Files:**
+- **project-data.json** - `C:\Users\17274\ME\[PROJECT-FOLDER]\project-data.json`
+- **Update-ProjectData.ps1** - `C:\Users\17274\ME\[PROJECT-FOLDER]\Update-ProjectData.ps1`
+- **mobile-design.html** - `C:\Users\17274\ME\[PROJECT-FOLDER]\mobile-design.html`
+- **README.md** - `C:\Users\17274\ME\[PROJECT-FOLDER]\README.md`
 
 ---
 
-## 📚 **RELATED PROJECTS**
+## 8.0 📚 **RELATED PROJECTS**
 
-### **Template Source:**
+### 8.1 **Template Source:**
 - **Nevo Tower Portal:** https://nevotm.github.io/nevo-tower-portal/mmm-master-dashboard.html
 - **Base System:** Miami Makers Model (MMM) framework
 
-### **Other Projects Using This System:**
+### 8.2 **Other Projects Using This System:**
 - [Add other projects as they're created]
 
 ---
 
-## 📝 **PROJECT-SPECIFIC NOTES**
+## 9.0 📝 **PROJECT-SPECIFIC NOTES**
 
-### **[Custom Section 1: Unique Features]**
+### 9.1 **[Custom Section 1: Unique Features]**
 [Add project-specific information that doesn't fit universal categories]
 
-### **[Custom Section 2: Special Requirements]**  
+### 9.2 **[Custom Section 2: Special Requirements]**
 [Add any special deployment, configuration, or operational notes]
 
-### **[Custom Section 3: Known Issues]**
+### 9.3 **[Custom Section 3: Known Issues]**
 [Document any project-specific bugs or limitations]
 
 ---
 
-## 📅 **PROJECT HISTORY**
+## 10.0 📅 **PROJECT HISTORY**
 
 **Created:** [DATE]  
 **Last Updated:** [DATE]  
