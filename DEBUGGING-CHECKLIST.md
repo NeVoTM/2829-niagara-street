@@ -725,6 +725,176 @@ In mobile-design.html, lines 688-690 show version in Contact tab only.
 
 ---
 
+### **🟪 CATEGORY 5: README TEMPLATE SYSTEM**
+**🎡 UNIVERSAL FOR ALL PROJECTS - DOCUMENTATION STANDARDIZATION**
+
+**What Warp Will See:**
+- User needs consistent project documentation
+- User asks "how do I create a README for a new project?"
+- User wants standardized project setup documentation
+- User needs template for both project-specific and universal README files
+
+**Root Cause:**
+Inconsistent or missing documentation across projects leads to confusion and lack of standardization.
+
+**UNIVERSAL SOLUTION - IMPLEMENT IN EVERY PROJECT:**
+
+**Step 1: Create Universal README Template (README-UNIVERSAL-TEMPLATE.md)**
+```markdown
+# PROJECT NAME
+
+**Location:** [Project Address]
+**Status:** [Development Phase]
+**Type:** [Project Type]
+
+## 🏗️ Project Overview
+
+[Brief project description]
+
+**Key Features:**
+- Feature 1
+- Feature 2
+- Feature 3
+
+## 💰 Financial Summary
+
+| Metric | Amount |
+|--------|--------|
+| Total Revenue | $XXM |
+| Gross Profit | $XXM |
+| Development Cost | $XXM |
+| ROI | XX% |
+
+## 🎯 Current Status
+
+**Development Phase:** [Current phase]
+**Target Completion:** [Date]
+**Progress:** [Percentage or milestone]
+
+## 🌐 Environment
+
+**Live URL:** https://username.github.io/repo-name/mobile-design.html
+**Repository:** https://github.com/username/repo-name
+**Development Stack:** HTML, CSS, JavaScript, Chart.js
+**Validation:** PowerShell 7.5.3+ (pwsh)
+
+## 📋 Project Structure
+
+```
+project/
+├── mobile-design.html     # Primary mobile interface
+├── desktop-design.html   # Desktop interface
+├── index.html            # Entry point with device detection
+├── project-data.json     # Centralized data source
+├── Update-ProjectData.ps1 # Data validation script
+├── README.md             # This file
+├── DEBUGGING-CHECKLIST.md # Quality assurance checklist
+└── assets/               # Images and media files
+```
+
+## 🚀 Quick Start
+
+### For Data Updates:
+1. Edit `project-data.json`
+2. Run validation: `.\Update-ProjectData.ps1 -ValidateOnly`
+3. Deploy: `git add . && git commit -m "Update data" && git push`
+
+### For Content Changes:
+1. Edit HTML files directly
+2. Test on mobile viewport (iPhone 12 Pro)
+3. Validate with debugging checklist
+4. Deploy changes
+
+## 📊 Data Management
+
+**Master Data File:** `project-data.json`
+- All text content, financial figures, contact information
+- Single source of truth for consistent data
+- Validation via PowerShell script
+
+**Marketing Rules Applied:**
+- Revenue figures rounded UP for appeal ($37.4M → $38M)
+- Costs kept precise for accuracy
+- All figures validated for mathematical consistency
+
+## 📱 Mobile-First Design
+
+**Primary Interface:** `mobile-design.html`
+- Optimized for iPhone viewport
+- Touch-friendly navigation
+- Responsive charts with height constraints
+- Professional appearance across all devices
+
+**Desktop Enhancement:** `desktop-design.html`
+- Enhanced version of mobile interface
+- Additional features for larger screens
+- Maintained mobile compatibility
+
+## 🔗 Related Projects
+
+**Template Source:** [Base project if applicable]
+**Portfolio:** [Link to project portfolio]
+**Contact:** [Developer contact information]
+
+## 📞 Contact Information
+
+**Developer:** [Name]
+**Email:** [Email]
+**Phone:** [Phone]
+**Project Inquiry:** [Contact method]
+
+## 📅 Version History
+
+**v2.0** - [Date] - [Major changes]
+**v1.0** - [Date] - Initial release
+
+---
+
+*This project follows the Western New York Makers Model (WNYMM) development standards and uses centralized data management for consistency and maintainability.*
+```
+
+**Step 2: Project-Specific README Instructions**
+```markdown
+### Creating Project-Specific README:
+
+1. Copy README-UNIVERSAL-TEMPLATE.md to README.md
+2. Replace all [bracketed placeholders] with actual project data
+3. Update financial figures from project-data.json
+4. Add project-specific sections if needed
+5. Ensure all links are functional and current
+6. Include actual screenshots or renderings if available
+```
+
+**Step 3: Universal Template Maintenance**
+```markdown
+### Updating Universal Template:
+
+1. When you improve documentation in one project
+2. Update README-UNIVERSAL-TEMPLATE.md with the improvement
+3. Apply changes to other project READMEs as needed
+4. Maintain consistency across all projects
+```
+
+**Why This Works Universally:**
+- ✅ Consistent documentation structure across all projects
+- ✅ Easy setup for new projects
+- ✅ Professional appearance for stakeholders
+- ✅ Integration with centralized data management
+- ✅ Mobile-first approach documentation
+- ✅ Clear deployment and development instructions
+
+**GitHub Reference:**
+See working examples: 
+- README.md in this project
+- README-UNIVERSAL-TEMPLATE.md for template structure
+
+**Note:** Each project should have both:
+- `README.md` (project-specific documentation)
+- `project-data.json` (centralized data management)
+- `DEBUGGING-CHECKLIST.md` (quality assurance)
+
+---
+
 ## 📝 **CENTRALIZED DATA MANAGEMENT SYSTEM**
 
 ### **Project Structure Overview**
