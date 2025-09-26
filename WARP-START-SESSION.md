@@ -13,6 +13,10 @@
 
 **🔴 ESSENTIAL - Read immediately from GitHub (master source):**
 ```
+0. https://github.com/NeVoTM/2829-niagara-street/blob/main/WARP-COMPLIANCE-SYSTEM.md
+   - CRITICAL: WHY and HOW to follow procedures (prevents wasting hours)
+   - MANDATORY: Read this FIRST to understand user expectations
+   
 1. https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
    - Quality assurance and problem solutions with numbered references
    

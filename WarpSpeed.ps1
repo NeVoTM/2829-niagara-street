@@ -151,17 +151,18 @@ function Show-ProjectGuidance {
         }
         "issues" {
             Write-Host "🛠️  ISSUE RESOLUTION FOCUS:" -ForegroundColor Red
+            Write-Host "0. 🤖 READ WARP-COMPLIANCE-SYSTEM.md FIRST (prevents wasting hours)" -ForegroundColor Red
             Write-Host "1. Read DEBUGGING-CHECKLIST.md for specific solutions" -ForegroundColor Gray
-            Write-Host "2. Use numbered references: 'Fix ISSUE #4.1 (infinite scroll)'" -ForegroundColor Gray
-            Write-Host "3. Apply SECTION #2 for mobile optimization" -ForegroundColor Gray
+            Write-Host "2. Use numbered references: 'Fix ISSUE 4.1 (infinite scroll)'" -ForegroundColor Gray
+            Write-Host "3. Apply SECTION 2.0 for mobile optimization" -ForegroundColor Gray
             Write-Host "4. Validate fixes with mobile viewport testing" -ForegroundColor Gray
             Write-Host ""
             Write-Host "📝 QUICK REFERENCE - Most Common Issues:" -ForegroundColor Magenta
-            Write-Host "   ISSUE #4.1: Infinite scrolling (max-height: 100vh)" -ForegroundColor White
-            Write-Host "   ISSUE #4.2: Chart sizing (max-height: 280px)" -ForegroundColor White
-            Write-Host "   ISSUE #4.3: Alignment problems (separate tables)" -ForegroundColor White
-            Write-Host "   ISSUE #4.4: Text visibility (text-shadow)" -ForegroundColor White
-            Write-Host "   ISSUE #4.7: Mobile usability (44px touch targets)" -ForegroundColor White
+            Write-Host "   ISSUE 4.1: Infinite scrolling (max-height: 100vh)" -ForegroundColor White
+            Write-Host "   ISSUE 4.2: Chart sizing (max-height: 280px)" -ForegroundColor White
+            Write-Host "   ISSUE 4.3: Alignment problems (separate tables)" -ForegroundColor White
+            Write-Host "   ISSUE 4.4: Text visibility (text-shadow)" -ForegroundColor White
+            Write-Host "   ISSUE 4.7: Mobile usability (44px touch targets)" -ForegroundColor White
             Write-Host ""
         }
     }
