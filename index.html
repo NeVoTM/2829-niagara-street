@@ -30,7 +30,7 @@
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 15px 0;
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -316,32 +316,77 @@
             font-weight: 600;
         }
 
+        /* Chart styling */
+        .chart-card {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .chart-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        
+        .chart-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--success-color);
+            background: rgba(39, 174, 96, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chart-stats {
+            padding-left: 20px;
+        }
+
         /* Stats */
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
         }
 
         .stat-card {
             background: rgba(255,255,255,0.1);
-            padding: 20px;
+            padding: 18px;
             border-radius: 10px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.2);
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--accent-color);
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
-            margin-top: 5px;
+            margin: 5px 0;
+        }
+        
+        .stat-revenue {
+            font-size: 0.75rem;
+            color: var(--success-color);
+            font-weight: 600;
         }
 
         /* Contact Section */
@@ -417,18 +462,25 @@
             }
         }
         
-        /* iPhone specific optimizations */
+            /* iPhone specific optimizations */
         @media (max-width: 414px) {
+            .header {
+                padding: 8px 0;
+            }
+            
             .header-content {
-                padding: 0 10px;
+                padding: 0 15px;
+                text-align: center;
             }
             
             .logo-section h1 {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
+                margin-bottom: 2px;
             }
             
             .logo-section p {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                margin: 0;
             }
             
             .status-badge {
@@ -531,6 +583,36 @@
                 margin-bottom: 12px !important;
             }
             
+            /* iPhone chart improvements */
+            .chart-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .chart-header h2 {
+                font-size: 1rem !important;
+                margin-bottom: 5px;
+            }
+            
+            .chart-total {
+                font-size: 1rem !important;
+                padding: 6px 12px;
+            }
+            
+            .chart-stats {
+                padding-left: 0;
+            }
+            
+            .stat-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .stat-revenue {
+                font-size: 0.65rem !important;
+            }
+            
             /* Fix slideshow caption overlay on iPhone */
             .slideshow-container {
                 position: relative;
@@ -601,10 +683,7 @@
         <div class="header-content">
             <div class="logo-section">
                 <h1>2829 Niagara Street Development</h1>
-                <p>MMM Master Dashboard v1.0 - Tonawanda, NY</p>
-            </div>
-            <div class="status-badge">
-                🚀 Partners Wanted • Development Ready
+                <p>Tonawanda, NY</p>
             </div>
         </div>
     </div>
@@ -702,28 +781,31 @@
         <!-- Financials Tab -->
         <div id="financials" class="tab-content">
             <!-- Revenue Breakdown Chart -->
-            <div class="card">
-                <h2>📈 Project Revenue Breakdown - $37.4M Total</h2>
+            <div class="card chart-card">
+                <div class="chart-header">
+                    <h2>📈 Project Revenue Breakdown</h2>
+                    <div class="chart-total">$37.4M Total</div>
+                </div>
                 <div class="grid grid-2">
-                    <div>
+                    <div class="chart-container">
                         <canvas id="revenueChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
                     </div>
-                    <div>
+                    <div class="chart-stats">
                         <div class="stat-grid">
                             <div class="stat-card">
                                 <div class="stat-number">65</div>
                                 <div class="stat-label">Residential Units</div>
-                                <div style="font-size: 0.8rem; margin-top: 5px;">$15.8M Revenue</div>
+                                <div class="stat-revenue">$15.8M Revenue</div>
                             </div>
                             <div class="stat-card">
                                 <div class="stat-number">72</div>
                                 <div class="stat-label">STR Hospitality</div>
-                                <div style="font-size: 0.8rem; margin-top: 5px;">$15.1M Revenue</div>
+                                <div class="stat-revenue">$15.1M Revenue</div>
                             </div>
                             <div class="stat-card">
                                 <div class="stat-number">13</div>
                                 <div class="stat-label">Retail Units</div>
-                                <div style="font-size: 0.8rem; margin-top: 5px;">$6.5M Revenue</div>
+                                <div class="stat-revenue">$6.5M Revenue</div>
                             </div>
                         </div>
                     </div>
@@ -1095,9 +1177,14 @@
                         📞 Call Development Team
                     </button>
                     <button class="btn btn-warning" onclick="openVideo()">
-                        🎬 Watch Development Video
+                        🌬️ Watch Development Video
                     </button>
                 </div>
+            </div>
+            
+            <div class="card" style="text-align: center; margin-top: 30px; background: rgba(255,255,255,0.05);">
+                <p style="color: #666; font-size: 0.8rem;">Website Version: v1.1 - Enhanced iPhone Experience</p>
+                <p style="color: #666; font-size: 0.75rem; margin-top: 5px;">2829 Niagara Street Development Portal</p>
             </div>
         </div>
     </div>

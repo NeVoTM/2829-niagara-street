@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2829 Niagara Street - Mobile Design</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --gold: #ffd700;
+            --text: #ffffff;
+            --text-light: #b8b8b8;
+            --success: #4caf50;
+            --danger: #f44336;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Full-screen sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Fixed bottom navigation */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            min-width: 60px;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: var(--gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('2829 Mixed-use building exterior - twilight.png') center/cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--gold), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--gold), #ffed4e);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Chart container */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .chart-title {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        /* Feature list */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            background: var(--success);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Video section */
+        .video-section {
+            text-align: center;
+        }
+
+        .video-placeholder {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 215, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        /* Contact section */
+        .contact-info {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .contact-info h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .contact-item {
+            margin: 10px 0;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide sections initially */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Version info */
+        .version-info {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            z-index: 999;
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Version Info -->
+    <div class="version-info">v2.0-mobile</div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <a href="#hero" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="#model" class="nav-item">
+            <span class="nav-icon">🤝</span>
+            <span>Model</span>
+        </a>
+        <a href="#financials" class="nav-item">
+            <span class="nav-icon">💰</span>
+            <span>Money</span>
+        </a>
+        <a href="#project" class="nav-item">
+            <span class="nav-icon">🏢</span>
+            <span>Project</span>
+        </a>
+        <a href="#contact" class="nav-item">
+            <span class="nav-icon">📞</span>
+            <span>Contact</span>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section hero active">
+        <div class="hero-content">
+            <h1>2829 Niagara Street</h1>
+            <p>4-Floor Mixed-Use Development<br>Tonawanda, NY</p>
+            <a href="#model" class="cta-button">🚀 Join the Revolution</a>
+            
+            <div class="stats-grid" style="margin-top: 40px;">
+                <div class="stat-item">
+                    <span class="stat-number">$37.4M</span>
+                    <span class="stat-label">Total Revenue</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">150</span>
+                    <span class="stat-label">Total Units</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">31%</span>
+                    <span class="stat-label">Profit Margin</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WNYMM Model Section -->
+    <section id="model" class="section">
+        <div class="card">
+            <h2>🏦 WNY Makers Model</h2>
+            <p style="color: var(--text-light); margin-bottom: 20px;">
+                Revolutionary partnership approach with <strong style="color: var(--gold);">$35M+ projected revenue</strong>
+            </p>
+            
+            <h3>💡 How It Works</h3>
+            <ul class="feature-list">
+                <li><strong>In-Kind Investment:</strong> Your expertise = Direct equity</li>
+                <li><strong>Profit Share:</strong> Pro-rata share of profits</li>
+                <li><strong>Debt-Free:</strong> No traditional bank loans</li>
+                <li><strong>6-12 Months Faster:</strong> Accelerated timeline</li>
+            </ul>
+            
+            <h3 style="margin-top: 25px;">🎯 Your Benefits</h3>
+            <ul class="feature-list">
+                <li><strong>Wealth Building:</strong> Long-term equity growth</li>
+                <li><strong>Tax Advantages:</strong> Depreciation benefits</li>
+                <li><strong>Future Projects:</strong> Scalable investment model</li>
+                <li><strong>Active Role:</strong> Marketing & partner recruitment</li>
+            </ul>
+        </div>
+
+        <div class="video-section">
+            <h3 style="color: var(--gold); margin-bottom: 15px;">🎬 Watch Project Vision</h3>
+            <div class="video-placeholder" onclick="openVideo()">
+                <div class="play-button">▶</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financials Section -->
+    <section id="financials" class="section">
+        <div class="card">
+            <h2>📈 Financial Overview</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">Revenue Breakdown - $37.4M</div>
+                <canvas id="mobileRevenueChart" width="300" height="300"></canvas>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">65</span>
+                    <span class="stat-label">Residential<br>$15.8M</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">72</span>
+                    <span class="stat-label">STR Hotels<br>$15.1M</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">13</span>
+                    <span class="stat-label">Retail<br>$6.5M</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💰 Investment Highlights</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">$11.7M</span>
+                    <span class="stat-label">Gross Profit</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">46%</span>
+                    <span class="stat-label">ROI</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$0</span>
+                    <span class="stat-label">Interest Costs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section id="project" class="section">
+        <div class="card">
+            <h2>🏢 Project Specs</h2>
+            <h3>Phase 1: Base Development</h3>
+            <ul class="feature-list">
+                <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
+                <li><strong>Type:</strong> 4-Floor Mixed-Use Building</li>
+                <li><strong>Size:</strong> 143,997 sq ft development</li>
+                <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
+                <li><strong>Upper Floors:</strong> Residential & STR Units</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🎯 Partner Categories</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">💵</span>
+                    <span class="stat-label">Cash Partners</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">🔧</span>
+                    <span class="stat-label">Service Partners</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">⚡</span>
+                    <span class="stat-label">Technical Partners</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">🧱</span>
+                    <span class="stat-label">Material Partners</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="contact-info">
+            <h2 style="color: var(--gold); margin-bottom: 20px;">📞 Ready to Partner?</h2>
+            
+            <div class="contact-item">
+                <h3>Partnership Inquiries</h3>
+                <p><strong>Tiffany Durilla</strong></p>
+                <p>Development Partner</p>
+                <a href="mailto:durillaprop@gmail.com">📧 durillaprop@gmail.com</a><br>
+                <a href="tel:+17164211210">📱 716-421-1210</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🚀 Next Steps</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Join the "Partners Not Paychecks" revolution</p>
+            
+            <div style="text-align: center;">
+                <a href="mailto:durillaprop@gmail.com?subject=2829 Niagara Partnership Interest" class="cta-button" style="margin: 10px;">
+                    📧 Express Interest
+                </a><br>
+                <a href="tel:+17164211210" class="cta-button" style="margin: 10px;">
+                    📞 Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Chart initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            initMobileCharts();
+            initScrollAnimation();
+        });
+
+        function initMobileCharts() {
+            const ctx = document.getElementById('mobileRevenueChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Residential', 'STR Hotels', 'Retail'],
+                        datasets: [{
+                            data: [15.8, 15.1, 6.5],
+                            backgroundColor: ['#ffd700', '#4caf50', '#f44336'],
+                            borderWidth: 3,
+                            borderColor: '#1a1a2e'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#ffffff',
+                                    padding: 20,
+                                    font: { size: 14 }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': $' + context.parsed + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initScrollAnimation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section');
+            
+            // Navigation click handlers
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = item.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    // Update active nav
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    // Smooth scroll to section
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Intersection Observer for section animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        function openVideo() {
+            window.open('https://drive.google.com/file/d/1MZm39BrwNxBRoqSg_ooco4PSCqcMMksk/view?usp=sharing', '_blank');
+        }
+
+        console.log('🚀 2829 Niagara Street - Mobile Design v2.0 Loaded');
+    </script>
+</body>
+</html>
