@@ -172,19 +172,19 @@ Reference `DEBUGGING-CHECKLIST.md` and apply solutions by category number.
 
 **🗣️ When you (the user) say these phrases, they trigger specific Warp AI responses:**
 
-- **"That's not what I meant"** → Triggers compliance check
+- **TRIGGER 7.2.1: "That's not what I meant"** → Triggers compliance check
   - *Warp should check if it ignored numbered reference system*
   - *Warp should re-read the specific SECTION you referenced*
 
-- **"We already solved this"** → Points to numbered existing solution  
+- **TRIGGER 7.2.2: "We already solved this"** → Points to numbered existing solution  
   - *Warp should search DEBUGGING-CHECKLIST.md for existing numbered solution*
   - *Warp should reference the specific SECTION/ISSUE number*
 
-- **"This is inconsistent"** → Flags cross-reference update failure
+- **TRIGGER 7.2.3: "This is inconsistent"** → Flags cross-reference update failure
   - *Warp should check if it updated ALL related files*
   - *Warp should verify cross-references in universal files*
 
-- **"I explained this before"** → Indicates procedure violation
+- **TRIGGER 7.2.4: "I explained this before"** → Indicates procedure violation
   - *Warp should reference established numbered procedures*
   - *Warp should avoid re-asking for documented information*
 
