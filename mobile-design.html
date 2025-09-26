@@ -360,6 +360,10 @@
             <span class="nav-icon">🏢</span>
             <span>Project</span>
         </a>
+        <a href="#renderings" class="nav-item">
+            <span class="nav-icon">🎨</span>
+            <span>Renderings</span>
+        </a>
         <a href="#contact" class="nav-item">
             <span class="nav-icon">📞</span>
             <span>Contact</span>
@@ -466,6 +470,28 @@
                 </div>
             </div>
         </div>
+        
+        <div class="card">
+            <h2>💰 Cost Analysis</h2>
+            <div class="chart-container">
+                <div class="chart-title">Development Costs - $25.7M</div>
+                <canvas id="mobileCostChart" width="300" height="250"></canvas>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📊 Market Comparables</h2>
+            <div class="chart-container">
+                <div class="chart-title">Tonawanda Market Analysis</div>
+                <canvas id="mobileComparablesChart" width="300" height="250"></canvas>
+            </div>
+            <ul class="feature-list">
+                <li><strong>Rental Range:</strong> $1.84 - $2.94/sq ft annually</li>
+                <li><strong>Sale Range:</strong> $250 - $451/sq ft</li>
+                <li><strong>Days on Market:</strong> 9-12 days average</li>
+                <li><strong>Market Growth:</strong> 10-18% year-over-year</li>
+            </ul>
+        </div>
     </section>
 
     <!-- Project Details Section -->
@@ -498,8 +524,63 @@
                     <span class="stat-label">Technical Partners</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">🧱</span>
+                    <span class="stat-number">🧧</span>
                     <span class="stat-label">Material Partners</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Renderings Section -->
+    <section id="renderings" class="section">
+        <div class="card">
+            <h2>🎨 Project Renderings</h2>
+            <p style="color: var(--text-light); margin-bottom: 20px;">Professional architectural visualizations</p>
+            
+            <div id="mobileSlideshow" style="position: relative; background: #000; border-radius: 15px; overflow: hidden; cursor: pointer; margin: 20px 0;" onclick="toggleMobileSlideshow()">
+                <img id="mobileImage" src="" alt="2829 Niagara Renderings" style="width: 100%; height: auto; display: block; min-height: 200px;">
+                
+                <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; max-width: 90%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <span id="mobileImageTitle">Loading...</span>
+                </div>
+                
+                <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem;">
+                    <span id="mobileImageCounter">1/20</span>
+                </div>
+                
+                <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;" onclick="event.stopPropagation(); prevMobileImage()">
+                    ◀
+                </div>
+                
+                <div style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;" onclick="event.stopPropagation(); nextMobileImage()">
+                    ▶
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 15px 0;">
+                <button class="btn btn-primary" onclick="toggleMobileSlideshow()" style="background: var(--gold); color: var(--primary); border: none; cursor: pointer;">
+                    <span id="mobileSlideshowToggle">⏸️ Pause</span>
+                </button>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 25px;">
+                <div>
+                    <h3>🏢 Building Features</h3>
+                    <ul class="feature-list">
+                        <li>Dramatic evening exteriors</li>
+                        <li>Modern waterfront integration</li>
+                        <li>Premium dining concepts</li>
+                        <li>Full-service spa facilities</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🏗️ Amenities</h3>
+                    <ul class="feature-list">
+                        <li>Rooftop entertainment decks</li>
+                        <li>Pet-friendly dog park</li>
+                        <li>Fitness centers (2 locations)</li>
+                        <li>Hotel-quality reception</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -539,15 +620,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             initMobileCharts();
             initScrollAnimation();
+            initMobileSlideshow();
         });
 
         function initMobileCharts() {
-            const ctx = document.getElementById('mobileRevenueChart');
-            if (ctx) {
-                new Chart(ctx, {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('mobileRevenueChart');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['Residential', 'STR Hotels', 'Retail'],
+                        labels: ['Residential (65)', 'STR Hotels (72)', 'Retail (13)'],
                         datasets: [{
                             data: [15.8, 15.1, 6.5],
                             backgroundColor: ['#ffd700', '#4caf50', '#f44336'],
@@ -563,8 +646,8 @@
                                 position: 'bottom',
                                 labels: {
                                     color: '#ffffff',
-                                    padding: 20,
-                                    font: { size: 14 }
+                                    padding: 15,
+                                    font: { size: 12 }
                                 }
                             },
                             tooltip: {
@@ -577,6 +660,172 @@
                         }
                     }
                 });
+            }
+            
+            // Cost Chart
+            const costCtx = document.getElementById('mobileCostChart');
+            if (costCtx) {
+                new Chart(costCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Hard Construction ($21.4M)', 'Soft Costs ($4.3M)'],
+                        datasets: [{
+                            data: [21.4, 4.3],
+                            backgroundColor: ['#1a1a2e', '#ffd700'],
+                            borderWidth: 2,
+                            borderColor: '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#ffffff',
+                                    padding: 15,
+                                    font: { size: 11 }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const value = context.parsed;
+                                        const total = 25.7;
+                                        const percentage = ((value / total) * 100).toFixed(1);
+                                        return context.label + ' (' + percentage + '%)';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Comparables Chart
+            const comparablesCtx = document.getElementById('mobileComparablesChart');
+            if (comparablesCtx) {
+                new Chart(comparablesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['600 River', '622 River', 'Exchange', 'Buffalo', '2829 Target'],
+                        datasets: [{
+                            label: 'Rent $/sq ft',
+                            data: [2.42, 2.02, 2.15, 2.11, 2.35],
+                            backgroundColor: '#4caf50',
+                            borderColor: '#388e3c',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#333' },
+                                ticks: { color: '#ffffff', font: { size: 10 } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#ffffff', font: { size: 9 } }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#ffffff', font: { size: 11 } }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': $' + context.parsed.y;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Mobile Slideshow Functions
+        let mobileImages = [
+            '2829 Mixed-use building exterior - twilight.png',
+            '2829 Mixed-use building exterior.jpg',
+            '2829 Modern waterfront development.png',
+            '2829 Restaurant.png',
+            '2829 Cafe - Health Bar with view.png',
+            '2829 Clotihng Boutique.png',
+            '2829 Reception - STR - Hotel.png',
+            '2829 Fitness Center 1.png',
+            '2829 Fitness Center 2.png',
+            '2829 Spa 1.png',
+            '2829 Spa 2.png',
+            '2829 Spa 3.png',
+            '2829 Spa - Massage.png',
+            '2829 Salon with View.png',
+            '2829 3rd floor view 2.png',
+            '2829 Rooftop 1.png',
+            '2829 Rooftop 2.png',
+            '2829 Rooftop 3 - dog park.png',
+            '2829 Rooftop 4 - dog park.png',
+            '2829 Rooftop 5 - dog park with view.png'
+        ];
+        
+        let mobileIndex = 0;
+        let mobileTimer = null;
+        let mobilePaused = false;
+        
+        function initMobileSlideshow() {
+            showMobileImage(0);
+            startMobileSlideshow();
+        }
+        
+        function showMobileImage(index) {
+            const img = document.getElementById('mobileImage');
+            const title = document.getElementById('mobileImageTitle');
+            const counter = document.getElementById('mobileImageCounter');
+            
+            if (img && title && counter) {
+                const file = mobileImages[index % mobileImages.length];
+                img.src = file;
+                title.textContent = file.replace(/\.(png|jpg)$/i, '').replace(/2829 /, '').replace(/[-_]/g, ' ');
+                counter.textContent = `${(index % mobileImages.length) + 1}/${mobileImages.length}`;
+            }
+        }
+        
+        function nextMobileImage() {
+            mobileIndex = (mobileIndex + 1) % mobileImages.length;
+            showMobileImage(mobileIndex);
+        }
+        
+        function prevMobileImage() {
+            mobileIndex = (mobileIndex - 1 + mobileImages.length) % mobileImages.length;
+            showMobileImage(mobileIndex);
+        }
+        
+        function startMobileSlideshow() {
+            clearInterval(mobileTimer);
+            mobileTimer = setInterval(() => {
+                if (!mobilePaused) nextMobileImage();
+            }, 3000);
+            mobilePaused = false;
+            const toggle = document.getElementById('mobileSlideshowToggle');
+            if (toggle) toggle.textContent = '⏸️ Pause';
+        }
+        
+        function pauseMobileSlideshow() {
+            mobilePaused = true;
+            const toggle = document.getElementById('mobileSlideshowToggle');
+            if (toggle) toggle.textContent = '▶️ Resume';
+        }
+        
+        function toggleMobileSlideshow() {
+            if (mobilePaused) {
+                startMobileSlideshow();
+            } else {
+                pauseMobileSlideshow();
             }
         }
 

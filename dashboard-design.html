@@ -656,7 +656,9 @@
                         <div class="chart-title">$37.4M Total Revenue</div>
                         <div class="chart-subtitle">Mixed-use development</div>
                     </div>
-                    <canvas id="dashboardChart" width="300" height="200"></canvas>
+                    <div style="height: 280px; width: 100%;">
+                        <canvas id="dashboardChart"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -762,6 +764,110 @@
             </div>
         </div>
 
+        <!-- Additional Financial Charts -->
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">💰</div>
+                        <span>Cost Breakdown</span>
+                    </div>
+                    <div class="card-value">$25.7M Total</div>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <div class="chart-title">Development Costs</div>
+                        <div class="chart-subtitle">Hard vs Soft Costs</div>
+                    </div>
+                    <div style="height: 200px; width: 100%;">
+                        <canvas id="dashboardCostChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">📉</div>
+                        <span>Market Analysis</span>
+                    </div>
+                    <div class="card-value">Tonawanda Comparables</div>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-content">
+                            <div class="feature-title">Rental Range</div>
+                            <div class="feature-desc">$1.84 - $2.94/sq ft annually</div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💵</div>
+                        <div class="feature-content">
+                            <div class="feature-title">Sale Range</div>
+                            <div class="feature-desc">$250 - $451/sq ft</div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⏱️</div>
+                        <div class="feature-content">
+                            <div class="feature-title">Days on Market</div>
+                            <div class="feature-desc">9-12 days average</div>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-content">
+                            <div class="feature-title">Market Growth</div>
+                            <div class="feature-desc">10-18% year-over-year</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project Renderings -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="card-icon">🎨</div>
+                    <span>Project Renderings</span>
+                </div>
+                <div class="card-value">20 Professional Images</div>
+            </div>
+            
+            <div id="dashboardSlideshow" style="position: relative; background: var(--bg-tertiary); border-radius: 12px; overflow: hidden; cursor: pointer; margin: 20px 0; height: 300px;" onclick="toggleDashboardSlideshow()">
+                <img id="dashboardImage" src="" alt="2829 Niagara Renderings" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                
+                <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(13, 17, 23, 0.9); color: var(--text-primary); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; max-width: 80%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid var(--border);">
+                    <span id="dashboardImageTitle">Loading...</span>
+                </div>
+                
+                <div style="position: absolute; top: 15px; right: 15px; background: rgba(13, 17, 23, 0.9); color: var(--text-primary); padding: 6px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid var(--border);">
+                    <span id="dashboardImageCounter">1/20</span>
+                </div>
+                
+                <div style="position: absolute; top: 50%; left: 15px; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; color: var(--bg-primary);" onclick="event.stopPropagation(); prevDashboardImage()">
+                    ◀
+                </div>
+                
+                <div style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); background: rgba(255, 255, 255, 0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; color: var(--bg-primary);" onclick="event.stopPropagation(); nextDashboardImage()">
+                    ▶
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="btn btn-primary" onclick="toggleDashboardSlideshow()" style="margin-right: 10px;">
+                    <span id="dashboardSlideshowToggle">⏸️ Pause Slideshow</span>
+                </button>
+                <button class="btn btn-outline" onclick="openVideo()">
+                    🌬️ Watch Project Video
+                </button>
+            </div>
+        </div>
+        
         <!-- Contact section -->
         <div class="dashboard-card">
             <div class="card-header">
@@ -808,12 +914,14 @@
         // Chart initialization
         document.addEventListener('DOMContentLoaded', function() {
             initDashboardChart();
+            initDashboardSlideshow();
         });
 
         function initDashboardChart() {
-            const ctx = document.getElementById('dashboardChart');
-            if (ctx) {
-                new Chart(ctx, {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('dashboardChart');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
                     type: 'bar',
                     data: {
                         labels: ['Residential\n(65 units)', 'STR Hotels\n(72 units)', 'Retail\n(13 units)'],
@@ -881,6 +989,136 @@
                         }
                     }
                 });
+            }
+            
+            // Cost Chart
+            const costCtx = document.getElementById('dashboardCostChart');
+            if (costCtx) {
+                new Chart(costCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Hard Construction ($21.4M)', 'Soft Costs ($4.3M)'],
+                        datasets: [{
+                            data: [21.4, 4.3],
+                            backgroundColor: [
+                                'rgba(88, 166, 255, 0.8)',
+                                'rgba(188, 140, 255, 0.8)'
+                            ],
+                            borderColor: [
+                                '#58a6ff',
+                                '#bc8cff'
+                            ],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#8b949e',
+                                    padding: 15,
+                                    font: { size: 11 }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#21262d',
+                                titleColor: '#f0f6fc',
+                                bodyColor: '#8b949e',
+                                borderColor: '#30363d',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        const percentage = ((context.parsed / 25.7) * 100).toFixed(1);
+                                        return context.label + ' (' + percentage + '%)';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Dashboard Slideshow Functions
+        let dashboardImages = [
+            '2829 Mixed-use building exterior - twilight.png',
+            '2829 Mixed-use building exterior.jpg',
+            '2829 Modern waterfront development.png',
+            '2829 Restaurant.png',
+            '2829 Cafe - Health Bar with view.png',
+            '2829 Clotihng Boutique.png',
+            '2829 Reception - STR - Hotel.png',
+            '2829 Fitness Center 1.png',
+            '2829 Fitness Center 2.png',
+            '2829 Spa 1.png',
+            '2829 Spa 2.png',
+            '2829 Spa 3.png',
+            '2829 Spa - Massage.png',
+            '2829 Salon with View.png',
+            '2829 3rd floor view 2.png',
+            '2829 Rooftop 1.png',
+            '2829 Rooftop 2.png',
+            '2829 Rooftop 3 - dog park.png',
+            '2829 Rooftop 4 - dog park.png',
+            '2829 Rooftop 5 - dog park with view.png'
+        ];
+        
+        let dashboardIndex = 0;
+        let dashboardTimer = null;
+        let dashboardPaused = false;
+        
+        function initDashboardSlideshow() {
+            showDashboardImage(0);
+            startDashboardSlideshow();
+        }
+        
+        function showDashboardImage(index) {
+            const img = document.getElementById('dashboardImage');
+            const title = document.getElementById('dashboardImageTitle');
+            const counter = document.getElementById('dashboardImageCounter');
+            
+            if (img && title && counter) {
+                const file = dashboardImages[index % dashboardImages.length];
+                img.src = file;
+                title.textContent = file.replace(/\.(png|jpg)$/i, '').replace(/2829 /, '').replace(/[-_]/g, ' ');
+                counter.textContent = `${(index % dashboardImages.length) + 1}/${dashboardImages.length}`;
+            }
+        }
+        
+        function nextDashboardImage() {
+            dashboardIndex = (dashboardIndex + 1) % dashboardImages.length;
+            showDashboardImage(dashboardIndex);
+        }
+        
+        function prevDashboardImage() {
+            dashboardIndex = (dashboardIndex - 1 + dashboardImages.length) % dashboardImages.length;
+            showDashboardImage(dashboardIndex);
+        }
+        
+        function startDashboardSlideshow() {
+            clearInterval(dashboardTimer);
+            dashboardTimer = setInterval(() => {
+                if (!dashboardPaused) nextDashboardImage();
+            }, 4000);
+            dashboardPaused = false;
+            const toggle = document.getElementById('dashboardSlideshowToggle');
+            if (toggle) toggle.textContent = '⏸️ Pause Slideshow';
+        }
+        
+        function pauseDashboardSlideshow() {
+            dashboardPaused = true;
+            const toggle = document.getElementById('dashboardSlideshowToggle');
+            if (toggle) toggle.textContent = '▶️ Resume Slideshow';
+        }
+        
+        function toggleDashboardSlideshow() {
+            if (dashboardPaused) {
+                startDashboardSlideshow();
+            } else {
+                pauseDashboardSlideshow();
             }
         }
 
