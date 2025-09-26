@@ -1,0 +1,6 @@
+title: 2829 Niagara Street Development
+description: Revolutionary MMM Development - Partners Not Paychecks
+theme: minima
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed

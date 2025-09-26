@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2829 Niagara Street - Master Development Dashboard v1.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-section p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            background: rgba(255,255,255,0.9);
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .tab-button:hover {
+            background: rgba(52,152,219,0.1);
+            color: var(--secondary-color);
+        }
+
+        .tab-button.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Video Section */
+        .video-hero {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .video-placeholder {
+            aspect-ratio: 16/9;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid var(--secondary-color);
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            background: var(--success-color);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Highlight */
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--primary-color);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+
+        .contact-card a {
+            color: #74b9ff;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                min-width: auto;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1>2829 Niagara Street Development</h1>
+                <p>MMM Master Dashboard v1.0 - Tonawanda, NY</p>
+            </div>
+            <div class="status-badge">
+                🚀 Partners Wanted • Development Ready
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-tabs">
+        <button class="tab-button active" onclick="showTab('overview')">🏗️ MMM Model Overview</button>
+        <button class="tab-button" onclick="showTab('financials')">💰 Financials</button>
+        <button class="tab-button" onclick="showTab('project')">🏢 Project Details</button>
+        <button class="tab-button" onclick="showTab('partners')">🤝 Partners</button>
+        <button class="tab-button" onclick="showTab('renderings')">🎨 Renderings</button>
+        <button class="tab-button" onclick="showTab('contact')">📞 Contact</button>
+    </div>
+
+    <div class="container">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <!-- Video Hero -->
+            <div class="video-hero">
+                <h2>🎬 2829 Niagara Street Development Vision</h2>
+                <p style="margin-bottom: 25px; color: #666;">Watch our 3-story mixed-use development proposal with major expansion potential</p>
+                
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div>
+                            <div class="play-button" onclick="openVideo()"></div>
+                            <p style="margin-top: 20px;">2829 Niagara Development Presentation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 15px; font-style: italic; color: #666;">
+                    Click to view complete development proposal and expansion strategies
+                </p>
+            </div>
+
+            <!-- MMM Model Introduction -->
+            <div class="card">
+                <h2>🏗️ Miami Makers Model (MMM)</h2>
+                <h3>Revolutionary "Partners Not Paychecks, Partners Not Investors" Development Approach</h3>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>🎯 Model Introduction</h3>
+                        <p>The Miami Makers Model (MMM) revolutionizes real estate development by transforming traditional contractor relationships into equity partnerships.</p>
+                        
+                        <ul class="feature-list">
+                            <li><strong>Core Innovation:</strong> Transforms contractors into equity partners</li>
+                            <li><strong>"Partners Not Paychecks" approach:</strong> Direct stakes in developments</li>
+                            <li><strong>Active Participation:</strong> Partners vote on key decisions</li>
+                            <li><strong>SEC Compliance:</strong> Howey Test approved structure</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🔄 Revolutionary Benefits</h3>
+                        <ul class="feature-list">
+                            <li>2x+ efficiency from ownership motivation</li>
+                            <li>Eliminates passive investor limitations</li>
+                            <li>Higher quality through partner accountability</li>
+                            <li>Scalable to developments worldwide</li>
+                            <li>Proven success in Miami market</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Stats -->
+            <div class="card">
+                <h2>📊 2829 Niagara Street Project Stats</h2>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Story Mixed-Use Base</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Partner Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Expansion Potential</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">SEC Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financials Tab -->
+        <div id="financials" class="tab-content">
+            <!-- Revenue Breakdown Chart -->
+            <div class="card">
+                <h2>📈 Project Revenue Breakdown - $37.4M Total</h2>
+                <div class="grid grid-2">
+                    <div>
+                        <canvas id="revenueChart" width="400" height="300" style="max-width: 400px; max-height: 300px;"></canvas>
+                    </div>
+                    <div>
+                        <div class="stat-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">65</div>
+                                <div class="stat-label">Residential Units</div>
+                                <div style="font-size: 0.8rem; margin-top: 5px;">$15.8M Revenue</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">72</div>
+                                <div class="stat-label">STR Hospitality</div>
+                                <div style="font-size: 0.8rem; margin-top: 5px;">$15.1M Revenue</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">13</div>
+                                <div class="stat-label">Retail Units</div>
+                                <div style="font-size: 0.8rem; margin-top: 5px;">$6.5M Revenue</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cost Breakdown Chart -->
+            <div class="card">
+                <h2>💰 Development Cost Analysis - $25.7M Total</h2>
+                <div class="grid grid-2">
+                    <div>
+                        <canvas id="costChart" width="400" height="300" style="max-width: 400px; max-height: 300px;"></canvas>
+                    </div>
+                    <div>
+                        <h3>Cost Breakdown</h3>
+                        <ul class="feature-list">
+                            <li><strong>Hard Construction:</strong> $21,428,105 (83%)</li>
+                            <li><strong>Soft Costs:</strong> $4,285,621 (17%)</li>
+                            <li><strong>Cost per Sq Ft:</strong> $125 NSF</li>
+                            <li><strong>Net Square Footage:</strong> 143,997 sq ft</li>
+                        </ul>
+                        <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                            <h4 style="color: #e74c3c; margin-bottom: 10px;">MMM Model Advantage</h4>
+                            <p style="font-size: 0.9rem;">Traditional financing would add $3-5M in interest and fees. Partner equity model eliminates these costs entirely.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparable Properties Analysis -->
+            <div class="card">
+                <h2>📉 Tonawanda Market Comparables Analysis</h2>
+                <div class="grid grid-2">
+                    <div>
+                        <canvas id="comparablesChart" width="400" height="300" style="max-width: 400px; max-height: 300px;"></canvas>
+                    </div>
+                    <div>
+                        <h3>Market Data (Per Sq Ft)</h3>
+                        <ul class="feature-list">
+                            <li><strong>Rental Range:</strong> $1.84 - $2.94 annually</li>
+                            <li><strong>Sale Range:</strong> $250 - $451</li>
+                            <li><strong>Average Rent:</strong> $2.15/sq ft</li>
+                            <li><strong>Days on Market:</strong> 9-12 days average</li>
+                            <li><strong>Market Growth:</strong> 10-18% year-over-year</li>
+                        </ul>
+                        
+                        <h3 style="margin-top: 20px;">Key Comparables</h3>
+                        <div style="font-size: 0.85rem; line-height: 1.4;">
+                            <p><strong>600 River Road:</strong> $1.90-$2.94/sf</p>
+                            <p><strong>622 River Road:</strong> $1.84-$2.19/sf</p>
+                            <p><strong>Exchange Luxury:</strong> $1.80-$2.50/sf</p>
+                            <p><strong>Buffalo Downtown:</strong> $1.95-$2.26/sf</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROI and Profit Analysis -->
+            <div class="card">
+                <h2>📈 ROI & Profit Analysis</h2>
+                <div class="grid grid-3">
+                    <div class="stat-card">
+                        <div class="stat-number">$11.7M</div>
+                        <div class="stat-label">Gross Profit</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">31%</div>
+                        <div class="stat-label">Profit Margin</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">46%</div>
+                        <div class="stat-label">ROI on Investment</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" style="margin-top: 20px;">
+                    <div>
+                        <h3>🞨 Rental Income Potential</h3>
+                        <ul class="feature-list">
+                            <li><strong>Residential:</strong> $29/sq ft annually</li>
+                            <li><strong>Retail:</strong> $30/sq ft annually</li>
+                            <li><strong>STR Hospitality:</strong> $60/sq ft annually</li>
+                            <li><strong>Total Annual Income:</strong> $4.2M - $5.8M</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>🎆 MMM Model Benefits</h3>
+                        <ul class="feature-list">
+                            <li><strong>No Interest Costs:</strong> Save $3-5M in financing</li>
+                            <li><strong>Partner Motivation:</strong> 2x efficiency gain</li>
+                            <li><strong>Quality Premium:</strong> Superior construction</li>
+                            <li><strong>Faster Timeline:</strong> 12-18 month completion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Details Tab -->
+        <div id="project" class="tab-content">
+            <div class="card">
+                <h2>🏢 Project Specifications</h2>
+                
+                <div class="grid grid-2">
+                    <div>
+                        <h3>🏗️ Phase 1: Base Development</h3>
+                        <ul class="feature-list">
+                            <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
+                            <li><strong>Type:</strong> 3-Story Mixed-Use Building</li>
+                            <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
+                            <li><strong>Upper Floors:</strong> Residential/Office Units</li>
+                            <li><strong>Parking:</strong> On-site parking solution</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🚀 Expansion Potential</h3>
+                        <ul class="feature-list">
+                            <li>Zoning allows for larger development</li>
+                            <li>Additional adjoining properties available</li>
+                            <li>Infrastructure supports major expansion</li>
+                            <li>Market demand supports growth</li>
+                            <li>Partner model scales efficiently</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏘️ Location Advantages</h2>
+                <div class="grid grid-3">
+                    <div>
+                        <h3>🚗 Transportation</h3>
+                        <ul class="feature-list">
+                            <li>Major highway access</li>
+                            <li>Public transportation</li>
+                            <li>Buffalo proximity</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🏬 Commerce</h3>
+                        <ul class="feature-list">
+                            <li>Established business district</li>
+                            <li>Growing retail corridor</li>
+                            <li>Mixed-use zoning</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🏡 Community</h3>
+                        <ul class="feature-list">
+                            <li>Established neighborhood</li>
+                            <li>Schools and services nearby</li>
+                            <li>Growth-oriented community</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partners Tab -->
+        <div id="partners" class="tab-content">
+            <div class="card">
+                <h2>🤝 Partner Categories</h2>
+                <p>Join the revolution - be a partner, not a paycheck recipient</p>
+                
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>💵 Cash Partners</h3>
+                        <ul class="feature-list">
+                            <li>Private capital investors</li>
+                            <li>Family offices</li>
+                            <li>Angel investors</li>
+                            <li>Equity participation in all phases</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactPartner('cash')">💰 Join as Cash Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🔧 Service Partners</h3>
+                        <ul class="feature-list">
+                            <li>General contractors</li>
+                            <li>Architects & engineers</li>
+                            <li>Construction managers</li>
+                            <li>Specialty trades</li>
+                        </ul>
+                        <button class="btn btn-success" onclick="contactPartner('service')">🏗️ Join as Service Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>⚡ MEP Technical Partners</h3>
+                        <ul class="feature-list">
+                            <li>Electrical contractors</li>
+                            <li>Plumbing specialists</li>
+                            <li>HVAC experts</li>
+                            <li>Smart building integrators</li>
+                        </ul>
+                        <button class="btn btn-warning" onclick="contactPartner('technical')">⚡ Join as Technical Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏗️ Material Partners</h3>
+                        <ul class="feature-list">
+                            <li>Steel suppliers</li>
+                            <li>Concrete providers</li>
+                            <li>Fixture suppliers</li>
+                            <li>Building materials</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactPartner('material')">🧱 Join as Material Partner</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏡 Land Partners</h3>
+                        <ul class="feature-list">
+                            <li>Property owners</li>
+                            <li>Land developers</li>
+                            <li>Real estate holders</li>
+                            <li>Adjacent property owners</li>
+                        </ul>
+                        <button class="btn btn-success" onclick="contactPartner('land')">🏘️ Join as Land Partner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Renderings Tab -->
+        <div id="renderings" class="tab-content">
+            <div class="card">
+                <h2>🎨 Project Renderings & Visualizations</h2>
+                <p>Visual representations of the 2829 Niagara Street development</p>
+                
+                <div class="card">
+                    <h3>🖼️ Interactive Image Gallery</h3>
+                    <p style="margin-bottom: 20px;">Professional architectural renderings - auto-advancing slideshow (click to pause/resume):</p>
+                    
+                    <div id="imageSlideshow" style="position: relative; max-width: 800px; margin: 0 auto; background: #000; border-radius: 10px; overflow: hidden; cursor: pointer;" onclick="toggleSlideshow()">
+                        <img id="slideshowImage" src="" alt="2829 Niagara Street Renderings" style="width: 100%; height: auto; display: block;">
+                        
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+                            <span id="imageTitle">Loading...</span>
+                        </div>
+                        
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
+                            <span id="imageCounter">1/20</span>
+                        </div>
+                        
+                        <div style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); prevImage()">
+                            ◀
+                        </div>
+                        
+                        <div style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); nextImage()">
+                            ▶
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="btn btn-primary" onclick="toggleSlideshow()">
+                            <span id="slideshowToggle">⏸️ Pause Slideshow</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>🏢 Building Exteriors</h3>
+                        <ul class="feature-list">
+                            <li><strong>Twilight View:</strong> Dramatic evening exterior rendering</li>
+                            <li><strong>Daytime Facade:</strong> Professional building exterior</li>
+                            <li><strong>Waterfront Context:</strong> Modern development integration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏪 Commercial Spaces</h3>
+                        <ul class="feature-list">
+                            <li><strong>Health Bar & Cafe:</strong> Premium dining concept</li>
+                            <li><strong>Full Restaurant:</strong> Complete dining experience</li>
+                            <li><strong>Boutique Retail:</strong> High-end shopping space</li>
+                            <li><strong>Reception Area:</strong> Hotel-quality hospitality</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>💪 Wellness Center</h3>
+                        <ul class="feature-list">
+                            <li><strong>Fitness Centers:</strong> Two dedicated workout areas</li>
+                            <li><strong>Full-Service Spa:</strong> Multiple treatment rooms</li>
+                            <li><strong>Massage Therapy:</strong> Professional wellness services</li>
+                            <li><strong>Salon with Views:</strong> Premium beauty services</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🏠 Rooftop Amenities</h3>
+                        <ul class="feature-list">
+                            <li><strong>Entertainment Decks:</strong> Multiple outdoor spaces</li>
+                            <li><strong>Dog Park:</strong> Pet-friendly rooftop area</li>
+                            <li><strong>Panoramic Views:</strong> City and waterfront vistas</li>
+                            <li><strong>Premium Recreation:</strong> Outdoor lifestyle amenities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📐 Technical Drawings</h2>
+                <div class="grid grid-3">
+                    <div class="stat-card">
+                        <div class="stat-number">📋</div>
+                        <div class="stat-label">Floor Plans</div>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">Available in /docs/ folder</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🔧</div>
+                        <div class="stat-label">MEP Drawings</div>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">Technical specifications</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">📏</div>
+                        <div class="stat-label">Structural Plans</div>
+                        <p style="font-size: 0.8rem; margin-top: 10px;">Engineering details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Tab -->
+        <div id="contact" class="tab-content">
+            <div class="card">
+                <h2>📞 Contact & Partnership Information</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h4>👥 Partnership Inquiries</h4>
+                        <p><strong>Tiffany Durilla</strong></p>
+                        <p>Development Partner</p>
+                        <p>📧 <a href="mailto:durillaprop@gmail.com">durillaprop@gmail.com</a></p>
+                        <p>📱 <a href="tel:+17164211210">716-421-1210</a></p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>🏗️ Project Location</h4>
+                        <p><strong>2829 Niagara Street</strong></p>
+                        <p>Tonawanda, NY</p>
+                        <p>Mixed-Use Development Site</p>
+                        <p>📍 Ready for Development</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4>💼 Investment Office</h4>
+                        <p><strong>MMM Development Partners</strong></p>
+                        <p>Tonawanda Operations</p>
+                        <p>Partnership Structure</p>
+                        <p>🚀 Expansion Ready</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🚀 Ready to Join?</h2>
+                <div style="text-align: center; padding: 20px;">
+                    <p style="font-size: 1.1rem; margin-bottom: 25px;">Be part of the "Partners Not Paychecks" revolution in Tonawanda's premier development opportunity.</p>
+                    
+                    <button class="btn btn-primary" onclick="window.open('mailto:durillaprop@gmail.com?subject=2829 Niagara Street Partnership Interest', '_blank')">
+                        📧 Express Partnership Interest
+                    </button>
+                    <button class="btn btn-success" onclick="window.open('tel:+17164211210', '_blank')">
+                        📞 Call Development Team
+                    </button>
+                    <button class="btn btn-warning" onclick="openVideo()">
+                        🎬 Watch Development Video
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function openVideo() {
+            // Direct link to Google Drive video
+            window.open('https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/preview', '_blank');
+        }
+
+        function contactPartner(partnerType) {
+            const messages = {
+                cash: "I'm interested in joining as a Cash Partner for the 2829 Niagara Street development.",
+                service: "I'm interested in joining as a Service Partner for the 2829 Niagara Street development.",
+                technical: "I'm interested in joining as a Technical Partner for the 2829 Niagara Street development.",
+                material: "I'm interested in joining as a Material Partner for the 2829 Niagara Street development.",
+                land: "I'm interested in joining as a Land Partner for the 2829 Niagara Street development."
+            };
+            
+            const subject = `2829 Niagara Street - ${partnerType.charAt(0).toUpperCase() + partnerType.slice(1)} Partnership Interest`;
+            window.open(`mailto:durillaprop@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(messages[partnerType])}`, '_blank');
+        }
+
+        // Auto-load functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('2829 Niagara Street MMM Dashboard Loaded');
+            console.log('Version: 1.0 - Full Multi-Page Portal');
+            console.log('Based on: Nevo Tower Portal Structure');
+
+            // Initialize charts and slideshow after DOM is ready
+            initCharts();
+            initSlideshow();
+        });
+
+        // =========================
+        // Interactive Charts Initialization
+        // =========================
+        function initCharts() {
+            // Revenue Breakdown Chart (Pie Chart)
+            const revenueCtx = document.getElementById('revenueChart');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Residential Units (65)', 'STR Hospitality (72)', 'Retail Units (13)'],
+                        datasets: [{
+                            data: [15.84, 15.12, 6.48], // in millions
+                            backgroundColor: [
+                                '#3498db', // Blue
+                                '#27ae60', // Green
+                                '#e74c3c'  // Red
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed;
+                                        return label + ': $' + value.toFixed(1) + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Cost Breakdown Chart (Doughnut Chart)
+            const costCtx = document.getElementById('costChart');
+            if (costCtx) {
+                new Chart(costCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Hard Construction ($21.4M)', 'Soft Costs ($4.3M)'],
+                        datasets: [{
+                            data: [21.43, 4.29],
+                            backgroundColor: [
+                                '#2c3e50', // Dark blue
+                                '#95a5a6'  // Gray
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed;
+                                        const percentage = ((value / 25.72) * 100).toFixed(1);
+                                        return label + ' (' + percentage + '%)';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Comparables Chart (Bar Chart)
+            const comparablesCtx = document.getElementById('comparablesChart');
+            if (comparablesCtx) {
+                new Chart(comparablesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['600 River Rd', '622 River Rd', 'Exchange Luxury', 'Buffalo Downtown', '2829 Niagara Target'],
+                        datasets: [{
+                            label: 'Rental Rate ($/sq ft)',
+                            data: [2.42, 2.02, 2.15, 2.11, 2.35],
+                            backgroundColor: '#3498db',
+                            borderColor: '#2980b9',
+                            borderWidth: 1
+                        }, {
+                            label: 'Sale Price ($/sq ft)',
+                            data: [350, 300, 325, 310, 260],
+                            backgroundColor: '#27ae60',
+                            borderColor: '#229954',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Price ($)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Properties'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': $' + context.parsed.y;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // =========================
+        // Image Slideshow (Auto-advance)
+        // =========================
+        let slideshowImages = [
+            '2829 Mixed-use building exterior - twilight.png',
+            '2829 Mixed-use building exterior.jpg',
+            '2829 Modern waterfront development.png',
+            '2829 Restaurant.png',
+            '2829 Cafe - Health Bar with view.png',
+            '2829 Clotihng Boutique.png',
+            '2829 Reception - STR - Hotel.png',
+            '2829 Fitness Center 1.png',
+            '2829 Fitness Center 2.png',
+            '2829 Spa 1.png',
+            '2829 Spa 2.png',
+            '2829 Spa 3.png',
+            '2829 Spa - Massage.png',
+            '2829 Salon with View.png',
+            '2829 3rd floor view 2.png',
+            '2829 Rooftop 1.png',
+            '2829 Rooftop 2.png',
+            '2829 Rooftop 3 - dog park.png',
+            '2829 Rooftop 4 - dog park.png',
+            '2829 Rooftop 5 - dog park with view.png'
+        ];
+
+        let slideshowIndex = 0;
+        let slideshowTimer = null;
+        let isPaused = false;
+
+        function initSlideshow() {
+            const imgEl = document.getElementById('slideshowImage');
+            const titleEl = document.getElementById('imageTitle');
+            const counterEl = document.getElementById('imageCounter');
+            if (!imgEl || !titleEl || !counterEl) return;
+            showImage(slideshowIndex);
+            startSlideshow();
+        }
+
+        function getDisplayTitle(filename) {
+            return filename.replace(/\.(png|jpg|jpeg)$/i, '').replace(/[-_]/g, ' ');
+        }
+
+        function showImage(index) {
+            const imgEl = document.getElementById('slideshowImage');
+            const titleEl = document.getElementById('imageTitle');
+            const counterEl = document.getElementById('imageCounter');
+            if (!imgEl) return;
+            const file = slideshowImages[index % slideshowImages.length];
+            imgEl.src = file; // images are stored in the repo root alongside index.html
+            if (titleEl) titleEl.textContent = getDisplayTitle(file);
+            if (counterEl) counterEl.textContent = `${(index % slideshowImages.length) + 1}/${slideshowImages.length}`;
+        }
+
+        function nextImage() {
+            slideshowIndex = (slideshowIndex + 1) % slideshowImages.length;
+            showImage(slideshowIndex);
+        }
+
+        function prevImage() {
+            slideshowIndex = (slideshowIndex - 1 + slideshowImages.length) % slideshowImages.length;
+            showImage(slideshowIndex);
+        }
+
+        function startSlideshow(intervalMs = 3000) {
+            clearInterval(slideshowTimer);
+            slideshowTimer = setInterval(() => {
+                if (!isPaused) nextImage();
+            }, intervalMs);
+            const toggle = document.getElementById('slideshowToggle');
+            if (toggle) toggle.textContent = '⏸️ Pause Slideshow';
+            isPaused = false;
+        }
+
+        function pauseSlideshow() {
+            isPaused = true;
+            const toggle = document.getElementById('slideshowToggle');
+            if (toggle) toggle.textContent = '▶️ Resume Slideshow';
+        }
+
+        function toggleSlideshow() {
+            if (isPaused) {
+                startSlideshow();
+            } else {
+                pauseSlideshow();
+            }
+        }
+    </script>
+</body>
+</html>
