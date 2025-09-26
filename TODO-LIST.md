@@ -216,6 +216,27 @@
 - **Project Selection:** Interactive choice between NEW/EXISTING/ISSUES
 - **Quick Mode:** `WarpSpeed -QuickStart` to skip selection
 
+### 9.4 **WARP AI PROCEDURES REMINDER:**
+
+**🤖 MANDATORY: When updating this TODO list, Warp AI MUST:**
+
+1. **Use Numbered References:** 
+   - Add items to appropriate numbered sections (1.0, 2.0, 3.0, etc.)
+   - Reference other files by number: "Apply SECTION 4.3 from DEBUGGING-CHECKLIST.md"
+   - Maintain hierarchical structure (X.1, X.2, X.3...)
+
+2. **Update Cross-References:**
+   - New TODO items → Update DEBUGGING-CHECKLIST.md quick reference
+   - File location changes → Update WARP-START-SESSION.md SECTION 1.1
+   - Priority changes → Update README-UNIVERSAL-TEMPLATE.md SECTION 7.3
+
+3. **Follow File Management:**
+   - GitHub files are MASTER source
+   - Update universal files simultaneously
+   - Commit with descriptive numbered references
+
+**📝 This prevents reorganization waste and maintains system consistency.**
+
 ---
 
 **🔄 This TODO list is living document - update regularly as items are completed or new priorities emerge.**

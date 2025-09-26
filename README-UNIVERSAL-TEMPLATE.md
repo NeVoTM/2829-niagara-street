@@ -144,6 +144,30 @@ This project implements the **Universal Project Debugging & Setup System**:
 ### 7.2 **For Debugging Issues:**
 Reference `DEBUGGING-CHECKLIST.md` and apply solutions by category number.
 
+### 7.2.1 **WARP AI INSTRUCTIONS - MANDATORY PROCEDURES:**
+
+**🤖 When Working with This Project, Warp AI MUST:**
+
+1. **ALWAYS Use Numbered References:**
+   - Refer to sections by number: "SECTION 4.1" not "Data Management"
+   - Reference specific issues: "ISSUE 4.3 (ALIGNMENT NIGHTMARES)"
+   - Use TODO items by number: "Complete TODO 3.1.2 (Data & Configuration)"
+
+2. **MAINTAIN Numbering System:**
+   - When adding new sections, follow sequential numbering
+   - Add subsections as X.1, X.2, X.3 format
+   - Never break the hierarchical structure
+
+3. **UPDATE All Related Files:**
+   - Changes to universal files must be reflected in ALL projects
+   - GitHub files are MASTER - local copies are secondary
+   - Always commit numbered updates to maintain consistency
+
+4. **FOLLOW File Location Standards:**
+   - GitHub URLs for universal files: `https://github.com/NeVoTM/2829-niagara-street/blob/main/[FILENAME]`
+   - Local paths format: `C:\Users\17274\ME\[PROJECT-FOLDER]\[filename]`
+   - Document ALL file locations when creating new references
+
 ### 7.3 **Universal System Files (GitHub Master Source):**
 - **DEBUGGING-CHECKLIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
 - **README-UNIVERSAL-TEMPLATE.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md

@@ -189,6 +189,37 @@ WarpSpeed
 
 ---
 
+## 7.0 🤖 **WARP AI MANDATORY PROCEDURES**
+
+**🚨 CRITICAL: Follow these procedures in EVERY session to maintain system integrity**
+
+### 7.1 **Numbered Reference System:**
+- **ALWAYS** use numbered references: "SECTION 4.3" not "alignment issues"
+- **ALWAYS** reference TODO items by number: "TODO 3.1.2" not "data files"
+- **ALWAYS** cite specific issues: "ISSUE 4.1 (INFINITE SCROLLING)"
+
+### 7.2 **File Update Workflow:**
+1. Changes to universal files affect ALL projects
+2. GitHub files are MASTER - update there first
+3. Use proper commit messages with numbered references
+4. Update cross-references in related files
+
+### 7.3 **Adding New Items:**
+1. Find appropriate numbered section
+2. Add with next sequential number (X.1, X.2, X.3...)
+3. Update ALL related files simultaneously
+4. Never break hierarchical numbering system
+
+### 7.4 **Session Standards:**
+- Start each session with `WarpSpeed` command
+- Choose appropriate project type (NEW/EXISTING/ISSUES)
+- Reference numbered sections in all communications
+- End sessions by updating TODO-LIST.md with numbered priorities
+
+**📝 Following these procedures prevents wasting time on reorganization and ensures consistent project management.**
+
+---
+
 **Last Updated:** [Auto-updated by WarpSpeed script]  
 **Session Duration:** Track time spent on current tasks  
 **Next Session:** Continue with TODO-LIST.md priorities

@@ -979,6 +979,99 @@ See `HOW-TO-DEPLOY.md` for detailed instructions.
 4. **Verify Using Example References**: Check the cited line numbers in mobile-design.html
 5. **Run Validation**: Use Update-ProjectData.ps1 to check data consistency
 
+---
+
+## 🤖 **WARP AI MANDATORY PROCEDURES - READ FIRST**
+
+**🚨 CRITICAL: These procedures MUST be followed for ALL interactions with this project system**
+
+### **📝 NUMBERING SYSTEM REQUIREMENTS:**
+
+1. **ALWAYS Reference by Number:**
+   ```
+   ✅ CORRECT: "Apply SECTION 4.3 (ALIGNMENT NIGHTMARES) to fix address formatting"
+   ✅ CORRECT: "Implement ISSUE 4.1 and 4.2 for infinite scroll and chart sizing"
+   ✅ CORRECT: "Check TODO 3.1.2 (Data & Configuration files)"
+   
+   ❌ WRONG: "Fix the alignment issues"
+   ❌ WRONG: "Apply the mobile optimization"
+   ❌ WRONG: "Update the data files"
+   ```
+
+2. **MAINTAIN Hierarchical Structure:**
+   - Main sections: X.0 (1.0, 2.0, 3.0...)
+   - Subsections: X.1, X.2, X.3...
+   - Sub-subsections: X.1.1, X.1.2, X.1.3...
+   - Issues within sections: 4.1, 4.2, 4.3... through 4.9
+
+3. **ADD New Items Correctly:**
+   - Find the appropriate numbered section
+   - Add new subsection with next sequential number
+   - Update references in ALL related files
+   - Never insert items without proper numbering
+
+### **📁 FILE MANAGEMENT REQUIREMENTS:**
+
+4. **GitHub Master File System:**
+   - ALWAYS reference latest GitHub versions first
+   - Local files are secondary copies only
+   - Update GitHub immediately after local changes
+   - Universal files affect ALL projects
+
+5. **File Location Documentation:**
+   ```
+   ✅ CORRECT Format:
+   - **GitHub Master**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
+   - **Local Copy**: C:\Users\17274\ME\2829-Niagara-Street\DEBUGGING-CHECKLIST.md
+   ```
+
+6. **When Adding New Solutions:**
+   - Determine correct section number (4.10, 4.11, etc.)
+   - Follow existing format exactly
+   - Include "What Warp Will See", "Root Cause", "EXACT SOLUTION"
+   - Add to quick reference list at bottom
+   - Update related universal files
+
+### **🔄 UPDATE WORKFLOW REQUIREMENTS:**
+
+7. **Universal File Changes:**
+   ```powershell
+   # Required workflow for universal file updates:
+   git add DEBUGGING-CHECKLIST.md README-UNIVERSAL-TEMPLATE.md TODO-LIST.md WARP-START-SESSION.md
+   git commit -m "Update: [Describe numbered changes]"
+   git push
+   ```
+
+8. **Cross-Reference Updates:**
+   - New DEBUGGING item → Update TODO-LIST.md SECTION 9.0
+   - New README section → Update WARP-START-SESSION.md SECTION 1.1
+   - New TODO category → Update appropriate numbered section
+
+9. **WarpSpeed Integration:**
+   - Use `WarpSpeed` command for session startup
+   - Choose appropriate project type (NEW/EXISTING/ISSUES)
+   - Reference numbered sections in all communications
+
+### **🚨 CRITICAL FAILURE PREVENTION:**
+
+**DO NOT:**
+- Add unnumbered sections or subsections
+- Reference items by name only without numbers
+- Skip updating related files after changes
+- Break the hierarchical numbering system
+- Ignore GitHub as master source
+
+**ALWAYS:**
+- Use complete numbered references
+- Update ALL affected files simultaneously
+- Maintain consistent formatting across files
+- Document file locations when creating references
+- Test WarpSpeed command after major updates
+
+---
+
+**📝 This system prevents wasting time on reorganization and ensures consistent project management across ALL future work.**
+
 ### **For Warp AI - Quick Reference System:**
 
 **You can now ask Warp to apply specific fixes by referencing the numbered sections:**
@@ -1006,6 +1099,14 @@ Check all items in SECTION 6.1 (CHARTS) and 6.3 (IPHONE OPTIMIZATION) for qualit
 - **5.0:** Universal README template system
 - **6.0:** Quality assurance checklists (7 categories)
 - **7.0:** Critical failure points and testing protocols
+
+**🤖 WARP AI QUICK REFERENCE - MANDATORY PROCEDURES:**
+- **ALWAYS** use numbers: "SECTION 4.3" not "alignment issues"
+- **MAINTAIN** hierarchical structure: X.0 → X.1 → X.1.1
+- **UPDATE** all related files when making changes
+- **FOLLOW** GitHub master file system
+- **REFERENCE** specific items: "TODO 3.1.2", "ISSUE 4.1", "SECTION 2.0"
+- **TEST** WarpSpeed command after major updates
 
 **Quick Issue Reference (Section 4.0):**
 - **4.1:** Infinite scrolling prevention
