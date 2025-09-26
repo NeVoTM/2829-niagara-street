@@ -1,9 +1,9 @@
 # 2829 Niagara Street - Project Videos
 
 ## 🎥 Main Development Video
-**Primary Video**: https://drive.google.com/file/d/1ySjEs15kyHM41sWFXWMtN-bxCCj5ZBZb/view?usp=sharing
+**Primary Video**: https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/view?usp=sharing
 
-**Auto-Play Direct Link**: https://drive.google.com/file/d/1ySjEs15kyHM41sWFXWMtN-bxCCj5ZBZb/preview
+**Auto-Play Direct Link**: https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/preview
 
 ## 📹 Video Details
 
@@ -23,14 +23,14 @@
 
 ### Standard Link (Requires Play Button)
 ```html
-<a href="https://drive.google.com/file/d/1ySjEs15kyHM41sWFXWMtN-bxCCj5ZBZb/view?usp=sharing" target="_blank">
+<a href="https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/view?usp=sharing" target="_blank">
     Watch Development Video
 </a>
 ```
 
 ### Auto-Play Preview Mode
 ```html
-<iframe src="https://drive.google.com/file/d/1ySjEs15kyHM41sWFXWMtN-bxCCj5ZBZb/preview" 
+<iframe src="https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/preview" 
         width="640" height="360" 
         allow="autoplay">
 </iframe>
@@ -40,7 +40,7 @@
 ```javascript
 function openVideoAutoPlay() {
     // Opens video in preview mode - starts playing automatically
-    window.open('https://drive.google.com/file/d/1ySjEs15kyHM41sWFXWMtN-bxCCj5ZBZb/preview', '_blank');
+    window.open('https://drive.google.com/file/d/1fuYkInZRKIShtk0ooec1jMu-GjKCwsUp/preview', '_blank');
 }
 ```
 
