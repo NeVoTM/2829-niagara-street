@@ -1,0 +1,6 @@
+phone,message,browser_assigned,status,sent_time
++15551234567,"Hello! This is a test message from our multi-browser SMS system.",chrome,pending,
++15559876543,"Hi there! Your property investment opportunity at 2829 Niagara Street is ready for review.",firefox,pending,
++15555551234,"Greetings from WNY Makers! We have an exclusive partnership opportunity for you.",brave,pending,
++15555554567,"Test message - checking our automated SMS system functionality.",vivaldi,pending,
++15555557890,"Hello! This is a demonstration of our multi-browser texting capability.",opera,pending,

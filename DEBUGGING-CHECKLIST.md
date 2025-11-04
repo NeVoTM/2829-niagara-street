@@ -1017,6 +1017,7 @@ See `HOW-TO-DEPLOY.md` for detailed instructions.
    - Local files are secondary copies only
    - Update GitHub immediately after local changes
    - Universal files affect ALL projects
+   - **Universal Access Principle:** GitHub first, then copy to local (NEVER local first)
 
 5. **File Location Documentation:**
    ```
@@ -1106,7 +1107,32 @@ Check all items in SECTION 6.1 (CHARTS) and 6.3 (IPHONE OPTIMIZATION) for qualit
 - **UPDATE** all related files when making changes
 - **FOLLOW** GitHub master file system
 - **REFERENCE** specific items: "TODO 3.1.2", "ISSUE 4.1", "SECTION 2.0"
-- **TEST** WarpSpeed command after major updates
+- **START** sessions with `WarpSpeed` command (installed in PowerShell profile)
+
+**CRITICAL: WarpSpeed Command Documentation**
+- **Function Name:** `WarpSpeed` (capital W, capital S)
+- **Location:** Installed in `$PROFILE` (PowerShell profile)
+- **Script Path:** `C:\Users\17274\ME\2829-Niagara-Street\WarpSpeed.ps1`
+- **Usage:** `WarpSpeed`, `WarpSpeed -QuickStart`, `WarpSpeed -ShowPath`, `WarpSpeed -Update`
+
+**CRITICAL: Custom Commands Setup (8 Essential Commands)**
+- **Setup Location:** Warp Settings > Features > Custom Commands > Add Command
+- **DebugRef** (Ctrl+Shift+D): Show common debugging issues instantly
+- **GitHubFirst** (Ctrl+Shift+G): Universal Access Principle reminder
+- **NumRef** (Ctrl+Shift+N): Numbered reference template format
+- **ComplianceCheck** (Ctrl+Shift+C): Session compliance checklist
+- **QACheck** (Ctrl+Shift+Q): Quality assurance categories
+- **MobileFirst** (Ctrl+Shift+M): Mobile-first design principles
+- **DataCheck** (Ctrl+Shift+V): Data validation and marketing rules
+- **UpdateFlow** (Ctrl+Shift+U): File update workflow
+
+**CRITICAL: Dropdown Tools (Global Hotkeys)**
+- **QuickDebug-Dropdown.ps1** (Ctrl+Alt+D): Debugging issues selector
+- **QuickCommands-Dropdown.ps1** (Ctrl+Alt+C): All commands browser
+- **QuickFiles-Dropdown.ps1** (Ctrl+Alt+F): Project files browser
+- **QuickReference-Selector.ps1** (Ctrl+Alt+R): Numbered reference selector
+- **Coverage:** 30% of screen, auto-copy to clipboard
+- **Usage:** Double-click any item to copy AI command instantly
 
 **Quick Issue Reference (Section 4.0):**
 - **4.1:** Infinite scrolling prevention

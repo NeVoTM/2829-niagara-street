@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Warp AI Command Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .command-category {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .command-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .command-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+        }
+
+        .command-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .command-item:active {
+            transform: scale(0.98);
+        }
+
+        .command-text {
+            font-weight: 500;
+        }
+
+        .command-desc {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copy-feedback {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .copy-feedback.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .command-category {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Warp AI Command Menu</h1>
+            <p>Click any command to copy to clipboard</p>
+        </div>
+
+        <div class="commands-grid">
+            <div class="command-category">
+                <div class="category-title">📋 Main Commands</div>
+                <div class="command-item" onclick="copyCommand('WarpSpeed')">
+                    <div class="command-text">WarpSpeed</div>
+                    <div class="command-desc">Start AI session with full context</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('.\\SimpleDebug.ps1')">
+                    <div class="command-text">.\SimpleDebug.ps1</div>
+                    <div class="command-desc">Quick debugging reference</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('menu')">
+                    <div class="command-text">menu</div>
+                    <div class="command-desc">Show this command menu</div>
+                </div>
+            </div>
+
+            <div class="command-category">
+                <div class="category-title">🐛 Debugging Tools</div>
+                <div class="command-item" onclick="copyCommand('.\\QuickDebug-Dropdown.ps1')">
+                    <div class="command-text">.\QuickDebug-Dropdown.ps1</div>
+                    <div class="command-desc">Show debugging issues dropdown</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('DebugRef')">
+                    <div class="command-text">DebugRef</div>
+                    <div class="command-desc">Common debugging issues reference</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('.\\Update-ProjectData.ps1 -ValidateOnly')">
+                    <div class="command-text">.\Update-ProjectData.ps1 -ValidateOnly</div>
+                    <div class="command-desc">Validate project data consistency</div>
+                </div>
+            </div>
+
+            <div class="command-category">
+                <div class="category-title">⚡ Quick Tools</div>
+                <div class="command-item" onclick="copyCommand('.\\QuickCommands-Dropdown.ps1')">
+                    <div class="command-text">.\QuickCommands-Dropdown.ps1</div>
+                    <div class="command-desc">Show all commands dropdown</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('.\\QuickFiles-Dropdown.ps1')">
+                    <div class="command-text">.\QuickFiles-Dropdown.ps1</div>
+                    <div class="command-desc">Browse project files</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('.\\QuickReference-Selector.ps1')">
+                    <div class="command-text">.\QuickReference-Selector.ps1</div>
+                    <div class="command-desc">Numbered reference selector</div>
+                </div>
+            </div>
+
+            <div class="command-category">
+                <div class="category-title">🌐 Git Commands</div>
+                <div class="command-item" onclick="copyCommand('git status')">
+                    <div class="command-text">git status</div>
+                    <div class="command-desc">Check repository status</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('git --no-pager log --oneline -10')">
+                    <div class="command-text">git --no-pager log --oneline -10</div>
+                    <div class="command-desc">Show recent commits</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('git pull')">
+                    <div class="command-text">git pull</div>
+                    <div class="command-desc">Pull latest changes</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('git push')">
+                    <div class="command-text">git push</div>
+                    <div class="command-desc">Push changes to GitHub</div>
+                </div>
+            </div>
+
+            <div class="command-category">
+                <div class="category-title">🎯 Custom Commands</div>
+                <div class="command-item" onclick="copyCommand('GitHubFirst')">
+                    <div class="command-text">GitHubFirst</div>
+                    <div class="command-desc">Universal Access Principle reminder</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('NumRef')">
+                    <div class="command-text">NumRef</div>
+                    <div class="command-desc">Numbered reference template</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('ComplianceCheck')">
+                    <div class="command-text">ComplianceCheck</div>
+                    <div class="command-desc">Session compliance checklist</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('QACheck')">
+                    <div class="command-text">QACheck</div>
+                    <div class="command-desc">Quality assurance categories</div>
+                </div>
+            </div>
+
+            <div class="command-category">
+                <div class="category-title">🔧 System Tools</div>
+                <div class="command-item" onclick="copyCommand('Get-Location')">
+                    <div class="command-text">Get-Location</div>
+                    <div class="command-desc">Show current directory</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('Get-ChildItem -Name')">
+                    <div class="command-text">Get-ChildItem -Name</div>
+                    <div class="command-desc">List files in directory</div>
+                </div>
+                <div class="command-item" onclick="copyCommand('$PSVersionTable')">
+                    <div class="command-text">$PSVersionTable</div>
+                    <div class="command-desc">Show PowerShell version</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        💡 Click any command to copy • Press F5 to refresh • ESC to close
+    </div>
+
+    <div class="copy-feedback" id="copyFeedback">
+        ✅ Command copied to clipboard!
+    </div>
+
+    <script>
+        function copyCommand(command) {
+            // Try modern clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(command).then(() => {
+                    showCopyFeedback(command);
+                }).catch(() => {
+                    // Fallback to older method
+                    fallbackCopy(command);
+                });
+            } else {
+                // Fallback for non-secure contexts
+                fallbackCopy(command);
+            }
+        }
+
+        function fallbackCopy(command) {
+            const textArea = document.createElement('textarea');
+            textArea.value = command;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopyFeedback(command);
+            } catch (err) {
+                console.error('Could not copy text: ', err);
+                // Show manual copy instruction
+                prompt('Copy this command:', command);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showCopyFeedback(command) {
+            const feedback = document.getElementById('copyFeedback');
+            feedback.textContent = `✅ Copied: ${command.substring(0, 30)}${command.length > 30 ? '...' : ''}`;
+            feedback.classList.add('show');
+            
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            } else if (e.key === 'F5') {
+                location.reload();
+            }
+        });
+
+        // Auto-focus for immediate keyboard use
+        window.addEventListener('load', function() {
+            document.body.focus();
+        });
+    </script>
+</body>
+</html>

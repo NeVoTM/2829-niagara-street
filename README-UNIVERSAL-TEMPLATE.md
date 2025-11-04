@@ -190,6 +190,50 @@ Reference `DEBUGGING-CHECKLIST.md` and apply solutions by category number.
 
 **💡 Use these trigger phrases to quickly redirect Warp back to established procedures.**
 
+### 7.2.3 **UNIVERSAL NUMBER SEQUENCING INSTRUCTIONS:**
+
+**🔢 MANDATORY: All future lists, instructions, sections MUST follow this numbering system:**
+
+**MAIN SECTIONS:**
+- Use X.0 format: 1.0, 2.0, 3.0, 4.0, etc.
+- Never skip numbers or use letters (A, B, C)
+- Always include section titles with emojis for visual hierarchy
+
+**SUBSECTIONS:**
+- Use X.1, X.2, X.3 format under main sections
+- Example: 4.1, 4.2, 4.3 under SECTION 4.0
+- Maximum 3 levels: X.0 → X.1 → X.1.1
+
+**LISTS & ITEMS:**
+- Use ITEM X.X.X format for detailed items
+- Use TRIGGER X.X.X format for user actions
+- Use ISSUE X.X format for problems/solutions
+
+**EXAMPLES OF PROPER NUMBERING:**
+```
+## 4.0 🔶 CRITICAL MOBILE ISSUES
+
+### 4.1 INFINITE SCROLLING PROBLEM
+#### 4.1.1 Root Cause Analysis
+#### 4.1.2 Exact Solution
+#### 4.1.3 Implementation Steps
+
+### 4.2 CHART SIZING DISASTERS
+#### 4.2.1 Root Cause Analysis
+#### 4.2.2 Exact Solution
+
+TRIGGER 7.2.1: "That's not what I meant"
+ISSUE 4.3: Alignment nightmares
+ITEM 3.1.2: Data configuration files
+```
+
+**CROSS-REFERENCE FORMAT:**
+- Always reference by number: "Apply SECTION 4.3" not "fix alignment"
+- Include brief description: "SECTION 4.3 (ALIGNMENT NIGHTMARES)"
+- Link to specific subsection when needed: "Follow SECTION 4.3.2 for exact CSS"
+
+**🔄 CONSISTENCY RULE: Every new addition must follow this numbering system to maintain universal organization.**
+
 ### 7.3 **Universal System Files (GitHub Master Source):**
 - **DEBUGGING-CHECKLIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
 - **README-UNIVERSAL-TEMPLATE.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md

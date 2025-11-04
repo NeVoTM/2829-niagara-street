@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Warp AI Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .popup-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            width: 450px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .option-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .option-button:active {
+            transform: translateY(0);
+        }
+        
+        .option-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .option-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .option-hotkey {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .github-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .close-hint {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 11px;
+            opacity: 0.7;
+        }
+        
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .content-area {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .content-area pre {
+            color: white;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            cursor: pointer;
+        }
+        
+        .content-area pre:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .action-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-button {
+            background: rgba(76, 175, 80, 0.8);
+        }
+        
+        .back-button {
+            background: rgba(33, 150, 243, 0.8);
+        }
+        
+        .close-button {
+            background: rgba(244, 67, 54, 0.8);
+        }
+        
+        .action-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-container">
+        <div class="header">
+            <h1>🚀 Warp AI Assistant</h1>
+            <p>Universal debugging and development tools</p>
+        </div>
+        
+        <div class="options-grid">
+            <button class="option-button" onclick="launchTool('debug')" data-tool="debug">
+                <span class="option-icon">🐛</span>
+                <span class="option-text">Debug Issues</span>
+                <span class="option-hotkey">Win+1</span>
+            </button>
+            
+            <button class="option-button" onclick="launchTool('commands')" data-tool="commands">
+                <span class="option-icon">⚡</span>
+                <span class="option-text">Commands Browser</span>
+                <span class="option-hotkey">Win+2</span>
+            </button>
+            
+            <button class="option-button" onclick="launchTool('files')" data-tool="files">
+                <span class="option-icon">📁</span>
+                <span class="option-text">Files Browser</span>
+                <span class="option-hotkey">Win+3</span>
+            </button>
+            
+            <button class="option-button" onclick="launchTool('references')" data-tool="references">
+                <span class="option-icon">📋</span>
+                <span class="option-text">Reference Selector</span>
+                <span class="option-hotkey">Win+4</span>
+            </button>
+            
+            <button class="option-button" onclick="launchTool('github')" data-tool="github">
+                <span class="option-icon">🌐</span>
+                <span class="option-text">GitHub Sync</span>
+                <span class="option-hotkey">Win+G</span>
+            </button>
+        </div>
+        
+        <div class="github-status" id="github-status">
+            <div class="status-dot"></div>
+            <span id="status-text">GitHub connected • Ready</span>
+        </div>
+        
+        <div class="close-hint">
+            Press ESC to close • Auto-closes after selection
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <span id="loading-text">Launching tool...</span>
+        </div>
+    </div>
+
+    <script>
+        // GitHub and local configuration
+        const config = {
+            githubUsername: 'nevotm', // Your actual GitHub username
+            currentRepo: getCurrentRepo(),
+            scriptsPath: 'C:\\Users\\17274\\ME\\2829-Niagara-Street',
+            tools: {
+                debug: {
+                    name: 'Debug Issues',
+                    script: 'QuickDebug-Dropdown.ps1',
+                    githubPath: 'debug-issues.md'
+                },
+                commands: {
+                    name: 'Commands Browser', 
+                    script: 'QuickCommands-Dropdown.ps1',
+                    githubPath: 'commands.md'
+                },
+                files: {
+                    name: 'Files Browser',
+                    script: 'QuickFiles-Dropdown.ps1',
+                    githubPath: 'project-files.md'
+                },
+                references: {
+                    name: 'Reference Selector',
+                    script: 'QuickReference-Selector.ps1', 
+                    githubPath: 'references.md'
+                },
+                github: {
+                    name: 'GitHub Sync',
+                    action: 'sync'
+                }
+            }
+        };
+        
+        function getCurrentRepo() {
+            // Try to detect from URL or default to main repo
+            const url = new URL(window.location.href);
+            const params = new URLSearchParams(url.search);
+            return params.get('repo') || '2829-Niagara-Street';
+        }
+        
+        function showLoading(message) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('loading-text').textContent = message;
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        async function launchTool(toolId) {
+            const tool = config.tools[toolId];
+            if (!tool) return;
+            
+            // Visual feedback
+            const button = document.querySelector(`[data-tool="${toolId}"]`);
+            button.style.background = 'rgba(76, 175, 80, 0.3)';
+            showLoading(`Launching ${tool.name}...`);
+            
+            if (toolId === 'github') {
+                await syncWithGitHub();
+            } else {
+                await launchPowerShellTool(tool);
+            }
+            
+            // Don't auto-close - let user see the instructions
+            // User can press ESC or click outside to close
+        }
+        
+        async function launchPowerShellTool(tool) {
+            // First, get data from GitHub for this tool
+            const githubData = await getGitHubToolData(tool.githubPath);
+            
+            // Transform popup to show the actual data/commands
+            showToolData(tool, githubData);
+        }
+        
+        async function getGitHubToolData(githubPath) {
+            try {
+                const apiUrl = `https://api.github.com/repos/${config.githubUsername}/${config.currentRepo}/contents/${githubPath}`;
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'User-Agent': 'WarpAI-Popup'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    // Decode base64 content
+                    const content = atob(data.content);
+                    return content;
+                } else {
+                    return getLocalFallbackData();
+                }
+            } catch (error) {
+                console.log('GitHub fetch failed, using local fallback');
+                return getLocalFallbackData();
+            }
+        }
+        
+        function getLocalFallbackData() {
+            return `# 🚀 Warp AI Commands (Local)
+
+## 📋 Main Commands (Click to Copy):
+WarpSpeed
+WarpSpeed -Popup
+.\\Simple-WarpAI-Launcher.ps1 -Install
+.\\Simple-WarpAI-Launcher.ps1 -Test
+
+## 🐛 Debugging Commands:
+.\\QuickDebug-Dropdown.ps1
+.\\SimpleDebug.ps1
+DebugRef
+
+## ⚡ Quick Access:
+.\\QuickCommands-Dropdown.ps1
+.\\QuickFiles-Dropdown.ps1
+.\\QuickReference-Selector.ps1
+
+## 🌐 GitHub & Data:
+git status
+git --no-pager log --oneline -10
+.\\Update-ProjectData.ps1 -ValidateOnly
+
+## 🎯 Custom Commands:
+GitHubFirst
+NumRef
+ComplianceCheck
+QACheck
+MobileFirst
+DataCheck
+
+## 💡 Install Win+W Hotkey:
+.\\Simple-WarpAI-Launcher.ps1 -Install
+
+Then press Win+W anywhere for instant popup access!`;
+        }
+        
+        function showToolData(tool, data) {
+            // Clear the popup and show the actual data
+            const container = document.querySelector('.popup-container');
+            
+            container.innerHTML = `
+                <div class="header">
+                    <h1>📊 ${tool.name}</h1>
+                    <p>Click any command to copy to clipboard</p>
+                </div>
+                
+                <div class="content-area">
+                    <pre id="tool-content">${data}</pre>
+                </div>
+                
+                <div class="action-buttons">
+                    <button onclick="copyAllCommands()" class="copy-button">📋 Copy All Commands</button>
+                    <button onclick="goBack()" class="back-button">⬅️ Back to Menu</button>
+                    <button onclick="window.close()" class="close-button">❌ Close</button>
+                </div>
+                
+                <div class="github-status" id="github-status">
+                    <div class="status-dot"></div>
+                    <span id="status-text">Data loaded • Click commands to copy</span>
+                </div>
+            `;
+            
+            // Add click-to-copy functionality to commands
+            addClickToCopy();
+        }
+        
+        
+        function updateStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status-text');
+            statusEl.textContent = message;
+            
+            const dot = document.querySelector('.status-dot');
+            dot.style.background = {
+                'success': '#4ade80',
+                'warning': '#fbbf24', 
+                'error': '#ef4444',
+                'loading': '#3b82f6',
+                'info': '#6366f1'
+            }[type] || '#6366f1';
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.close();
+            } else if (e.key >= '1' && e.key <= '4' && e.metaKey) {
+                const tools = ['debug', 'commands', 'files', 'references'];
+                launchTool(tools[parseInt(e.key) - 1]);
+            } else if (e.key.toLowerCase() === 'g' && e.metaKey) {
+                launchTool('github');
+            }
+        });
+        
+        // Auto-focus for immediate keyboard use
+        window.addEventListener('load', () => {
+            document.body.focus();
+            
+            // Check GitHub connectivity on load
+            setTimeout(() => {
+                if (navigator.onLine) {
+                    syncWithGitHub();
+                } else {
+                    updateStatus('📱 Offline - using local data', 'warning');
+                }
+            }, 500);
+        });
+        
+        // Helper functions for the tool data view
+        function addClickToCopy() {
+            const content = document.getElementById('tool-content');
+            if (content) {
+                content.addEventListener('click', (e) => {
+                    const line = e.target.textContent || e.target.innerText;
+                    if (line.trim()) {
+                        navigator.clipboard.writeText(line.trim()).then(() => {
+                            updateStatus('📋 Copied: ' + line.trim().substring(0, 30) + '...', 'success');
+                        }).catch(() => {
+                            // Fallback for browsers that block clipboard
+                            const textarea = document.createElement('textarea');
+                            textarea.value = line.trim();
+                            document.body.appendChild(textarea);
+                            textarea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textarea);
+                            updateStatus('📋 Copied (fallback)', 'success');
+                        });
+                    }
+                });
+            }
+        }
+        
+        function copyAllCommands() {
+            const content = document.getElementById('tool-content');
+            if (content) {
+                const text = content.textContent || content.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    updateStatus('✅ All commands copied to clipboard!', 'success');
+                }).catch(() => {
+                    alert('All commands:\n\n' + text);
+                    updateStatus('💡 Commands shown in alert', 'info');
+                });
+            }
+        }
+        
+        function goBack() {
+            location.reload(); // Simple way to go back to main menu
+        }
+        
+        // Auto-close after 60 seconds of inactivity (longer for reading)
+        setTimeout(() => {
+            if (document.hasFocus()) {
+                window.close();
+            }
+        }, 60000);
+    </script>
+</body>
+</html>

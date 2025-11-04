@@ -1,0 +1,65 @@
+{
+  "patterns": {
+    "Cannot find path": {
+      "category": "File System",
+      "solution": "Check if file/folder exists. Use Test-Path or ls to verify.",
+      "commands": ["Test-Path \"$target\"", "Get-ChildItem \"$directory\""],
+      "frequency": 0
+    },
+    "Access denied": {
+      "category": "Permissions", 
+      "solution": "Run as administrator or check file permissions.",
+      "commands": ["Get-Acl \"$target\" | Format-List", "Start-Process PowerShell -Verb RunAs"],
+      "frequency": 0
+    },
+    "Port already in use": {
+      "category": "Network",
+      "solution": "Find and kill process using the port.",
+      "commands": ["netstat -ano | findstr :$port", "Stop-Process -Id $pid"],
+      "frequency": 0
+    },
+    "Module not found": {
+      "category": "Dependencies",
+      "solution": "Install missing module or check import path.",
+      "commands": ["npm install", "pip install", "Import-Module"],
+      "frequency": 0
+    },
+    "Git error": {
+      "category": "Version Control",
+      "solution": "Check git status and recent changes.",
+      "commands": ["git status", "git log --oneline -5"],
+      "frequency": 0
+    },
+    "EADDRINUSE": {
+      "category": "Network",
+      "solution": "Port is already in use by another process.",
+      "commands": ["netstat -tulpn | grep $port", "lsof -i :$port"],
+      "frequency": 0
+    },
+    "npm ERR!": {
+      "category": "Dependencies",
+      "solution": "npm installation or package error.",
+      "commands": ["npm cache clean --force", "rm -rf node_modules package-lock.json", "npm install"],
+      "frequency": 0
+    },
+    "PowerShell execution policy": {
+      "category": "PowerShell",
+      "solution": "PowerShell script execution is restricted.",
+      "commands": ["Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"],
+      "frequency": 0
+    }
+  },
+  "categories": {
+    "File System": { "icon": "📁", "color": "Yellow" },
+    "Permissions": { "icon": "🔒", "color": "Red" },
+    "Network": { "icon": "🌐", "color": "Blue" },
+    "Dependencies": { "icon": "📦", "color": "Green" },
+    "Version Control": { "icon": "🔀", "color": "Magenta" },
+    "PowerShell": { "icon": "⚡", "color": "Cyan" }
+  },
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2024-01-01",
+    "totalPatterns": 8
+  }
+}

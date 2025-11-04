@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Warp AI Projects Command Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tabs-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .tabs-header {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: 20px 30px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-button.active {
+            color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ffd700;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .status-live { background: rgba(76, 175, 80, 0.3); color: #4caf50; }
+        .status-complete { background: rgba(33, 150, 243, 0.3); color: #2196f3; }
+        .status-dev { background: rgba(255, 193, 7, 0.3); color: #ffc107; }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .commands-section {
+            margin-top: 25px;
+        }
+
+        .commands-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .command-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+        }
+
+        .command-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .command-text {
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        .command-desc {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 3px;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copy-feedback {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .copy-feedback.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tab-button {
+                padding: 15px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Warp AI Projects Command Center</h1>
+            <p>Universal command menu for all your projects</p>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-button active" onclick="switchTab(event, 'warp-assistant')">
+                    🤖 Warp Assistant
+                </button>
+                <button class="tab-button" onclick="switchTab(event, '2829-niagara')">
+                    🏢 2829 Niagara Street
+                </button>
+                <button class="tab-button" onclick="switchTab(event, 'mmm-nevo')">
+                    🏗️ MMM Nevo Tower
+                </button>
+                <button class="tab-button" onclick="switchTab(event, 'templates-tools')">
+                    🛠️ Templates & Tools
+                </button>
+                <button class="tab-button" onclick="switchTab(event, 'universal-commands')">
+                    ⚡ Universal Commands
+                </button>
+                <button class="tab-button" onclick="switchTab(event, 'github-files')">
+                    📂 GitHub Files
+                </button>
+            </div>
+
+            <!-- Warp Assistant Tab -->
+            <div id="warp-assistant" class="tab-content active">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">🤖 Warp AI Assistant System</div>
+                        <div class="project-status status-dev">In Development</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            Universal AI debugging and command system with popup menus, dropdowns, and GitHub integration.
+                        </p>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">🚀 Main Commands</div>
+                            <div class="command-item" onclick="copyCommand('WarpSpeed')">
+                                <div class="command-text">WarpSpeed</div>
+                                <div class="command-desc">Start AI session with full context</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('menu')">
+                                <div class="command-text">menu</div>
+                                <div class="command-desc">Open this beautiful command menu</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('.\\SimpleDebug.ps1')">
+                                <div class="command-text">.\SimpleDebug.ps1</div>
+                                <div class="command-desc">Quick terminal debugging reference</div>
+                            </div>
+                        </div>
+
+                        <div class="commands-section">
+                            <div class="commands-title">🐛 Debugging Tools</div>
+                            <div class="command-item" onclick="copyCommand('.\\QuickDebug-Dropdown.ps1')">
+                                <div class="command-text">.\QuickDebug-Dropdown.ps1</div>
+                                <div class="command-desc">Popup with common debugging issues</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('DebugRef')">
+                                <div class="command-text">DebugRef</div>
+                                <div class="command-desc">Show debugging reference template</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('.\\QuickCommands-Dropdown.ps1')">
+                                <div class="command-text">.\QuickCommands-Dropdown.ps1</div>
+                                <div class="command-desc">All available commands in popup</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2829 Niagara Tab -->
+            <div id="2829-niagara" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">🏢 2829 Niagara Street Development</div>
+                        <div class="project-status status-complete">Complete - Development Ready</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            1.312 acres, 3-story mixed-use, 150 units, $37.4M project value. Mobile-responsive portal with financial data and partner system.
+                        </p>
+                        
+                        <div class="project-links">
+                            <a href="https://nevotm.github.io/2829-niagara-street/" target="_blank" class="project-link">
+                                🌐 Live Portal
+                            </a>
+                            <a href="https://github.com/NeVoTM/2829-niagara-street" target="_blank" class="project-link">
+                                📂 GitHub Repo
+                            </a>
+                        </div>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">📊 Project Commands</div>
+                            <div class="command-item" onclick="copyCommand('cd \"C:\\Users\\17274\\ME\\2829-Niagara-Street\"')">
+                                <div class="command-text">cd "C:\Users\17274\ME\2829-Niagara-Street"</div>
+                                <div class="command-desc">Navigate to project directory</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('.\\Update-ProjectData.ps1 -ValidateOnly')">
+                                <div class="command-text">.\Update-ProjectData.ps1 -ValidateOnly</div>
+                                <div class="command-desc">Validate project data consistency</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('Start-Process \"https://nevotm.github.io/2829-niagara-street/mobile-design.html\"')">
+                                <div class="command-text">Start-Process "https://nevotm.github.io/2829-niagara-street/mobile-design.html"</div>
+                                <div class="command-desc">Open live mobile interface</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MMM Nevo Tower Tab -->
+            <div id="mmm-nevo" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">🏗️ Miami Makers Model - Nevo Tower Portal</div>
+                        <div class="project-status status-live">Live & Complete</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            Revolutionary "Partners Not Paychecks" real estate model. Howey Test compliant with partner governance and equity sharing system.
+                        </p>
+                        
+                        <div class="project-links">
+                            <a href="https://nevotm.github.io/nevo-tower-portal/mmm-master-dashboard.html" target="_blank" class="project-link">
+                                🌐 Live Dashboard
+                            </a>
+                            <a href="https://github.com/NeVoTM/nevo-tower-portal" target="_blank" class="project-link">
+                                📂 GitHub Repo
+                            </a>
+                        </div>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">🏗️ Project Commands</div>
+                            <div class="command-item" onclick="copyCommand('Start-Process \"https://nevotm.github.io/nevo-tower-portal/mmm-master-dashboard.html\"')">
+                                <div class="command-text">Start-Process "https://nevotm.github.io/nevo-tower-portal/mmm-master-dashboard.html"</div>
+                                <div class="command-desc">Open MMM master dashboard</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('# Navigate to MMM project (if local copy exists)')">
+                                <div class="command-text"># Navigate to MMM project (if local copy exists)</div>
+                                <div class="command-desc">Template for local development</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Templates & Tools Tab -->
+            <div id="templates-tools" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">📄 Invoice Templates</div>
+                        <div class="project-status status-complete">Complete</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            Professional HTML invoice templates with multi-table structure for perfect print alignment.
+                        </p>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">📄 Template Commands</div>
+                            <div class="command-item" onclick="copyCommand('cd \"C:\\Users\\17274\\ME\\Templates_Invoices\"')">
+                                <div class="command-text">cd "C:\Users\17274\ME\Templates_Invoices"</div>
+                                <div class="command-desc">Navigate to invoice templates</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('Start-Process \"koach-invoice-multi-table.html\"')">
+                                <div class="command-text">Start-Process "koach-invoice-multi-table.html"</div>
+                                <div class="command-desc">Open best invoice template</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">🤖 AI Teaching Reference</div>
+                        <div class="project-status status-complete">Complete</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            Comprehensive lessons for training AI on invoice optimization and common mistakes.
+                        </p>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">🤖 AI Teaching Commands</div>
+                            <div class="command-item" onclick="copyCommand('cd \"C:\\Users\\17274\\ME\\AI-Teaching\"')">
+                                <div class="command-text">cd "C:\Users\17274\ME\AI-Teaching"</div>
+                                <div class="command-desc">Navigate to AI teaching directory</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('Get-Content \"AI-Teaching-Reference.md\"')">
+                                <div class="command-text">Get-Content "AI-Teaching-Reference.md"</div>
+                                <div class="command-desc">View AI teaching reference</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">⚙️ PowerShell Scripts Collection</div>
+                        <div class="project-status status-complete">Complete</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            Automation scripts for session archiving, usage tracking, and GitHub synchronization.
+                        </p>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">⚙️ Script Commands</div>
+                            <div class="command-item" onclick="copyCommand('cd \"C:\\Users\\17274\\ME\\Scripts\"')">
+                                <div class="command-text">cd "C:\Users\17274\ME\Scripts"</div>
+                                <div class="command-desc">Navigate to scripts directory</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('.\\save-conversation.ps1')">
+                                <div class="command-text">.\save-conversation.ps1</div>
+                                <div class="command-desc">Archive current Warp session</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('.\\session-accounting.ps1')">
+                                <div class="command-text">.\session-accounting.ps1</div>
+                                <div class="command-desc">Track usage and costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Universal Commands Tab -->
+            <div id="universal-commands" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">🌐 Git Commands</div>
+                        <div class="commands-section">
+                            <div class="command-item" onclick="copyCommand('git status')">
+                                <div class="command-text">git status</div>
+                                <div class="command-desc">Check repository status</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('git --no-pager log --oneline -10')">
+                                <div class="command-text">git --no-pager log --oneline -10</div>
+                                <div class="command-desc">Show recent commits</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('git pull')">
+                                <div class="command-text">git pull</div>
+                                <div class="command-desc">Pull latest changes</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('git push')">
+                                <div class="command-text">git push</div>
+                                <div class="command-desc">Push changes to GitHub</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('git add . && git commit -m \"Quick update\" && git push')">
+                                <div class="command-text">git add . && git commit -m "Quick update" && git push</div>
+                                <div class="command-desc">Quick commit and push</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">🎯 Custom Warp Commands</div>
+                        <div class="commands-section">
+                            <div class="command-item" onclick="copyCommand('GitHubFirst')">
+                                <div class="command-text">GitHubFirst</div>
+                                <div class="command-desc">Universal Access Principle reminder</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('NumRef')">
+                                <div class="command-text">NumRef</div>
+                                <div class="command-desc">Numbered reference template</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('ComplianceCheck')">
+                                <div class="command-text">ComplianceCheck</div>
+                                <div class="command-desc">Session compliance checklist</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('QACheck')">
+                                <div class="command-text">QACheck</div>
+                                <div class="command-desc">Quality assurance categories</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('MobileFirst')">
+                                <div class="command-text">MobileFirst</div>
+                                <div class="command-desc">Mobile-first design principles</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">🔧 System Tools</div>
+                        <div class="commands-section">
+                            <div class="command-item" onclick="copyCommand('Get-Location')">
+                                <div class="command-text">Get-Location</div>
+                                <div class="command-desc">Show current directory</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('Get-ChildItem -Name')">
+                                <div class="command-text">Get-ChildItem -Name</div>
+                                <div class="command-desc">List files in directory</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('$PSVersionTable')">
+                                <div class="command-text">$PSVersionTable</div>
+                                <div class="command-desc">Show PowerShell version</div>
+                            </div>
+                            <div class="command-item" onclick="copyCommand('Get-ComputerInfo | Select-Object WindowsProductName, TotalPhysicalMemory')">
+                                <div class="command-text">Get-ComputerInfo | Select-Object WindowsProductName, TotalPhysicalMemory</div>
+                                <div class="command-desc">Show system information</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Files Tab -->
+            <div id="github-files" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">📂 Current Repository Files</div>
+                        <div class="project-status status-live">Live from GitHub</div>
+                        <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">
+                            Browse and access files directly from your GitHub repositories. Click any file to open in browser.
+                        </p>
+                        
+                        <div class="commands-section">
+                            <div class="commands-title">🔄 Repository Selection</div>
+                            <div class="command-item" onclick="loadGitHubFiles('2829-Niagara-Street')">
+                                <div class="command-text">🏢 Load 2829-Niagara-Street Files</div>
+                                <div class="command-desc">Browse current project repository</div>
+                            </div>
+                            <div class="command-item" onclick="loadGitHubFiles('nevo-tower-portal')">
+                                <div class="command-text">🏗️ Load Nevo Tower Portal Files</div>
+                                <div class="command-desc">Browse MMM project repository</div>
+                            </div>
+                        </div>
+
+                        <div id="github-files-list" class="commands-section" style="display: none;">
+                            <div class="commands-title">📁 Repository Files</div>
+                            <div id="files-container">
+                                <!-- Files will be loaded here -->
+                            </div>
+                        </div>
+
+                        <div id="github-loading" style="display: none; text-align: center; padding: 20px;">
+                            <div style="font-size: 20px; margin-bottom: 10px;">🔄</div>
+                            <div>Loading files from GitHub...</div>
+                        </div>
+
+                        <div id="github-error" style="display: none; text-align: center; padding: 20px; color: #ff6b6b;">
+                            <div style="font-size: 20px; margin-bottom: 10px;">⚠️</div>
+                            <div>Failed to load files from GitHub</div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">🔗 Quick GitHub Links</div>
+                        <div class="commands-section">
+                            <div class="command-item" onclick="openGitHubUrl('https://github.com/NeVoTM/2829-niagara-street')">
+                                <div class="command-text">🏢 2829 Niagara Street Repo</div>
+                                <div class="command-desc">Open main project repository</div>
+                            </div>
+                            <div class="command-item" onclick="openGitHubUrl('https://github.com/NeVoTM/nevo-tower-portal')">
+                                <div class="command-text">🏗️ Nevo Tower Portal Repo</div>
+                                <div class="command-desc">Open MMM project repository</div>
+                            </div>
+                            <div class="command-item" onclick="openGitHubUrl('https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md')">
+                                <div class="command-text">🐛 Debugging Checklist</div>
+                                <div class="command-desc">Universal debugging reference</div>
+                            </div>
+                            <div class="command-item" onclick="openGitHubUrl('https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md')">
+                                <div class="command-text">📄 Universal README Template</div>
+                                <div class="command-desc">Template for all projects</div>
+                            </div>
+                            <div class="command-item" onclick="openGitHubUrl('https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md')">
+                                <div class="command-text">📝 TODO List</div>
+                                <div class="command-desc">Current priorities and tasks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        💡 Click commands to copy • Use tabs to switch projects • 📂 GitHub Files tab for repository browsing • ESC to close
+    </div>
+
+    <div class="copy-feedback" id="copyFeedback">
+        ✅ Command copied to clipboard!
+    </div>
+
+    <script>
+        function switchTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show the selected tab content and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function copyCommand(command) {
+            // Try modern clipboard API first
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(command).then(() => {
+                    showCopyFeedback(command);
+                }).catch(() => {
+                    // Fallback to older method
+                    fallbackCopy(command);
+                });
+            } else {
+                // Fallback for non-secure contexts
+                fallbackCopy(command);
+            }
+        }
+
+        function fallbackCopy(command) {
+            const textArea = document.createElement('textarea');
+            textArea.value = command;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopyFeedback(command);
+            } catch (err) {
+                console.error('Could not copy text: ', err);
+                // Show manual copy instruction
+                prompt('Copy this command:', command);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showCopyFeedback(command) {
+            const feedback = document.getElementById('copyFeedback');
+            
+            if (typeof command === 'string' && command.length > 20) {
+                // This is a command copy
+                feedback.textContent = `✅ Copied: ${command.substring(0, 40)}${command.length > 40 ? '...' : ''}`;
+                feedback.style.background = 'rgba(76, 175, 80, 0.9)';
+            } else {
+                // This is already formatted message
+                feedback.textContent = command;
+            }
+            
+            feedback.classList.add('show');
+            
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2500);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            } else if (e.key === 'F5') {
+                location.reload();
+            }
+        });
+
+        // GitHub file browsing functions
+        async function loadGitHubFiles(repoName) {
+            const loading = document.getElementById('github-loading');
+            const error = document.getElementById('github-error');
+            const filesList = document.getElementById('github-files-list');
+            const filesContainer = document.getElementById('files-container');
+            
+            // Show loading state
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            filesList.style.display = 'none';
+            
+            try {
+                const apiUrl = `https://api.github.com/repos/NeVoTM/${repoName}/contents`;
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'User-Agent': 'WarpAI-ProjectsMenu'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const files = await response.json();
+                
+                // Clear previous files
+                filesContainer.innerHTML = '';
+                
+                // Add files to the container
+                files.forEach(file => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'command-item';
+                    fileItem.onclick = () => openGitHubFile(file, repoName);
+                    
+                    const fileIcon = getFileIcon(file.name, file.type);
+                    const fileSize = file.size ? ` (${formatFileSize(file.size)})` : '';
+                    
+                    fileItem.innerHTML = `
+                        <div class="command-text">${fileIcon} ${file.name}${fileSize}</div>
+                        <div class="command-desc">${file.type === 'dir' ? 'Directory' : 'File'} • Click to open in GitHub</div>
+                    `;
+                    
+                    filesContainer.appendChild(fileItem);
+                });
+                
+                // Show files list
+                loading.style.display = 'none';
+                filesList.style.display = 'block';
+                
+                showCopyFeedback(`Loaded ${files.length} files from ${repoName}`);
+                
+            } catch (err) {
+                console.error('Failed to load GitHub files:', err);
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                showCopyFeedback('Failed to load GitHub files', false);
+            }
+        }
+        
+        function getFileIcon(fileName, fileType) {
+            if (fileType === 'dir') return '📁';
+            
+            const ext = fileName.split('.').pop().toLowerCase();
+            switch (ext) {
+                case 'md': return '📄';
+                case 'html': return '🌐';
+                case 'css': return '🎨';
+                case 'js': return '⚡';
+                case 'json': return '🗃️';
+                case 'ps1': return '🖥️';
+                case 'txt': return '📄';
+                case 'png': case 'jpg': case 'gif': return '🇼️';
+                case 'pdf': return '📄';
+                default: return '📄';
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+        
+        function openGitHubFile(file, repoName) {
+            const baseUrl = `https://github.com/NeVoTM/${repoName}`;
+            let url;
+            
+            if (file.type === 'dir') {
+                url = `${baseUrl}/tree/main/${file.name}`;
+            } else {
+                url = `${baseUrl}/blob/main/${file.name}`;
+            }
+            
+            window.open(url, '_blank');
+            showCopyFeedback(`Opening ${file.name} in GitHub`);
+        }
+        
+        function openGitHubUrl(url) {
+            window.open(url, '_blank');
+            const fileName = url.split('/').pop().split('.')[0];
+            showCopyFeedback(`Opening ${fileName} in GitHub`);
+        }
+        
+        function showCopyFeedback(message, isSuccess = true) {
+            const feedback = document.getElementById('copyFeedback');
+            feedback.textContent = isSuccess ? `✅ ${message}` : `❌ ${message}`;
+            feedback.style.background = isSuccess ? 
+                'rgba(76, 175, 80, 0.9)' : 
+                'rgba(244, 67, 54, 0.9)';
+            feedback.classList.add('show');
+            
+            setTimeout(() => {
+                feedback.classList.remove('show');
+            }, 2500);
+        }
+
+        // Auto-focus for immediate keyboard use
+        window.addEventListener('load', function() {
+            document.body.focus();
+        });
+    </script>
+</body>
+</html>

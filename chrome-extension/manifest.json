@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Warp AI Dropdown Hotkeys",
+  "version": "1.0",
+  "description": "Global hotkeys for launching Warp AI debugging dropdowns",
+  
+  "permissions": [
+    "notifications",
+    "tabs",
+    "activeTab",
+    "downloads"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "commands": {
+    "debug-dropdown": {
+      "suggested_key": {
+        "default": "Alt+Shift+1"
+      },
+      "description": "Open Debug Issues dropdown"
+    },
+    "commands-browser": {
+      "suggested_key": {
+        "default": "Alt+Shift+2"
+      },
+      "description": "Open Commands Browser dropdown"
+    },
+    "files-browser": {
+      "suggested_key": {
+        "default": "Alt+Shift+3"
+      },
+      "description": "Open Files Browser dropdown"
+    },
+    "reference-selector": {
+      "suggested_key": {
+        "default": "Alt+Shift+4"
+      },
+      "description": "Open Reference Selector dropdown"
+    }
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Warp AI Dropdowns"
+  },
+  
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

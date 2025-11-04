@@ -5,7 +5,8 @@ param(
     [switch]$Install = $false,
     [switch]$ShowPath = $false,
     [switch]$Update = $false,
-    [switch]$QuickStart = $false
+    [switch]$QuickStart = $false,
+    [switch]$Popup = $false
 )
 
 # Function to display colorized header
@@ -270,6 +271,19 @@ if ($Install) {
     return
 }
 
+# Handle popup parameter - launch AI popup directly
+if ($Popup) {
+    Write-Host "🚀 Opening Warp AI Popup..." -ForegroundColor Cyan
+    $popupScript = Join-Path $PSScriptRoot "Simple-WarpAI-Launcher.ps1"
+    if (Test-Path $popupScript) {
+        & $popupScript -Action popup
+        Write-Host "✅ AI Popup launched! Use Win+W for global access." -ForegroundColor Green
+    } else {
+        Write-Host "⚠️  Popup launcher not found. Run from project directory." -ForegroundColor Yellow
+    }
+    return
+}
+
 # Get project choice unless quick start is enabled
 $projectType = "skip"
 if (-not $QuickStart) {
@@ -309,13 +323,26 @@ else {
     Write-Host ""
 }
 
-# Display usage help
+# Display usage help and popup access
 Write-Host "🛠️  Usage Options:" -ForegroundColor Magenta
 Write-Host "   WarpSpeed              # Interactive project selection + session instructions" -ForegroundColor Gray
 Write-Host "   WarpSpeed -QuickStart  # Skip project selection, show session file only" -ForegroundColor Gray
 Write-Host "   WarpSpeed -ShowPath    # Show file location" -ForegroundColor Gray
 Write-Host "   WarpSpeed -Update      # Update session timestamp" -ForegroundColor Gray
 Write-Host "   WarpSpeed -Install     # Install globally in PowerShell profile" -ForegroundColor Gray
+Write-Host ""
+Write-Host "⚡ SIMPLE SOLUTION - AI Popup Access:" -ForegroundColor Yellow
+Write-Host "   💡 Rule: Simple is always better!" -ForegroundColor White
+Write-Host "   🚀 Test popup: .\Simple-WarpAI-Launcher.ps1 -Test" -ForegroundColor Cyan
+Write-Host "   ⚡ Install hotkey: .\Simple-WarpAI-Launcher.ps1 -Install" -ForegroundColor Green
+Write-Host "   🎯 Then use: Win+W (opens AI popup anywhere)" -ForegroundColor Magenta
+Write-Host ""
+Write-Host "🎛️  Popup Features:" -ForegroundColor Blue
+Write-Host "   🐛 Debug Issues (copies command to clipboard)" -ForegroundColor Gray
+Write-Host "   ⚡ Commands Browser (Win+W → Option 2)" -ForegroundColor Gray
+Write-Host "   📁 Files Browser (all hotkeys and commands listed)" -ForegroundColor Gray
+Write-Host "   📋 Reference Selector (numbered solutions)" -ForegroundColor Gray
+Write-Host "   🌐 GitHub Sync (pulls from your repos)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "📋 Project Types:" -ForegroundColor Cyan
 Write-Host "   NEW: First-time setup, README templates, universal files" -ForegroundColor Gray

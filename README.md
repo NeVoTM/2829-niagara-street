@@ -147,6 +147,18 @@ This project implements the **Universal Project Debugging & Setup System**:
 ### **For Debugging Issues:**
 Reference `DEBUGGING-CHECKLIST.md` and apply solutions by category number.
 
+### **⚡ QUICK REFERENCE TOOLS:**
+- **NUMBERED-REFERENCE-GUIDE.md:** Side-by-side reference for all sections and issues
+- **Custom Commands:** 8 essential shortcuts (DebugRef, GitHubFirst, NumRef, etc.)
+- **Dropdown Tools:** Global hotkey dropdowns for instant AI command access
+
+### **🔥 EFFICIENCY BOOSTERS:**
+- **Ctrl+Alt+D:** Debug issues dropdown (30% screen coverage)
+- **Ctrl+Alt+C:** All commands browser with search
+- **Ctrl+Alt+F:** Project files browser with quick open
+- **Ctrl+Alt+R:** Numbered reference selector with copy-to-clipboard
+- **Ctrl+Shift+[D/G/N/C/Q/M/V/U]:** Custom command shortcuts
+
 ### **Warp AI Feedback Integration Triggers:**
 
 **🗣️ Use these phrases to quickly redirect Warp back to established procedures:**
