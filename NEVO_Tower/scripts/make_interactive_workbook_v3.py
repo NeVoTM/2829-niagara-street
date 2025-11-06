@@ -980,7 +980,7 @@ def create_cash_flow_sheet(wb):
     ws.merge_cells('A2:J2')
     
     row = 4
-    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Pre-Sales Units', 'Pre-Sales Revenue (25%)', 'Total Cash In', 'Net Cash Flow', 'Cumulative Cash', 'Bridge Loan Need']
+    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Pre-Sales Units', 'Pre-Sales Payment', 'Usable (90%)', 'Total Cash In', 'Net Cash Flow', 'Cumulative Cash', 'Bridge Loan Need']
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row, col)
         cell.value = header
@@ -1041,40 +1041,51 @@ def create_cash_flow_sheet(wb):
         # Pre-sales units
         ws[f'E{row}'] = presales_units[month_idx]
         
-        # Pre-sales revenue - 25% at signing, +25% at month 5, +25% at month 9
+        # Pre-sales payment schedule:
+        # 25% at signing, 25% at month 5 (superstructure), 25% at month 15 (envelope), 25% at month 24 (CO)
         if month_num == 1:
-            # Month 1: 25% of units sold in month 1
+            # Month 1: 25% of units sold this month
             ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
         elif month_num == 5:
-            # Month 5: 25% of current month + 25% of all previous units (cumulative through month 4)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM(E5:E8)*(TotalRevenue/50)*0.25)'
-        elif month_num == 9:
-            # Month 9: 25% of current month + 25% of all previous units (cumulative through month 8)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM(E5:E12)*(TotalRevenue/50)*0.25)'
+            # Month 5: 25% of current + 25% of ALL previous sales (payment 2 of 4)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM($E$5:E8)*(TotalRevenue/50)*0.25)'
+        elif month_num == 15:
+            # Month 15: 25% of current + 25% of ALL previous sales (payment 3 of 4 = 75% total collected)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM($E$5:E18)*(TotalRevenue/50)*0.25)'
+        elif month_num == 24:
+            # Month 24: Final 25% payment for ALL units (100% collected)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM($E$5:E27)*(TotalRevenue/50)*0.25)'
         else:
             # Other months: just 25% of current month sales
             ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
         ws[f'F{row}'].number_format = '$#,##0'
         
-        # Total cash in
-        ws[f'G{row}'] = f'=D{row}+F{row}'
+        # Usable pre-sales (90% before month 24, 100% at month 24)
+        if month_num < 24:
+            ws[f'G{row}'] = f'=F{row}*0.90'
+        else:
+            ws[f'G{row}'] = f'=F{row}'
         ws[f'G{row}'].number_format = '$#,##0'
         
-        # Net cash flow
-        ws[f'H{row}'] = f'=G{row}-C{row}'
+        # Total cash in (SC Cash + Usable Pre-Sales)
+        ws[f'H{row}'] = f'=D{row}+G{row}'
         ws[f'H{row}'].number_format = '$#,##0'
+        
+        # Net cash flow
+        ws[f'I{row}'] = f'=H{row}-C{row}'
+        ws[f'I{row}'].number_format = '$#,##0'
         
         # Cumulative cash
         if month_num == 1:
-            ws[f'I{row}'] = f'=H{row}'
+            ws[f'J{row}'] = f'=I{row}'
         else:
-            ws[f'I{row}'] = f'=I{row-1}+H{row}'
-        ws[f'I{row}'].number_format = '$#,##0'
+            ws[f'J{row}'] = f'=J{row-1}+I{row}'
+        ws[f'J{row}'].number_format = '$#,##0'
         
         # Bridge loan need
-        ws[f'J{row}'] = f'=IF(I{row}<0,-I{row},0)'
-        ws[f'J{row}'].number_format = '$#,##0'
-        ws[f'J{row}'].fill = highlight_fill
+        ws[f'K{row}'] = f'=IF(J{row}<0,-J{row},0)'
+        ws[f'K{row}'].number_format = '$#,##0'
+        ws[f'K{row}'].fill = highlight_fill
         
         row += 1
     
@@ -1093,11 +1104,24 @@ def create_cash_flow_sheet(wb):
     ws[f'F{row}'] = f'=SUM(F{start_data_row}:F{row-2})'
     ws[f'F{row}'].number_format = '$#,##0'
     ws[f'F{row}'].font = Font(bold=True)
+    ws[f'G{row}'] = f'=SUM(G{start_data_row}:G{row-2})'
+    ws[f'G{row}'].number_format = '$#,##0'
+    ws[f'G{row}'].font = Font(bold=True)
     
     row += 2
+    ws[f'A{row}'] = 'VERIFICATION:'
+    ws[f'A{row}'].font = Font(bold=True)
+    ws[f'B{row}'] = 'Total Pre-Sales Payment ='
+    ws[f'C{row}'] = f'=SUM(F{start_data_row}:F{row-3})'
+    ws[f'C{row}'].number_format = '$#,##0'
+    ws[f'D{row}'] = 'Should = Total Revenue ='
+    ws[f'E{row}'] = '=TotalRevenue'
+    ws[f'E{row}'].number_format = '$#,##0'
+    row += 1
+    
     ws[f'A{row}'] = 'MAX BRIDGE LOAN NEEDED:'
     ws[f'A{row}'].font = Font(bold=True, size=12, color="FF0000")
-    ws[f'B{row}'] = f'=MAX(J{start_data_row}:J{row-3})'
+    ws[f'B{row}'] = f'=MAX(K{start_data_row}:K{row-4})'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].font = Font(bold=True, size=12)
     ws[f'B{row}'].fill = highlight_fill
