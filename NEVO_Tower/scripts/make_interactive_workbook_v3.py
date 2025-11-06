@@ -44,19 +44,9 @@ def create_interactive_workbook():
     create_gc_rfq_sheet(wb)
     create_sync_instructions_sheet(wb)
     
-    # Auto-fit all columns
-    for sheet in wb.worksheets:
-        for col_idx, column in enumerate(sheet.iter_cols(), 1):
-            max_length = 0
-            column_letter = openpyxl.utils.get_column_letter(col_idx)
-            for cell in column:
-                try:
-                    if cell.value and len(str(cell.value)) > max_length:
-                        max_length = len(str(cell.value))
-                except:
-                    pass
-            adjusted_width = min(max(max_length + 2, 10), 50)
-            sheet.column_dimensions[column_letter].width = adjusted_width
+    # Set column widths explicitly for proper alignment
+    # Summary sheet column widths already set in create_summary_sheet
+    # Other sheets have their column widths set in their respective functions
     
     # Save workbook
     filename = 'outputs/NEVO_Interactive_Budget_V3.xlsx'
@@ -117,7 +107,7 @@ def create_summary_sheet(wb):
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].font = Font(bold=True, size=12)
     ws[f'B{row}'].fill = PatternFill(start_color="FFD700", end_color="FFD700", fill_type="solid")
-    ws[f'C{row}'] = '100%'
+    ws[f'C{row}'] = '100.0%'
     total_cost_row = row
     row += 2
     
@@ -183,6 +173,12 @@ def create_summary_sheet(wb):
     ws[f'A{row}'] = 'Revenue per NSF'
     ws[f'B{row}'] = f'=B{revenue_row}/TotalNSF'
     ws[f'B{row}'].number_format = '$#,##0.00'
+    
+    # Set column widths
+    ws.column_dimensions['A'].width = 35
+    ws.column_dimensions['B'].width = 20
+    ws.column_dimensions['C'].width = 15
+    ws.column_dimensions['D'].width = 25
 
 def create_assumptions_sheet(wb):
     """Project assumptions with land partner structure"""
@@ -208,7 +204,8 @@ def create_assumptions_sheet(wb):
     ws[f'A{row}'] = 'Total GSF'
     ws[f'B{row}'] = TOTAL_GSF
     ws[f'B{row}'].number_format = '#,##0'
-    ws[f'C{row}'] = '100%'
+    ws[f'C{row}'] = 1.0
+    ws[f'C{row}'].number_format = '0.0%'
     row += 1
     
     ws[f'A{row}'] = 'Total NSF'
@@ -220,7 +217,8 @@ def create_assumptions_sheet(wb):
     
     ws[f'A{row}'] = 'Residential Units'
     ws[f'B{row}'] = RESIDENTIAL_UNITS
-    ws[f'C{row}'] = '100%'
+    ws[f'C{row}'] = 1.0
+    ws[f'C{row}'].number_format = '0.0%'
     row += 2
     
     # LAND PARTNER STRUCTURE
@@ -263,7 +261,8 @@ def create_assumptions_sheet(wb):
     ws[f'B{row}'] = 0
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = '0%'
+    ws[f'C{row}'] = 0.0
+    ws[f'C{row}'].number_format = '0.0%'
     ws[f'D{row}'] = '$8M paid at exit (NOT a cost)'
     row += 2
     
@@ -362,10 +361,20 @@ def create_assumptions_sheet(wb):
     row += 1
     ws[f'A{row}'] = 'Example:'
     ws[f'D{row}'] = '=TotalHardCosts*0.05 calculates 5% of hard costs'
+    
+    # Set column widths
+    ws.column_dimensions['A'].width = 35
+    ws.column_dimensions['B'].width = 20
+    ws.column_dimensions['C'].width = 12
+    ws.column_dimensions['D'].width = 45
 
 def create_hard_costs_sheet(wb):
     """Hard costs by CSI division"""
     ws = wb.create_sheet("Hard Costs")
+    
+    # Create named range for TotalGSF if not already created
+    if 'TotalGSF' not in wb.defined_names:
+        wb.defined_names['TotalGSF'] = DefinedName('TotalGSF', attr_text='Assumptions!$B$5')
     
     header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
     header_font = Font(color="FFFFFF", bold=True)
@@ -419,7 +428,7 @@ def create_hard_costs_sheet(wb):
         ws[f'C{row}'] = rate
         ws[f'C{row}'].fill = editable_fill
         ws[f'C{row}'].number_format = '$#,##0.00'
-        ws[f'D{row}'] = TOTAL_GSF
+        ws[f'D{row}'] = '=TotalGSF'
         ws[f'D{row}'].number_format = '#,##0'
         ws[f'E{row}'] = f'=C{row}*D{row}'
         ws[f'E{row}'].number_format = '$#,##0'
@@ -971,7 +980,7 @@ def create_cash_flow_sheet(wb):
     ws.merge_cells('A2:J2')
     
     row = 4
-    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Pre-Sales Units', 'Pre-Sales Revenue', 'Total Cash In', 'Net Cash Flow', 'Cumulative Cash', 'Bridge Loan Need']
+    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Pre-Sales Units', 'Pre-Sales Revenue (25%)', 'Total Cash In', 'Net Cash Flow', 'Cumulative Cash', 'Bridge Loan Need']
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row, col)
         cell.value = header
@@ -1032,8 +1041,19 @@ def create_cash_flow_sheet(wb):
         # Pre-sales units
         ws[f'E{row}'] = presales_units[month_idx]
         
-        # Pre-sales revenue formula (20% deposit)
-        ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.20'
+        # Pre-sales revenue - 25% at signing, +25% at month 5, +25% at month 9
+        if month_num == 1:
+            # Month 1: 25% of units sold in month 1
+            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
+        elif month_num == 5:
+            # Month 5: 25% of current month + 25% of all previous units (cumulative through month 4)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM(E5:E8)*(TotalRevenue/50)*0.25)'
+        elif month_num == 9:
+            # Month 9: 25% of current month + 25% of all previous units (cumulative through month 8)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM(E5:E12)*(TotalRevenue/50)*0.25)'
+        else:
+            # Other months: just 25% of current month sales
+            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
         ws[f'F{row}'].number_format = '$#,##0'
         
         # Total cash in
