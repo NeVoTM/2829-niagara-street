@@ -781,6 +781,9 @@ def create_revenue_sheet(wb):
     ws[f'F{row}'].font = Font(bold=True, size=12)
     
     wb.defined_names['TotalRevenue'] = DefinedName('TotalRevenue', attr_text=f"'Revenue'!$F${row}")
+    # Synagogue cost is in row start_row + 3 (4th row = Chabad/Mikvah)
+    synagogue_row = start_row + 3
+    wb.defined_names['Synagogue_Cost'] = DefinedName('Synagogue_Cost', attr_text=f"'Revenue'!$F${synagogue_row}")
 
 def create_project_deal_sheet(wb):
     """Project Deal Structure & Payout Explanation"""
@@ -1014,7 +1017,7 @@ def create_cash_flow_sheet(wb):
     ws.merge_cells('A2:J2')
     
     row = 4
-    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Units Sold', 'Pre-Sales $', 'Usable (90%)', 'Total Cash IN', 'Net Cash Flow', 'Cumulative Bridge', 'Bridge Balance', 'Interest (9%/yr)']
+    headers = ['Month', 'Activity', 'Hard Cost Draw', 'Soft-CASH', 'Soft-IN-KIND', 'SC Cash OUT', 'Units Sold', 'Pre-Sales $', 'Usable (90%)', 'Total Cash IN', 'Net Cash Flow', 'Cumulative', 'Bridge Balance', 'Interest (9%/yr)']
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row, col)
         cell.value = header
@@ -1063,17 +1066,30 @@ def create_cash_flow_sheet(wb):
         ws[f'C{row}'] = f'=TotalHardCosts*{monthly_pcts[month_idx]}'
         ws[f'C{row}'].number_format = '$#,##0'
         
-        # SC Cash OUT
-        if month_num == 1:
-            ws[f'D{row}'] = '=-LandPartner_Cash1'
-        elif month_num == 6:
-            ws[f'D{row}'] = '=-LandPartner_Cash2'
-        else:
-            ws[f'D{row}'] = 0
+        # Soft costs - CASH items (spread evenly across 24 months)
+        # CASH soft costs = permits, fees, insurance, testing, utilities (not IN-KIND)
+        ws[f'D{row}'] = '=(TotalSoftCosts-TotalFinancingCosts-(TotalHardCosts*(0.0335+0.0209+0.0083+0.0126)))/24'
         ws[f'D{row}'].number_format = '$#,##0'
         
+        # Soft costs - IN-KIND items (paid only when cumulative turns positive)
+        # IN-KIND = A&E, Marketing, Legal, Dev Fee
+        if month_num == 1:
+            ws[f'E{row}'] = '=0'
+        else:
+            ws[f'E{row}'] = f'=IF(AND(L{row-1}<0, L{row}=0), TotalHardCosts*(0.0335+0.0209+0.0083+0.0126), 0)'
+        ws[f'E{row}'].number_format = '$#,##0'
+        
+        # SC Cash OUT
+        if month_num == 1:
+            ws[f'F{row}'] = '=-LandPartner_Cash1'
+        elif month_num == 6:
+            ws[f'F{row}'] = '=-LandPartner_Cash2'
+        else:
+            ws[f'F{row}'] = 0
+        ws[f'F{row}'].number_format = '$#,##0'
+        
         # Pre-sales units
-        ws[f'E{row}'] = presales_units[month_idx]
+        ws[f'G{row}'] = presales_units[month_idx]
         
         # Pre-sales payment structure based on WHEN units are sold:
         # Months 1-4: 25% at signing
@@ -1083,62 +1099,62 @@ def create_cash_flow_sheet(wb):
         
         if month_num <= 4:
             # Months 1-4: New buyers pay 25% at signing
-            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
+            ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.25'
         elif month_num == 5:
             # Month 5: New buyers pay 50% + ALL previous (months 1-4) top off from 25% to 50% (add 25%)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.50)+(SUM($E$5:$E$8)*(TotalRevenue/50)*0.25)'
+            ws[f'H{row}'] = f'=(G{row}*(TotalRevenue/50)*0.50)+(SUM($G$5:$G$8)*(TotalRevenue/50)*0.25)'
         elif month_num <= 8:
             # Months 6-8: New buyers pay 50% at signing
-            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.50'
+            ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.50'
         elif month_num == 9:
             # Month 9: New buyers pay 75% + ALL previous (months 1-8) top off to 75% (add 25%)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.75)+(SUM($E$5:$E$12)*(TotalRevenue/50)*0.25)'
+            ws[f'H{row}'] = f'=(G{row}*(TotalRevenue/50)*0.75)+(SUM($G$5:$G$12)*(TotalRevenue/50)*0.25)'
         elif month_num <= 15:
             # Months 10-15: New buyers pay 75% at signing
-            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.75'
+            ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.75'
         elif month_num <= 20:
             # Months 16-20: Still 75% at signing (no new milestone yet)
-            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.75'
+            ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.75'
         elif month_num == 21:
             # Month 21: New buyers pay 100% + ALL previous (months 1-20) top off to 100% (add 25%)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*1.00)+(SUM($E$5:$E$24)*(TotalRevenue/50)*0.25)'
+            ws[f'H{row}'] = f'=(G{row}*(TotalRevenue/50)*1.00)+(SUM($G$5:$G$24)*(TotalRevenue/50)*0.25)'
         else:
             # Months 22-24: New buyers pay 100% at signing
-            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*1.00'
-        ws[f'F{row}'].number_format = '$#,##0'
+            ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*1.00'
+        ws[f'H{row}'].number_format = '$#,##0'
         
         # Usable pre-sales (90% before month 24, 100% at month 24 PLUS 10% holdback release)
         if month_num < 24:
-            ws[f'G{row}'] = f'=F{row}*0.90'
+            ws[f'I{row}'] = f'=H{row}*0.90'
         else:
             # Month 24: 100% of current month + release 10% held from all previous months
             prev_row_end = row - 1
-            ws[f'G{row}'] = f'=F{row}+(SUM($F${start_data_row}:$F${prev_row_end})*0.10)'
-        ws[f'G{row}'].number_format = '$#,##0'
-        
-        # Total cash in (SC Cash + Usable Pre-Sales)
-        ws[f'H{row}'] = f'=D{row}+G{row}'
-        ws[f'H{row}'].number_format = '$#,##0'
-        
-        # Net cash flow
-        ws[f'I{row}'] = f'=H{row}-C{row}'
+            ws[f'I{row}'] = f'=H{row}+(SUM($H${start_data_row}:$H${prev_row_end})*0.10)'
         ws[f'I{row}'].number_format = '$#,##0'
         
-        # Cumulative Bridge Need (negative cumulative = bridge loan needed)
-        if month_num == 1:
-            ws[f'J{row}'] = f'=I{row}'
-        else:
-            ws[f'J{row}'] = f'=J{row-1}+I{row}'
+        # Total cash in (SC Cash + Usable Pre-Sales)
+        ws[f'J{row}'] = f'=F{row}+I{row}'
         ws[f'J{row}'].number_format = '$#,##0'
         
-        # Bridge loan balance (absolute value of negative cumulative, then paid down)
-        ws[f'K{row}'] = f'=IF(J{row}<0,-J{row},0)'
+        # Net cash flow (Cash IN - Hard Costs - Soft CASH - Soft IN-KIND)
+        ws[f'K{row}'] = f'=J{row}-C{row}-D{row}-E{row}'
         ws[f'K{row}'].number_format = '$#,##0'
-        ws[f'K{row}'].fill = highlight_fill
+        
+        # Cumulative (negative cumulative = bridge loan needed)
+        if month_num == 1:
+            ws[f'L{row}'] = f'=K{row}'
+        else:
+            ws[f'L{row}'] = f'=L{row-1}+K{row}'
+        ws[f'L{row}'].number_format = '$#,##0'
+        
+        # Bridge loan balance (absolute value of negative cumulative, then paid down)
+        ws[f'M{row}'] = f'=IF(L{row}<0,-L{row},0)'
+        ws[f'M{row}'].number_format = '$#,##0'
+        ws[f'M{row}'].fill = highlight_fill
         
         # Monthly interest on bridge loan balance (9% annual = 0.75% monthly)
-        ws[f'L{row}'] = f'=K{row}*Finance_Rate/12'
-        ws[f'L{row}'].number_format = '$#,##0'
+        ws[f'N{row}'] = f'=M{row}*Finance_Rate/12'
+        ws[f'N{row}'].number_format = '$#,##0'
         
         row += 1
     
@@ -1146,35 +1162,61 @@ def create_cash_flow_sheet(wb):
     row += 1
     ws[f'A{row}'] = 'TOTALS:'
     ws[f'A{row}'].font = Font(bold=True, size=12)
+    
+    # Hard Costs total
     ws[f'C{row}'] = f'=SUM(C{start_data_row}:C{row-2})'
     ws[f'C{row}'].number_format = '$#,##0'
     ws[f'C{row}'].font = Font(bold=True)
+    
+    # Soft-CASH total
     ws[f'D{row}'] = f'=SUM(D{start_data_row}:D{row-2})'
     ws[f'D{row}'].number_format = '$#,##0'
     ws[f'D{row}'].font = Font(bold=True)
+    
+    # Soft-IN-KIND total
     ws[f'E{row}'] = f'=SUM(E{start_data_row}:E{row-2})'
+    ws[f'E{row}'].number_format = '$#,##0'
     ws[f'E{row}'].font = Font(bold=True)
+    
+    # SC Cash OUT total
     ws[f'F{row}'] = f'=SUM(F{start_data_row}:F{row-2})'
     ws[f'F{row}'].number_format = '$#,##0'
     ws[f'F{row}'].font = Font(bold=True)
+    
+    # Units sold total
     ws[f'G{row}'] = f'=SUM(G{start_data_row}:G{row-2})'
-    ws[f'G{row}'].number_format = '$#,##0'
     ws[f'G{row}'].font = Font(bold=True)
     
-    row += 2
-    ws[f'A{row}'] = 'VERIFICATION:'
-    ws[f'A{row}'].font = Font(bold=True)
-    ws[f'B{row}'] = 'Total Pre-Sales Payment ='
-    ws[f'C{row}'] = f'=SUM(F{start_data_row}:F{row-3})'
-    ws[f'C{row}'].number_format = '$#,##0'
-    ws[f'D{row}'] = 'Should = Total Revenue ='
-    ws[f'E{row}'] = '=TotalRevenue'
-    ws[f'E{row}'].number_format = '$#,##0'
-    row += 1
+    # Pre-sales $ total
+    ws[f'H{row}'] = f'=SUM(H{start_data_row}:H{row-2})'
+    ws[f'H{row}'].number_format = '$#,##0'
+    ws[f'H{row}'].font = Font(bold=True)
     
+    # Usable total
+    ws[f'I{row}'] = f'=SUM(I{start_data_row}:I{row-2})'
+    ws[f'I{row}'].number_format = '$#,##0'
+    ws[f'I{row}'].font = Font(bold=True)
+    
+    # Total Cash IN
+    ws[f'J{row}'] = f'=SUM(J{start_data_row}:J{row-2})'
+    ws[f'J{row}'].number_format = '$#,##0'
+    ws[f'J{row}'].font = Font(bold=True)
+    
+    # Net Cash Flow total
+    ws[f'K{row}'] = f'=SUM(K{start_data_row}:K{row-2})'
+    ws[f'K{row}'].number_format = '$#,##0'
+    ws[f'K{row}'].font = Font(bold=True)
+    
+    # Interest total
+    ws[f'N{row}'] = f'=SUM(N{start_data_row}:N{row-2})'
+    ws[f'N{row}'].number_format = '$#,##0'
+    ws[f'N{row}'].font = Font(bold=True)
+    
+    totals_row = row
+    row += 2
     ws[f'A{row}'] = 'MAX BRIDGE LOAN NEEDED:'
     ws[f'A{row}'].font = Font(bold=True, size=12, color="FF0000")
-    ws[f'B{row}'] = f'=MAX(K{start_data_row}:K{row-4})'
+    ws[f'B{row}'] = f'=MAX(M{start_data_row}:M{start_data_row+23})'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].font = Font(bold=True, size=12)
     ws[f'B{row}'].fill = highlight_fill
@@ -1182,13 +1224,30 @@ def create_cash_flow_sheet(wb):
     
     ws[f'A{row}'] = 'TOTAL FINANCING COSTS (9% Interest):'
     ws[f'A{row}'].font = Font(bold=True, size=12, color="FF0000")
-    ws[f'B{row}'] = f'=SUM(L{start_data_row}:L{start_data_row+23})'
+    ws[f'B{row}'] = f'=N{totals_row}'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].font = Font(bold=True, size=12)
     ws[f'B{row}'].fill = highlight_fill
+    row += 2
+    
+    # TIE-OUT: Cumulative (Month 24) should equal Gross Profit
+    ws[f'A{row}'] = 'TIE-OUT: CUMULATIVE = GROSS PROFIT'
+    ws[f'A{row}'].font = Font(bold=True, size=12, color="0000FF")
+    ws[f'B{row}'] = 'Cumulative (Month 24) ='
+    ws[f'C{row}'] = f'=L{start_data_row+23}'
+    ws[f'C{row}'].number_format = '$#,##0'
+    ws[f'C{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = 'Gross Profit (Summary) ='
+    ws[f'E{row}'] = '=GrossProfit'
+    ws[f'E{row}'].number_format = '$#,##0'
+    ws[f'E{row}'].font = Font(bold=True)
+    ws[f'F{row}'] = 'Difference ='
+    ws[f'G{row}'] = f'=C{row}-E{row}'
+    ws[f'G{row}'].number_format = '$#,##0'
+    ws[f'G{row}'].font = Font(bold=True)
     
     # Define named range for total financing costs
-    wb.defined_names['TotalFinancingCosts'] = DefinedName('TotalFinancingCosts', attr_text=f"'24-Month Cash Flow'!$B${row}")
+    wb.defined_names['TotalFinancingCosts'] = DefinedName('TotalFinancingCosts', attr_text=f"'24-Month Cash Flow'!$B${row-3}")
 
 def create_gc_rfq_sheet(wb):
     """GC RFQ Summary with Materials, Labor, and Workforce Breakdown"""
