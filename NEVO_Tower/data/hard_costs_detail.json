@@ -1,0 +1,176 @@
+{
+  "timestamp": "2025-11-05T01:11:51.352806",
+  "divisions": [
+    {
+      "division": "01",
+      "description": "General Requirements",
+      "rate_per_gsf": 12,
+      "gsf": 108675,
+      "total": 1304100
+    },
+    {
+      "division": "02",
+      "description": "Existing Conditions & Site Work",
+      "rate_per_gsf": 5.2,
+      "gsf": 108675,
+      "total": 565110
+    },
+    {
+      "division": "03",
+      "description": "Concrete - Pour-in-Place PT",
+      "rate_per_gsf": 45,
+      "gsf": 108675,
+      "total": 4890375
+    },
+    {
+      "division": "04",
+      "description": "Masonry",
+      "rate_per_gsf": 2.8,
+      "gsf": 108675,
+      "total": 304290
+    },
+    {
+      "division": "05",
+      "description": "Metals",
+      "rate_per_gsf": 8.5,
+      "gsf": 108675,
+      "total": 923737.5
+    },
+    {
+      "division": "06",
+      "description": "Wood & Plastics",
+      "rate_per_gsf": 3.2,
+      "gsf": 108675,
+      "total": 347760
+    },
+    {
+      "division": "07",
+      "description": "Thermal & Moisture Protection",
+      "rate_per_gsf": 22,
+      "gsf": 108675,
+      "total": 2390850
+    },
+    {
+      "division": "08",
+      "description": "Openings (Doors, Windows, HVHZ)",
+      "rate_per_gsf": 28,
+      "gsf": 108675,
+      "total": 3042900
+    },
+    {
+      "division": "09",
+      "description": "Finishes",
+      "rate_per_gsf": 42,
+      "gsf": 108675,
+      "total": 4564350
+    },
+    {
+      "division": "10",
+      "description": "Specialties",
+      "rate_per_gsf": 4.5,
+      "gsf": 108675,
+      "total": 489037.5
+    },
+    {
+      "division": "11",
+      "description": "Equipment",
+      "rate_per_gsf": 3.8,
+      "gsf": 108675,
+      "total": 412965
+    },
+    {
+      "division": "12",
+      "description": "Furnishings",
+      "rate_per_gsf": 1.2,
+      "gsf": 108675,
+      "total": 130410
+    },
+    {
+      "division": "13",
+      "description": "Special Construction",
+      "rate_per_gsf": 1.8,
+      "gsf": 108675,
+      "total": 195615
+    },
+    {
+      "division": "14",
+      "description": "Conveying Equipment",
+      "rate_per_gsf": 3.1,
+      "gsf": 108675,
+      "total": 336892.5
+    },
+    {
+      "division": "21",
+      "description": "Fire Suppression",
+      "rate_per_gsf": 7.5,
+      "gsf": 108675,
+      "total": 815062.5
+    },
+    {
+      "division": "22",
+      "description": "Plumbing",
+      "rate_per_gsf": 10,
+      "gsf": 108675,
+      "total": 1086750
+    },
+    {
+      "division": "23",
+      "description": "HVAC",
+      "rate_per_gsf": 15,
+      "gsf": 108675,
+      "total": 1630125
+    },
+    {
+      "division": "26",
+      "description": "Electrical",
+      "rate_per_gsf": 15,
+      "gsf": 108675,
+      "total": 1630125
+    },
+    {
+      "division": "27",
+      "description": "Communications",
+      "rate_per_gsf": 2,
+      "gsf": 108675,
+      "total": 217350
+    },
+    {
+      "division": "28",
+      "description": "Electronic Safety & Security",
+      "rate_per_gsf": 2,
+      "gsf": 108675,
+      "total": 217350
+    },
+    {
+      "division": "31",
+      "description": "Earthwork",
+      "rate_per_gsf": 4.2,
+      "gsf": 108675,
+      "total": 456435
+    },
+    {
+      "division": "32",
+      "description": "Exterior Improvements",
+      "rate_per_gsf": 4,
+      "gsf": 108675,
+      "total": 434700
+    },
+    {
+      "division": "33",
+      "description": "Utilities",
+      "rate_per_gsf": 3.2,
+      "gsf": 108675,
+      "total": 347760
+    }
+  ],
+  "subtotals": {
+    "construction": 26734050,
+    "general_conditions": 1069362,
+    "ohp": 1112136.48,
+    "before_contingency": 28915548.48,
+    "design_contingency": 1156621.9392000001,
+    "construction_contingency": 867466.4543999999,
+    "owner_contingency": 289155.48480000003
+  },
+  "total": 31228792.3584
+}

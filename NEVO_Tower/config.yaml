@@ -1,0 +1,90 @@
+# NEVO Tower Budget & RFQ Configuration
+# Project: 1580 79th Street Causeway, North Bay Village, FL 33141
+
+project:
+  name: "NEVO Tower"
+  address: "1580 79th Street Causeway, North Bay Village, FL 33141"
+  description: "7-floor mid-rise with rooftop amenities + Chabad House"
+  
+source_data:
+  csv_path: "C:\\Users\\17274\\Downloads\\_NEVO TOWER 50 UNITS - Measurements 50 (1).csv"
+  parsed_output: "data/nevo_parsed.json"
+  validation_report: "data/validation_report.md"
+
+building_program:
+  total_floors: 7
+  rooftop_amenity: true
+  building_height_ft: 75
+  classification: "mid-rise"
+  total_gsf: 108675
+  total_nsf: 86940
+  
+  floors:
+    floor_1:
+      use: "Chabad House & Mikvah"
+      gsf: 13125
+      units: 1
+    floors_2_3:
+      use: "Parking - EV/ADA"
+      gsf: 31500
+      spaces: 102
+    floors_4_5:
+      use: "Residential Hospitality 2BR/1.5BA"
+      gsf: 31500
+      units: 32
+    floor_6:
+      use: "Residential Hospitality 2BR/1.5BA"
+      gsf: 10850
+      units: 10
+    floor_7:
+      use: "Residential Condos 3BR/2BA"
+      gsf: 10850
+      units: 8
+    rooftop:
+      use: "Pool & Gym"
+      gsf: 10850
+
+residential_units:
+  total: 50
+  hospitality_2br: 42
+  condo_3br: 8
+
+budget_targets:
+  land_cost: 10000000
+  soft_costs_target: 4000000
+  hard_costs_baseline: 32602500
+  baseline_cost_per_gsf: 300
+  target_sales_price_psf: 1000
+  
+  special_conditions:
+    chabad_mikvah: "Sold at cost - zero margin"
+
+construction:
+  method: "Pour-in-place concrete"
+  structure: "Cast-in-place post-tensioned slabs and shear walls"
+  no_precast: true
+  location: "Miami-Dade County"
+  code: "Florida Building Code + IBC + Miami-Dade HVHZ"
+  
+scenarios:
+  baseline:
+    enabled: true
+    name: "7 Floors + Rooftop (Current Design)"
+  
+  alternate:
+    enabled: true
+    name: "11-12 Floor Tower"
+    floors: 12
+    avg_floor_plate_sf: 9000
+    synagogue_mikvah_sf: 7000
+    reduced_parking: true
+
+outputs:
+  excel_workbook: "outputs/NEVO_Budget_RFQ.xlsx"
+  rfq_document: "rfq/NEVO_Tower_RFQ.md"
+  specs_concrete: "specs/Concrete_PIP_Specs.md"
+  basis_of_estimate: "docs/basis_of_estimate.md"
+  variance_analysis: "docs/variance_analysis.md"
+
+version: "1.0"
+created: "2025-11-05"

@@ -1,0 +1,61 @@
+{
+  "timestamp": "2025-11-05T01:11:51.352806",
+  "items": [
+    {
+      "category": "Architecture & Engineering",
+      "amount": 936863.7707519999,
+      "basis": "3% of hard costs"
+    },
+    {
+      "category": "Building Permit",
+      "amount": 300000,
+      "basis": "Lump sum"
+    },
+    {
+      "category": "Impact Fees",
+      "amount": 380000,
+      "basis": "Water/Sewer/Traffic"
+    },
+    {
+      "category": "Plan Review",
+      "amount": 95000,
+      "basis": null
+    },
+    {
+      "category": "Legal & Accounting",
+      "amount": 200000,
+      "basis": null
+    },
+    {
+      "category": "Marketing & Sales",
+      "amount": 552720,
+      "basis": "1% of revenue"
+    },
+    {
+      "category": "Insurance",
+      "amount": 150000,
+      "basis": null
+    },
+    {
+      "category": "Financing Costs",
+      "amount": 1669766.0905152,
+      "basis": "Interest on construction loan"
+    },
+    {
+      "category": "Testing & Inspections",
+      "amount": 200000,
+      "basis": null
+    },
+    {
+      "category": "Utilities & Misc",
+      "amount": 75000,
+      "basis": null
+    },
+    {
+      "category": "Developer Fee",
+      "amount": 200000,
+      "basis": "Adjustable"
+    }
+  ],
+  "total": 4759349.8612672
+}
