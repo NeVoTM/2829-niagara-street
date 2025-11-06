@@ -1185,15 +1185,15 @@ def create_cash_flow_sheet(wb):
         cell.font = header_font
     row += 1
     
-    # Monthly hard cost percentages
+    # Monthly hard cost percentages - MUST TOTAL TO 1.0 (100%)
     monthly_pcts = [
-        0.03, 0.04, 0.05, 0.06,  # Months 1-4: Foundation
-        0.07, 0.08, 0.08, 0.07,  # Months 5-8: Superstructure
-        0.07, 0.07, 0.06, 0.06,  # Months 9-12: Envelope
-        0.05, 0.05, 0.04, 0.04,  # Months 13-16: MEP
-        0.03, 0.03, 0.02, 0.02,  # Months 17-20: Finishes
-        0.01, 0.01, 0.005, 0.005  # Months 21-24: Closeout
-    ]
+        0.03, 0.04, 0.05, 0.06,  # Months 1-4: Foundation = 0.18
+        0.07, 0.08, 0.08, 0.07,  # Months 5-8: Superstructure = 0.30
+        0.06, 0.06, 0.05, 0.05,  # Months 9-12: Envelope = 0.22
+        0.04, 0.04, 0.03, 0.03,  # Months 13-16: MEP = 0.14
+        0.03, 0.03, 0.02, 0.02,  # Months 17-20: Finishes = 0.10
+        0.02, 0.02, 0.01, 0.01   # Months 21-24: Closeout = 0.06
+    ]  # TOTAL = 1.00 (100%)
     
     # Pre-sales velocity - TOTAL = 50 UNITS
     presales_units = [

@@ -1,0 +1,122 @@
+================================================================================
+NEVO TOWER WORKBOOK ANALYSIS
+================================================================================
+
+================================================================================
+SUMMARY SHEET
+================================================================================
+SC Cash Payment:       $           0.00
+Hard Costs:            $           0.00
+Soft Costs:            $           0.00
+TOTAL PROJECT COST:    $           0.00
+
+Total Revenue:         $           0.00
+Gross Profit:          $           0.00
+
+Calculated Total:      $           0.00
+Difference:            $           0.00
+
+================================================================================
+ASSUMPTIONS SHEET - LAND PARTNER
+================================================================================
+SC Key Money (Mo 0):   $   1,250,000.00
+SC Payment (Mo 6):     $     750,000.00
+Total SC Cash:         $   2,000,000.00
+
+================================================================================
+HARD COSTS SHEET
+================================================================================
+TOTAL HARD COSTS:      $           0.00
+
+================================================================================
+SOFT COSTS SHEET - DETAILED
+================================================================================
+SUBTOTAL IN-KIND:      $           0.00
+SUBTOTAL CASH:         $           0.00
+Bridge Loan Interest:  $           0.00
+Subtotal Before Fin:   $           0.00
+TOTAL SOFT (w/Fin):    $           0.00
+
+================================================================================
+REVENUE SHEET
+================================================================================
+Total Units:                              0
+TOTAL REVENUE:         $           0.00
+Synagogue Revenue:     $           0.00
+50-Unit Revenue:       $           0.00
+
+================================================================================
+CASH FLOW SHEET - LINE BY LINE
+================================================================================
+
+TOTALS ROW: 30
+
+Hard Costs Total:      $           0.00
+CASH Soft Total:       $           0.00
+IN-KIND Soft Total:    $           0.00
+SC Cash Total:         $           0.00
+Interest Total:        $           0.00
+
+Units Sold:                               0
+Pre-Sales Total:       $           0.00
+Usable Total:          $           0.00
+Cash IN Total:         $           0.00
+Net Flow Total:        $           0.00
+
+Final Cumulative:      $           0.00
+
+MAX BRIDGE LOAN:       $           0.00
+FINANCING COSTS:       $           0.00
+
+================================================================================
+RECONCILIATION ANALYSIS
+================================================================================
+
+1. COST COMPONENTS:
+   Hard Costs (Summary):     $           0.00
+   Hard Costs (CF):          $           0.00
+   Difference:               $           0.00
+
+   Soft Costs (Summary):     $           0.00
+   Soft from CF (C+I+Int):   $           0.00
+   Difference:               $           0.00
+
+   SC Cash (Summary):        $           0.00
+   SC Cash (CF):             $           0.00
+   Difference:               $           0.00
+
+2. REVENUE CHECK:
+   Revenue (Summary):        $           0.00
+   Revenue (Revenue Sheet):  $           0.00
+   Difference:               $           0.00
+
+   Pre-Sales (CF):           $           0.00
+   Difference:               $           0.00
+
+3. PROFIT CHECK:
+   Gross Profit (Summary):   $           0.00
+   Final Cumulative (CF):    $           0.00
+   Difference:               $           0.00
+
+4. TOTAL PROJECT COST BUILD-UP:
+   Hard + CASH Soft + IN-KIND + SC Cash + Interest
+   $0.00 + $0.00 + $0.00 + $0.00 + $0.00
+   = $           0.00
+   Summary Total:            $           0.00
+   DISCREPANCY:              $           0.00
+
+5. INTEREST ANALYSIS:
+   Interest in CF:           $           0.00
+   Financing in Soft Costs:  $           0.00
+   Are they equal?           True
+
+6. FINAL CUMULATIVE CALCULATION:
+   Revenue:                  $           0.00
+   - Total Costs:            $           0.00
+   = Expected Profit:        $           0.00
+   Actual Final Cum:         $           0.00
+   DIFFERENCE:               $           0.00
+
+================================================================================
+END OF ANALYSIS
+================================================================================
