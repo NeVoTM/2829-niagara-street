@@ -24,6 +24,35 @@ TOTAL_GSF = project_data['building_totals']['total_gsf']
 TOTAL_NSF = project_data['building_totals']['total_nsf']
 RESIDENTIAL_UNITS = project_data['building_totals']['residential_units']
 
+def auto_fit_columns(ws, min_width=8, max_width=60):
+    """Auto-fit column widths based on content - snug fit"""
+    from openpyxl.utils import get_column_letter
+    
+    col_widths = {}
+    
+    for row in ws.iter_rows():
+        for cell in row:
+            if cell.value:
+                col_letter = get_column_letter(cell.column)
+                try:
+                    # Account for different formatting (numbers, formulas, etc)
+                    if isinstance(cell.value, (int, float)):
+                        cell_length = 12  # Standard width for numbers
+                    else:
+                        cell_length = len(str(cell.value))
+                    
+                    if col_letter not in col_widths:
+                        col_widths[col_letter] = cell_length
+                    else:
+                        col_widths[col_letter] = max(col_widths[col_letter], cell_length)
+                except:
+                    pass
+    
+    for col_letter, max_length in col_widths.items():
+        # Snug fit: just add 1-2 chars padding
+        adjusted_width = min(max(max_length + 1, min_width), max_width)
+        ws.column_dimensions[col_letter].width = adjusted_width
+
 def create_interactive_workbook():
     """Create fully interactive Excel workbook with land partner structure"""
     
@@ -44,9 +73,10 @@ def create_interactive_workbook():
     create_gc_rfq_sheet(wb)
     create_sync_instructions_sheet(wb)
     
-    # Set column widths explicitly for proper alignment
-    # Summary sheet column widths already set in create_summary_sheet
-    # Other sheets have their column widths set in their respective functions
+    # Auto-fit all columns on all sheets
+    print("\nAuto-fitting column widths...")
+    for sheet in wb.worksheets:
+        auto_fit_columns(sheet)
     
     # Save workbook
     filename = 'outputs/NEVO_Interactive_Budget_V3.xlsx'
@@ -160,9 +190,10 @@ def create_summary_sheet(wb):
     # Per unit metrics - using named range TotalNSF
     wb.defined_names['TotalNSF'] = DefinedName('TotalNSF', attr_text=f"Assumptions!$B$6")
     
-    ws[f'A{row}'] = 'Cost per Unit'
-    ws[f'B{row}'] = f'=B{total_cost_row}/50'
+    ws[f'A{row}'] = 'Cost per Unit (50 Condos)'
+    ws[f'B{row}'] = f'=(B{total_cost_row}-Synagogue_Cost)/50'
     ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'D{row}'] = 'Excluding synagogue cost'
     row += 1
     
     ws[f'A{row}'] = 'Cost per NSF'
@@ -546,121 +577,124 @@ def create_soft_costs_sheet(wb):
     
     # Architecture & Engineering
     ws[f'A{row}'] = 'Architecture & Engineering'
-    ws[f'B{row}'] = '=TotalHardCosts*0.04'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0335'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
     ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
     ws[f'C{row}'].fill = inkind_fill
     ws[f'C{row}'].font = Font(bold=True, color="0000FF")
-    ws[f'D{row}'] = '4.0% of hard costs'
+    ws[f'D{row}'] = '3.35% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Marketing & Sales'
-    ws[f'B{row}'] = '=TotalHardCosts*0.025'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0209'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
     ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
     ws[f'C{row}'].fill = inkind_fill
     ws[f'C{row}'].font = Font(bold=True, color="0000FF")
-    ws[f'D{row}'] = '2.5% of hard costs'
+    ws[f'D{row}'] = '2.09% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Legal & Accounting'
-    ws[f'B{row}'] = '=TotalHardCosts*0.01'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0083'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
     ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
     ws[f'C{row}'].fill = inkind_fill
     ws[f'C{row}'].font = Font(bold=True, color="0000FF")
-    ws[f'D{row}'] = '1.0% of hard costs'
+    ws[f'D{row}'] = '0.83% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Developer Fee'
-    ws[f'B{row}'] = '=TotalHardCosts*0.015'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0126'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
     ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
     ws[f'C{row}'].fill = inkind_fill
     ws[f'C{row}'].font = Font(bold=True, color="0000FF")
-    ws[f'D{row}'] = '1.5% of hard costs'
+    ws[f'D{row}'] = '1.26% of hard costs'
     inkind_end_row = row
     row += 2
     
-    # CASH Items (Months 1-9)
+    # CASH Items (Months 1-24)
     ws[f'A{row}'] = 'Building Permit'
-    ws[f'B{row}'] = '=TotalHardCosts*0.015'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0126'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Upfront)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '1.5% of hard costs'
+    ws[f'D{row}'] = '1.26% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Impact Fees'
-    ws[f'B{row}'] = '=TotalHardCosts*0.01'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0083'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Upfront)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '1.0% of hard costs'
+    ws[f'D{row}'] = '0.83% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Plan Review'
-    ws[f'B{row}'] = '=TotalHardCosts*0.005'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0041'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Upfront)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '0.5% of hard costs'
+    ws[f'D{row}'] = '0.41% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Insurance'
-    ws[f'B{row}'] = '=TotalHardCosts*0.008'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0067'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Monthly)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '0.8% of hard costs'
+    ws[f'D{row}'] = '0.67% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Testing & Inspections'
-    ws[f'B{row}'] = '=TotalHardCosts*0.003'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0024'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Ongoing)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '0.3% of hard costs'
+    ws[f'D{row}'] = '0.24% of hard costs'
     row += 1
     
     ws[f'A{row}'] = 'Utilities & Misc'
-    ws[f'B{row}'] = '=TotalHardCosts*0.002'
+    ws[f'B{row}'] = '=TotalHardCosts*0.0016'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Monthly)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '0.2% of hard costs'
+    ws[f'D{row}'] = '0.16% of hard costs'
     row += 1
     
-    ws[f'A{row}'] = 'Financing Costs'
-    ws[f'B{row}'] = '=ConstructionSubtotal*0.375*LTC*Finance_Rate*(9/12)'
+    ws[f'A{row}'] = 'Financing Costs (Bridge Loan)'
+    ws[f'B{row}'] = '=TotalFinancingCosts'
     ws[f'B{row}'].number_format = '$#,##0'
-    ws[f'C{row}'] = 'CASH (Months 1-9)'
+    ws[f'C{row}'] = 'CASH (Variable)'
     ws[f'C{row}'].fill = cash_fill
     ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '9-month bridge loan interest'
+    ws[f'D{row}'] = '9% annual interest until payoff'
     cash_end_row = row
     row += 2
     
     # Note
     ws[f'A{row}'] = '  Note:'
     ws[f'B{row}'] = 'IN-KIND costs paid after Month 9 from pre-sales revenue'
-    ws[f'C{row}'] = 'CASH costs paid Months 1-9 from bridge loan'
+    ws.merge_cells(f'B{row}:D{row}')
+    row += 1
+    ws[f'A{row}'] = ''
+    ws[f'B{row}'] = 'Financing costs calculated dynamically based on bridge loan payoff from pre-sales'
     ws.merge_cells(f'B{row}:D{row}')
     row += 2
     
@@ -980,7 +1014,7 @@ def create_cash_flow_sheet(wb):
     ws.merge_cells('A2:J2')
     
     row = 4
-    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Pre-Sales Units', 'Pre-Sales Payment', 'Usable (90%)', 'Total Cash In', 'Net Cash Flow', 'Cumulative Cash', 'Bridge Loan Need']
+    headers = ['Month', 'Activity', 'Hard Cost Draw', 'SC Cash OUT', 'Units Sold', 'Pre-Sales $', 'Usable (90%)', 'Total Cash IN', 'Net Cash Flow', 'Cumulative Bridge', 'Bridge Balance', 'Interest (9%/yr)']
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row, col)
         cell.value = header
@@ -1073,11 +1107,13 @@ def create_cash_flow_sheet(wb):
             ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*1.00'
         ws[f'F{row}'].number_format = '$#,##0'
         
-        # Usable pre-sales (90% before month 24, 100% at month 24)
+        # Usable pre-sales (90% before month 24, 100% at month 24 PLUS 10% holdback release)
         if month_num < 24:
             ws[f'G{row}'] = f'=F{row}*0.90'
         else:
-            ws[f'G{row}'] = f'=F{row}'
+            # Month 24: 100% of current month + release 10% held from all previous months
+            prev_row_end = row - 1
+            ws[f'G{row}'] = f'=F{row}+(SUM($F${start_data_row}:$F${prev_row_end})*0.10)'
         ws[f'G{row}'].number_format = '$#,##0'
         
         # Total cash in (SC Cash + Usable Pre-Sales)
@@ -1088,17 +1124,21 @@ def create_cash_flow_sheet(wb):
         ws[f'I{row}'] = f'=H{row}-C{row}'
         ws[f'I{row}'].number_format = '$#,##0'
         
-        # Cumulative cash
+        # Cumulative Bridge Need (negative cumulative = bridge loan needed)
         if month_num == 1:
             ws[f'J{row}'] = f'=I{row}'
         else:
             ws[f'J{row}'] = f'=J{row-1}+I{row}'
         ws[f'J{row}'].number_format = '$#,##0'
         
-        # Bridge loan need
+        # Bridge loan balance (absolute value of negative cumulative, then paid down)
         ws[f'K{row}'] = f'=IF(J{row}<0,-J{row},0)'
         ws[f'K{row}'].number_format = '$#,##0'
         ws[f'K{row}'].fill = highlight_fill
+        
+        # Monthly interest on bridge loan balance (9% annual = 0.75% monthly)
+        ws[f'L{row}'] = f'=K{row}*Finance_Rate/12'
+        ws[f'L{row}'].number_format = '$#,##0'
         
         row += 1
     
@@ -1138,6 +1178,17 @@ def create_cash_flow_sheet(wb):
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].font = Font(bold=True, size=12)
     ws[f'B{row}'].fill = highlight_fill
+    row += 1
+    
+    ws[f'A{row}'] = 'TOTAL FINANCING COSTS (9% Interest):'
+    ws[f'A{row}'].font = Font(bold=True, size=12, color="FF0000")
+    ws[f'B{row}'] = f'=SUM(L{start_data_row}:L{start_data_row+23})'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True, size=12)
+    ws[f'B{row}'].fill = highlight_fill
+    
+    # Define named range for total financing costs
+    wb.defined_names['TotalFinancingCosts'] = DefinedName('TotalFinancingCosts', attr_text=f"'24-Month Cash Flow'!$B${row}")
 
 def create_gc_rfq_sheet(wb):
     """GC RFQ Summary with Materials, Labor, and Workforce Breakdown"""
