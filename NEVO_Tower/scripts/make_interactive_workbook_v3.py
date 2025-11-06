@@ -1041,23 +1041,36 @@ def create_cash_flow_sheet(wb):
         # Pre-sales units
         ws[f'E{row}'] = presales_units[month_idx]
         
-        # Pre-sales payment schedule:
-        # 25% at signing, 25% at month 5 (superstructure), 25% at month 15 (envelope), 25% at month 24 (CO)
-        if month_num == 1:
-            # Month 1: 25% of units sold this month
+        # Pre-sales payment structure based on WHEN units are sold:
+        # Months 1-4: 25% at signing
+        # Months 5-8: 50% at signing + ALL previous buyers top off from 25% to 50%
+        # Months 9-15: 75% at signing + ALL previous buyers top off to 75%
+        # Months 21-24: 100% at signing + ALL previous buyers top off to 100%
+        
+        if month_num <= 4:
+            # Months 1-4: New buyers pay 25% at signing
             ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
         elif month_num == 5:
-            # Month 5: 25% of current + 25% of ALL previous sales (payment 2 of 4)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM($E$5:E8)*(TotalRevenue/50)*0.25)'
-        elif month_num == 15:
-            # Month 15: 25% of current + 25% of ALL previous sales (payment 3 of 4 = 75% total collected)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM($E$5:E18)*(TotalRevenue/50)*0.25)'
-        elif month_num == 24:
-            # Month 24: Final 25% payment for ALL units (100% collected)
-            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.25)+(SUM($E$5:E27)*(TotalRevenue/50)*0.25)'
+            # Month 5: New buyers pay 50% + ALL previous (months 1-4) top off from 25% to 50% (add 25%)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.50)+(SUM($E$5:$E$8)*(TotalRevenue/50)*0.25)'
+        elif month_num <= 8:
+            # Months 6-8: New buyers pay 50% at signing
+            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.50'
+        elif month_num == 9:
+            # Month 9: New buyers pay 75% + ALL previous (months 1-8) top off to 75% (add 25%)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*0.75)+(SUM($E$5:$E$12)*(TotalRevenue/50)*0.25)'
+        elif month_num <= 15:
+            # Months 10-15: New buyers pay 75% at signing
+            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.75'
+        elif month_num <= 20:
+            # Months 16-20: Still 75% at signing (no new milestone yet)
+            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.75'
+        elif month_num == 21:
+            # Month 21: New buyers pay 100% + ALL previous (months 1-20) top off to 100% (add 25%)
+            ws[f'F{row}'] = f'=(E{row}*(TotalRevenue/50)*1.00)+(SUM($E$5:$E$24)*(TotalRevenue/50)*0.25)'
         else:
-            # Other months: just 25% of current month sales
-            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*0.25'
+            # Months 22-24: New buyers pay 100% at signing
+            ws[f'F{row}'] = f'=E{row}*(TotalRevenue/50)*1.00'
         ws[f'F{row}'].number_format = '$#,##0'
         
         # Usable pre-sales (90% before month 24, 100% at month 24)
