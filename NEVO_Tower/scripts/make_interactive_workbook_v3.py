@@ -76,7 +76,11 @@ def create_interactive_workbook():
     # Auto-fit all columns on all sheets
     print("\nAuto-fitting column widths...")
     for sheet in wb.worksheets:
-        auto_fit_columns(sheet)
+        if sheet.title == '24-Month Cash Flow':
+            # Extra snug for cash flow
+            auto_fit_columns(sheet, min_width=6, max_width=14)
+        else:
+            auto_fit_columns(sheet)
     
     # Save workbook
     filename = 'outputs/NEVO_Interactive_Budget_V3.xlsx'
@@ -173,6 +177,9 @@ def create_summary_sheet(wb):
     ws[f'C{row}'] = f'=(B{revenue_row}-B{total_cost_row})/B{revenue_row}'
     ws[f'C{row}'].number_format = '0.0%'
     profit_row = row
+    
+    # Define named range for GrossProfit
+    wb.defined_names['GrossProfit'] = DefinedName('GrossProfit', attr_text=f"Summary!$B${profit_row}")
     row += 1
     
     ws[f'A{row}'] = 'Profit Margin'
@@ -347,8 +354,121 @@ def create_assumptions_sheet(wb):
     wb.defined_names['LTC'] = DefinedName('LTC', attr_text=f'Assumptions!$B${cost_start+8}')
     wb.defined_names['Duration'] = DefinedName('Duration', attr_text=f'Assumptions!$B${cost_start+9}')
     
+    # PROJECT TOTALS SECTION
+    row += 2
+    ws[f'A{row}'] = 'PROJECT TOTALS'
+    ws[f'A{row}'].fill = header_fill
+    ws[f'A{row}'].font = header_font
+    ws.merge_cells(f'A{row}:D{row}')
+    row += 2
+    
+    ws[f'A{row}'] = 'Total Hard Costs'
+    ws[f'B{row}'] = '=TotalHardCosts'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'C{row}'] = '=TotalHardCosts/TotalProjectCost'
+    ws[f'C{row}'].number_format = '0.0%'
+    ws[f'D{row}'] = 'From Hard Costs sheet'
+    row += 1
+    
+    ws[f'A{row}'] = 'Total Soft Costs'
+    ws[f'B{row}'] = '=TotalSoftCosts'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'C{row}'] = '=TotalSoftCosts/TotalProjectCost'
+    ws[f'C{row}'].number_format = '0.0%'
+    ws[f'D{row}'] = 'From Soft Costs sheet'
+    row += 1
+    
+    ws[f'A{row}'] = 'SC Cash Payments'
+    ws[f'B{row}'] = '=LandPartner_Cash1+LandPartner_Cash2'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'C{row}'] = '=(LandPartner_Cash1+LandPartner_Cash2)/TotalProjectCost'
+    ws[f'C{row}'].number_format = '0.0%'
+    ws[f'D{row}'] = 'Cash paid to land partner'
+    row += 1
+    
+    ws[f'A{row}'] = 'TOTAL PROJECT COST'
+    ws[f'B{row}'] = '=TotalProjectCost'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True, size=12)
+    ws[f'B{row}'].fill = PatternFill(start_color="FFD700", end_color="FFD700", fill_type="solid")
+    ws[f'C{row}'] = '100.0%'
+    ws[f'C{row}'].number_format = '0.0%'
+    ws[f'D{row}'] = 'From Summary sheet'
+    row += 2
+    
+    ws[f'A{row}'] = 'Total Revenue'
+    ws[f'B{row}'] = '=TotalRevenue'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True, size=12)
+    ws[f'B{row}'].fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
+    ws[f'D{row}'] = 'From Revenue sheet'
+    row += 2
+    
+    ws[f'A{row}'] = 'Gross Profit'
+    ws[f'B{row}'] = '=GrossProfit'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True, size=12)
+    ws[f'B{row}'].fill = PatternFill(start_color="FFD700", end_color="FFD700", fill_type="solid")
+    ws[f'C{row}'] = '=GrossProfit/TotalRevenue'
+    ws[f'C{row}'].number_format = '0.0%'
+    ws[f'D{row}'] = 'From Summary sheet'
+    row += 1
+    
+    ws[f'A{row}'] = 'ROI (Return on Cost)'
+    ws[f'B{row}'] = '=GrossProfit/TotalProjectCost'
+    ws[f'B{row}'].number_format = '0.0%'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = 'Profit / Total Cost'
+    row += 2
+    
+    # SYNAGOGUE/MIKVAH SECTION
+    ws[f'A{row}'] = 'SYNAGOGUE/MIKVAH (Unit #51)'
+    ws[f'A{row}'].fill = header_fill
+    ws[f'A{row}'].font = header_font
+    ws.merge_cells(f'A{row}:D{row}')
+    row += 2
+    
+    ws[f'A{row}'] = 'Synagogue Revenue (at cost)'
+    ws[f'B{row}'] = '=Synagogue_Cost'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = '10,500 NSF @ $400/SF'
+    row += 1
+    
+    ws[f'A{row}'] = 'Allocated Cost (part of Hard+Soft)'
+    ws[f'B{row}'] = '=Synagogue_Cost'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = 'Paid by SC from windfall'
+    row += 1
+    
+    ws[f'A{row}'] = 'Net Impact on Profit'
+    ws[f'B{row}'] = 0
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'C{row}'] = '0.0%'
+    ws[f'C{row}'].number_format = '0.0%'
+    ws[f'D{row}'] = 'Revenue = Cost (break-even)'
+    row += 2
+    
+    ws[f'A{row}'] = 'Revenue-Generating Units'
+    ws[f'B{row}'] = 50
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = 'Excludes Synagogue/Mikvah'
+    row += 1
+    
+    ws[f'A{row}'] = 'Cost per Revenue Unit'
+    ws[f'B{row}'] = '=(TotalProjectCost-Synagogue_Cost)/50'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = 'From Summary sheet'
+    row += 2
+    
     # Add Named Ranges Documentation
-    row += 3
+    row += 1
     ws[f'A{row}'] = 'NAMED RANGES - How Formulas Connect Sheets'
     ws[f'A{row}'].fill = header_fill
     ws[f'A{row}'].font = header_font
@@ -556,12 +676,13 @@ def create_soft_costs_sheet(wb):
     editable_fill = PatternFill(start_color="FFFF99", end_color="FFFF99", fill_type="solid")
     inkind_fill = PatternFill(start_color="E6F3FF", end_color="E6F3FF", fill_type="solid")  # Light blue
     cash_fill = PatternFill(start_color="FFE6E6", end_color="FFE6E6", fill_type="solid")  # Light red
+    total_fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     
-    ws['A1'] = 'SOFT COSTS - PAYMENT TIMING: MONTHS 1-9 vs AFTER MONTH 9'
+    ws['A1'] = 'SOFT COSTS - PAYMENT TIMING'
     ws['A1'].font = Font(bold=True, size=14)
     ws.merge_cells('A1:D1')
     
-    ws['A2'] = 'Target: 12% of Total Hard Costs | IN-KIND = Paid after Month 9 from pre-sales'
+    ws['A2'] = 'CASH: Months 1-12 | IN-KIND: Months 7-24 | Financing: Dynamic'
     ws.merge_cells('A2:D2')
     
     row = 4
@@ -573,16 +694,22 @@ def create_soft_costs_sheet(wb):
         cell.font = header_font
     row += 1
     
-    start_row = row
+    # IN-KIND SECTION
+    ws[f'A{row}'] = 'IN-KIND SOFT COSTS (Months 7-24)'
+    ws[f'A{row}'].font = Font(bold=True, size=11)
+    ws[f'A{row}'].fill = inkind_fill
+    ws.merge_cells(f'A{row}:D{row}')
+    row += 1
+    
+    inkind_start_row = row
     
     # Architecture & Engineering
     ws[f'A{row}'] = 'Architecture & Engineering'
     ws[f'B{row}'] = '=TotalHardCosts*0.0335'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
+    ws[f'C{row}'] = 'IN-KIND (Mo 7-24)'
     ws[f'C{row}'].fill = inkind_fill
-    ws[f'C{row}'].font = Font(bold=True, color="0000FF")
     ws[f'D{row}'] = '3.35% of hard costs'
     row += 1
     
@@ -590,9 +717,8 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0209'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
+    ws[f'C{row}'] = 'IN-KIND (Mo 7-24)'
     ws[f'C{row}'].fill = inkind_fill
-    ws[f'C{row}'].font = Font(bold=True, color="0000FF")
     ws[f'D{row}'] = '2.09% of hard costs'
     row += 1
     
@@ -600,9 +726,8 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0083'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
+    ws[f'C{row}'] = 'IN-KIND (Mo 7-24)'
     ws[f'C{row}'].fill = inkind_fill
-    ws[f'C{row}'].font = Font(bold=True, color="0000FF")
     ws[f'D{row}'] = '0.83% of hard costs'
     row += 1
     
@@ -610,21 +735,41 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0126'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'IN-KIND (After Mo 9)'
+    ws[f'C{row}'] = 'IN-KIND (Mo 7-24)'
     ws[f'C{row}'].fill = inkind_fill
-    ws[f'C{row}'].font = Font(bold=True, color="0000FF")
     ws[f'D{row}'] = '1.26% of hard costs'
     inkind_end_row = row
+    row += 1
+    
+    # IN-KIND Subtotal
+    ws[f'A{row}'] = 'SUBTOTAL IN-KIND'
+    ws[f'A{row}'].font = Font(bold=True)
+    ws[f'B{row}'] = f'=SUM(B{inkind_start_row}:B{inkind_end_row})'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].fill = total_fill
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = '18 months (Mo 7-24)'
+    inkind_total_row = row
     row += 2
     
-    # CASH Items (Months 1-24)
+    # Define named range for IN-KIND total
+    wb.defined_names['TotalInKindCosts'] = DefinedName('TotalInKindCosts', attr_text=f"'Soft Costs'!$B${inkind_total_row}")
+    
+    # CASH SECTION
+    ws[f'A{row}'] = 'CASH SOFT COSTS (Months 1-12)'
+    ws[f'A{row}'].font = Font(bold=True, size=11)
+    ws[f'A{row}'].fill = cash_fill
+    ws.merge_cells(f'A{row}:D{row}')
+    row += 1
+    
+    cash_start_row = row
+    
     ws[f'A{row}'] = 'Building Permit'
     ws[f'B{row}'] = '=TotalHardCosts*0.0126'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Upfront)'
+    ws[f'C{row}'] = 'CASH (Mo 1-12)'
     ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
     ws[f'D{row}'] = '1.26% of hard costs'
     row += 1
     
@@ -632,9 +777,8 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0083'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Upfront)'
+    ws[f'C{row}'] = 'CASH (Mo 1-12)'
     ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
     ws[f'D{row}'] = '0.83% of hard costs'
     row += 1
     
@@ -642,9 +786,8 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0041'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Upfront)'
+    ws[f'C{row}'] = 'CASH (Mo 1-12)'
     ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
     ws[f'D{row}'] = '0.41% of hard costs'
     row += 1
     
@@ -652,9 +795,8 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0067'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Monthly)'
+    ws[f'C{row}'] = 'CASH (Mo 1-12)'
     ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
     ws[f'D{row}'] = '0.67% of hard costs'
     row += 1
     
@@ -662,9 +804,8 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0024'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Ongoing)'
+    ws[f'C{row}'] = 'CASH (Mo 1-12)'
     ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
     ws[f'D{row}'] = '0.24% of hard costs'
     row += 1
     
@@ -672,36 +813,55 @@ def create_soft_costs_sheet(wb):
     ws[f'B{row}'] = '=TotalHardCosts*0.0016'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = editable_fill
-    ws[f'C{row}'] = 'CASH (Monthly)'
+    ws[f'C{row}'] = 'CASH (Mo 1-12)'
     ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
     ws[f'D{row}'] = '0.16% of hard costs'
+    cash_end_row = row
     row += 1
     
-    ws[f'A{row}'] = 'Financing Costs (Bridge Loan)'
+    # CASH Subtotal
+    ws[f'A{row}'] = 'SUBTOTAL CASH'
+    ws[f'A{row}'].font = Font(bold=True)
+    ws[f'B{row}'] = f'=SUM(B{cash_start_row}:B{cash_end_row})'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].fill = total_fill
+    ws[f'B{row}'].font = Font(bold=True)
+    ws[f'D{row}'] = '12 months (Mo 1-12)'
+    cash_total_row = row
+    row += 2
+    
+    # Define named range for CASH total
+    wb.defined_names['TotalCashSoftCosts'] = DefinedName('TotalCashSoftCosts', attr_text=f"'Soft Costs'!$B${cash_total_row}")
+    
+    # FINANCING SECTION
+    ws[f'A{row}'] = 'FINANCING COSTS (Dynamic)'
+    ws[f'A{row}'].font = Font(bold=True, size=11)
+    ws[f'A{row}'].fill = PatternFill(start_color="FFFFCC", end_color="FFFFCC", fill_type="solid")
+    ws.merge_cells(f'A{row}:D{row}')
+    row += 1
+    
+    ws[f'A{row}'] = 'Bridge Loan Interest'
     ws[f'B{row}'] = '=TotalFinancingCosts'
     ws[f'B{row}'].number_format = '$#,##0'
-    ws[f'C{row}'] = 'CASH (Variable)'
-    ws[f'C{row}'].fill = cash_fill
-    ws[f'C{row}'].font = Font(bold=True, color="FF0000")
-    ws[f'D{row}'] = '9% annual interest until payoff'
-    cash_end_row = row
+    ws[f'C{row}'] = 'Variable (9%/yr)'
+    ws[f'D{row}'] = 'Calculated in Cash Flow sheet'
+    financing_row = row
     row += 2
     
-    # Note
-    ws[f'A{row}'] = '  Note:'
-    ws[f'B{row}'] = 'IN-KIND costs paid after Month 9 from pre-sales revenue'
-    ws.merge_cells(f'B{row}:D{row}')
+    # TOTAL SOFT COSTS (without financing - that's added separately)
+    ws[f'A{row}'] = 'SUBTOTAL SOFT COSTS (Before Financing)'
+    ws[f'A{row}'].font = Font(bold=True, size=11)
+    ws[f'B{row}'] = f'=B{inkind_total_row}+B{cash_total_row}'
+    ws[f'B{row}'].number_format = '$#,##0'
+    ws[f'B{row}'].fill = total_fill
+    ws[f'B{row}'].font = Font(bold=True)
+    subtotal_before_financing_row = row
     row += 1
-    ws[f'A{row}'] = ''
-    ws[f'B{row}'] = 'Financing costs calculated dynamically based on bridge loan payoff from pre-sales'
-    ws.merge_cells(f'B{row}:D{row}')
-    row += 2
     
-    # Total
-    ws[f'A{row}'] = 'TOTAL SOFT COSTS'
+    # GRAND TOTAL SOFT COSTS
+    ws[f'A{row}'] = 'TOTAL SOFT COSTS (With Financing)'
     ws[f'A{row}'].font = Font(bold=True, size=12)
-    ws[f'B{row}'] = f'=SUM(B{start_row}:B{cash_end_row})'
+    ws[f'B{row}'] = f'=B{subtotal_before_financing_row}+B{financing_row}'
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].fill = PatternFill(start_color="FFD700", end_color="FFD700", fill_type="solid")
     ws[f'B{row}'].font = Font(bold=True, size=12)
@@ -1011,13 +1171,13 @@ def create_cash_flow_sheet(wb):
     
     ws['A1'] = 'NEVO TOWER - 24-MONTH CASH FLOW WITH PRE-SALES'
     ws['A1'].font = Font(bold=True, size=14)
-    ws.merge_cells('A1:J1')
+    ws.merge_cells('A1:O1')
     
-    ws['A2'] = 'Construction Costs vs Pre-Sales Revenue - Bridge Loan Calculation'
-    ws.merge_cells('A2:J2')
+    ws['A2'] = 'CASH (Mo 1-12) | IN-KIND (Mo 7-24) | Financing calculated dynamically'
+    ws.merge_cells('A2:O2')
     
     row = 4
-    headers = ['Month', 'Activity', 'Hard Cost Draw', 'Soft-CASH', 'Soft-IN-KIND', 'SC Cash OUT', 'Units Sold', 'Pre-Sales $', 'Usable (90%)', 'Total Cash IN', 'Net Cash Flow', 'Cumulative', 'Bridge Balance', 'Interest (9%/yr)']
+    headers = ['Month', 'Activity', 'Hard Cost', 'CASH Soft', 'IN-KIND Soft', 'SC Cash', 'Units Sold', 'Pre-Sales $', 'Usable (90%)', 'Cash IN', 'Net Flow', 'Cumulative', 'Bridge Bal', 'Interest', 'Final Cum']
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row, col)
         cell.value = header
@@ -1066,20 +1226,21 @@ def create_cash_flow_sheet(wb):
         ws[f'C{row}'] = f'=TotalHardCosts*{monthly_pcts[month_idx]}'
         ws[f'C{row}'].number_format = '$#,##0'
         
-        # Soft costs - CASH items (spread evenly across 24 months)
-        # CASH soft costs = permits, fees, insurance, testing, utilities (not IN-KIND)
-        ws[f'D{row}'] = '=(TotalSoftCosts-TotalFinancingCosts-(TotalHardCosts*(0.0335+0.0209+0.0083+0.0126)))/24'
+        # CASH soft costs (months 1-12 only) - divide total by 12
+        if month_num <= 12:
+            ws[f'D{row}'] = '=TotalCashSoftCosts/12'
+        else:
+            ws[f'D{row}'] = 0
         ws[f'D{row}'].number_format = '$#,##0'
         
-        # Soft costs - IN-KIND items (paid only when cumulative turns positive)
-        # IN-KIND = A&E, Marketing, Legal, Dev Fee
-        if month_num == 1:
-            ws[f'E{row}'] = '=0'
+        # IN-KIND soft costs (months 7-24) - divide total by 18
+        if 7 <= month_num <= 24:
+            ws[f'E{row}'] = '=TotalInKindCosts/18'
         else:
-            ws[f'E{row}'] = f'=IF(AND(L{row-1}<0, L{row}=0), TotalHardCosts*(0.0335+0.0209+0.0083+0.0126), 0)'
+            ws[f'E{row}'] = 0
         ws[f'E{row}'].number_format = '$#,##0'
         
-        # SC Cash OUT
+        # SC Cash payments
         if month_num == 1:
             ws[f'F{row}'] = '=-LandPartner_Cash1'
         elif month_num == 6:
@@ -1091,43 +1252,29 @@ def create_cash_flow_sheet(wb):
         # Pre-sales units
         ws[f'G{row}'] = presales_units[month_idx]
         
-        # Pre-sales payment structure based on WHEN units are sold:
-        # Months 1-4: 25% at signing
-        # Months 5-8: 50% at signing + ALL previous buyers top off from 25% to 50%
-        # Months 9-15: 75% at signing + ALL previous buyers top off to 75%
-        # Months 21-24: 100% at signing + ALL previous buyers top off to 100%
-        
+        # Pre-sales payment structure
         if month_num <= 4:
-            # Months 1-4: New buyers pay 25% at signing
             ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.25'
         elif month_num == 5:
-            # Month 5: New buyers pay 50% + ALL previous (months 1-4) top off from 25% to 50% (add 25%)
             ws[f'H{row}'] = f'=(G{row}*(TotalRevenue/50)*0.50)+(SUM($G$5:$G$8)*(TotalRevenue/50)*0.25)'
         elif month_num <= 8:
-            # Months 6-8: New buyers pay 50% at signing
             ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.50'
         elif month_num == 9:
-            # Month 9: New buyers pay 75% + ALL previous (months 1-8) top off to 75% (add 25%)
             ws[f'H{row}'] = f'=(G{row}*(TotalRevenue/50)*0.75)+(SUM($G$5:$G$12)*(TotalRevenue/50)*0.25)'
         elif month_num <= 15:
-            # Months 10-15: New buyers pay 75% at signing
             ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.75'
         elif month_num <= 20:
-            # Months 16-20: Still 75% at signing (no new milestone yet)
             ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*0.75'
         elif month_num == 21:
-            # Month 21: New buyers pay 100% + ALL previous (months 1-20) top off to 100% (add 25%)
             ws[f'H{row}'] = f'=(G{row}*(TotalRevenue/50)*1.00)+(SUM($G$5:$G$24)*(TotalRevenue/50)*0.25)'
         else:
-            # Months 22-24: New buyers pay 100% at signing
             ws[f'H{row}'] = f'=G{row}*(TotalRevenue/50)*1.00'
         ws[f'H{row}'].number_format = '$#,##0'
         
-        # Usable pre-sales (90% before month 24, 100% at month 24 PLUS 10% holdback release)
+        # Usable pre-sales (90% before month 24)
         if month_num < 24:
             ws[f'I{row}'] = f'=H{row}*0.90'
         else:
-            # Month 24: 100% of current month + release 10% held from all previous months
             prev_row_end = row - 1
             ws[f'I{row}'] = f'=H{row}+(SUM($H${start_data_row}:$H${prev_row_end})*0.10)'
         ws[f'I{row}'].number_format = '$#,##0'
@@ -1136,25 +1283,30 @@ def create_cash_flow_sheet(wb):
         ws[f'J{row}'] = f'=F{row}+I{row}'
         ws[f'J{row}'].number_format = '$#,##0'
         
-        # Net cash flow (Cash IN - Hard Costs - Soft CASH - Soft IN-KIND)
+        # Net cash flow (Cash IN - Hard - CASH Soft - IN-KIND Soft)
         ws[f'K{row}'] = f'=J{row}-C{row}-D{row}-E{row}'
         ws[f'K{row}'].number_format = '$#,##0'
         
-        # Cumulative (negative cumulative = bridge loan needed)
+        # Cumulative (running total)
         if month_num == 1:
             ws[f'L{row}'] = f'=K{row}'
         else:
             ws[f'L{row}'] = f'=L{row-1}+K{row}'
         ws[f'L{row}'].number_format = '$#,##0'
         
-        # Bridge loan balance (absolute value of negative cumulative, then paid down)
+        # Bridge loan balance
         ws[f'M{row}'] = f'=IF(L{row}<0,-L{row},0)'
         ws[f'M{row}'].number_format = '$#,##0'
         ws[f'M{row}'].fill = highlight_fill
         
-        # Monthly interest on bridge loan balance (9% annual = 0.75% monthly)
+        # Monthly interest (9% annual)
         ws[f'N{row}'] = f'=M{row}*Finance_Rate/12'
         ws[f'N{row}'].number_format = '$#,##0'
+        
+        # Final Cumulative (after interest)
+        ws[f'O{row}'] = f'=L{row}-N{row}'
+        ws[f'O{row}'].number_format = '$#,##0'
+        ws[f'O{row}'].fill = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
         
         row += 1
     
@@ -1168,17 +1320,17 @@ def create_cash_flow_sheet(wb):
     ws[f'C{row}'].number_format = '$#,##0'
     ws[f'C{row}'].font = Font(bold=True)
     
-    # Soft-CASH total
+    # CASH Soft total
     ws[f'D{row}'] = f'=SUM(D{start_data_row}:D{row-2})'
     ws[f'D{row}'].number_format = '$#,##0'
     ws[f'D{row}'].font = Font(bold=True)
     
-    # Soft-IN-KIND total
+    # IN-KIND Soft total
     ws[f'E{row}'] = f'=SUM(E{start_data_row}:E{row-2})'
     ws[f'E{row}'].number_format = '$#,##0'
     ws[f'E{row}'].font = Font(bold=True)
     
-    # SC Cash OUT total
+    # SC Cash total
     ws[f'F{row}'] = f'=SUM(F{start_data_row}:F{row-2})'
     ws[f'F{row}'].number_format = '$#,##0'
     ws[f'F{row}'].font = Font(bold=True)
@@ -1228,13 +1380,14 @@ def create_cash_flow_sheet(wb):
     ws[f'B{row}'].number_format = '$#,##0'
     ws[f'B{row}'].font = Font(bold=True, size=12)
     ws[f'B{row}'].fill = highlight_fill
+    financing_costs_row = row
     row += 2
     
-    # TIE-OUT: Cumulative (Month 24) should equal Gross Profit
-    ws[f'A{row}'] = 'TIE-OUT: CUMULATIVE = GROSS PROFIT'
+    # TIE-OUT: Final Cumulative (Month 24) should equal Gross Profit
+    ws[f'A{row}'] = 'TIE-OUT: FINAL CUMULATIVE = GROSS PROFIT'
     ws[f'A{row}'].font = Font(bold=True, size=12, color="0000FF")
-    ws[f'B{row}'] = 'Cumulative (Month 24) ='
-    ws[f'C{row}'] = f'=L{start_data_row+23}'
+    ws[f'B{row}'] = 'Final Cumulative (Month 24) ='
+    ws[f'C{row}'] = f'=O{start_data_row+23}'
     ws[f'C{row}'].number_format = '$#,##0'
     ws[f'C{row}'].font = Font(bold=True)
     ws[f'D{row}'] = 'Gross Profit (Summary) ='
@@ -1246,8 +1399,8 @@ def create_cash_flow_sheet(wb):
     ws[f'G{row}'].number_format = '$#,##0'
     ws[f'G{row}'].font = Font(bold=True)
     
-    # Define named range for total financing costs
-    wb.defined_names['TotalFinancingCosts'] = DefinedName('TotalFinancingCosts', attr_text=f"'24-Month Cash Flow'!$B${row-3}")
+    # Define named range for total financing costs - points to the interest total
+    wb.defined_names['TotalFinancingCosts'] = DefinedName('TotalFinancingCosts', attr_text=f"'24-Month Cash Flow'!$B${financing_costs_row}")
 
 def create_gc_rfq_sheet(wb):
     """GC RFQ Summary with Materials, Labor, and Workforce Breakdown"""
