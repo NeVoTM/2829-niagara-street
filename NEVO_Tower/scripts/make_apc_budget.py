@@ -87,9 +87,9 @@ def create_apc_hard_costs_sheet(wb):
         ('13', 'Special Construction', 1.58, 0, 'Same'),
         ('14', 'Conveying Equipment', 2.72, 0, 'Same'),
         ('21', 'Fire Suppression', 6.58, 0, 'Same'),
-        ('22', 'Plumbing', 8.77, 0, 'Same'),
+        ('22', 'Plumbing', 7.89, -0.88, '10% savings - embedded in slab'),  # Was 8.77
         ('23', 'HVAC', 13.15, 0, 'Same'),
-        ('26', 'Electrical', 13.15, 0, 'Same'),
+        ('26', 'Electrical', 11.84, -1.31, '10% savings - conduits in slab'),  # Was 13.15
         ('27', 'Communications', 1.75, 0, 'Same'),
         ('28', 'Electronic Safety & Security', 1.75, 0, 'Same'),
         ('31', 'Earthwork', 3.68, 0, 'Same'),
@@ -310,6 +310,8 @@ def create_apc_rfq_detail(wb):
         '✓ Semi-precast system reduces on-site labor by 30-40%',
         '✓ Eliminates traditional formwork and shoring',
         '✓ Faster construction schedule (25% time savings)',
+        '✓ MEP conduits/pipes embedded between precast and topping slab',
+        '✓ 10% savings on electrical and plumbing (pre-laid before pour)',
         '✓ Improved quality control (factory fabrication)',
         '✓ Reduced concrete waste and material costs',
         '✓ Integrated structural steel support system',
@@ -344,14 +346,15 @@ def create_apc_rfq_detail(wb):
     scope_items = [
         ('1', 'APC Filigree Deck Panels', TOTAL_GSF, 'SF', 28.50, '', 'Factory fabricated'),
         ('2', 'Structural Steel Integration', TOTAL_GSF, 'SF', 3.08, '', 'Embedded supports'),
-        ('3', 'Topping Concrete', TOTAL_GSF * 0.25, 'CY', 200, '', '3" topping slab'),
-        ('4', 'Panel Installation Labor', TOTAL_GSF, 'SF', 2.50, '', 'Crane & crew'),
-        ('5', 'Shoring (minimal)', TOTAL_GSF * 0.2, 'SF', 1.50, '', 'Temporary only'),
-        ('6', 'Connections & Anchors', 350, 'EA', 250, '', 'Per floor connections'),
-        ('7', 'Engineering & Shop Drawings', 1, 'LS', 45000, '', 'Structural PE'),
-        ('8', 'Transportation & Delivery', TOTAL_GSF / 1000, 'Loads', 2500, '', 'Per truck'),
-        ('9', 'Crane Time', 90, 'Days', 1200, '', 'Tower crane rental'),
-        ('10', 'Quality Control & Testing', 1, 'LS', 25000, '', 'Third party'),
+        ('3', 'MEP Conduit/Pipe Pre-Lay', TOTAL_GSF, 'SF', 0.75, '', 'Before topping pour'),
+        ('4', 'Topping Concrete', TOTAL_GSF * 0.25, 'CY', 200, '', '3" topping slab'),
+        ('5', 'Panel Installation Labor', TOTAL_GSF, 'SF', 2.50, '', 'Crane & crew'),
+        ('6', 'Shoring (minimal)', TOTAL_GSF * 0.2, 'SF', 1.50, '', 'Temporary only'),
+        ('7', 'Connections & Anchors', 350, 'EA', 250, '', 'Per floor connections'),
+        ('8', 'Engineering & Shop Drawings', 1, 'LS', 45000, '', 'Structural PE'),
+        ('9', 'Transportation & Delivery', TOTAL_GSF / 1000, 'Loads', 2500, '', 'Per truck'),
+        ('10', 'Crane Time', 90, 'Days', 1200, '', 'Tower crane rental'),
+        ('11', 'Quality Control & Testing', 1, 'LS', 25000, '', 'Third party'),
     ]
     
     scope_start = row
