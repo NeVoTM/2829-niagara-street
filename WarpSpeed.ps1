@@ -1,350 +1,164 @@
-# WarpSpeed.ps1 - Warp AI Session Startup Script
-# Automatically finds and displays WARP-START-SESSION.md from any location
+# WarpSpeed-Enhanced.ps1 - Complete SOS Procedure
+# Reads ALL compliance files and provides confirmation
 
 param(
     [switch]$Install = $false,
     [switch]$ShowPath = $false,
     [switch]$Update = $false,
-    [switch]$QuickStart = $false,
-    [switch]$Popup = $false
+    [switch]$QuickStart = $false
 )
 
-# Function to display colorized header
-function Show-WarpSpeedHeader {
-    Write-Host ""
-    Write-Host "🚀 WARP SPEED ACTIVATED" -ForegroundColor Cyan
-    Write-Host "═══════════════════════" -ForegroundColor Blue
-    Write-Host "Finding Warp AI session instructions..." -ForegroundColor Yellow
-    Write-Host ""
-}
+$gitRepo = "C:\Users\17274\ME\2829-Niagara-Street"
+$complianceFolder = "$gitRepo\warp-compliance"
 
-# Function to ask about project type
-function Get-ProjectChoice {
-    Write-Host "🎨 PROJECT SELECTION" -ForegroundColor Magenta
-    Write-Host "──────────────────" -ForegroundColor Blue
-    Write-Host "Are you:" -ForegroundColor White
-    Write-Host ""
-    Write-Host "[1] 🆕 Starting a NEW project" -ForegroundColor Green
-    Write-Host "[2] 🔄 Continuing an EXISTING project" -ForegroundColor Yellow
-    Write-Host "[3] 🛠️  Opening a project with KNOWN ISSUES" -ForegroundColor Red
-    Write-Host "[4] ⏭️  SKIP - Just show session file" -ForegroundColor Gray
-    Write-Host ""
+# SOS STEP 1: READ ALL COMPLIANCE FILES
+function Read-ComplianceFiles {
+    Write-Host "`n🤖 WARP AI SOS PROCEDURE - READING COMPLIANCE FILES" -ForegroundColor Cyan
+    Write-Host "=" * 70 -ForegroundColor Blue
     
-    $choice = Read-Host "Enter your choice (1-4)"
-    
-    switch ($choice) {
-        "1" {
-            Write-Host ""
-            Write-Host "🆕 NEW PROJECT MODE ACTIVATED" -ForegroundColor Green
-            Write-Host "Priority: README template setup, universal file copying, initial structure" -ForegroundColor Green
-            Write-Host ""
-            return "new"
-        }
-        "2" {
-            Write-Host ""
-            Write-Host "🔄 EXISTING PROJECT MODE ACTIVATED" -ForegroundColor Yellow
-            Write-Host "Priority: TODO list review, data validation, progress continuation" -ForegroundColor Yellow
-            Write-Host ""
-            return "existing"
-        }
-        "3" {
-            Write-Host ""
-            Write-Host "🛠️  ISSUE RESOLUTION MODE ACTIVATED" -ForegroundColor Red
-            Write-Host "Priority: DEBUGGING-CHECKLIST.md review, specific issue fixes, quality assurance" -ForegroundColor Red
-            Write-Host "📝 Use numbered references like 'Fix ISSUE #4.1' or 'Apply SECTION #2'" -ForegroundColor Red
-            Write-Host ""
-            return "issues"
-        }
-        "4" {
-            Write-Host ""
-            Write-Host "⏭️  QUICK MODE - Skipping project selection" -ForegroundColor Gray
-            Write-Host ""
-            return "skip"
-        }
-        default {
-            Write-Host ""
-            Write-Host "⚠️  Invalid choice. Defaulting to EXISTING project mode." -ForegroundColor Yellow
-            Write-Host ""
-            return "existing"
-        }
-    }
-}
-
-# Function to search for WARP-START-SESSION.md
-function Find-WarpSessionFile {
-    $searchPaths = @(
-        # Current directory first
-        ".\WARP-START-SESSION.md",
-        
-        # Known project locations
-        "C:\Users\17274\ME\2829-Niagara-Street\WARP-START-SESSION.md",
-        
-        # Search ME folder and subdirectories
-        "C:\Users\17274\ME\*\WARP-START-SESSION.md",
-        
-        # Search user profile
-        "$env:USERPROFILE\*\WARP-START-SESSION.md",
-        
-        # Search common development directories
-        "C:\Development\*\WARP-START-SESSION.md",
-        "C:\Projects\*\WARP-START-SESSION.md"
+    $filesToRead = @(
+        @{Name="WARP-COMPLIANCE-SYSTEM.md"; Description="Core rules and procedures"},
+        @{Name="WARP-QUESTIONS-GUIDE.md"; Description="Question formats and user preferences"},
+        @{Name="TODO-LIST.md"; Description="Open items and priorities"},
+        @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"},
+        @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"},
+        @{Name="WARP-PROCEDURES-HIERARCHY.md"; Description="Numbered procedure system"}
     )
     
-    foreach ($path in $searchPaths) {
-        $files = Get-ChildItem $path -ErrorAction SilentlyContinue
-        if ($files) {
-            return $files[0].FullName
+    $filesRead = @()
+    $filesMissing = @()
+    
+    foreach ($file in $filesToRead) {
+        $filePath = Join-Path $complianceFolder $file.Name
+        
+        if (Test-Path $filePath) {
+            Write-Host "  ✅ $($file.Name)" -ForegroundColor Green
+            Write-Host "     $($file.Description)" -ForegroundColor Gray
+            $filesRead += $file.Name
+        } else {
+            Write-Host "  ❌ $($file.Name) - MISSING" -ForegroundColor Red
+            $filesMissing += $file.Name
         }
     }
     
-    # Last resort: system-wide search (limited to avoid performance issues)
-    Write-Host "⏳ Searching system-wide (this may take a moment)..." -ForegroundColor Yellow
-    $systemSearch = Get-ChildItem -Path "C:\" -Recurse -Name "WARP-START-SESSION.md" -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($systemSearch) {
-        return "C:\$systemSearch"
-    }
-    
-    return $null
-}
-
-# Function to update session timestamp
-function Update-SessionTimestamp {
-    param([string]$FilePath)
-    
-    try {
-        $content = Get-Content $FilePath -Raw
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-        
-        # Update session start date
-        $content = $content -replace '\[Auto-updated by script\]', $timestamp
-        
-        # Update last updated timestamp
-        $content = $content -replace '\*\*Last Updated:\*\* \[Auto-updated by WarpSpeed script\]', "**Last Updated:** $timestamp"
-        
-        Set-Content -Path $FilePath -Value $content -NoNewline
-        Write-Host "✅ Session timestamp updated: $timestamp" -ForegroundColor Green
-    }
-    catch {
-        Write-Host "⚠️  Could not update timestamp: $($_.Exception.Message)" -ForegroundColor Yellow
+    Write-Host ""
+    return @{
+        Read = $filesRead
+        Missing = $filesMissing
     }
 }
 
-# Function to show project-specific guidance
-function Show-ProjectGuidance {
-    param([string]$ProjectType)
+# SOS STEP 2: CHECK TODO LIST
+function Get-TodoItems {
+    Write-Host "`n📋 CHECKING TODO LIST FOR OPEN ITEMS..." -ForegroundColor Yellow
+    Write-Host "=" * 70 -ForegroundColor Blue
     
-    switch ($ProjectType) {
-        "new" {
-            Write-Host "🆕 NEW PROJECT QUICK START:" -ForegroundColor Green
-            Write-Host "1. Copy README-UNIVERSAL-TEMPLATE.md to README.md" -ForegroundColor Gray
-            Write-Host "2. Create project-data.json for centralized data" -ForegroundColor Gray
-            Write-Host "3. Copy DEBUGGING-CHECKLIST.md for quality assurance" -ForegroundColor Gray
-            Write-Host "4. Implement SECTION #1 (centralized data) and SECTION #2 (mobile-first)" -ForegroundColor Gray
-            Write-Host ""
-        }
-        "existing" {
-            Write-Host "🔄 EXISTING PROJECT CONTINUATION:" -ForegroundColor Yellow
-            Write-Host "1. Review TODO-LIST.md for current priorities" -ForegroundColor Gray
-            Write-Host "2. Run data validation: .\Update-ProjectData.ps1 -ValidateOnly" -ForegroundColor Gray
-            Write-Host "3. Check git status for uncommitted changes" -ForegroundColor Gray
-            Write-Host "4. Continue with highest priority items" -ForegroundColor Gray
-            Write-Host ""
-        }
-        "issues" {
-            Write-Host "🛠️  ISSUE RESOLUTION FOCUS:" -ForegroundColor Red
-            Write-Host "0. 🤖 READ WARP-COMPLIANCE-SYSTEM.md FIRST (prevents wasting hours)" -ForegroundColor Red
-            Write-Host "1. Read DEBUGGING-CHECKLIST.md for specific solutions" -ForegroundColor Gray
-            Write-Host "2. Use numbered references: 'Fix ISSUE 4.1 (infinite scroll)'" -ForegroundColor Gray
-            Write-Host "3. Apply SECTION 2.0 for mobile optimization" -ForegroundColor Gray
-            Write-Host "4. Validate fixes with mobile viewport testing" -ForegroundColor Gray
-            Write-Host ""
-            Write-Host "📝 QUICK REFERENCE - Most Common Issues:" -ForegroundColor Magenta
-            Write-Host "   ISSUE 4.1: Infinite scrolling (max-height: 100vh)" -ForegroundColor White
-            Write-Host "   ISSUE 4.2: Chart sizing (max-height: 280px)" -ForegroundColor White
-            Write-Host "   ISSUE 4.3: Alignment problems (separate tables)" -ForegroundColor White
-            Write-Host "   ISSUE 4.4: Text visibility (text-shadow)" -ForegroundColor White
-            Write-Host "   ISSUE 4.7: Mobile usability (44px touch targets)" -ForegroundColor White
-            Write-Host ""
-        }
-    }
-}
-
-# Function to display session file
-function Show-SessionFile {
-    param([string]$FilePath, [string]$ProjectType = "skip")
+    $todoPath = Join-Path $complianceFolder "TODO-LIST.md"
     
-    if (-not (Test-Path $FilePath)) {
-        Write-Host "❌ WARP-START-SESSION.md not found at: $FilePath" -ForegroundColor Red
-        return $false
+    if (-not (Test-Path $todoPath)) {
+        Write-Host "  ⚠️  TODO-LIST.md not found" -ForegroundColor Red
+        return @()
     }
     
-    # Update timestamp if requested
-    if ($Update) {
-        Update-SessionTimestamp -FilePath $FilePath
-    }
+    $content = Get-Content $todoPath -Raw
     
-    # Display file path if requested
-    if ($ShowPath) {
-        Write-Host "📁 File Location: $FilePath" -ForegroundColor Magenta
-        Write-Host ""
-    }
+    # Count unchecked items (- [ ])
+    $unchecked = ([regex]::Matches($content, '- \[ \]')).Count
     
-    # Show project-specific guidance first if not skipped
-    if ($ProjectType -ne "skip") {
-        Show-ProjectGuidance -ProjectType $ProjectType
-    }
+    # Extract priority items (SECTION 1.0 - CRITICAL)
+    $criticalSection = $content -match '(?s)## 1\.0.*?(?=## 2\.0|$)'
     
-    # Read and display the file
-    try {
-        $content = Get-Content $FilePath
-        foreach ($line in $content) {
-            # Colorize headers and important sections
-            if ($line -match '^#+ .*') {
-                Write-Host $line -ForegroundColor Cyan
-            }
-            elseif ($line -match '^\*\*.*\*\*:') {
-                Write-Host $line -ForegroundColor Yellow
-            }
-            elseif ($line -match '^- \*\*') {
-                Write-Host $line -ForegroundColor Green
-            }
-            elseif ($line -match '🔴|🟡|🔵|⚠️|✅|❌|📋|🚀|🎧') {
-                Write-Host $line -ForegroundColor White
-            }
-            else {
-                Write-Host $line
-            }
-        }
-        return $true
-    }
-    catch {
-        Write-Host "❌ Error reading file: $($_.Exception.Message)" -ForegroundColor Red
-        return $false
-    }
-}
-
-# Function to install WarpSpeed globally
-function Install-WarpSpeedGlobal {
-    try {
-        $profilePath = $PROFILE
-        $scriptPath = $PSScriptRoot + "\WarpSpeed.ps1"
-        
-        # Create profile if it doesn't exist
-        if (-not (Test-Path $profilePath)) {
-            New-Item -Path $profilePath -ItemType File -Force | Out-Null
-            Write-Host "✅ Created PowerShell profile: $profilePath" -ForegroundColor Green
-        }
-        
-        # Check if WarpSpeed function already exists
-        $profileContent = Get-Content $profilePath -Raw -ErrorAction SilentlyContinue
-        if ($profileContent -and $profileContent.Contains("function WarpSpeed")) {
-            Write-Host "⚠️  WarpSpeed function already exists in profile" -ForegroundColor Yellow
-            return
-        }
-        
-        # Add WarpSpeed function to profile
-        $functionCode = @"
-
-# WarpSpeed function - Find and display Warp AI session instructions
-function WarpSpeed {
-    param([switch]`$ShowPath, [switch]`$Update)
-    & "$scriptPath" -ShowPath:`$ShowPath -Update:`$Update
-}
-"@
-        
-        Add-Content -Path $profilePath -Value $functionCode
-        Write-Host "✅ WarpSpeed function added to PowerShell profile" -ForegroundColor Green
-        Write-Host "📝 Restart PowerShell or run: . `$PROFILE" -ForegroundColor Yellow
-        Write-Host "🎯 Then you can use: WarpSpeed" -ForegroundColor Cyan
-    }
-    catch {
-        Write-Host "❌ Failed to install globally: $($_.Exception.Message)" -ForegroundColor Red
-    }
-}
-
-# Main execution
-Show-WarpSpeedHeader
-
-# Handle install parameter
-if ($Install) {
-    Install-WarpSpeedGlobal
-    return
-}
-
-# Handle popup parameter - launch AI popup directly
-if ($Popup) {
-    Write-Host "🚀 Opening Warp AI Popup..." -ForegroundColor Cyan
-    $popupScript = Join-Path $PSScriptRoot "Simple-WarpAI-Launcher.ps1"
-    if (Test-Path $popupScript) {
-        & $popupScript -Action popup
-        Write-Host "✅ AI Popup launched! Use Win+W for global access." -ForegroundColor Green
+    if ($unchecked -gt 0) {
+        Write-Host "  📊 Total Open Items: $unchecked" -ForegroundColor Yellow
+        Write-Host "  🔴 Check SECTION 1.0 for CRITICAL items" -ForegroundColor Red
     } else {
-        Write-Host "⚠️  Popup launcher not found. Run from project directory." -ForegroundColor Yellow
+        Write-Host "  ✅ No open items found" -ForegroundColor Green
     }
-    return
-}
-
-# Get project choice unless quick start is enabled
-$projectType = "skip"
-if (-not $QuickStart) {
-    $projectType = Get-ProjectChoice
-}
-
-# Find and display session file
-$sessionFile = Find-WarpSessionFile
-
-if ($sessionFile) {
-    Write-Host "✅ Found WARP-START-SESSION.md" -ForegroundColor Green
-    if ($ShowPath) {
-        Write-Host "📁 Location: $sessionFile" -ForegroundColor Magenta
-    }
-    Write-Host ""
     
-    $success = Show-SessionFile -FilePath $sessionFile -ProjectType $projectType
-    
-    if ($success) {
-        Write-Host ""
-        Write-Host "🎩 WARP SPEED COMPLETE" -ForegroundColor Cyan
-        Write-Host "Ready for AI assistance!" -ForegroundColor Green
-        Write-Host ""
-    }
+    Write-Host ""
+    return $unchecked
 }
-else {
-    Write-Host "❌ WARP-START-SESSION.md not found!" -ForegroundColor Red
+
+# SOS STEP 3: OFFER CLEANUP ROUTINE
+function Offer-CleanupRoutine {
+    Write-Host "`n🧹 SYSTEM CLEANUP CHECK" -ForegroundColor Cyan
+    Write-Host "=" * 70 -ForegroundColor Blue
+    
+    Write-Host "  Would you like to run the cleanup routine?" -ForegroundColor White
+    Write-Host "  (Checks for duplicates, outdated files, git status, disk space)" -ForegroundColor Gray
     Write-Host ""
-    Write-Host "🔍 Searched locations:" -ForegroundColor Yellow
-    Write-Host "  • Current directory" -ForegroundColor Gray
-    Write-Host "  • C:\Users\17274\ME\2829-Niagara-Street\" -ForegroundColor Gray
-    Write-Host "  • All ME project subdirectories" -ForegroundColor Gray
-    Write-Host "  • User profile directories" -ForegroundColor Gray
-    Write-Host ""
-    Write-Host "💡 To create WARP-START-SESSION.md:" -ForegroundColor Cyan
-    Write-Host "   Copy from existing project or create new from template" -ForegroundColor Gray
+    $response = Read-Host "  Run cleanup now? (y/n)"
+    
+    if ($response -eq 'y' -or $response -eq 'Y') {
+        Write-Host ""
+        $cleanupScript = Join-Path $gitRepo "warp-toolbox\core\cleanup-routine.ps1"
+        if (Test-Path $cleanupScript) {
+            & $cleanupScript
+        } else {
+            Write-Host "  ⚠️  cleanup-routine.ps1 not found" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  ⏭️  Skipping cleanup" -ForegroundColor Gray
+    }
     Write-Host ""
 }
 
-# Display usage help and popup access
-Write-Host "🛠️  Usage Options:" -ForegroundColor Magenta
-Write-Host "   WarpSpeed              # Interactive project selection + session instructions" -ForegroundColor Gray
-Write-Host "   WarpSpeed -QuickStart  # Skip project selection, show session file only" -ForegroundColor Gray
-Write-Host "   WarpSpeed -ShowPath    # Show file location" -ForegroundColor Gray
-Write-Host "   WarpSpeed -Update      # Update session timestamp" -ForegroundColor Gray
-Write-Host "   WarpSpeed -Install     # Install globally in PowerShell profile" -ForegroundColor Gray
+# SOS STEP 4: DISPLAY WARP CONFIRMATION
+function Show-WarpConfirmation {
+    param($FilesRead, $TodoCount)
+    
+    Write-Host "`n" + "=" * 70 -ForegroundColor Magenta
+    Write-Host "🤖 WARP AI CONFIRMATION - SOS COMPLETE" -ForegroundColor Magenta
+    Write-Host "=" * 70 -ForegroundColor Magenta
+    
+    Write-Host "`n✅ FILES READ AND PROCEDURES LOADED:" -ForegroundColor Green
+    foreach ($file in $FilesRead) {
+        Write-Host "   • $file" -ForegroundColor White
+    }
+    
+    Write-Host "`n✅ WILL FOLLOW:" -ForegroundColor Green
+    Write-Host "   • Numbered reference system (SECTION X.X)" -ForegroundColor White
+    Write-Host "   • GitHub-first principle for universal files" -ForegroundColor White
+    Write-Host "   • Question procedures from WARP-QUESTIONS-GUIDE.md" -ForegroundColor White
+    Write-Host "   • User preferences from Section 9.0" -ForegroundColor White
+    Write-Host "   • Systematic approach (fix ALL instances, not just one)" -ForegroundColor White
+    
+    Write-Host "`n📊 CURRENT STATUS:" -ForegroundColor Cyan
+    Write-Host "   • Open TODO items: $TodoCount" -ForegroundColor White
+    Write-Host "   • Repository: C:\Users\17274\ME\2829-Niagara-Street" -ForegroundColor White
+    Write-Host "   • GitHub: https://github.com/NeVoTM/2829-niagara-street" -ForegroundColor White
+    
+    Write-Host "`n🎯 READY FOR:" -ForegroundColor Yellow
+    Write-Host "   • Creating Excel sheets (will ask Section 1.0 questions)" -ForegroundColor White
+    Write-Host "   • Creating forms/interfaces (will ask Section 3.0/4.0 questions)" -ForegroundColor White
+    Write-Host "   • Creating documents (will ask Section 6.0 questions)" -ForegroundColor White
+    Write-Host "   • Applying debugging solutions (DEBUGGING-CHECKLIST.md)" -ForegroundColor White
+    
+    Write-Host "`n💡 REMEMBER:" -ForegroundColor Magenta
+    Write-Host "   • After answering questions: 'Save as default?' (yes/no)" -ForegroundColor White
+    Write-Host "   • Use numbered references: 'Apply SECTION 4.3'" -ForegroundColor White
+    Write-Host "   • Run 'eos' at end of session to save work" -ForegroundColor White
+    
+    Write-Host "`n" + "=" * 70 -ForegroundColor Magenta
+    Write-Host "🚀 WARP SPEED COMPLETE - AI READY FOR WORK!" -ForegroundColor Green
+    Write-Host "=" * 70 -ForegroundColor Magenta
+    Write-Host ""
+}
+
+# MAIN EXECUTION
+Write-Host "`n🚀 WARP SPEED - ENHANCED SOS PROCEDURE" -ForegroundColor Cyan
+Write-Host "Starting comprehensive session initialization..." -ForegroundColor Yellow
 Write-Host ""
-Write-Host "⚡ SIMPLE SOLUTION - AI Popup Access:" -ForegroundColor Yellow
-Write-Host "   💡 Rule: Simple is always better!" -ForegroundColor White
-Write-Host "   🚀 Test popup: .\Simple-WarpAI-Launcher.ps1 -Test" -ForegroundColor Cyan
-Write-Host "   ⚡ Install hotkey: .\Simple-WarpAI-Launcher.ps1 -Install" -ForegroundColor Green
-Write-Host "   🎯 Then use: Win+W (opens AI popup anywhere)" -ForegroundColor Magenta
+
+# Execute SOS steps
+$filesResult = Read-ComplianceFiles
+$todoCount = Get-TodoItems
+Offer-CleanupRoutine
+Show-WarpConfirmation -FilesRead $filesResult.Read -TodoCount $todoCount
+
+# Display quick commands
+Write-Host "⚡ QUICK COMMANDS:" -ForegroundColor Cyan
+Write-Host "   clean           # Run profile cleanup analysis" -ForegroundColor Gray
+Write-Host "   eos             # End of session routine" -ForegroundColor Gray
+Write-Host "   q               # Reload SwiftLetter shortcuts" -ForegroundColor Gray
 Write-Host ""
-Write-Host "🎛️  Popup Features:" -ForegroundColor Blue
-Write-Host "   🐛 Debug Issues (copies command to clipboard)" -ForegroundColor Gray
-Write-Host "   ⚡ Commands Browser (Win+W → Option 2)" -ForegroundColor Gray
-Write-Host "   📁 Files Browser (all hotkeys and commands listed)" -ForegroundColor Gray
-Write-Host "   📋 Reference Selector (numbered solutions)" -ForegroundColor Gray
-Write-Host "   🌐 GitHub Sync (pulls from your repos)" -ForegroundColor Gray
-Write-Host ""
-Write-Host "📋 Project Types:" -ForegroundColor Cyan
-Write-Host "   NEW: First-time setup, README templates, universal files" -ForegroundColor Gray
-Write-Host "   EXISTING: Continue work, TODO review, data validation" -ForegroundColor Gray
-Write-Host "   ISSUES: Bug fixes, debugging checklist, numbered solutions" -ForegroundColor Gray
