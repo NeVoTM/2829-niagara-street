@@ -17,11 +17,12 @@ function Read-ComplianceFiles {
     Write-Host "=" * 70 -ForegroundColor Blue
     
     $filesToRead = @(
-        @{Name="WARP-COMPLIANCE-SYSTEM.md"; Description="Core rules and procedures"},
+        @{Name="WARP-MASTER-RULES.md"; Description="📜 MASTER RULES - Single source of truth (24 numbered rules)"},
         @{Name="WARP-QUESTIONS-GUIDE.md"; Description="Question formats and user preferences"},
         @{Name="TODO-LIST.md"; Description="Open items and priorities"},
         @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"},
         @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"},
+        @{Name="WARP-COMPLIANCE-SYSTEM.md"; Description="Core rules (references MASTER RULES)"},
         @{Name="WARP-PROCEDURES-HIERARCHY.md"; Description="Numbered procedure system"}
     )
     
