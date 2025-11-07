@@ -27,6 +27,7 @@ function Read-ComplianceFiles {
     
     $filesToRead = @(
         @{Name="WARP-MASTER-RULES.md"; Description="📜 MASTER RULES - Single source of truth (24 numbered rules)"},
+        @{Name="WARP-COMMANDS-REFERENCE.md"; Description="🚀 Complete command reference (all available commands)"},
         @{Name="WARP-QUESTIONS-GUIDE.md"; Description="Question formats and user preferences"},
         @{Name="TODO-LIST.md"; Description="Open items and priorities"},
         @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"},
