@@ -28,6 +28,29 @@ WarpSpeed -QuickStart  # Skip prompts
 ```
 
 **When to use:** At the start of EVERY work session
+### `r`
+**Purpose:** Rules reminder with self-check enforcement  
+**What it does:**
+1. Displays critical compliance rules (RULE 1.1, 2.1, 4.1, 4.2)
+2. Shows MANDATORY SELF-CHECK PROCESS
+3. Instructs Warp AI to verify compliance after answering
+4. Forces Warp AI to redo answer if rules violated
+
+**Usage:**
+```powershell
+r    # Display rules reminder before asking question
+```
+
+**When to use:** Before EVERY task/question you give to Warp AI  
+**Purpose:** Enforce rule compliance through self-checking mechanism  
+**Expected flow:**
+1. User types: `r`
+2. User asks question
+3. Warp AI runs `r` before answering
+4. Warp AI provides answer
+5. Warp AI runs `r` after answering to verify compliance
+6. If rules violated, Warp AI redoes the answer
+
 
 ---
 
@@ -277,3 +300,5 @@ These are set by the profile to signal rule enforcement to Warp AI:
 ---
 
 **END OF COMMANDS REFERENCE**
+
+
