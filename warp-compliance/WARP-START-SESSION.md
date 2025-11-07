@@ -9,7 +9,23 @@
 
 ## 1.0 📋 **IMMEDIATE ACTIONS FOR WARP**
 
-### 1.1 **READ CRITICAL FILES (PRIORITY ORDER)**
+### 1.1 **AUTO-EXECUTE AFTER READING FILES**
+
+**🚨 WARP AI: AUTOMATIC EXECUTION REQUIRED**
+
+When you read this file after WarpSpeed runs, you MUST automatically execute these commands:
+
+```
+AUTO-EXECUTION SEQUENCE:
+1. Read TODO-LIST.md and display current priority items from SECTION 1.0
+2. Check git status: git --no-pager status
+3. Display: "Ready to work. Current priorities: [list top 3 from TODO 1.0]"
+4. Ask: "Which priority should we tackle first?"
+```
+
+**DO NOT just say "I read the files" - EXECUTE the sequence above automatically.**
+
+### 1.2 **READ CRITICAL FILES (PRIORITY ORDER)**
 
 **🔴 ESSENTIAL - Read immediately from GitHub (master source):**
 ```
@@ -42,7 +58,7 @@
 - **TODO-LIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
 - **WarpSpeed.ps1**: https://github.com/NeVoTM/2829-niagara-street/blob/main/WarpSpeed.ps1
 
-### 1.2 **VALIDATE CURRENT PROJECT STATE**
+### 1.3 **VALIDATE CURRENT PROJECT STATE**
 
 **Run validation script:**
 ```powershell
@@ -55,7 +71,7 @@ git status
 git log --oneline -5
 ```
 
-### 1.3 **UNDERSTAND WORK COMPLETED**
+### 1.4 **UNDERSTAND WORK COMPLETED**
 
 **✅ COMPLETED BY WARP (Previous Sessions):**
 - Updated mobile-design.html with centralized data system
