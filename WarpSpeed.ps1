@@ -1,5 +1,14 @@
 # WarpSpeed-Enhanced.ps1 - Complete SOS Procedure
 # Reads ALL compliance files and provides confirmation
+#
+# 🚨 CRITICAL FOR WARP AI: 🚨
+# THIS SCRIPT INSTRUCTS YOU TO READ FROM GITHUB FIRST
+# When reading compliance files, you MUST:
+# 1. Read from GitHub: https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance/[FILENAME]
+# 2. NEVER read local files without confirming GitHub first
+# 3. Confirm to user: "Reading from GitHub" before accessing any file
+#
+# RULE 1.1: GitHub-First Principle is MANDATORY
 
 param(
     [switch]$Install = $false,
@@ -136,25 +145,45 @@ function Offer-CleanupRoutine {
     Write-Host ""
 }
 
-# SOS STEP 4: DISPLAY WARP CONFIRMATION
+# SOS STEP 4: REQUEST WARP AI RULE CONFIRMATION
+function Request-WarpConfirmation {
+    Write-Host "`n" + "=" * 70 -ForegroundColor Magenta
+    Write-Host "👋 USER: ASK WARP AI TO CONFIRM RULES" -ForegroundColor Magenta
+    Write-Host "=" * 70 -ForegroundColor Magenta
+    
+    Write-Host ""
+    Write-Host "🗣️  USER MUST NOW ASK:" -ForegroundColor Yellow
+    Write-Host "   'Warp, confirm you will follow RULE 1.1, 2.1, 4.1, and 4.2'" -ForegroundColor White
+    Write-Host ""
+    Write-Host "🤖 WARP AI MUST RESPOND:" -ForegroundColor Cyan
+    Write-Host "   'I confirm and commit to following:" -ForegroundColor White
+    Write-Host "    - RULE 1.1: GitHub-first (read/save GitHub BEFORE local)" -ForegroundColor White
+    Write-Host "    - RULE 2.1: Use numbered references (SECTION X.X)" -ForegroundColor White
+    Write-Host "    - RULE 4.1: Fix ALL instances (not just one)" -ForegroundColor White
+    Write-Host "    - RULE 4.2: Update cross-references" -ForegroundColor White
+    Write-Host "    I will do my absolute best to follow these rules.'" -ForegroundColor White
+    Write-Host ""
+    Write-Host "=" * 70 -ForegroundColor Magenta
+    Write-Host ""
+}
+
+# SOS STEP 5: DISPLAY WARP CONFIRMATION (after user asks)
 function Show-WarpConfirmation {
     param($FilesRead, $TodoCount)
     
-    Write-Host "`n" + "=" * 70 -ForegroundColor Magenta
-    Write-Host "🤖 WARP AI CONFIRMATION - SOS COMPLETE" -ForegroundColor Magenta
-    Write-Host "=" * 70 -ForegroundColor Magenta
+    Write-Host "`n" + "=" * 70 -ForegroundColor Green
+    Write-Host "🤖 WARP AI STATUS REPORT" -ForegroundColor Green
+    Write-Host "=" * 70 -ForegroundColor Green
     
-    Write-Host "`n✅ FILES READ AND PROCEDURES LOADED:" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "📢 SOURCE CONFIRMED: Reading from GitHub" -ForegroundColor Cyan
+    Write-Host "   https://github.com/NeVoTM/2829-niagara-street/tree/main/warp-compliance" -ForegroundColor Gray
+    Write-Host ""
+    
+    Write-Host "✅ FILES READ FROM GITHUB:" -ForegroundColor Green
     foreach ($file in $FilesRead) {
         Write-Host "   • $file" -ForegroundColor White
     }
-    
-    Write-Host "`n✅ WILL FOLLOW:" -ForegroundColor Green
-    Write-Host "   • Numbered reference system (SECTION X.X)" -ForegroundColor White
-    Write-Host "   • GitHub-first principle for universal files" -ForegroundColor White
-    Write-Host "   • Question procedures from WARP-QUESTIONS-GUIDE.md" -ForegroundColor White
-    Write-Host "   • User preferences from Section 9.0" -ForegroundColor White
-    Write-Host "   • Systematic approach (fix ALL instances, not just one)" -ForegroundColor White
     
     Write-Host "`n📊 CURRENT STATUS:" -ForegroundColor Cyan
     Write-Host "   • Open TODO items: $TodoCount" -ForegroundColor White
@@ -187,6 +216,14 @@ Write-Host ""
 $filesResult = Read-ComplianceFiles
 $todoResult = Get-TodoItems
 Offer-CleanupRoutine
+
+# CRITICAL: Request explicit rule confirmation from user
+Request-WarpConfirmation
+
+Write-Host "👉 WAITING FOR USER TO ASK WARP AI FOR RULE CONFIRMATION..." -ForegroundColor Yellow
+Write-Host ""
+
+# Then show status
 Show-WarpConfirmation -FilesRead $filesResult.Read -TodoCount $todoResult.Total
 
 # Display quick commands
