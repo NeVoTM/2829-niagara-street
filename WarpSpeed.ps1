@@ -57,7 +57,7 @@ function Read-ComplianceFiles {
     }
 }
 
-# SOS STEP 2: CHECK TODO LIST
+# SOS STEP 2: CHECK TODO LIST AND SHOW BREAKDOWN
 function Get-TodoItems {
     Write-Host "`n📋 CHECKING TODO LIST FOR OPEN ITEMS..." -ForegroundColor Yellow
     Write-Host "=" * 70 -ForegroundColor Blue
@@ -66,26 +66,50 @@ function Get-TodoItems {
     
     if (-not (Test-Path $todoPath)) {
         Write-Host "  ⚠️  TODO-LIST.md not found" -ForegroundColor Red
-        return @()
+        return @{ Total=0; Path=$null }
     }
     
     $content = Get-Content $todoPath -Raw
     
-    # Count unchecked items (- [ ])
-    $unchecked = ([regex]::Matches($content, '- \[ \]')).Count
+    # Count unchecked items total
+    $totalUnchecked = ([regex]::Matches($content, '- \[ \]')).Count
     
-    # Extract priority items (SECTION 1.0 - CRITICAL)
-    $criticalSection = $content -match '(?s)## 1\.0.*?(?=## 2\.0|$)'
+    # Extract sections and count items in each
+    $sections = @(
+        @{Name="1.0 CRITICAL PRIORITY"; Pattern='(?s)## 1\.0.*?(?=## 2\.0|$)'; Color="Red"},
+        @{Name="2.0 IMPORTANT"; Pattern='(?s)## 2\.0.*?(?=## 3\.0|$)'; Color="Yellow"},
+        @{Name="3.0 PROJECT-SPECIFIC"; Pattern='(?s)## 3\.0.*?(?=## 4\.0|$)'; Color="White"},
+        @{Name="4.0+ SYSTEM-WIDE"; Pattern='(?s)## [4-9]\.0.*$'; Color="Gray"}
+    )
     
-    if ($unchecked -gt 0) {
-        Write-Host "  📊 Total Open Items: $unchecked" -ForegroundColor Yellow
-        Write-Host "  🔴 Check SECTION 1.0 for CRITICAL items" -ForegroundColor Red
-    } else {
-        Write-Host "  ✅ No open items found" -ForegroundColor Green
+    Write-Host "  📊 Total Open Items: $totalUnchecked" -ForegroundColor White
+    Write-Host ""
+    Write-Host "  📌 BREAKDOWN BY PRIORITY:" -ForegroundColor Cyan
+    
+    foreach ($section in $sections) {
+        $sectionMatch = [regex]::Match($content, $section.Pattern)
+        if ($sectionMatch.Success) {
+            $sectionContent = $sectionMatch.Value
+            $sectionCount = ([regex]::Matches($sectionContent, '- \[ \]')).Count
+            $icon = if ($section.Color -eq "Red") { "🔴" } 
+                    elseif ($section.Color -eq "Yellow") { "🟡" } 
+                    else { "⚪" }
+            Write-Host "     $icon $($section.Name): $sectionCount items" -ForegroundColor $section.Color
+        }
     }
     
     Write-Host ""
-    return $unchecked
+    Write-Host "  💡 Opening TODO-LIST.md for review..." -ForegroundColor Gray
+    
+    # Open TODO file
+    if (Get-Command code -ErrorAction SilentlyContinue) {
+        Start-Process code $todoPath
+    } else {
+        Start-Process $todoPath
+    }
+    
+    Write-Host ""
+    return @{ Total=$totalUnchecked; Path=$todoPath }
 }
 
 # SOS STEP 3: OFFER CLEANUP ROUTINE
@@ -161,9 +185,9 @@ Write-Host ""
 
 # Execute SOS steps
 $filesResult = Read-ComplianceFiles
-$todoCount = Get-TodoItems
+$todoResult = Get-TodoItems
 Offer-CleanupRoutine
-Show-WarpConfirmation -FilesRead $filesResult.Read -TodoCount $todoCount
+Show-WarpConfirmation -FilesRead $filesResult.Read -TodoCount $todoResult.Total
 
 # Display quick commands
 Write-Host "⚡ QUICK COMMANDS:" -ForegroundColor Cyan
