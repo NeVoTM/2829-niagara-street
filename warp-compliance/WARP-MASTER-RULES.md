@@ -30,6 +30,33 @@
 
 ---
 
+### 1.1a Auto-Commit After Every Change
+**RULE:** After making ANY changes to files, IMMEDIATELY execute git commit and push without being reminded.
+
+**APPLY WHEN:** ANY file modification in the project
+
+**MANDATORY SEQUENCE:**
+```powershell
+# After making changes, AUTOMATICALLY execute:
+git add [files-modified]
+git commit -m "[descriptive message with SECTION references]"
+git push
+```
+
+**DO NOT:**
+- Wait for user to remind you
+- Ask "should I commit this?"
+- Skip committing changes
+
+**ALWAYS:**
+- Commit immediately after edits
+- Use descriptive commit messages with numbered references
+- Push to GitHub automatically
+
+**CRITICAL:** User has requested this behavior for WEEKS. Execute it EVERY time.
+
+---
+
 ### 1.2 Named Ranges in Excel
 **RULE:** All Excel cross-sheet references MUST use named ranges, not cell addresses.
 
