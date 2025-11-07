@@ -2,7 +2,13 @@
 # Reads ALL compliance files and provides confirmation
 #
 # 🚨 CRITICAL FOR WARP AI: 🚨
-# THIS SCRIPT INSTRUCTS YOU TO READ FROM GITHUB FIRST
+# STEP 0: READ CUSTOMER PROFILE FIRST!
+# Before doing ANYTHING, Warp AI must:
+# 1. Read C:\Users\17274\ME\Scripts\New-Session-Instructions.md
+# 2. Acknowledge all user preferences and rules from the profile
+# 3. Confirm you will follow these profile rules
+#
+# STEP 1: READ FROM GITHUB FIRST
 # When reading compliance files, you MUST:
 # 1. Read from GitHub: https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance/[FILENAME]
 # 2. NEVER read local files without confirming GitHub first
@@ -211,6 +217,19 @@ function Show-WarpConfirmation {
 # MAIN EXECUTION
 Write-Host "`n🚀 WARP SPEED - ENHANCED SOS PROCEDURE" -ForegroundColor Cyan
 Write-Host "Starting comprehensive session initialization..." -ForegroundColor Yellow
+Write-Host ""
+
+# STEP 0: WARP AI MUST READ PROFILE FIRST
+Write-Host "" 
+Write-Host "🤖 WARP AI: READ THIS FIRST" -ForegroundColor Red
+Write-Host "═══════════════════════════════════════" -ForegroundColor Red
+Write-Host "Before proceeding, you MUST:" -ForegroundColor Yellow
+Write-Host "1. Read: C:\Users\17274\ME\Scripts\New-Session-Instructions.md" -ForegroundColor White
+Write-Host "2. Acknowledge ALL user preferences from that file" -ForegroundColor White
+Write-Host "3. Confirm you will follow the profile rules" -ForegroundColor White
+Write-Host "" 
+Write-Host "👉 WARP AI: Respond with 'Profile read and confirmed' before continuing" -ForegroundColor Cyan
+Write-Host "═══════════════════════════════════════" -ForegroundColor Red
 Write-Host ""
 
 # Execute SOS steps
