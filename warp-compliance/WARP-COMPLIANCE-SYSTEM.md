@@ -42,71 +42,21 @@
 
 ---
 
-## 📋 **MANDATORY PROCEDURES - CONTEXTUAL UNDERSTANDING**
+## 📋 **ALL RULES NOW IN WARP-MASTER-RULES.md**
 
-### **1. NUMBERED REFERENCE SYSTEM**
+**🎯 CRITICAL:** All specific rules have been consolidated into **WARP-MASTER-RULES.md**
 
-**WHY:** User has 47+ open TODO items, 9 critical issues, 7 quality categories. Without numbers, communication becomes impossible.
+**See WARP-MASTER-RULES.md for:**
+- **RULE 1.1:** GitHub-First Principle
+- **RULE 2.1:** Use Numbered References  
+- **RULE 2.2:** Maintain Hierarchical Numbering
+- **RULE 4.2:** Update Cross-References
+- **All 24 numbered rules** organized by category
 
-**COMPLIANCE RULE:**
-```
-WHEN User mentions: "SECTION X.X" or "ISSUE X.X" or "TODO X.X.X"
-THEN Warp MUST: 
-1. Know exactly which GitHub file to reference
-2. Find the exact numbered section
-3. Apply the specific solution provided
-4. Reference the section number in response
+**Location:** `warp-compliance/WARP-MASTER-RULES.md`  
+**GitHub:** https://github.com/NeVoTM/2829-niagara-street/blob/main/warp-compliance/WARP-MASTER-RULES.md
 
-NEVER ask "which section do you mean?" - the number IS the identifier
-```
-
-### **2. GITHUB MASTER FILE SYSTEM**
-
-**WHY:** User needs universal solutions that work across multiple projects. Local files get out of sync.
-
-**COMPLIANCE RULE:**
-```
-WHEN User mentions universal files (DEBUGGING-CHECKLIST.md, README-UNIVERSAL-TEMPLATE.md, etc.)
-THEN Warp MUST:
-1. Reference GitHub version first: https://github.com/NeVoTM/2829-niagara-street/blob/main/[FILENAME]
-2. Read latest version from GitHub
-3. Apply changes to local AND GitHub versions
-4. Update cross-references in related files
-
-NEVER work only with local copies of universal files
-```
-
-### **3. HIERARCHICAL STRUCTURE MAINTENANCE**
-
-**WHY:** User invested hours creating systematic numbering. Breaking it wastes that investment.
-
-**COMPLIANCE RULE:**
-```
-WHEN Adding new items to any numbered system:
-THEN Warp MUST:
-1. Find appropriate section (1.0, 2.0, etc.)
-2. Add with next sequential number (4.10, 4.11, not 4.X or 4.A)
-3. Update quick reference lists
-4. Maintain format consistency
-
-NEVER insert unnumbered items or break sequence
-```
-
-### **4. CROSS-REFERENCE UPDATES**
-
-**WHY:** User relies on interconnected file system. Breaking links wastes time hunting for information.
-
-**COMPLIANCE RULE:**
-```
-WHEN Updating any universal file:
-THEN Warp MUST also update:
-- DEBUGGING-CHECKLIST.md quick reference (if adding solutions)
-- TODO-LIST.md SECTION 9.0 (if changing file locations)
-- WARP-START-SESSION.md SECTION 1.1 (if changing priorities)
-- README-UNIVERSAL-TEMPLATE.md SECTION 7.3 (if adding file references)
-
-NEVER update files in isolation
-```
+**This file now explains WHY the system exists. WARP-MASTER-RULES.md explains WHAT the rules are.**
 
 ---
 
@@ -128,50 +78,28 @@ NEVER update files in isolation
 
 ---
 
-## 🚨 **CRITICAL FAILURE PREVENTION**
-
-### **HIGH-IMPACT VIOLATIONS (NEVER DO):**
-1. **Ignore numbered references** - User says "SECTION 4.3", Warp asks "what section?"
-2. **Work with outdated local files** - Apply changes without checking GitHub master
-3. **Break numbering sequence** - Add items without proper numbers
-4. **Update files in isolation** - Change one file without updating cross-references
-
-### **IMMEDIATE RECOVERY ACTIONS:**
-When Warp realizes a violation occurred:
-1. **Acknowledge:** "I should have referenced the numbered section directly"
-2. **Correct:** Go to proper GitHub file and find numbered section
-3. **Apply:** Use exact solution with proper formatting
-4. **Update:** Fix any cross-references that were missed
 
 ---
 
-## 🎯 **PRACTICAL IMPLEMENTATION**
+## 🚨 **CRITICAL VIOLATIONS**
 
-### **Session Startup Protocol:**
-```
-1. User runs: WarpSpeed
-2. Warp reads: WARP-START-SESSION.md from GitHub
-3. Warp prioritizes: Files listed in SECTION 1.1 (numbered priority order)
-4. Warp confirms: "Ready to apply numbered solutions from master files"
-```
+**See WARP-MASTER-RULES.md SECTION 10.0 for complete list of violations to avoid.**
 
-### **Problem-Solving Protocol:**
-```
-1. User: "Apply SECTION 4.3 to dashboard files"
-2. Warp: Reads GitHub DEBUGGING-CHECKLIST.md SECTION 4.3 (ALIGNMENT NIGHTMARES)  
-3. Warp: Applies exact CSS solution provided
-4. Warp: Updates affected files and cross-references
-5. Warp: "Applied SECTION 4.3 alignment solution to dashboard files"
-```
+**Most Critical:**
+- **NEVER** ignore numbered references (RULE 10.1)
+- **NEVER** work with local files first (RULE 10.2)
+- **NEVER** fix just one instance (RULE 10.3)
+- **NEVER** assume preferences (RULE 10.4)
+- **NEVER** skip SOS confirmation (RULE 10.5)
 
-### **Update Protocol:**
-```
-1. Warp makes changes to universal files
-2. Warp updates ALL affected cross-references
-3. Warp commits with descriptive numbered message
-4. Warp pushes to GitHub as master source
-5. Warp confirms: "Updated SECTION X.X and related references"
-```
+---
+
+## 🎯 **IMPLEMENTATION PROTOCOLS**
+
+**All protocols are now documented in WARP-MASTER-RULES.md:**
+- **Session Startup:** RULE 7.1 (WarpSpeed at start)
+- **Problem-Solving:** RULE 2.1 (Use numbered references) + RULE 4.1 (Fix ALL instances)
+- **Updates:** RULE 1.1 (GitHub-first) + RULE 4.2 (Update cross-references) + RULE 9.2 (Commit messages)
 
 ---
 
