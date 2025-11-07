@@ -25,6 +25,14 @@ function Read-ComplianceFiles {
         @{Name="WARP-PROCEDURES-HIERARCHY.md"; Description="Numbered procedure system"}
     )
     
+    # Also read directory structure from docs folder
+    $docsFile = Join-Path (Split-Path $complianceFolder -Parent) "warp-toolbox\docs\SAIT-DIRECTORY-STRUCTURE.md"
+    if (Test-Path $docsFile) {
+        Write-Host "  ✅ SAIT-DIRECTORY-STRUCTURE.md" -ForegroundColor Green
+        Write-Host "     Directory and file organization" -ForegroundColor Gray
+        $filesToRead += @{Name="SAIT-DIRECTORY-STRUCTURE.md"; Description="Directory and file organization"}
+    }
+    
     $filesRead = @()
     $filesMissing = @()
     
