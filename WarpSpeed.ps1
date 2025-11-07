@@ -26,20 +26,23 @@ param(
 $gitRepo = "C:\Users\17274\ME\2829-Niagara-Street"
 $complianceFolder = "$gitRepo\warp-compliance"
 
-# SOS STEP 1: READ ALL COMPLIANCE FILES
+# SOS STEP 1: READ ALL COMPLIANCE FILES FROM GITHUB
 function Read-ComplianceFiles {
-    Write-Host "`n🤖 WARP AI SOS PROCEDURE - READING COMPLIANCE FILES" -ForegroundColor Cyan
+    Write-Host "`n🤖 WARP AI SOS PROCEDURE - READING FROM GITHUB" -ForegroundColor Cyan
+    Write-Host "📡 Source: https://github.com/NeVoTM/2829-niagara-street" -ForegroundColor Gray
     Write-Host "=" * 70 -ForegroundColor Blue
     
+    $gitHubBase = "https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance"
+    
     $filesToRead = @(
-        @{Name="WARP-MASTER-RULES.md"; Description="📜 MASTER RULES - Single source of truth (24 numbered rules)"},
-        @{Name="WARP-COMMANDS-REFERENCE.md"; Description="🚀 Complete command reference (all available commands)"},
-        @{Name="WARP-QUESTIONS-GUIDE.md"; Description="Question formats and user preferences"},
-        @{Name="TODO-LIST.md"; Description="Open items and priorities"},
-        @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"},
-        @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"},
-        @{Name="WARP-COMPLIANCE-SYSTEM.md"; Description="Core rules (references MASTER RULES)"},
-        @{Name="WARP-PROCEDURES-HIERARCHY.md"; Description="Numbered procedure system"}
+        @{Name="WARP-MASTER-RULES.md"; Description="📜 MASTER RULES - Single source of truth (24 numbered rules)"; URL="$gitHubBase/WARP-MASTER-RULES.md"},
+        @{Name="WARP-COMMANDS-REFERENCE.md"; Description="🚀 Complete command reference (all available commands)"; URL="$gitHubBase/WARP-COMMANDS-REFERENCE.md"},
+        @{Name="WARP-QUESTIONS-GUIDE.md"; Description="Question formats and user preferences"; URL="$gitHubBase/WARP-QUESTIONS-GUIDE.md"},
+        @{Name="TODO-LIST.md"; Description="Open items and priorities"; URL="$gitHubBase/TODO-LIST.md"},
+        @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"; URL="$gitHubBase/DEBUGGING-CHECKLIST.md"},
+        @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"; URL="$gitHubBase/WARP-START-SESSION.md"},
+        @{Name="WARP-COMPLIANCE-SYSTEM.md"; Description="Core rules (references MASTER RULES)"; URL="$gitHubBase/WARP-COMPLIANCE-SYSTEM.md"},
+        @{Name="WARP-PROCEDURES-HIERARCHY.md"; Description="Numbered procedure system"; URL="$gitHubBase/WARP-PROCEDURES-HIERARCHY.md"}
     )
     
     # Also read directory structure from docs folder
@@ -51,25 +54,35 @@ function Read-ComplianceFiles {
     }
     
     $filesRead = @()
-    $filesMissing = @()
+    $filesFailed = @()
+    
+    Write-Host "`n📥 DOWNLOADING FROM GITHUB..." -ForegroundColor Yellow
     
     foreach ($file in $filesToRead) {
-        $filePath = Join-Path $complianceFolder $file.Name
+        Write-Host "  📡 $($file.Name)..." -ForegroundColor Gray -NoNewline
         
-        if (Test-Path $filePath) {
-            Write-Host "  ✅ $($file.Name)" -ForegroundColor Green
+        try {
+            $response = Invoke-WebRequest -Uri $file.URL -UseBasicParsing -ErrorAction Stop
+            Write-Host " ✅" -ForegroundColor Green
             Write-Host "     $($file.Description)" -ForegroundColor Gray
             $filesRead += $file.Name
-        } else {
-            Write-Host "  ❌ $($file.Name) - MISSING" -ForegroundColor Red
-            $filesMissing += $file.Name
+        } catch {
+            Write-Host " ❌ FAILED" -ForegroundColor Red
+            Write-Host "     Error: $($_.Exception.Message)" -ForegroundColor DarkRed
+            $filesFailed += $file.Name
         }
     }
     
     Write-Host ""
+    Write-Host "✅ Successfully read from GitHub: $($filesRead.Count)/$($filesToRead.Count)" -ForegroundColor Green
+    
+    if ($filesFailed.Count -gt 0) {
+        Write-Host "❌ Failed to read: $($filesFailed -join ', ')" -ForegroundColor Red
+    }
+    
     return @{
         Read = $filesRead
-        Missing = $filesMissing
+        Failed = $filesFailed
     }
 }
 
@@ -128,29 +141,7 @@ function Get-TodoItems {
     return @{ Total=$totalUnchecked; Path=$todoPath }
 }
 
-# SOS STEP 3: OFFER CLEANUP ROUTINE
-function Offer-CleanupRoutine {
-    Write-Host "`n🧹 SYSTEM CLEANUP CHECK" -ForegroundColor Cyan
-    Write-Host "=" * 70 -ForegroundColor Blue
-    
-    Write-Host "  Would you like to run the cleanup routine?" -ForegroundColor White
-    Write-Host "  (Checks for duplicates, outdated files, git status, disk space)" -ForegroundColor Gray
-    Write-Host ""
-    $response = Read-Host "  Run cleanup now? (y/n)"
-    
-    if ($response -eq 'y' -or $response -eq 'Y') {
-        Write-Host ""
-        $cleanupScript = Join-Path $gitRepo "warp-toolbox\core\cleanup-routine.ps1"
-        if (Test-Path $cleanupScript) {
-            & $cleanupScript
-        } else {
-            Write-Host "  ⚠️  cleanup-routine.ps1 not found" -ForegroundColor Yellow
-        }
-    } else {
-        Write-Host "  ⏭️  Skipping cleanup" -ForegroundColor Gray
-    }
-    Write-Host ""
-}
+# Cleanup moved to EOS command (RULE 1.1a requirement)
 
 # SOS STEP 4: REQUEST WARP AI RULE CONFIRMATION
 function Request-WarpConfirmation {
@@ -235,7 +226,6 @@ Write-Host ""
 # Execute SOS steps
 $filesResult = Read-ComplianceFiles
 $todoResult = Get-TodoItems
-Offer-CleanupRoutine
 
 # CRITICAL: Request explicit rule confirmation from user
 Request-WarpConfirmation

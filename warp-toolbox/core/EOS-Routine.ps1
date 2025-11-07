@@ -35,6 +35,15 @@ if ((Test-Path "$gitRepo\warp-toolbox\core") -and (Test-Path "$gitRepo\ai-teachi
     Write-Host "  ⚠️ Run .\Reorganize-To-Git-Structure.ps1 first!" -ForegroundColor Yellow
 }
 
+# STEP 0.5: CLEANUP CHECK
+Write-Host "`nSTEP 0.5: 🧹 RUNNING CLEANUP CHECK..." -ForegroundColor Cyan
+$cleanupScript = Join-Path $gitRepo "warp-toolbox\core\cleanup-routine.ps1"
+if (Test-Path $cleanupScript) {
+    & $cleanupScript
+} else {
+    Write-Host "  ⚠️  cleanup-routine.ps1 not found, skipping" -ForegroundColor Yellow
+}
+
 # STEP 1: GITHUB SAVE (CRITICAL - GITHUB FIRST PRINCIPLE)
 Write-Host "`nSTEP 1: 💾 SAVING TO GITHUB..." -ForegroundColor Green
 
