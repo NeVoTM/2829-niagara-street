@@ -59,16 +59,18 @@ function Read-ComplianceFiles {
     Write-Host "`n📥 DOWNLOADING FROM GITHUB..." -ForegroundColor Yellow
     
     foreach ($file in $filesToRead) {
-        Write-Host "  📡 $($file.Name)..." -ForegroundColor Gray -NoNewline
+        Write-Host ""
+        Write-Host "  ▶️  EXECUTING: Invoke-WebRequest" -ForegroundColor Yellow
+        Write-Host "     File: $($file.Name)" -ForegroundColor Gray
+        Write-Host "     URL: $($file.URL)" -ForegroundColor Gray
         
         try {
             $response = Invoke-WebRequest -Uri $file.URL -UseBasicParsing -ErrorAction Stop
-            Write-Host " ✅" -ForegroundColor Green
-            Write-Host "     $($file.Description)" -ForegroundColor Gray
+            Write-Host "  ✅ COMPLETED: Downloaded successfully ($($response.Content.Length) bytes)" -ForegroundColor Green
+            Write-Host "     $($file.Description)" -ForegroundColor Cyan
             $filesRead += $file.Name
         } catch {
-            Write-Host " ❌ FAILED" -ForegroundColor Red
-            Write-Host "     Error: $($_.Exception.Message)" -ForegroundColor DarkRed
+            Write-Host "  ❌ FAILED: $($_.Exception.Message)" -ForegroundColor Red
             $filesFailed += $file.Name
         }
     }
@@ -236,9 +238,61 @@ Write-Host ""
 # Then show status
 Show-WarpConfirmation -FilesRead $filesResult.Read -TodoCount $todoResult.Total
 
+
+# Open key reference files on screen
+Write-Host "`n📂 Opening reference files..." -ForegroundColor Cyan
+$complianceFolder = "C:\Users\17274\ME\2829-Niagara-Street\warp-compliance"
+$filesToOpen = @(
+    "$complianceFolder\WARP-COMMANDS-REFERENCE.md",
+    "$complianceFolder\WARP-MASTER-RULES.md"
+)
+
+foreach ($file in $filesToOpen) {
+    if (Test-Path $file) {
+        if (Get-Command code -ErrorAction SilentlyContinue) {
+            Start-Process code $file
+            Write-Host "  ✅ Opened: $(Split-Path $file -Leaf)" -ForegroundColor Green
+        } else {
+            Start-Process notepad $file
+            Write-Host "  ✅ Opened in Notepad: $(Split-Path $file -Leaf)" -ForegroundColor Green
+        }
+    }
+}
+Write-Host ""
 # Display quick commands
 Write-Host "⚡ QUICK COMMANDS:" -ForegroundColor Cyan
 Write-Host "   clean           # Run profile cleanup analysis" -ForegroundColor Gray
 Write-Host "   eos             # End of session routine" -ForegroundColor Gray
 Write-Host "   q               # Reload SwiftLetter shortcuts" -ForegroundColor Gray
 Write-Host ""
+
+# WARP AI AUTO-TRIGGER
+Write-Host ""
+Write-Host ("=" * 70) -ForegroundColor Yellow
+Write-Host "🤖 WARP AI: EXECUTE AUTO-SEQUENCE NOW" -ForegroundColor Yellow
+Write-Host ("=" * 70) -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Per WARP-START-SESSION.md Section 1.1, you must now automatically:" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "COMMAND 1: Read TODO-LIST.md from GitHub" -ForegroundColor White
+Write-Host "  → URL: https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance/TODO-LIST.md" -ForegroundColor Gray
+Write-Host "  → Display: All items from SECTION 1.0 (CRITICAL PRIORITY)" -ForegroundColor Gray
+Write-Host ""
+Write-Host "COMMAND 2: Check git status" -ForegroundColor White
+Write-Host "  → Run: git --no-pager status" -ForegroundColor Gray
+Write-Host "  → Show: Any uncommitted changes or clean status" -ForegroundColor Gray
+Write-Host ""
+Write-Host "COMMAND 3: Display status message" -ForegroundColor White
+Write-Host "  → Format: 'Ready to work. Current priorities: [list top 3 from TODO 1.0]'" -ForegroundColor Gray
+Write-Host ""
+Write-Host "COMMAND 4: Ask user which priority" -ForegroundColor White
+Write-Host "  → Question: 'Which priority should we tackle first?'" -ForegroundColor Gray
+Write-Host ""
+Write-Host "🔴 MANDATORY: Show each command AS YOU RUN IT with format:" -ForegroundColor Red
+Write-Host "   ▶️ EXECUTING: [command description]" -ForegroundColor Yellow
+Write-Host "   ✅ COMPLETED: [what was found/done]" -ForegroundColor Green
+Write-Host ""
+Write-Host "👉 DO NOT just say 'I read the files' - EXECUTE and SHOW each command NOW." -ForegroundColor Red
+Write-Host ("=" * 70) -ForegroundColor Yellow
+Write-Host ""
+
