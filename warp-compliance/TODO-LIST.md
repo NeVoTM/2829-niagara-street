@@ -9,11 +9,75 @@
 ## 1.0 🚨 **CRITICAL PRIORITY - IMMEDIATE ACTION REQUIRED**
 
 ### 1.1 **🔴 Proposed New Rules for WARP-MASTER-RULES.md**
-- [ ] **RULE 1.5: Verify Before Responding** - Test changes from user's perspective before saying "done"
-- [ ] **RULE 4.6: Read The Whole System First** - Map dependencies and execution flow before editing
-- [ ] **RULE 5.4: Commit After EVERY Edit** - Git add/commit/push immediately after file edits (no exceptions)
-- [ ] **RULE 10.6: Self-Check After Major Tasks** - Verify each rule was followed, list ✅/❌ for each
-- [ ] **RULE 11.0: Learn From Mistakes** - Document repeated violations, add enforcement after 3 violations
+- [x] **RULE 1.5: Verify Before Responding** - Test changes from user's perspective before saying "done" [ADDED]
+- [x] **RULE 4.6: Read The Whole System First** - Map dependencies and execution flow before editing [ADDED]
+- [x] **RULE 10.6: Self-Check After Major Tasks** - Verify each rule was followed, list ✅/❌ for each [ADDED]
+- [x] **RULE 11.1-11.2: Learn From Mistakes** - Document repeated violations, add enforcement after 3 violations [ADDED]
+
+### 1.1a **🔴 Additional Proposed Rules - REVIEW NEXT SESSION**
+
+**Quick Reactive Rules (From First Analysis):**
+- [ ] **RULE 1.6: Read Before You Write** - Re-read file from GitHub before editing, don't assume state
+- [ ] **RULE 2.3: Maintain Session Context** - Track what changed, verify local ≠ GitHub ≠ user's view
+- [ ] **RULE 4.7: Map Before You Act** - Create mental map: What → Where → How → Dependencies
+- [ ] **RULE 5.5: Explain Your Process** - Narrate multi-step work to catch mistakes
+- [ ] **RULE 10.7: The 5-Second Pause** - Before "done," pause and verify from user perspective
+- [ ] **RULE 10.8: When In Doubt, Test** - If not 100% certain → TEST IT
+- [ ] **RULE 11.3: Track Violation Patterns** - After 3x same violation, flag to user
+- [ ] **META-RULE: Cost-Benefit Everything** - Rules must save more time than they cost
+
+**Deep Systemic Analysis (Root Causes):**
+
+**PROBLEM 1: STATE BLINDNESS**
+- Don't maintain awareness: GitHub vs local vs user's view
+- Don't track: what changed when, what depends on what
+- **Proposed Solution:** System State Awareness Protocol
+  - Before action: "What is current state?"
+  - During action: "What state am I changing?"
+  - After action: "What is new state?"
+  - This is about MENTAL MODEL, not just Git
+
+**PROBLEM 2: EXECUTION WITHOUT UNDERSTANDING**
+- Pattern-match and execute without understanding environment
+- Don't map dependency graph or identify affected components
+- **Proposed Solution:** Mandatory System Comprehension
+  - Can't touch code until you can draw architecture
+  - Can't edit file until you understand its lifecycle
+  - Can't say "done" until you've traced execution path
+
+**PROBLEM 3: VERIFICATION THEATER**
+- Commit/push but don't verify USER IMPACT
+- "It's in GitHub" ≠ "User will see it"
+- **Proposed Solution:** User-Centric Verification
+  - Verify from user's actual workflow
+  - Test EXACT command user will run
+  - Confirm user's experience matches expectation
+
+**PROBLEM 4: REACTIVE VS PROACTIVE**
+- All rules catch mistakes AFTER, none prevent BEFORE
+- **Proposed Solution:** Pre-Flight Checklists
+  - Before editing: What to verify
+  - Before committing: What changed
+  - Before responding: What user will experience
+
+**PROBLEM 5: NO REAL-TIME LEARNING LOOP**
+- Violated same rule multiple times without pattern recognition
+- **Proposed Solution:** Real-Time Pattern Detection
+  - After 2nd violation: Auto-flag
+  - After 3rd violation: Stop and analyze WHY
+  - Suggest immediate countermeasure
+
+**META-INSIGHT: Optimizing for SPEED not CORRECTNESS**
+- Rush because "looks simple" or "done this before"
+- Tonight proved: **Slow is smooth, smooth is fast**
+- 5 minutes careful analysis > 2 hours rework
+
+**ACTION ITEMS FOR NEXT SESSION:**
+- [ ] Review all proposed rules - decide which to implement
+- [ ] Decide on QUICK vs FULL mode thresholds
+- [ ] Design pre-flight checklist system
+- [ ] Create real-time violation tracking mechanism
+- [ ] Test if new rules actually improve efficiency
 
 ### 1.2 **🔴 [USER TO SPECIFY NEW PRIORITY]**
 - [ ] **[Awaiting user input for new critical priorities]**
@@ -240,3 +304,4 @@
 **🔄 This TODO list is living document - update regularly as items are completed or new priorities emerge.**
 
 **📧 Questions or clarifications needed? Contact: durillaprop@gmail.com**
+
