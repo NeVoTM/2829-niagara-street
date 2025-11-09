@@ -120,6 +120,36 @@ git push
 
 ---
 
+### 1.5 Verify Before Responding
+**RULE:** Before saying "done," test changes from user's perspective to confirm they work as intended.
+
+**APPLY WHEN:** Making changes that affect user-facing behavior
+
+**QUICK MODE** (Skip verification):
+- Single file edits with no dependencies
+- Documentation-only changes
+- Simple text updates
+
+**FULL MODE** (Verify required):
+- Scripts that run from GitHub (test with actual command)
+- Multi-file changes affecting execution flow
+- Changes to startup/loading mechanisms
+- Anything user will immediately interact with
+
+**PROCEDURE:**
+1. Make changes
+2. Test from user's perspective (e.g., run `warpspeed` to see output)
+3. Verify behavior matches expectation
+4. Only then respond "done"
+
+**NEVER:** Say "done" based only on "the file looks correct"
+
+**VIOLATION EXAMPLE:** Edit WarpSpeed-GitHub.ps1 locally, say "done," but user runs from GitHub and sees old version → WRONG
+
+**TIME COST:** 1 minute to verify vs. hours of back-and-forth
+
+---
+
 ## 2.0 🎯 **NUMBERED REFERENCE SYSTEM**
 
 ### 2.1 Use Numbered References
@@ -307,6 +337,43 @@ git push
 - Add dot-sourcing without validating compatibility
 
 **VIOLATION EXAMPLE:** Add `. RulesReminder.ps1` to profile without reading it → Script has `Export-ModuleMember` → Error on startup → WRONG
+
+---
+
+### 4.6 Read The Whole System First
+**RULE:** Before making changes, understand the complete system including dependencies, loaders, and execution flow.
+
+**APPLY WHEN:** Modifying files that are part of a larger system
+
+**QUICK MODE** (Skip system analysis):
+- Standalone documentation files
+- Single isolated scripts with no dependencies
+- Simple text/markdown edits
+
+**FULL MODE** (Read whole system):
+- Scripts loaded by other scripts (profile loads scripts)
+- Files executed from GitHub vs. local
+- Startup/initialization code
+- Anything with cross-file dependencies
+
+**"WHOLE SYSTEM" MEANS:**
+1. The file being edited
+2. Files that source/load it (e.g., $PROFILE loads warp-profile-alias.ps1)
+3. Files it references (e.g., script calls other scripts)
+4. Where it's executed from (GitHub-sourced vs. local)
+
+**PROCEDURE:**
+1. User: "Fix startup message"
+2. Read: warp-profile-alias.ps1 (contains message)
+3. Read: $PROFILE (loads warp-profile-alias.ps1)
+4. Check: Is this executed from GitHub? (warpspeed downloads and runs)
+5. Map the flow, then make changes
+
+**NEVER:** Edit one file without checking what loads/calls it
+
+**VIOLATION EXAMPLE:** Fix warp-profile-alias.ps1 but miss that $PROFILE also has the message → Still duplicated → WRONG
+
+**TIME COST:** 2-3 minutes to read 3-5 files vs. hours of back-and-forth
 
 ---
 
@@ -564,7 +631,75 @@ NEXT: What comes next
 
 ---
 
-## 11.0 ✅ **RULE COMPLIANCE CHECKLIST**
+### 10.6 Self-Check After Major Tasks
+**RULE:** After completing multi-step or system-wide tasks, verify each rule was followed before responding.
+
+**APPLY WHEN:** Tasks involving:
+- 3+ file changes
+- Multiple steps/procedures
+- System-wide impact
+- Cross-file dependencies
+
+**QUICK MODE** (Skip self-check):
+- Single file edits
+- Simple documentation updates
+- Isolated changes with no dependencies
+
+**FULL MODE** (Self-check required):
+- Multi-file edits
+- Changes affecting execution flow
+- Startup/system modifications
+- Anything touching rules or enforcement
+
+**SELF-CHECK FORMAT:**
+```
+✅ RULE 1.1 (GitHub-first) - Committed and pushed to GitHub
+✅ RULE 1.1a (Auto-commit) - Changes committed immediately
+✅ RULE 4.1 (Fix ALL instances) - Checked all 3 locations
+❌ RULE 4.4 (Check profile) - Forgot to check $PROFILE
+```
+
+**If ANY ❌ found:** Fix immediately before responding "done"
+
+**NEVER:** Skip the self-check and discover violations later
+
+**TIME COST:** 30 seconds to verify vs. 5 iterations to fix mistakes
+
+---
+
+## 11.0 📚 **LEARNING FROM MISTAKES**
+
+### 11.1 Document Repeated Violations
+**RULE:** Track which rules get violated repeatedly and add enforcement mechanisms.
+
+**APPLY WHEN:** Same rule violated 3+ times
+
+**PROCEDURE:**
+1. Recognize pattern: "I keep violating RULE 1.1"
+2. Document in mistakes log: "RULE 1.1 violated 3x - forgot to push to GitHub"
+3. Add enforcement: Create pre-commit hook or checklist
+4. Update RULE with additional safeguards
+
+**NEVER:** Keep making the same mistake without adding prevention
+
+---
+
+### 11.2 Analyze Root Causes
+**RULE:** When mistakes happen, identify WHY they happened, not just WHAT went wrong.
+
+**APPLY WHEN:** Any significant mistake or repeated violation
+
+**QUESTIONS TO ASK:**
+- Why did I miss this?
+- What could have prevented it?
+- Is the rule clear enough?
+- Do I need a checklist or automation?
+
+**NEVER:** Just fix the mistake and move on without learning
+
+---
+
+## 12.0 ✅ **RULE COMPLIANCE CHECKLIST**
 
 **At session start, Warp AI confirms:**
 - [ ] Read WARP-MASTER-RULES.md (this file)
@@ -628,4 +763,5 @@ NEXT: What comes next
 ---
 
 **END OF MASTER RULES**
+
 
