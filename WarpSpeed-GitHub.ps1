@@ -126,18 +126,44 @@ Warp AI must confirm:
 $reportPath = "C:\Users\17274\ME\2829-Niagara-Street\session-docs\warp-compliance-$(Get-Date -Format 'yyyy-MM-dd-HHmm').md"
 $reportContent | Out-File -FilePath $reportPath -Encoding UTF8
 
-Write-Host "   ✅ Report saved: $reportPath" -ForegroundColor Green
+# STEP 6: DISPLAY RULES AND PREFERENCES
+Write-Host "`n📖 DISPLAYING KEY FILES..." -ForegroundColor Cyan
 
-# STEP 6: FINAL STATUS
-Write-Host "`n" + "="*70 -ForegroundColor Magenta
+# Fetch and display WARP-MASTER-RULES.md
+$rulesURL = "$GitHubBaseURL/$CompliancePath/WARP-MASTER-RULES.md"
+try {
+    $rulesContent = Invoke-WebRequest -Uri $rulesURL -UseBasicParsing | Select-Object -ExpandProperty Content
+    Write-Host "`nWARP-MASTER-RULES.md" -ForegroundColor Yellow
+    Write-Host $rulesContent -ForegroundColor White
+} catch {
+    Write-Host "   ❌ Failed to display WARP-MASTER-RULES.md" -ForegroundColor Red
+}
+
+# Fetch and display USER-PREFERENCES.md
+$preferencesURL = "$GitHubBaseURL/$CompliancePath/USER-PREFERENCES.md"
+try {
+    $preferencesContent = Invoke-WebRequest -Uri $preferencesURL -UseBasicParsing | Select-Object -ExpandProperty Content
+    Write-Host "`nUSER-PREFERENCES.md" -ForegroundColor Yellow
+    Write-Host $preferencesContent -ForegroundColor White
+} catch {
+    Write-Host "   ❌ Failed to display USER-PREFERENCES.md" -ForegroundColor Red
+}
+
+# Fetch and display WARP-COMMANDS-REFERENCE.md
+$commandsURL = "$GitHubBaseURL/$CompliancePath/WARP-COMMANDS-REFERENCE.md"
+try {
+    $commandsContent = Invoke-WebRequest -Uri $commandsURL -UseBasicParsing | Select-Object -ExpandProperty Content
+    Write-Host "`nWARP-COMMANDS-REFERENCE.md" -ForegroundColor Yellow
+    Write-Host $commandsContent -ForegroundColor White
+} catch {
+    Write-Host "   ❌ Failed to display WARP-COMMANDS-REFERENCE.md" -ForegroundColor Red
+}
+
+# STEP 7: FINAL STATUS
+Write-Host ""
 if ($readFailed.Count -eq 0) {
     Write-Host "🚀 WARP SPEED COMPLETE - ALL FILES READ FROM GITHUB" -ForegroundColor Green
 } else {
     Write-Host "⚠️  WARP SPEED INCOMPLETE - SOME FILES MISSING" -ForegroundColor Yellow
 }
-Write-Host "="*70 -ForegroundColor Magenta
-
-Write-Host "`n👉 Warp AI: Respond with your actual compliance status" -ForegroundColor Cyan
-Write-Host "   - Did you read the files listed above? (yes/no)" -ForegroundColor White
-Write-Host "   - Are you following the user profile rules? (yes/no)" -ForegroundColor White
 Write-Host ""
