@@ -126,8 +126,8 @@ Warp AI must confirm:
 $reportPath = "C:\Users\17274\ME\2829-Niagara-Street\session-docs\warp-compliance-$(Get-Date -Format 'yyyy-MM-dd-HHmm').md"
 $reportContent | Out-File -FilePath $reportPath -Encoding UTF8
 
-# STEP 6: SAVE AND OPEN KEY FILES
-Write-Host "`n📖 SAVING KEY FILES..." -ForegroundColor Cyan
+# STEP 6: OPEN KEY FILES IN EDITOR
+Write-Host "`n📖 OPENING KEY FILES..." -ForegroundColor Cyan
 
 $tempFolder = Join-Path $env:TEMP "warp-compliance-files"
 if (-not (Test-Path $tempFolder)) {
