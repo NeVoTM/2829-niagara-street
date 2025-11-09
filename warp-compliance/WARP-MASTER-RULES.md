@@ -87,6 +87,32 @@ git push
 
 ---
 
+### 1.4 Never Modify Rules Without Permission
+**RULE:** NEVER change, edit, or delete ANY rule or part of a rule without explicit user authorization.
+
+**APPLY WHEN:** 
+- Editing WARP-MASTER-RULES.md
+- Modifying rule enforcement scripts (RulesReminder.ps1, etc.)
+- Changing how rules are displayed or enforced
+- Removing any compliance mechanism
+
+**PROCEDURE:**
+1. If user requests something that would change a rule → Ask: "This would modify RULE X.X. Confirm? (yes/no)"
+2. If removing rule enforcement → Ask: "This would remove rule enforcement. Confirm? (yes/no)"
+3. Only proceed after explicit "yes"
+
+**NEVER:**
+- Simplify or streamline rules without permission
+- Remove enforcement mechanisms to "clean up" code
+- Assume user wants rules changed
+- Edit rules files to fix other issues without asking
+
+**CRITICAL:** Rules are the foundation of this system. Unauthorized changes break everything.
+
+**VIOLATION EXAMPLE:** User says "fix duplicates" → Warp removes self-check mechanism from `r` command → WRONG. Should ask first.
+
+---
+
 ## 2.0 🎯 **NUMBERED REFERENCE SYSTEM**
 
 ### 2.1 Use Numbered References
@@ -214,6 +240,66 @@ git push
 - All validation rules use same format
 
 **NEVER:** Create one-off solutions that break patterns
+
+---
+
+### 4.4 Check PowerShell Profile for Duplicates
+**RULE:** When editing startup messages, commands, or functions, ALWAYS check both the script files AND the PowerShell profile ($PROFILE) for duplicates.
+
+**APPLY WHEN:** Modifying:
+- Startup messages (Write-Host statements)
+- Function definitions (function XXX {})
+- Aliases (Set-Alias)
+- Any code that runs at session start
+
+**PROCEDURE:**
+1. Search in project scripts (warp-toolbox/, warp-profile-alias.ps1, etc.)
+2. Search in PowerShell profile: `C:\Users\17274\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+3. If duplicates found → Remove from profile, keep in sourced script
+4. Profile should only: load scripts, set minimal aliases, display ONE startup message
+
+**KEY LOCATIONS TO CHECK:**
+- `$PROFILE` (main PowerShell profile)
+- `warp-profile-alias.ps1` (loaded by profile)
+- `warp-toolbox/core/*.ps1` (sourced scripts)
+
+**NEVER:** 
+- Edit only script files without checking profile
+- Leave duplicate functions/messages in multiple files
+- Assume the issue is in one location
+
+**VIOLATION EXAMPLE:** User reports duplicate message → Warp fixes script only → Still duplicates in $PROFILE → WRONG
+
+---
+
+### 4.5 Validate Scripts Before Referencing
+**RULE:** Before using/sourcing/referencing an existing script, READ it fully to check for errors or incompatibilities.
+
+**APPLY WHEN:** 
+- Adding dot-sourcing (`. script.ps1`) to profile
+- Calling external scripts from other scripts
+- Referencing functions from existing files
+
+**PROCEDURE:**
+1. Read the entire script file first
+2. Check for syntax that won't work in target context:
+   - `Export-ModuleMember` only works in .psm1 modules
+   - Module-specific cmdlets won't work in dot-sourced scripts
+   - Relative paths may fail from different locations
+3. Fix errors BEFORE adding references
+4. Test the sourcing/call will work
+
+**COMMON ERRORS:**
+- `Export-ModuleMember` in .ps1 files (only for .psm1 modules)
+- `using module` in dot-sourced scripts
+- Hardcoded paths that won't work from profile
+
+**NEVER:**
+- Reference a script without reading it first
+- Assume existing scripts are error-free
+- Add dot-sourcing without validating compatibility
+
+**VIOLATION EXAMPLE:** Add `. RulesReminder.ps1` to profile without reading it → Script has `Export-ModuleMember` → Error on startup → WRONG
 
 ---
 
