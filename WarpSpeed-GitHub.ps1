@@ -172,6 +172,18 @@ try {
     Write-Host "   ❌ Failed to save WARP-COMMANDS-REFERENCE.md" -ForegroundColor Red
 }
 
+# Save TODO-LIST.md
+$todoListURL = "$GitHubBaseURL/$CompliancePath/TODO-LIST.md"
+try {
+    $todoListContent = Invoke-WebRequest -Uri $todoListURL -UseBasicParsing | Select-Object -ExpandProperty Content
+    $todoListPath = Join-Path $tempFolder "TODO-LIST.md"
+    $todoListContent | Out-File -FilePath $todoListPath -Encoding UTF8
+    Write-Host "   ✅ Saved: TODO-LIST.md" -ForegroundColor Green
+    $filesToOpen += $todoListPath
+} catch {
+    Write-Host "   ❌ Failed to save TODO-LIST.md" -ForegroundColor Red
+}
+
 # Open all files
 if ($filesToOpen.Count -gt 0) {
     Write-Host "`n📂 Opening files..." -ForegroundColor Cyan

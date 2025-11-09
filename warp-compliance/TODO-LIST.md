@@ -8,7 +8,14 @@
 
 ## 1.0 🚨 **CRITICAL PRIORITY - IMMEDIATE ACTION REQUIRED**
 
-### 1.1 **🔴 [USER TO SPECIFY NEW PRIORITY]**
+### 1.1 **🔴 Proposed New Rules for WARP-MASTER-RULES.md**
+- [ ] **RULE 1.5: Verify Before Responding** - Test changes from user's perspective before saying "done"
+- [ ] **RULE 4.6: Read The Whole System First** - Map dependencies and execution flow before editing
+- [ ] **RULE 5.4: Commit After EVERY Edit** - Git add/commit/push immediately after file edits (no exceptions)
+- [ ] **RULE 10.6: Self-Check After Major Tasks** - Verify each rule was followed, list ✅/❌ for each
+- [ ] **RULE 11.0: Learn From Mistakes** - Document repeated violations, add enforcement after 3 violations
+
+### 1.2 **🔴 [USER TO SPECIFY NEW PRIORITY]**
 - [ ] **[Awaiting user input for new critical priorities]**
 
 ---
