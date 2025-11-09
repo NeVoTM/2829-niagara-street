@@ -126,37 +126,66 @@ Warp AI must confirm:
 $reportPath = "C:\Users\17274\ME\2829-Niagara-Street\session-docs\warp-compliance-$(Get-Date -Format 'yyyy-MM-dd-HHmm').md"
 $reportContent | Out-File -FilePath $reportPath -Encoding UTF8
 
-# STEP 6: DISPLAY RULES AND PREFERENCES
-Write-Host "`n📖 DISPLAYING KEY FILES..." -ForegroundColor Cyan
+# STEP 6: SAVE AND OPEN KEY FILES
+Write-Host "`n📖 SAVING KEY FILES..." -ForegroundColor Cyan
 
-# Fetch and display WARP-MASTER-RULES.md
+$tempFolder = Join-Path $env:TEMP "warp-compliance-files"
+if (-not (Test-Path $tempFolder)) {
+    New-Item -ItemType Directory -Path $tempFolder -Force | Out-Null
+}
+
+$filesToOpen = @()
+
+# Save WARP-MASTER-RULES.md
 $rulesURL = "$GitHubBaseURL/$CompliancePath/WARP-MASTER-RULES.md"
 try {
     $rulesContent = Invoke-WebRequest -Uri $rulesURL -UseBasicParsing | Select-Object -ExpandProperty Content
-    Write-Host "`nWARP-MASTER-RULES.md" -ForegroundColor Yellow
-    Write-Host $rulesContent -ForegroundColor White
+    $rulesPath = Join-Path $tempFolder "WARP-MASTER-RULES.md"
+    $rulesContent | Out-File -FilePath $rulesPath -Encoding UTF8
+    Write-Host "   ✅ Saved: WARP-MASTER-RULES.md" -ForegroundColor Green
+    $filesToOpen += $rulesPath
 } catch {
-    Write-Host "   ❌ Failed to display WARP-MASTER-RULES.md" -ForegroundColor Red
+    Write-Host "   ❌ Failed to save WARP-MASTER-RULES.md" -ForegroundColor Red
 }
 
-# Fetch and display USER-PREFERENCES.md
+# Save USER-PREFERENCES.md
 $preferencesURL = "$GitHubBaseURL/$CompliancePath/USER-PREFERENCES.md"
 try {
     $preferencesContent = Invoke-WebRequest -Uri $preferencesURL -UseBasicParsing | Select-Object -ExpandProperty Content
-    Write-Host "`nUSER-PREFERENCES.md" -ForegroundColor Yellow
-    Write-Host $preferencesContent -ForegroundColor White
+    $preferencesPath = Join-Path $tempFolder "USER-PREFERENCES.md"
+    $preferencesContent | Out-File -FilePath $preferencesPath -Encoding UTF8
+    Write-Host "   ✅ Saved: USER-PREFERENCES.md" -ForegroundColor Green
+    $filesToOpen += $preferencesPath
 } catch {
-    Write-Host "   ❌ Failed to display USER-PREFERENCES.md" -ForegroundColor Red
+    Write-Host "   ❌ Failed to save USER-PREFERENCES.md" -ForegroundColor Red
 }
 
-# Fetch and display WARP-COMMANDS-REFERENCE.md
+# Save WARP-COMMANDS-REFERENCE.md
 $commandsURL = "$GitHubBaseURL/$CompliancePath/WARP-COMMANDS-REFERENCE.md"
 try {
     $commandsContent = Invoke-WebRequest -Uri $commandsURL -UseBasicParsing | Select-Object -ExpandProperty Content
-    Write-Host "`nWARP-COMMANDS-REFERENCE.md" -ForegroundColor Yellow
-    Write-Host $commandsContent -ForegroundColor White
+    $commandsPath = Join-Path $tempFolder "WARP-COMMANDS-REFERENCE.md"
+    $commandsContent | Out-File -FilePath $commandsPath -Encoding UTF8
+    Write-Host "   ✅ Saved: WARP-COMMANDS-REFERENCE.md" -ForegroundColor Green
+    $filesToOpen += $commandsPath
 } catch {
-    Write-Host "   ❌ Failed to display WARP-COMMANDS-REFERENCE.md" -ForegroundColor Red
+    Write-Host "   ❌ Failed to save WARP-COMMANDS-REFERENCE.md" -ForegroundColor Red
+}
+
+# Open all files
+if ($filesToOpen.Count -gt 0) {
+    Write-Host "`n📂 Opening files..." -ForegroundColor Cyan
+    if (Get-Command code -ErrorAction SilentlyContinue) {
+        # Open in VS Code if available
+        & code $filesToOpen
+        Write-Host "   ✅ Opened in VS Code" -ForegroundColor Green
+    } else {
+        # Open in default editor
+        foreach ($file in $filesToOpen) {
+            Start-Process $file
+        }
+        Write-Host "   ✅ Opened in default editor" -ForegroundColor Green
+    }
 }
 
 # STEP 7: FINAL STATUS
