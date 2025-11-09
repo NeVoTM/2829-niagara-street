@@ -251,6 +251,98 @@ Also update: SESSION-COMPLETION-TRACKER.md (progress)
 
 ---
 
+
+### 3.3 Text Shadows for Readability
+**Rule:** Use text shadows when text appears over images/videos
+
+**Sample:**
+```css
+.text-over-image {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: white;
+}
+```
+
+**Usage:** Ensures text is readable over any background
+
+---
+
+## 4.4 Chart Height Standard
+
+### Mobile Charts
+**Rule:** Maximum height 280px for mobile charts
+
+**Sample:**
+```css
+.chart-container {
+    max-height: 280px;
+    overflow-y: auto;
+}
+```
+
+**Reason:** Prevents infinite scrolling on mobile devices
+
+---
+
+## 5.3 File Naming Conventions
+
+### PowerShell Scripts
+**Rule:** Use PascalCase for PowerShell files
+
+**Examples:**
+```
+✅ CORRECT:   CleanAndHealthy.ps1   |   QuickStart.ps1
+❌ WRONG:     clean-and-healthy.ps1 |   quickstart.ps1
+```
+
+### Documentation Files
+**Rule:** Use kebab-case for Markdown files
+
+**Examples:**
+```
+✅ CORRECT:   warp-compliance-system.md   |   user-preferences.md
+❌ WRONG:     WarpComplianceSystem.md     |   UserPreferences.md
+```
+
+---
+
+## 10.0 📅 SESSION DOCUMENTATION
+
+### 10.1 Date Format
+**Rule:** YYYY-MM-DD-HHMM format for session files
+
+**Examples:**
+```
+✅ CORRECT:   SESSION-DOCUMENTATION-2025-11-09-0102.md
+❌ WRONG:     Session-11-9-2025.md
+```
+
+### 10.2 Progress Tracking
+**Rule:** Show percentage with 1 decimal place
+
+**Examples:**
+```
+✅ CORRECT:   67.5% complete
+❌ WRONG:     67% or 67.50%
+```
+
+---
+
+## 10.3 TODO Priority Colors
+
+**Rule:** Consistent color scheme for priority levels
+
+**Pattern:**
+```
+🔴 1.0 CRITICAL     - Red (#FF0000)
+🟡 2.0 IMPORTANT    - Yellow (#FFFF00)  
+⚪ 3.0+ NORMAL       - White/Gray
+```
+
+**Usage:** Visual priority indication in TODO lists
+
+
 **Last Updated:** 2025-11-09  
 **Version:** 1.0  
 **Status:** Living document - add preferences as discovered
+
