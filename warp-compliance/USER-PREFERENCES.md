@@ -238,7 +238,7 @@ Also update: SESSION-COMPLETION-TRACKER.md (progress)
 
 ## 9.0 🔍 SELF-CHECK REQUIREMENTS
 
-**When using `r` command, verify output against:**
+**When using `>r` command, verify output against:**
 1. WARP-MASTER-RULES.md (system rules)
 2. USER-PREFERENCES.md (this file - user preferences)
 

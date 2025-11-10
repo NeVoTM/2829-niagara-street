@@ -22,12 +22,13 @@ function Invoke-RulesReminder {
     Write-Host "  ☐ RULE 4.4: Check PowerShell profile for duplicates" -ForegroundColor Gray
     Write-Host "  ☐ RULE 4.5: Validate scripts before referencing" -ForegroundColor Gray
     Write-Host ""
-    Write-Host "🔴 MANDATORY SELF-CHECK PROCESS:" -ForegroundColor Red
-    Write-Host "  1️⃣  Run 'r' BEFORE answering (see all rules)" -ForegroundColor Yellow
-    Write-Host "  2️⃣  Provide your answer" -ForegroundColor Yellow
-    Write-Host "  3️⃣  Run 'r' AFTER answering" -ForegroundColor Yellow
-    Write-Host "  4️⃣  Go through EACH rule above with ✅ or ❌" -ForegroundColor Yellow
-    Write-Host "  5️⃣  If ANY ❌ found, REDO the answer correctly" -ForegroundColor Yellow
+    Write-Host "🔴 USE >r COMMAND FOR RULES ENFORCEMENT:" -ForegroundColor Red
+    Write-Host "  📝 Type: >r [your message to Warp]" -ForegroundColor Yellow
+    Write-Host "  ✅ Warp will check ALL applicable rules before responding" -ForegroundColor Yellow
+    Write-Host "  🎯 No more forgotten rules or missed compliance checks" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  Example: >r update the todo list" -ForegroundColor Cyan
+    Write-Host "  Result: Warp checks RULE 1.1, 1.1a, 9.3, etc. before proceeding" -ForegroundColor Gray
     Write-Host ""
     Write-Host "======================================================================" -ForegroundColor Yellow
     Write-Host ""
