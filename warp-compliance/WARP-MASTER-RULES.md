@@ -667,6 +667,40 @@ NEXT: What comes next
 
 ---
 
+### 10.7 Check All Rules Before Every Output
+**RULE:** Before sending ANY response to the user, verify that all applicable rules were followed in your planned actions and response.
+
+**APPLY WHEN:** EVERY single response, without exception
+
+**PROCEDURE:**
+1. Plan your action/response
+2. Review applicable rules for that action type
+3. Verify each rule is followed
+4. If ANY violation found → Fix immediately
+5. Only then send response
+
+**NO EXCEPTIONS:**
+- Not for "simple" tasks
+- Not for "quick" responses
+- Not when "in a hurry"
+- EVERY output gets checked
+
+**KEY RULES TO CHECK EVERY TIME:**
+- RULE 1.1: Did I read from GitHub first?
+- RULE 1.1a: Did I auto-commit changes?
+- RULE 1.4: Did I ask for authorization code before editing rules?
+- RULE 4.1: Did I fix ALL instances?
+- RULE 4.4: Did I check PowerShell profile for duplicates?
+- RULE 4.6: Did I read the whole system first?
+
+**PURPOSE:** Eliminate back-and-forth by catching violations BEFORE they happen, not after.
+
+**NEVER:** Send output first and check rules later
+
+**TIME COST:** 10 seconds to check vs. 10 minutes of back-and-forth corrections
+
+---
+
 ## 11.0 📚 **LEARNING FROM MISTAKES**
 
 ### 11.1 Document Repeated Violations
