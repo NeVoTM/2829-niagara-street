@@ -166,12 +166,21 @@ git push
 1. Detect `>r` at start of user message
 2. Parse actual message (everything after `>r`)
 3. Check ALL applicable rules for that request
-4. Formulate response following all rules
-5. Verify compliance before sending
+4. START response with "Rules checked" or "Rules checked:" on first line
+5. Formulate response following all rules
+6. Verify compliance before sending
+
+**RESPONSE FORMAT:**
+```
+Rules checked
+
+[Your actual response here]
+```
 
 **EXAMPLE:**
 - User: `>r update the todo list`
 - I see: Rules enforcement + "update the todo list"
+- I respond: "Rules checked" (first line)
 - I do: Check RULE 1.1 (GitHub-first), RULE 1.1a (Auto-commit), RULE 9.3 (Update dates), etc.
 - Then: Execute with full compliance
 
@@ -179,6 +188,9 @@ git push
 - Ignore the `>r` prefix
 - Treat `>r` as part of the message text
 - Skip rules check when `>r` is present
+- Respond without "Rules checked" confirmation
+
+**PURPOSE:** If user doesn't see "Rules checked" at start, they know I missed the `>r` and can immediately ask me to recheck.
 
 **CRITICAL:** The `>r` command exists because I repeatedly failed to follow rules. When user uses it, they're explicitly demanding compliance.
 
