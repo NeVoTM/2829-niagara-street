@@ -30,4 +30,4 @@ function warpspeed {
     }
 }
 
-Write-Host "✅ 'warpspeed' command loaded - runs from GitHub" -ForegroundColor Green
+Write-Host "💡 Use 'v' for visual interface | 'warpspeed' to load rules & preferences | '>r' to force Warp AI to listen to rules" -ForegroundColor Cyan
