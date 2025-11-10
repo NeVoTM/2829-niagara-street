@@ -109,10 +109,10 @@ git push
 3. Only proceed after explicit "yes"
 
 **AUTHORIZATION CODE PROCEDURE:**
-1. When editing WARP-MASTER-RULES.md, request: "Authorization code required to edit rules. Code hint: door & card code"
-2. User provides code in next message (any format: "1103", "AUTH: 1103", "the code is 1103", etc.)
-3. Accept ANY message containing the code immediately after request
-4. Proceed with edit
+1. When editing WARP-MASTER-RULES.md, request: "Code = ?"
+2. User responds: "pw=1103"
+3. Accept immediately and proceed with edit
+4. If response doesn't contain "pw=1103", ask again
 
 **NEVER:**
 - Simplify or streamline rules without permission
@@ -600,6 +600,21 @@ NEXT: What comes next
 ```
 
 **NEVER:** Use vague commits like "updates" or "fixes"
+
+---
+
+### 9.3 Update Documentation Dates
+**RULE:** When modifying documentation files with a "Last Updated" field, update the date to the current date.
+
+**APPLY WHEN:** Editing any file with "Last Updated:" metadata (TODO-LIST.md, DEBUGGING-CHECKLIST.md, etc.)
+
+**PROCEDURE:**
+1. Make content changes to documentation file
+2. Find "Last Updated:" field at top of file
+3. Update to current date in format: Month Day, Year (e.g., "November 10, 2025")
+4. Commit with updated date
+
+**NEVER:** Leave old dates after modifying documentation
 
 ---
 
