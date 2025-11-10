@@ -9,10 +9,7 @@
 ## 1.0 🚨 **CRITICAL PRIORITY - IMMEDIATE ACTION REQUIRED**
 
 ### 1.1 **🔴 Proposed New Rules for WARP-MASTER-RULES.md**
-- [x] **RULE 1.5: Verify Before Responding** - Test changes from user's perspective before saying "done" [ADDED]
-- [x] **RULE 4.6: Read The Whole System First** - Map dependencies and execution flow before editing [ADDED]
-- [x] **RULE 10.6: Self-Check After Major Tasks** - Verify each rule was followed, list ✅/❌ for each [ADDED]
-- [x] **RULE 11.1-11.2: Learn From Mistakes** - Document repeated violations, add enforcement after 3 violations [ADDED]
+- All proposed rules from this section have been added to WARP-MASTER-RULES.md
 
 ### 1.1a **🔴 Additional Proposed Rules - REVIEW NEXT SESSION**
 
