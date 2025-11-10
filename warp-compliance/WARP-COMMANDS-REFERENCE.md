@@ -28,28 +28,33 @@ WarpSpeed -QuickStart  # Skip prompts
 ```
 
 **When to use:** At the start of EVERY work session
-### `r`
-**Purpose:** Rules reminder with self-check enforcement  
+
+---
+
+### `>r`
+**Purpose:** Rules enforcement command - Prefix for messages that require strict rules compliance  
 **What it does:**
-1. Displays critical compliance rules (RULE 1.1, 2.1, 4.1, 4.2)
-2. Shows MANDATORY SELF-CHECK PROCESS
-3. Instructs Warp AI to verify compliance after answering
-4. Forces Warp AI to redo answer if rules violated
+1. Triggers mandatory rules check before Warp AI responds
+2. Forces verification of RULE 1.1 (GitHub-first), RULE 1.1a (Auto-commit), RULE 4.1 (Fix ALL instances)
+3. Ensures Warp AI follows ALL applicable rules for the request
+4. Prevents rule violations and saves time
 
 **Usage:**
-```powershell
-r    # Display rules reminder before asking question
+```
+>r update the todo list
+>r fix the alignment issues
+>r create new Excel workbook
 ```
 
-**When to use:** Before EVERY task/question you give to Warp AI  
-**Purpose:** Enforce rule compliance through self-checking mechanism  
-**Expected flow:**
-1. User types: `r`
-2. User asks question
-3. Warp AI runs `r` before answering
-4. Warp AI provides answer
-5. Warp AI runs `r` after answering to verify compliance
-6. If rules violated, Warp AI redoes the answer
+**Format:** Type `>r` followed by space, then your message to Warp AI
+
+**When to use:** 
+- When you need guaranteed rules compliance
+- For critical tasks (file edits, commits, system changes)
+- When previous responses violated rules
+- ANY time you want strict rule enforcement
+
+**Note:** The `>` prevents PowerShell from trying to execute it as a command. Everything after `>r` is your message to Warp AI.
 
 
 ---
@@ -89,17 +94,18 @@ clean
 ---
 
 ### `rules`
-**Purpose:** Display WARP MASTER RULES quick reference  
+**Purpose:** Force Warp AI to listen to rules and preferences  
 **What it does:**
 - Shows the 7 most critical rules
 - Displays location of full rules file
+- Forces Warp AI attention to rule compliance
 
 **Usage:**
 ```powershell
 rules
 ```
 
-**When to use:** Anytime you need a rule reminder
+**When to use:** Before asking questions or giving tasks to Warp AI (same as `r`)
 
 ---
 
