@@ -108,11 +108,20 @@ git push
 2. If removing rule enforcement → Ask: "This would remove rule enforcement. Confirm? (yes/no)"
 3. Only proceed after explicit "yes"
 
+**AUTHORIZATION CODE PROCEDURE:**
+1. When editing WARP-MASTER-RULES.md, request: "Authorization code required to edit rules. Code hint: door & card code"
+2. User provides code in next message (any format: "1103", "AUTH: 1103", "the code is 1103", etc.)
+3. Accept ANY message containing the code immediately after request
+4. Proceed with edit
+
 **NEVER:**
 - Simplify or streamline rules without permission
 - Remove enforcement mechanisms to "clean up" code
 - Assume user wants rules changed
 - Edit rules files to fix other issues without asking
+- Accept code mentioned casually (only after Warp requests it)
+- Ignore code when user provides it in response to request
+- Ask again if code was already provided
 
 **CRITICAL:** Rules are the foundation of this system. Unauthorized changes break everything.
 
