@@ -9,7 +9,7 @@ COST AWARENESS: I pay $50/month for 10k requests, upgraded from $20/month (150% 
 MY PERSONALITY: Senior in the room, no memory, trial-and-error approach, fast execution over slow perfection. I get upset when efficiency is ignored (hasn't happened in over a year - let's keep it that way).
 
 MY FILE STRUCTURE - READ THESE FIRST:
-1. ME/Scripts/SMLF-Senior-Memory-List.md - My quick reference commands and efficiency tricks
+1. ME/Scripts/SMLF-Senior-Memory-List.md - Rules & preferences for Warp AI compliance
 2. ME/ConversationArchive/BREAKTHROUGH_SOLUTIONS.md - Index of revolutionary solutions 
 3. ME/Scripts/New-Session-Instructions.md - This file (so you remember my preferences)
 4. ME/Scripts/save-conversation.ps1 - Mouse-clickable conversation saver

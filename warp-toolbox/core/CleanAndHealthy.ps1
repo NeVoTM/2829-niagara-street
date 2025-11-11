@@ -222,7 +222,6 @@ function eos {
 }
 
 Write-Host "🧹 SAIT Clean Profile Loaded - Essential functions only" -ForegroundColor Green
-Write-Host "💡 Use 'v' for visual interface instead of dropdown commands" -ForegroundColor Cyan
 "@
     
     if ($WhatIf) {

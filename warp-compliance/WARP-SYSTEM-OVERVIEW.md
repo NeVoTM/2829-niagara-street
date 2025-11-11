@@ -157,7 +157,7 @@ None - session starts cold
 
 ### **After WarpSpeed:**
 ```
->r       - Rules enforcement command (use at start of messages)
+rules-       - Rules enforcement command (use at start of messages)
 clean    - Profile cleanup analysis  
 eos      - End of session routine
 q        - Reload shortcuts
@@ -167,7 +167,7 @@ q        - Reload shortcuts
 ```
 1. Open PowerShell
 2. WarpSpeed         (initialize session)
-3. >r [your message] (rules-enforced requests)
+3. rules- [your message] (rules-enforced requests)
 4. [work completed with full compliance]
 5. eos               (end session)
 ```
@@ -185,7 +185,7 @@ q        - Reload shortcuts
 - Downloads from GitHub first (RULE 1.1)
 - Shows command execution (▶️ EXECUTING / ✅ COMPLETED)
 - Auto-trigger for Warp AI actions
-- Integrated with `>r` command for rules enforcement
+- Integrated with `rules-` command for rules enforcement
 
 ### **Potential Version 3.0:**
 - Delete redundant files (WARP-AI-CONFIRMATION-CHECKLIST.md)

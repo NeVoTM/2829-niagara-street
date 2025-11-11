@@ -31,22 +31,23 @@ WarpSpeed -QuickStart  # Skip prompts
 
 ---
 
-### `>r`
+### `rules-`
 **Purpose:** Rules enforcement command - Prefix for messages that require strict rules compliance  
 **What it does:**
-1. Triggers mandatory rules check before Warp AI responds
-2. Forces verification of RULE 1.1 (GitHub-first), RULE 1.1a (Auto-commit), RULE 4.1 (Fix ALL instances)
-3. Ensures Warp AI follows ALL applicable rules for the request
+1. Triggers mandatory compliance check of all 42 rules before Warp AI responds
+2. Forces verification of ALL applicable rules for the request
+3. Ensures Warp AI follows complete rule set before output
 4. Prevents rule violations and saves time
+5. Displays only violations (or ✅ All rules obeyed)
 
 **Usage:**
 ```
->r update the todo list
->r fix the alignment issues
->r create new Excel workbook
+rules- update the todo list
+rules- fix the alignment issues
+rules- create new Excel workbook
 ```
 
-**Format:** Type `>r` followed by space, then your message to Warp AI
+**Format:** Type `rules-` followed by space, then your message to Warp AI
 
 **When to use:** 
 - When you need guaranteed rules compliance
@@ -54,7 +55,7 @@ WarpSpeed -QuickStart  # Skip prompts
 - When previous responses violated rules
 - ANY time you want strict rule enforcement
 
-**Note:** The `>` prevents PowerShell from trying to execute it as a command. Everything after `>r` is your message to Warp AI.
+**Note:** Bulletproof prefix that cannot be confused with PowerShell redirects or variable names. Everything after `rules-` is your message to Warp AI.
 
 
 ---

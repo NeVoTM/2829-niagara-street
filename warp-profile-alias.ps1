@@ -30,4 +30,4 @@ function warpspeed {
     }
 }
 
-Write-Host "💡 Use 'v' for visual interface | 'warpspeed' to load rules & preferences | '>r' to force Warp AI to listen to rules" -ForegroundColor Cyan
+Write-Host "💡 Use 'rules-' to enforce compliance | 'v' for visual interface | 'warpspeed' to start session" -ForegroundColor Cyan

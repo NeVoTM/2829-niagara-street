@@ -27,13 +27,7 @@ Write-Host "   📄 $profilePath" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "After reading, please respond with:" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "   'I have read your profile at New-Session-Instructions.md'" -ForegroundColor Green
-Write-Host "   'I confirm I will follow:'" -ForegroundColor Green
-Write-Host "   ' - Your cost-awareness preferences'" -ForegroundColor Green
-Write-Host "   ' - Your efficiency-focused personality'" -ForegroundColor Green
-Write-Host "   ' - Your communication style (direct, concise)'" -ForegroundColor Green
-Write-Host "   ' - Your clickable solutions preference'" -ForegroundColor Green
-Write-Host "   ' - All other preferences listed in the profile'" -ForegroundColor Green
+Write-Host "   'Confirmed: I've read your profile and will follow all preferences.'" -ForegroundColor Green
 Write-Host ""
 Write-Host "═══════════════════════════════════════" -ForegroundColor Blue
 Write-Host ""

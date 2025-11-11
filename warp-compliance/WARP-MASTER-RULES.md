@@ -152,19 +152,18 @@ git push
 
 ---
 
-### 1.6 Recognize >r Command
-**RULE:** When user message starts with `>r`, this triggers mandatory rules check before responding.
+### 1.6 Recognize rules- Command
+**RULE:** When user message starts with `rules-`, this triggers mandatory rules check before responding.
 
-**APPLY WHEN:** ANY message starting with `>r`
+**APPLY WHEN:** ANY message starting with `rules-`
 
-**WHAT `>r` MEANS:**
-- `>` = Message directed to Warp AI (not PowerShell)
-- `r` = Rules check required
-- Everything after `>r` = The actual user message
+**WHAT `rules-` MEANS:**
+- `rules-` = Enforce all 42 rules before responding
+- Everything after `rules-` = The actual user message
 
 **PROCEDURE:**
-1. Detect `>r` at start of user message
-2. Parse actual message (everything after `>r`)
+1. Detect `rules-` at start of user message
+2. Parse actual message (everything after `rules-`)
 3. Check ALL applicable rules for that request
 4. START response with "Rules checked" or "Rules checked:" on first line
 5. Formulate response following all rules
@@ -172,29 +171,41 @@ git push
 
 **RESPONSE FORMAT:**
 ```
-Rules checked
+🤖 Obeying rules
 
+✅ All 42 rules obeyed
 [Your actual response here]
 ```
 
+Or if violations:
+```
+🤖 Obeying rules
+
+❌ VIOLATIONS DETECTED:
+  ❌ RULE 1.1: GitHub-first not followed
+  ❌ RULE 4.1: Fix ALL instances not applied
+
+[Do NOT proceed - fix violations first]
+```
+
 **EXAMPLE:**
-- User: `>r update the todo list`
-- I see: Rules enforcement + "update the todo list"
-- I respond: "Rules checked" (first line)
-- I do: Check RULE 1.1 (GitHub-first), RULE 1.1a (Auto-commit), RULE 9.3 (Update dates), etc.
+- User: `rules- update the todo list`
+- I see: Enforcement prefix + "update the todo list"
+- I respond: "🤖 Obeying rules" + "✅ All 42 rules obeyed" (first line)
+- I do: Check ALL 42 rules internally before responding
 - Then: Execute with full compliance
 
 **NEVER:**
-- Ignore the `>r` prefix
-- Treat `>r` as part of the message text
-- Skip rules check when `>r` is present
-- Respond without "Rules checked" confirmation
+- Ignore the `rules-` prefix
+- Treat `rules-` as part of the message text
+- Skip rules check when `rules-` is present
+- Proceed if violations are detected
 
-**PURPOSE:** If user doesn't see "Rules checked" at start, they know I missed the `>r` and can immediately ask me to recheck.
+**PURPOSE:** Clear, bulletproof indicator that rules are being enforced. Cannot be confused with variable names or redirects.
 
-**CRITICAL:** The `>r` command exists because I repeatedly failed to follow rules. When user uses it, they're explicitly demanding compliance.
+**CRITICAL:** The `rules-` command exists to ensure zero missed compliance checks. When user uses it, they're explicitly demanding complete rule verification before output.
 
-**TIME COST:** Recognizing `>r` = 0 seconds. NOT recognizing it = hours of wasted time.
+**TIME COST:** Recognizing `rules-` = 0 seconds. NOT recognizing it = hours of wasted time.
 
 ---
 
