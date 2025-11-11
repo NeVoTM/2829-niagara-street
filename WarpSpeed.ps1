@@ -296,3 +296,15 @@ Write-Host "👉 DO NOT just say 'I read the files' - EXECUTE and SHOW each comm
 Write-Host ("=" * 70) -ForegroundColor Yellow
 Write-Host ""
 
+# FINAL STEP: Prompt user to tell Warp AI to confirm files
+Write-Host ""
+Write-Host ("=" * 70) -ForegroundColor Cyan
+Write-Host "📋 FINAL STEP: FILE CONFIRMATION" -ForegroundColor Cyan
+Write-Host ("=" * 70) -ForegroundColor Cyan
+Write-Host ""
+Write-Host "👉 Now tell Warp AI: 'Confirm files read'" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Warp AI will respond with list of files successfully loaded." -ForegroundColor Gray
+Write-Host ("=" * 70) -ForegroundColor Cyan
+Write-Host ""
+
