@@ -92,10 +92,11 @@ function Invoke-RulesChecker {
     }
 }
 
-# For PowerShell terminal usage (not primary)
-function rules- {
-    Invoke-RulesChecker
-}
-
-# Alias for quick access
+# For PowerShell terminal usage - note: cannot use 'rules-' as function name (hyphens invalid)
+# Use alias instead
 Set-Alias -Name rules-check -Value Invoke-RulesChecker -Force
+
+# Optional: Add rulescheck command (no hyphen) for terminal use
+function rulescheck {
+    Invoke-RulesChecker @args
+}
