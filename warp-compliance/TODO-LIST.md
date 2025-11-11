@@ -189,9 +189,58 @@
 
 ---
 
-## 9.0 📁 **UNIVERSAL SYSTEM FILES REFERENCE**
+## 9.0 🗑️ **DELETION BACKLOG - SCHEDULED FOR REMOVAL**
 
-### 9.1 **GitHub Master Files (Always Use Latest):**
+### 9.1 **Immediate Deletions (Delete Now)**
+- [x] **RulesReminder.ps1** - Fully replaced by RulesChecker.ps1 (RULE 1.6)
+  - Location: `warp-toolbox/core/RulesReminder.ps1`
+  - Reason: Superseded by new rules- command system
+  - Backup: Keep in git history
+
+### 9.2 **Scheduled for Deletion (December 11, 2025 - 30 days)**
+- [ ] **WARP-SYSTEM-ANALYSIS.md** - Heavy duplication with WARP-MASTER-RULES.md
+  - Location: `warp-compliance/WARP-SYSTEM-ANALYSIS.md`
+  - Reason: Mirror document, redundant analysis
+  - Keep Until: User confirms consolidation decision
+  - Backup: Yes, keep in git
+
+- [ ] **RULES-COMMAND-MIGRATION.md** - Historical record only
+  - Location: `warp-compliance/RULES-COMMAND-MIGRATION.md`
+  - Reason: Migration complete, historical reference
+  - Keep Until: December 11, 2025 (archive date)
+  - Backup: Yes, archive to session-docs/
+
+- [ ] **SESSION-COMPLETION-TRACKER.md** - If merged with TODO-LIST.md
+  - Location: `warp-compliance/SESSION-COMPLETION-TRACKER.md`
+  - Reason: Consolidation with TODO-LIST.md
+  - Keep Until: User approves consolidation (Option A)
+  - Backup: Yes, keep in git
+
+### 9.3 **Conditional Deletions (On User Review)**
+- [ ] **WARP-SYSTEM-OVERVIEW.md** - If consolidated
+  - Location: `warp-compliance/WARP-SYSTEM-OVERVIEW.md`
+  - Reason: Overlaps with WARP-START-SESSION.md
+  - Keep Until: Consolidation decision made
+  - Backup: Yes
+
+- [ ] **>r references in old scripts** - If found
+  - Search all scripts for old >r command
+  - Replace or remove as needed
+  - Keep Until: Full migration verified
+
+### 9.4 **Deletion Process (RULE 4.3 - Consistency)**
+When deleting files:
+1. Verify file is backed up in git history
+2. Check for any remaining references (grep)
+3. Update all cross-reference documents
+4. Commit deletion with message: "Delete [filename] - scheduled removal after [date]"
+5. Add to SESSION-DOCUMENTATION when completed
+
+---
+
+## 10.0 📁 **UNIVERSAL SYSTEM FILES REFERENCE**
+
+### 10.1 **GitHub Master Files (Always Use Latest):**
 - **DEBUGGING-CHECKLIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
 - **README-UNIVERSAL-TEMPLATE.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md
 - **TODO-LIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md

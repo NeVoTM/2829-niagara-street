@@ -339,7 +339,44 @@ Or if violations:
 
 ---
 
-### 4.4 Check PowerShell Profile for Duplicates
+### 4.4 Document Future Deletions in TODO-LIST
+**RULE:** When a file, function, or feature becomes obsolete, immediately add it to TODO-LIST.md Section 9.0 (DELETION BACKLOG) with deletion date scheduled 30 days in future.
+
+**APPLY WHEN:** 
+- Feature is replaced by newer system (e.g., RulesReminder.ps1 replaced by RulesChecker.ps1)
+- File becomes redundant through consolidation
+- Code is deprecated but needed for backward compatibility
+- Any item slated for future removal
+
+**PROCEDURE:**
+1. Add to TODO-LIST.md Section 9.0 with:
+   - Item name
+   - Current location
+   - Reason for deletion
+   - Scheduled deletion date (30 days out)
+   - Backup note (keep in git history)
+2. Mark as "[ ]" (unchecked) if future deletion
+3. Reference the TODO item when making related changes
+4. On deletion date, execute deletion and mark complete
+
+**FORMAT:**
+```
+- [ ] **FileName.ext** - Reason for deletion
+  - Location: `path/to/file`
+  - Reason: Why it's obsolete
+  - Keep Until: [Date 30 days from now]
+  - Backup: Yes, keep in git
+```
+
+**NEVER:** Silently delete files without documenting in TODO-LIST first
+
+**VIOLATION EXAMPLE:** Replace RulesReminder.ps1 but forget to add to deletion backlog → File lost track of, may get committed again accidentally → WRONG
+
+**TIME COST:** 2 minutes to document vs. confusion about why file exists 6 months later
+
+---
+
+### 4.5 Check PowerShell Profile for Duplicates
 **RULE:** When editing startup messages, commands, or functions, ALWAYS check both the script files AND the PowerShell profile ($PROFILE) for duplicates.
 
 **APPLY WHEN:** Modifying:
@@ -368,7 +405,7 @@ Or if violations:
 
 ---
 
-### 4.5 Validate Scripts Before Referencing
+### 4.6 Validate Scripts Before Referencing
 **RULE:** Before using/sourcing/referencing an existing script, READ it fully to check for errors or incompatibilities.
 
 **APPLY WHEN:** 
@@ -399,7 +436,7 @@ Or if violations:
 
 ---
 
-### 4.6 Read The Whole System First
+### 4.7 Read The Whole System First
 **RULE:** Before making changes, understand the complete system including dependencies, loaders, and execution flow.
 
 **APPLY WHEN:** Modifying files that are part of a larger system
