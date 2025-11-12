@@ -29,6 +29,8 @@ WarpSpeed -QuickStart  # Skip prompts
 
 **When to use:** At the start of EVERY work session
 
+**Best Practice:** Run WarpSpeed at the beginning of every session to ensure Warp AI has latest rules and context.
+
 ---
 
 ### `rules-`
@@ -73,7 +75,9 @@ rules- create new Excel workbook
 eos
 ```
 
-**When to use:** At the end of EVERY work session (RULE 7.2)
+**When to use:** At the end of EVERY work session
+
+**Best Practice:** Run eos at the end of every session to commit work, generate documentation, and prepare for next session.
 
 ---
 
