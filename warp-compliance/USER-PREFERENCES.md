@@ -131,6 +131,24 @@ Tab 2-N: Details    - Consistent formatting
 Last Tab: Settings  - Configuration/inputs
 ```
 
+### 4.4 Mobile-First Design
+**Rule:** Always design and test for mobile (iPhone 12 Pro 390x844) before desktop
+
+**Procedure:**
+1. Design for mobile viewport first
+2. Test all interactions on mobile
+3. Then expand to desktop
+
+### 4.5 Touch Targets
+**Rule:** All interactive elements must be at least 44px for touch accessibility
+
+**When to apply:** Creating buttons, links, icons, or any clickable element
+
+### 4.6 Prevent Infinite Scrolling
+**Rule:** All sections must have `max-height: 100vh` and `overflow-y: auto` on mobile
+
+**When to apply:** Creating sectioned layouts
+
 ---
 
 ## 5.0 📁 FILE ORGANIZATION
@@ -170,6 +188,23 @@ warp-toolbox/core/
 ✅ CORRECT:   =TotalRevenue * GrossMargin
 ❌ WRONG:     ='Sheet1'!B23 * 'Sheet2'!C15
 ```
+
+### 6.2 Excel Editable Cells
+**Rule:** All user-editable cells MUST have yellow background (#FFFF99)
+
+**When to apply:** Creating any Excel workbook
+
+### 6.3 Excel Currency Format
+**Rule:** Currency displays as `$#,##0` (no decimals unless cents matter)
+
+**Examples:**
+- Budget totals: $1,234,567 (no decimals)
+- Unit prices: $1,234.56 (with decimals)
+
+### 6.4 Excel Percentages
+**Rule:** Display percentages as whole numbers (10%) not decimals (0.10)
+
+**Format:** `0.0%` or `0%` depending on precision needed
 
 ### 6.2 Git Commit Messages
 **Rule:** Include numbered references and structured format
