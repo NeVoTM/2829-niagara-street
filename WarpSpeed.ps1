@@ -1,6 +1,6 @@
 # WarpSpeed.ps1 - Simplified Session Startup
 # Downloads WARP-START-SESSION.md and TODO-LIST.md from GitHub
-# Displays 13 critical rules and TODO breakdown
+# Displays 13 critical rules
 
 param(
     [switch]$ShowPath = $false
@@ -10,7 +10,7 @@ $gitHubBase = "https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main
 $complianceFolder = "warp-compliance"
 
 Write-Host "`n🚀 WARP SPEED - SESSION STARTUP" -ForegroundColor Cyan
-Write-Host "Downloading compliance files from GitHub...`n" -ForegroundColor Yellow
+Write-Host "Downloading 2 files from GitHub...`n" -ForegroundColor Yellow
 
 # Download WARP-START-SESSION.md
 Write-Host "▶️  Downloading WARP-START-SESSION.md..." -ForegroundColor Yellow
@@ -81,28 +81,6 @@ Write-Host "RULE 5.1   - Auto-Confirm Files After WarpSpeed" -ForegroundColor Cy
 Write-Host "             List files successfully loaded" -ForegroundColor Gray
 Write-Host ""
 Write-Host ("=" * 70) -ForegroundColor Magenta
-Write-Host ""
-
-# Parse and display TODO breakdown
-Write-Host "📋 TODO LIST BREAKDOWN" -ForegroundColor Yellow
-Write-Host ("=" * 70) -ForegroundColor Blue
-Write-Host ""
-
-# Count TODO items by section
-$section10Count = ([regex]::Matches($todoContent, '(?s)## 1\.0.*?(?=## 2\.0|$)')).Count
-$section20Count = ([regex]::Matches($todoContent, '(?s)## 2\.0.*?(?=## 3\.0|$)')).Count
-$section30Count = ([regex]::Matches($todoContent, '(?s)## 3\.0.*?(?=## 4\.0|$)')).Count
-$totalUnchecked = ([regex]::Matches($todoContent, '- \[ \]')).Count
-
-Write-Host "  📊 Total Open Items: $totalUnchecked" -ForegroundColor White
-Write-Host ""
-Write-Host "  📌 BREAKDOWN BY PRIORITY:" -ForegroundColor Cyan
-Write-Host "     🔴 1.0 CRITICAL PRIORITY" -ForegroundColor Red
-Write-Host "     🟡 2.0 IMPORTANT" -ForegroundColor Yellow
-Write-Host "     ⚪ 3.0 PROJECT-SPECIFIC" -ForegroundColor White
-Write-Host "     ⚪ 4.0+ SYSTEM-WIDE" -ForegroundColor Gray
-Write-Host ""
-Write-Host ("=" * 70) -ForegroundColor Blue
 Write-Host ""
 
 # Save files locally for reference
