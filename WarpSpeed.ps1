@@ -37,21 +37,11 @@ function Read-ComplianceFiles {
     $filesToRead = @(
         @{Name="WARP-MASTER-RULES.md"; Description="📜 MASTER RULES - Single source of truth (24 numbered rules)"; URL="$gitHubBase/WARP-MASTER-RULES.md"},
         @{Name="WARP-COMMANDS-REFERENCE.md"; Description="🚀 Complete command reference (all available commands)"; URL="$gitHubBase/WARP-COMMANDS-REFERENCE.md"},
-        @{Name="WARP-QUESTIONS-GUIDE.md"; Description="Question formats and user preferences"; URL="$gitHubBase/WARP-QUESTIONS-GUIDE.md"},
         @{Name="TODO-LIST.md"; Description="Open items and priorities"; URL="$gitHubBase/TODO-LIST.md"},
         @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"; URL="$gitHubBase/DEBUGGING-CHECKLIST.md"},
-        @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"; URL="$gitHubBase/WARP-START-SESSION.md"},
-        @{Name="WARP-COMPLIANCE-SYSTEM.md"; Description="Core rules (references MASTER RULES)"; URL="$gitHubBase/WARP-COMPLIANCE-SYSTEM.md"},
-        @{Name="WARP-PROCEDURES-HIERARCHY.md"; Description="Numbered procedure system"; URL="$gitHubBase/WARP-PROCEDURES-HIERARCHY.md"}
+        @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"; URL="$gitHubBase/WARP-START-SESSION.md"}
     )
     
-    # Also read directory structure from docs folder
-    $docsFile = Join-Path (Split-Path $complianceFolder -Parent) "warp-toolbox\docs\SAIT-DIRECTORY-STRUCTURE.md"
-    if (Test-Path $docsFile) {
-        Write-Host "  ✅ SAIT-DIRECTORY-STRUCTURE.md" -ForegroundColor Green
-        Write-Host "     Directory and file organization" -ForegroundColor Gray
-        $filesToRead += @{Name="SAIT-DIRECTORY-STRUCTURE.md"; Description="Directory and file organization"}
-    }
     
     $filesRead = @()
     $filesFailed = @()
