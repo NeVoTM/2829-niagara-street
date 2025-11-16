@@ -1,300 +1,145 @@
-# WarpSpeed-Enhanced.ps1 - Complete SOS Procedure
-# Reads ALL compliance files and provides confirmation
-#
-# 🚨 CRITICAL FOR WARP AI: 🚨
-# STEP 0: READ CUSTOMER PROFILE FIRST!
-# Before doing ANYTHING, Warp AI must:
-# 1. Read C:\Users\17274\ME\Scripts\New-Session-Instructions.md
-# 2. Acknowledge all user preferences and rules from the profile
-# 3. Confirm you will follow these profile rules
-#
-# STEP 1: READ FROM GITHUB FIRST
-# When reading compliance files, you MUST:
-# 1. Read from GitHub: https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance/[FILENAME]
-# 2. NEVER read local files without confirming GitHub first
-# 3. Confirm to user: "Reading from GitHub" before accessing any file
-#
-# RULE 1.1: GitHub-First Principle is MANDATORY
+# WarpSpeed.ps1 - Simplified Session Startup
+# Downloads WARP-START-SESSION.md and TODO-LIST.md from GitHub
+# Displays 13 critical rules and TODO breakdown
 
 param(
-    [switch]$Install = $false,
-    [switch]$ShowPath = $false,
-    [switch]$Update = $false,
-    [switch]$QuickStart = $false
+    [switch]$ShowPath = $false
 )
 
-$gitRepo = "C:\Users\17274\ME\2829-Niagara-Street"
-$complianceFolder = "$gitRepo\warp-compliance"
+$gitHubBase = "https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main"
+$complianceFolder = "warp-compliance"
 
-# SOS STEP 1: READ ALL COMPLIANCE FILES FROM GITHUB
-function Read-ComplianceFiles {
-    Write-Host "`n🤖 WARP AI SOS PROCEDURE - READING FROM GITHUB" -ForegroundColor Cyan
-    Write-Host "📡 Source: https://github.com/NeVoTM/2829-niagara-street" -ForegroundColor Gray
-    Write-Host "=" * 70 -ForegroundColor Blue
-    
-    $gitHubBase = "https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance"
-    
-    $filesToRead = @(
-        @{Name="WARP-MASTER-RULES.md"; Description="📜 MASTER RULES - Single source of truth (24 numbered rules)"; URL="$gitHubBase/WARP-MASTER-RULES.md"},
-        @{Name="WARP-COMMANDS-REFERENCE.md"; Description="🚀 Complete command reference (all available commands)"; URL="$gitHubBase/WARP-COMMANDS-REFERENCE.md"},
-        @{Name="TODO-LIST.md"; Description="Open items and priorities"; URL="$gitHubBase/TODO-LIST.md"},
-        @{Name="DEBUGGING-CHECKLIST.md"; Description="Universal solutions (10 categories)"; URL="$gitHubBase/DEBUGGING-CHECKLIST.md"},
-        @{Name="WARP-START-SESSION.md"; Description="Session startup procedures"; URL="$gitHubBase/WARP-START-SESSION.md"}
-    )
-    
-    
-    $filesRead = @()
-    $filesFailed = @()
-    
-    Write-Host "`n📥 DOWNLOADING FROM GITHUB..." -ForegroundColor Yellow
-    
-    foreach ($file in $filesToRead) {
-        Write-Host ""
-        Write-Host "  ▶️  EXECUTING: Invoke-WebRequest" -ForegroundColor Yellow
-        Write-Host "     File: $($file.Name)" -ForegroundColor Gray
-        Write-Host "     URL: $($file.URL)" -ForegroundColor Gray
-        
-        try {
-            $response = Invoke-WebRequest -Uri $file.URL -UseBasicParsing -ErrorAction Stop
-            Write-Host "  ✅ COMPLETED: Downloaded successfully ($($response.Content.Length) bytes)" -ForegroundColor Green
-            Write-Host "     $($file.Description)" -ForegroundColor Cyan
-            $filesRead += $file.Name
-        } catch {
-            Write-Host "  ❌ FAILED: $($_.Exception.Message)" -ForegroundColor Red
-            $filesFailed += $file.Name
-        }
-    }
-    
-    Write-Host ""
-    Write-Host "✅ Successfully read from GitHub: $($filesRead.Count)/$($filesToRead.Count)" -ForegroundColor Green
-    
-    if ($filesFailed.Count -gt 0) {
-        Write-Host "❌ Failed to read: $($filesFailed -join ', ')" -ForegroundColor Red
-    }
-    
-    return @{
-        Read = $filesRead
-        Failed = $filesFailed
-    }
+Write-Host "`n🚀 WARP SPEED - SESSION STARTUP" -ForegroundColor Cyan
+Write-Host "Downloading compliance files from GitHub...`n" -ForegroundColor Yellow
+
+# Download WARP-START-SESSION.md
+Write-Host "▶️  Downloading WARP-START-SESSION.md..." -ForegroundColor Yellow
+try {
+    $startSessionUrl = "$gitHubBase/$complianceFolder/WARP-START-SESSION.md"
+    $startSessionContent = Invoke-RestMethod -Uri $startSessionUrl -TimeoutSec 10
+    Write-Host "✅ WARP-START-SESSION.md downloaded" -ForegroundColor Green
+} catch {
+    Write-Host "❌ Failed to download WARP-START-SESSION.md" -ForegroundColor Red
+    Write-Host "Error: $_" -ForegroundColor Red
+    exit 1
 }
 
-# SOS STEP 2: CHECK TODO LIST AND SHOW BREAKDOWN
-function Get-TodoItems {
-    Write-Host "`n📋 CHECKING TODO LIST FOR OPEN ITEMS..." -ForegroundColor Yellow
-    Write-Host "=" * 70 -ForegroundColor Blue
-    
-    $todoPath = Join-Path $complianceFolder "TODO-LIST.md"
-    
-    if (-not (Test-Path $todoPath)) {
-        Write-Host "  ⚠️  TODO-LIST.md not found" -ForegroundColor Red
-        return @{ Total=0; Path=$null }
-    }
-    
-    $content = Get-Content $todoPath -Raw
-    
-    # Count unchecked items total
-    $totalUnchecked = ([regex]::Matches($content, '- \[ \]')).Count
-    
-    # Extract sections and count items in each
-    $sections = @(
-        @{Name="1.0 CRITICAL PRIORITY"; Pattern='(?s)## 1\.0.*?(?=## 2\.0|$)'; Color="Red"},
-        @{Name="2.0 IMPORTANT"; Pattern='(?s)## 2\.0.*?(?=## 3\.0|$)'; Color="Yellow"},
-        @{Name="3.0 PROJECT-SPECIFIC"; Pattern='(?s)## 3\.0.*?(?=## 4\.0|$)'; Color="White"},
-        @{Name="4.0+ SYSTEM-WIDE"; Pattern='(?s)## [4-9]\.0.*$'; Color="Gray"}
-    )
-    
-    Write-Host "  📊 Total Open Items: $totalUnchecked" -ForegroundColor White
-    Write-Host ""
-    Write-Host "  📌 BREAKDOWN BY PRIORITY:" -ForegroundColor Cyan
-    
-    foreach ($section in $sections) {
-        $sectionMatch = [regex]::Match($content, $section.Pattern)
-        if ($sectionMatch.Success) {
-            $sectionContent = $sectionMatch.Value
-            $sectionCount = ([regex]::Matches($sectionContent, '- \[ \]')).Count
-            $icon = if ($section.Color -eq "Red") { "🔴" } 
-                    elseif ($section.Color -eq "Yellow") { "🟡" } 
-                    else { "⚪" }
-            Write-Host "     $icon $($section.Name): $sectionCount items" -ForegroundColor $section.Color
-        }
-    }
-    
-    Write-Host ""
-    Write-Host "  💡 Opening TODO-LIST.md for review..." -ForegroundColor Gray
-    
-    # Open TODO file
-    if (Get-Command code -ErrorAction SilentlyContinue) {
-        Start-Process code $todoPath
-    } else {
-        Start-Process $todoPath
-    }
-    
-    Write-Host ""
-    return @{ Total=$totalUnchecked; Path=$todoPath }
+# Download TODO-LIST.md
+Write-Host "▶️  Downloading TODO-LIST.md..." -ForegroundColor Yellow
+try {
+    $todoUrl = "$gitHubBase/$complianceFolder/TODO-LIST.md"
+    $todoContent = Invoke-RestMethod -Uri $todoUrl -TimeoutSec 10
+    Write-Host "✅ TODO-LIST.md downloaded`n" -ForegroundColor Green
+} catch {
+    Write-Host "❌ Failed to download TODO-LIST.md" -ForegroundColor Red
+    Write-Host "Error: $_" -ForegroundColor Red
+    exit 1
 }
 
-# Cleanup moved to EOS command (RULE 1.1a requirement)
-
-# SOS STEP 4: REQUEST WARP AI RULE CONFIRMATION
-function Request-WarpConfirmation {
-    Write-Host "`n" + "=" * 70 -ForegroundColor Magenta
-    Write-Host "👋 USER: ASK WARP AI TO CONFIRM RULES" -ForegroundColor Magenta
-    Write-Host "=" * 70 -ForegroundColor Magenta
-    
-    Write-Host ""
-    Write-Host "🗣️  USER MUST NOW ASK:" -ForegroundColor Yellow
-    Write-Host "   'Warp, confirm you will follow RULE 1.1, 2.1, 4.1, and 4.2'" -ForegroundColor White
-    Write-Host ""
-    Write-Host "🤖 WARP AI MUST RESPOND:" -ForegroundColor Cyan
-    Write-Host "   'I confirm and commit to following:" -ForegroundColor White
-    Write-Host "    - RULE 1.1: GitHub-first (read/save GitHub BEFORE local)" -ForegroundColor White
-    Write-Host "    - RULE 2.1: Use numbered references (SECTION X.X)" -ForegroundColor White
-    Write-Host "    - RULE 4.1: Fix ALL instances (not just one)" -ForegroundColor White
-    Write-Host "    - RULE 4.2: Update cross-references" -ForegroundColor White
-    Write-Host "    I will do my absolute best to follow these rules.'" -ForegroundColor White
-    Write-Host ""
-    Write-Host "=" * 70 -ForegroundColor Magenta
-    Write-Host ""
-}
-
-# SOS STEP 5: DISPLAY WARP CONFIRMATION (after user asks)
-function Show-WarpConfirmation {
-    param($FilesRead, $TodoCount)
-    
-    Write-Host "`n" + "=" * 70 -ForegroundColor Green
-    Write-Host "🤖 WARP AI STATUS REPORT" -ForegroundColor Green
-    Write-Host "=" * 70 -ForegroundColor Green
-    
-    Write-Host ""
-    Write-Host "📢 SOURCE CONFIRMED: Reading from GitHub" -ForegroundColor Cyan
-    Write-Host "   https://github.com/NeVoTM/2829-niagara-street/tree/main/warp-compliance" -ForegroundColor Gray
-    Write-Host ""
-    
-    Write-Host "✅ FILES READ FROM GITHUB:" -ForegroundColor Green
-    foreach ($file in $FilesRead) {
-        Write-Host "   • $file" -ForegroundColor White
-    }
-    
-    Write-Host "`n📊 CURRENT STATUS:" -ForegroundColor Cyan
-    Write-Host "   • Open TODO items: $TodoCount" -ForegroundColor White
-    Write-Host "   • Repository: C:\Users\17274\ME\2829-Niagara-Street" -ForegroundColor White
-    Write-Host "   • GitHub: https://github.com/NeVoTM/2829-niagara-street" -ForegroundColor White
-    
-    Write-Host "`n🎯 READY FOR:" -ForegroundColor Yellow
-    Write-Host "   • Creating Excel sheets (will ask Section 1.0 questions)" -ForegroundColor White
-    Write-Host "   • Creating forms/interfaces (will ask Section 3.0/4.0 questions)" -ForegroundColor White
-    Write-Host "   • Creating documents (will ask Section 6.0 questions)" -ForegroundColor White
-    Write-Host "   • Applying debugging solutions (DEBUGGING-CHECKLIST.md)" -ForegroundColor White
-    
-    Write-Host "`n💡 REMEMBER:" -ForegroundColor Magenta
-    Write-Host "   • After answering questions: 'Save as default?' (yes/no)" -ForegroundColor White
-    Write-Host "   • Use numbered references: 'Apply SECTION 4.3'" -ForegroundColor White
-    Write-Host "   • Run 'eos' at end of session to save work" -ForegroundColor White
-    
-    Write-Host "`n" + "=" * 70 -ForegroundColor Magenta
-    Write-Host "🚀 WARP SPEED COMPLETE - AI READY FOR WORK!" -ForegroundColor Green
-    Write-Host "=" * 70 -ForegroundColor Magenta
-    Write-Host ""
-}
-
-# MAIN EXECUTION
-Write-Host "`n🚀 WARP SPEED - ENHANCED SOS PROCEDURE" -ForegroundColor Cyan
-Write-Host "Starting comprehensive session initialization..." -ForegroundColor Yellow
+# Display critical rules (Section 1.0)
+Write-Host ("=" * 70) -ForegroundColor Magenta
+Write-Host "🔴 SECTION 1.0: CRITICAL RULES (ALL 13 RULES)" -ForegroundColor Yellow
+Write-Host ("=" * 70) -ForegroundColor Magenta
+Write-Host ""
+Write-Host "RULE 1.1   - GitHub-First Principle" -ForegroundColor Cyan
+Write-Host "             Read/save GitHub BEFORE local files" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 1.1a  - Auto-Commit After Every Change" -ForegroundColor Cyan
+Write-Host "             git add → commit → push (immediately)" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 1.4   - Authorization Code 2319 Required" -ForegroundColor Cyan
+Write-Host "             Never edit rules without code 2319" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 1.5   - Verify Before Responding" -ForegroundColor Cyan
+Write-Host "             Test changes before saying 'done'" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 1.6   - Rulescheck Command" -ForegroundColor Cyan
+Write-Host "             Show violations only or 'All rules obeyed'" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 2.2   - Sequential Numbering" -ForegroundColor Cyan
+Write-Host "             Use X.1, X.2, X.3... not letters" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 4.1   - Fix ALL Instances" -ForegroundColor Cyan
+Write-Host "             Fix every occurrence, not just one" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 4.2   - Update Cross-References" -ForegroundColor Cyan
+Write-Host "             Update ALL related files" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 4.3   - Consistent Patterns" -ForegroundColor Cyan
+Write-Host "             Maintain consistency across elements" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 4.5   - Check PowerShell Profile for Duplicates" -ForegroundColor Cyan
+Write-Host "             Check both scripts AND \$PROFILE" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 4.6   - Validate Scripts Before Sourcing" -ForegroundColor Cyan
+Write-Host "             Read entire script first" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 4.7   - Read The Whole System First" -ForegroundColor Cyan
+Write-Host "             Understand dependencies before changes" -ForegroundColor Gray
+Write-Host ""
+Write-Host "RULE 5.1   - Auto-Confirm Files After WarpSpeed" -ForegroundColor Cyan
+Write-Host "             List files successfully loaded" -ForegroundColor Gray
+Write-Host ""
+Write-Host ("=" * 70) -ForegroundColor Magenta
 Write-Host ""
 
-# STEP 0: WARP AI MUST READ PROFILE FIRST
-Write-Host "" 
-Write-Host "🤖 WARP AI: READ THIS FIRST" -ForegroundColor Red
-Write-Host "═══════════════════════════════════════" -ForegroundColor Red
-Write-Host "Before proceeding, you MUST:" -ForegroundColor Yellow
-Write-Host "1. Read: C:\Users\17274\ME\Scripts\New-Session-Instructions.md" -ForegroundColor White
-Write-Host "2. Acknowledge ALL user preferences from that file" -ForegroundColor White
-Write-Host "3. Confirm you will follow the profile rules" -ForegroundColor White
-Write-Host "" 
-Write-Host "👉 WARP AI: Respond with 'Profile read and confirmed' before continuing" -ForegroundColor Cyan
-Write-Host "═══════════════════════════════════════" -ForegroundColor Red
+# Parse and display TODO breakdown
+Write-Host "📋 TODO LIST BREAKDOWN" -ForegroundColor Yellow
+Write-Host ("=" * 70) -ForegroundColor Blue
 Write-Host ""
 
-# Execute SOS steps
-$filesResult = Read-ComplianceFiles
-$todoResult = Get-TodoItems
+# Count TODO items by section
+$section10Count = ([regex]::Matches($todoContent, '(?s)## 1\.0.*?(?=## 2\.0|$)')).Count
+$section20Count = ([regex]::Matches($todoContent, '(?s)## 2\.0.*?(?=## 3\.0|$)')).Count
+$section30Count = ([regex]::Matches($todoContent, '(?s)## 3\.0.*?(?=## 4\.0|$)')).Count
+$totalUnchecked = ([regex]::Matches($todoContent, '- \[ \]')).Count
 
-# CRITICAL: Request explicit rule confirmation from user
-Request-WarpConfirmation
-
-Write-Host "👉 WAITING FOR USER TO ASK WARP AI FOR RULE CONFIRMATION..." -ForegroundColor Yellow
+Write-Host "  📊 Total Open Items: $totalUnchecked" -ForegroundColor White
+Write-Host ""
+Write-Host "  📌 BREAKDOWN BY PRIORITY:" -ForegroundColor Cyan
+Write-Host "     🔴 1.0 CRITICAL PRIORITY" -ForegroundColor Red
+Write-Host "     🟡 2.0 IMPORTANT" -ForegroundColor Yellow
+Write-Host "     ⚪ 3.0 PROJECT-SPECIFIC" -ForegroundColor White
+Write-Host "     ⚪ 4.0+ SYSTEM-WIDE" -ForegroundColor Gray
+Write-Host ""
+Write-Host ("=" * 70) -ForegroundColor Blue
 Write-Host ""
 
-# Then show status
-Show-WarpConfirmation -FilesRead $filesResult.Read -TodoCount $todoResult.Total
+# Save files locally for reference
+$localCompliance = "C:\Users\17274\ME\2829-Niagara-Street\warp-compliance"
+try {
+    $startSessionContent | Out-File "$localCompliance\WARP-START-SESSION.md" -Encoding UTF8 -Force
+    $todoContent | Out-File "$localCompliance\TODO-LIST.md" -Encoding UTF8 -Force
+    Write-Host "✅ Files saved locally to $localCompliance" -ForegroundColor Green
+} catch {
+    Write-Host "⚠️  Could not save files locally: $_" -ForegroundColor Yellow
+}
 
-
-# Open key reference files on screen
+# Open files in editor
 Write-Host "`n📂 Opening reference files..." -ForegroundColor Cyan
-$complianceFolder = "C:\Users\17274\ME\2829-Niagara-Street\warp-compliance"
-$filesToOpen = @(
-    "$complianceFolder\WARP-COMMANDS-REFERENCE.md",
-    "$complianceFolder\WARP-MASTER-RULES.md"
-)
-
-foreach ($file in $filesToOpen) {
-    if (Test-Path $file) {
-        if (Get-Command code -ErrorAction SilentlyContinue) {
-            Start-Process code $file
-            Write-Host "  ✅ Opened: $(Split-Path $file -Leaf)" -ForegroundColor Green
-        } else {
-            Start-Process notepad $file
-            Write-Host "  ✅ Opened in Notepad: $(Split-Path $file -Leaf)" -ForegroundColor Green
-        }
+if (Test-Path "$localCompliance\WARP-START-SESSION.md") {
+    if (Get-Command code -ErrorAction SilentlyContinue) {
+        Start-Process code "$localCompliance\WARP-START-SESSION.md"
+        Start-Process code "$localCompliance\TODO-LIST.md"
+        Write-Host "  ✅ Opened in VS Code" -ForegroundColor Green
+    } else {
+        Start-Process notepad "$localCompliance\WARP-START-SESSION.md"
+        Start-Process notepad "$localCompliance\TODO-LIST.md"
+        Write-Host "  ✅ Opened in Notepad" -ForegroundColor Green
     }
 }
+
 Write-Host ""
-# Display quick commands
+Write-Host ("=" * 70) -ForegroundColor Green
+Write-Host "🚀 WARP SPEED COMPLETE - SESSION READY" -ForegroundColor Green
+Write-Host ("=" * 70) -ForegroundColor Green
+Write-Host ""
 Write-Host "⚡ QUICK COMMANDS:" -ForegroundColor Cyan
-Write-Host "   clean           # Run profile cleanup analysis" -ForegroundColor Gray
-Write-Host "   eos             # End of session routine" -ForegroundColor Gray
-Write-Host "   q               # Reload SwiftLetter shortcuts" -ForegroundColor Gray
+Write-Host "   rulescheck  # Validate compliance" -ForegroundColor Gray
+Write-Host "   clean       # Run health check" -ForegroundColor Gray
+Write-Host "   eos         # End of session" -ForegroundColor Gray
 Write-Host ""
 
-# WARP AI AUTO-TRIGGER
-Write-Host ""
-Write-Host ("=" * 70) -ForegroundColor Yellow
-Write-Host "🤖 WARP AI: EXECUTE AUTO-SEQUENCE NOW" -ForegroundColor Yellow
-Write-Host ("=" * 70) -ForegroundColor Yellow
-Write-Host ""
-Write-Host "Per WARP-START-SESSION.md Section 1.1, you must now automatically:" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "COMMAND 1: Read TODO-LIST.md from GitHub" -ForegroundColor White
-Write-Host "  → URL: https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main/warp-compliance/TODO-LIST.md" -ForegroundColor Gray
-Write-Host "  → Display: All items from SECTION 1.0 (CRITICAL PRIORITY)" -ForegroundColor Gray
-Write-Host ""
-Write-Host "COMMAND 2: Check git status" -ForegroundColor White
-Write-Host "  → Run: git --no-pager status" -ForegroundColor Gray
-Write-Host "  → Show: Any uncommitted changes or clean status" -ForegroundColor Gray
-Write-Host ""
-Write-Host "COMMAND 3: Display status message" -ForegroundColor White
-Write-Host "  → Format: 'Ready to work. Current priorities: [list top 3 from TODO 1.0]'" -ForegroundColor Gray
-Write-Host ""
-Write-Host "COMMAND 4: Ask user which priority" -ForegroundColor White
-Write-Host "  → Question: 'Which priority should we tackle first?'" -ForegroundColor Gray
-Write-Host ""
-Write-Host "🔴 MANDATORY: Show each command AS YOU RUN IT with format:" -ForegroundColor Red
-Write-Host "   ▶️ EXECUTING: [command description]" -ForegroundColor Yellow
-Write-Host "   ✅ COMPLETED: [what was found/done]" -ForegroundColor Green
-Write-Host ""
-Write-Host "👉 DO NOT just say 'I read the files' - EXECUTE and SHOW each command NOW." -ForegroundColor Red
-Write-Host ("=" * 70) -ForegroundColor Yellow
-Write-Host ""
-
-# FINAL STEP: Prompt user to tell Warp AI to confirm files
-Write-Host ""
-Write-Host ("=" * 70) -ForegroundColor Cyan
-Write-Host "📋 FINAL STEP: FILE CONFIRMATION" -ForegroundColor Cyan
-Write-Host ("=" * 70) -ForegroundColor Cyan
-Write-Host ""
-Write-Host "👉 Now tell Warp AI: 'Confirm files read'" -ForegroundColor Yellow
-Write-Host ""
-Write-Host "Warp AI will respond with list of files successfully loaded." -ForegroundColor Gray
-Write-Host ("=" * 70) -ForegroundColor Cyan
-Write-Host ""
-
+# Set environment variable to signal completion
+$env:WARP_GITHUB_FIRST = "true"
+$env:WARP_SESSION_STARTED = Get-Date -Format "yyyy-MM-dd HH:mm:ss"

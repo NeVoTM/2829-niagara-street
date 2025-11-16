@@ -1,303 +1,417 @@
-# 🚀 WARP AI START SESSION INSTRUCTIONS
+# 🚀 WARP AI START SESSION - CONSOLIDATED GUIDE
 
-**Session Start Date:** [Auto-updated by script]  
-**Project:** 2829 Niagara Street Mixed-Use Development  
-**Current Location:** C:\Users\17274\ME\2829-Niagara-Street  
-**GitHub Repository:** https://github.com/NeVoTM/2829-niagara-street  
+**Purpose:** Single source of truth for session startup, rules enforcement, commands, and debugging  
+**Location:** `warp-compliance/WARP-START-SESSION.md`  
+**GitHub:** https://github.com/NeVoTM/2829-niagara-street/blob/main/warp-compliance/WARP-START-SESSION.md  
+**Last Updated:** 2025-11-16  
 
 ---
 
-## 1.0 📋 **IMMEDIATE ACTIONS FOR WARP**
+## 1.0 🔴 CRITICAL RULES - ALL 13 RULES
 
-### 1.1 **AUTO-EXECUTE AFTER READING FILES**
+**WARP AI: These rules are MANDATORY for every interaction. They are loaded as environment variables in PowerShell and enforced by `rulescheck` command.**
 
-**🚨 WARP AI: AUTOMATIC EXECUTION REQUIRED**
+### RULE 1.1: GitHub-First Principle
+**Always read from and save to GitHub BEFORE local files.**
 
-When you read this file after WarpSpeed runs, you MUST automatically execute these commands:
+**When to apply:** Working with compliance files (WARP-MASTER-RULES.md, TODO-LIST.md, USER-PREFERENCES.md, etc.)
 
-```
-AUTO-EXECUTION SEQUENCE:
-1. Read TODO-LIST.md and display current priority items from SECTION 1.0
-2. Check git status: git --no-pager status
-3. Display: "Ready to work. Current priorities: [list top 3 from TODO 1.0]"
-4. Ask: "Which priority should we tackle first?"
-```
+**Procedure:**
+1. Read latest from GitHub: `https://github.com/NeVoTM/2829-niagara-street/blob/main/[FILENAME]`
+2. Make changes
+3. Save to GitHub first (commit + push)
+4. Then update local copy if needed
 
-**DO NOT just say "I read the files" - EXECUTE the sequence above automatically.**
+---
 
-### 1.2 **READ CRITICAL FILES (PRIORITY ORDER)**
+### RULE 1.1a: Auto-Commit After Every Change
+**After making ANY changes to files, IMMEDIATELY execute git commit and push without being reminded.**
 
-**🔴 ESSENTIAL - Read immediately from GitHub (master source):**
-```
-0. https://github.com/NeVoTM/2829-niagara-street/blob/main/WARP-COMPLIANCE-SYSTEM.md
-   - CRITICAL: WHY and HOW to follow procedures (prevents wasting hours)
-   - MANDATORY: Read this FIRST to understand user expectations
-   
-1. https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
-   - Quality assurance and problem solutions with numbered references
-   
-2. https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md
-   - Universal project documentation template for all projects
-   
-3. https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
-   - Current open items and pending work across all projects
-   
-4. project-data.json (local) - Master data source for THIS project's content
-```
-
-**🔵 IMPORTANT - Read for context:**
-```
-5. PROJECT-DOCUMENTATION.md (local) - Complete project specifications
-6. DATA-SYSTEM-README.md (local) - Centralized data system instructions
-7. README.md (local) - Current project overview
-```
-
-**📋 GitHub Master Files (Source of Truth):**
-- **DEBUGGING-CHECKLIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/DEBUGGING-CHECKLIST.md
-- **README-UNIVERSAL-TEMPLATE.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/README-UNIVERSAL-TEMPLATE.md
-- **TODO-LIST.md**: https://github.com/NeVoTM/2829-niagara-street/blob/main/TODO-LIST.md
-- **WarpSpeed.ps1**: https://github.com/NeVoTM/2829-niagara-street/blob/main/WarpSpeed.ps1
-
-### 1.3 **VALIDATE CURRENT PROJECT STATE**
-
-**Run validation script:**
+**Mandatory sequence:**
 ```powershell
-.\Update-ProjectData.ps1 -ValidateOnly
-```
-
-**Check repository status:**
-```powershell
-git status
-git log --oneline -5
-```
-
-### 1.4 **UNDERSTAND WORK COMPLETED**
-
-**✅ COMPLETED BY WARP (Previous Sessions):**
-- Updated mobile-design.html with centralized data system
-- Created comprehensive DEBUGGING-CHECKLIST.md with 9 universal categories
-- Implemented README template system (Category 5)
-- Applied mobile-first design principles
-- Fixed text visibility, alignment, and mobile optimization issues
-- Created data validation PowerShell scripts
-- Established GitHub deployment processes
-
-**📍 CURRENT STATUS:**
-- Project uses PowerShell 7.5.3 (pwsh) for data validation
-- No Node.js dependency required for basic operations
-- All dashboards (mobile-design.html, 2829-dashboard.html, dashboard-design.html) need consistency updates
-- Universal template system created and ready for deployment
-
----
-
-## 2.0 🎯 **PROJECT CONTEXT & ENVIRONMENT**
-
-### 2.1 **Technical Environment:**
-- **OS:** Windows with PowerShell 7.5.3 (pwsh)
-- **Development:** HTML, CSS, JavaScript, Chart.js
-- **Deployment:** GitHub Pages
-- **Data Management:** Centralized JSON system
-- **Validation:** PowerShell scripts (no Node.js required)
-
-### 2.2 **Project Structure:**
-```
-C:\Users\17274\ME\2829-Niagara-Street\
-├── mobile-design.html     # ✅ UPDATED - Primary mobile interface
-├── 2829-dashboard.html   # ⚠️  NEEDS UPDATE - Desktop dashboard
-├── dashboard-design.html # ⚠️  NEEDS UPDATE - Alternative dashboard
-├── index.html            # ⚠️  NEEDS UPDATE - Entry point
-├── project-data.json     # ✅ MASTER DATA SOURCE
-├── DEBUGGING-CHECKLIST.md # ✅ UNIVERSAL QUALITY SYSTEM
-├── README-UNIVERSAL-TEMPLATE.md # ✅ TEMPLATE SYSTEM
-├── TODO-LIST.md          # 📋 CURRENT WORK ITEMS
-└── Update-ProjectData.ps1 # ✅ VALIDATION SCRIPT
-```
-
-### 2.3 **Key Data Standards:**
-- **Financial Figures:** Revenue rounded UP for marketing appeal ($37.4M → $38M)
-- **Text Labels:** "STR Hotel Rooms" (not "STR Hotels")
-- **Mobile-First:** iPhone viewport optimization priority
-- **Centralized Data:** All content sourced from project-data.json
-
----
-
-## 3.0 🔧 **WORKFLOW GUIDELINES**
-
-### 3.1 **For Data Changes:**
-1. Edit `project-data.json` (single source of truth)
-2. Run validation: `.\Update-ProjectData.ps1 -ValidateOnly`
-3. Update affected HTML files if needed
-4. Test on mobile viewport (iPhone 12 Pro in browser dev tools)
-
-### 3.2 **For Code Changes:**
-1. Follow mobile-first principles
-2. Apply DEBUGGING-CHECKLIST.md solutions
-3. Maintain consistency across all dashboard versions
-4. Test infinite scroll prevention and chart sizing
-
-### 3.3 **For New Projects:**
-1. Copy README-UNIVERSAL-TEMPLATE.md to README.md
-2. Replace [bracketed placeholders] with project data
-3. Create project-data.json for centralized data
-4. Copy DEBUGGING-CHECKLIST.md for quality assurance
-
----
-
-## 4.0 📊 **RELATED PROJECTS & REFERENCES**
-
-### 4.1 **Portfolio Links:**
-- **Nevo Tower Portal:** https://nevotm.github.io/nevo-tower-portal/ (Template source)
-- **Current Project Live:** https://nevotm.github.io/2829-niagara-street/mobile-design.html
-
-### 4.2 **Contact Information:**
-- **Developer:** Tiffany Durilla
-- **Email:** durillaprop@gmail.com
-- **Phone:** 716-421-1210
-
-### 4.3 **Documentation Locations:**
-- **AI Teaching Reference:** C:\Users\17274\ME\AI-Teaching\AI-Teaching-Reference.md
-- **Command Reference:** C:\Users\17274\ME\Scripts\SMLF-Senior-Memory-List.md
-- **Projects List:** C:\Users\17274\ME\Projects-and-Links-Master-List.md
-
----
-
-## 5.0 ⚡ **QUICK COMMANDS REFERENCE**
-
-**Validate project data:**
-```powershell
-.\Update-ProjectData.ps1 -ValidateOnly
-```
-
-**Deploy to GitHub:**
-```powershell
-git add .
-git commit -m "Update: [describe changes]"
+git add [files-modified]
+git commit -m "[descriptive message]"
 git push
 ```
 
-**Check live site:**
-- Mobile: https://nevotm.github.io/2829-niagara-street/mobile-design.html
-- Desktop: https://nevotm.github.io/2829-niagara-street/2829-dashboard.html
+**Do NOT:**
+- Wait for user to remind you
+- Ask "should I commit this?"
+- Skip committing changes
 
-**Start new session:**
+---
+
+### RULE 1.4: Authorization Code Required
+**Never edit WARP-MASTER-RULES.md without user providing authorization code 2319**
+
+**When to apply:** Any request to modify this file
+
+**Procedure:**
+1. User requests edit to rules → Ask for code 2319
+2. If code provided → Proceed with changes
+3. If code not provided → Refuse edit request
+
+---
+
+### RULE 1.5: Verify Before Responding
+**Before saying "done," test changes from user's perspective to confirm they work as intended.**
+
+**When to apply:** Changes that affect user-facing behavior (scripts, profiles, system files)
+
+**Procedure:**
+1. Make changes
+2. Think through execution flow from user's perspective
+3. Verify behavior matches expectation
+4. Only then respond "done"
+
+**Never:** Say "done" based only on "the file looks correct"
+
+---
+
+### RULE 1.6: Rulescheck Command
+**When user types `rulescheck`, verify answer against all applicable rules. Only display rules that were violated (❌). If all rules obeyed, respond "All rules obeyed"**
+
+**Response format if compliant:**
+```
+🤖 Rules Verification: All rules obeyed
+
+[Your answer here]
+```
+
+**Response format if violations:**
+```
+🤖 Rules Verification:
+
+❌ RULE 4.1 (Fix ALL): Only fixed 1 instance, need to fix 6 more
+❌ RULE 1.1a (Auto-commit): Forgot to commit changes
+
+[Fixing violations now...]
+```
+
+---
+
+### RULE 2.2: Sequential Numbering
+**When adding new items, use sequential numbering (X.1, X.2, X.3...) not letters or mixed formats.**
+
+**When to apply:** Adding items to any numbered list (TODOs, procedures, sections)
+
+---
+
+### RULE 4.1: Fix ALL Instances
+**When fixing a problem, fix ALL occurrences, not just one.**
+
+**When to apply:** User reports ANY problem that might exist in multiple places
+
+**Procedure:**
+1. Identify the issue
+2. Search for ALL occurrences
+3. Apply fix to EVERY instance
+4. Verify no instances were missed
+
+---
+
+### RULE 4.2: Update Cross-References
+**When updating any file, update ALL cross-references in related files.**
+
+**When to apply:** Modifying any compliance file
+
+**Must update:**
+- If changing TODO-LIST.md → Update any files that reference it
+- If adding to DEBUGGING-CHECKLIST.md → Update quick reference
+- If modifying file locations → Update SAIT-DIRECTORY-STRUCTURE.md
+
+---
+
+### RULE 4.3: Consistent Patterns
+**Maintain consistent patterns across all similar elements.**
+
+**When to apply:** Creating or modifying repetitive elements (tabs, forms, sections, buttons)
+
+**Examples:**
+- All tabs have same height
+- All buttons have same styling
+- All sections follow same layout
+
+---
+
+### RULE 4.5: Check PowerShell Profile for Duplicates
+**When editing startup messages, commands, or functions, ALWAYS check both the script files AND the PowerShell profile ($PROFILE) for duplicates.**
+
+**When to apply:** Modifying startup messages, function definitions, aliases, or session startup code
+
+**Procedure:**
+1. Search in project scripts (warp-toolbox/, warp-profile-alias.ps1, etc.)
+2. Search in PowerShell profile: `C:\Users\17274\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+3. If duplicates found → Remove from profile, keep in sourced script
+
+---
+
+### RULE 4.6: Validate Scripts Before Sourcing
+**Before using/sourcing/referencing an existing script, READ it fully to check for errors or incompatibilities.**
+
+**When to apply:** 
+- Adding dot-sourcing (`. script.ps1`) to profile
+- Calling external scripts from other scripts
+
+**Procedure:**
+1. Read the entire script file first
+2. Check for syntax that won't work (e.g., `Export-ModuleMember` only works in .psm1 modules)
+3. Fix errors BEFORE adding references
+
+---
+
+### RULE 4.7: Read The Whole System First
+**Before making changes, understand the complete system including dependencies, loaders, and execution flow.**
+
+**When to apply:** Modifying files that are part of a larger system (scripts loaded by other scripts, files executed from GitHub vs. local)
+
+**"Whole system" means:**
+1. The file being edited
+2. Files that source/load it (e.g., $PROFILE loads scripts)
+3. Files it references (e.g., script calls other scripts)
+4. Where it's executed from (GitHub vs. local)
+
+---
+
+### RULE 5.1: Auto-Confirm Files After WarpSpeed
+**After WarpSpeed completes, if I actually downloaded and read the compliance files, automatically respond with "Confirmed files read:" followed by short list of files successfully loaded.**
+
+**When to apply:** After WarpSpeed downloads files from GitHub
+
+**Response format:**
+```
+✅ Confirmed files read:
+   • WARP-START-SESSION.md
+   • TODO-LIST.md
+```
+
+---
+
+## 2.0 📋 ESSENTIAL COMMANDS
+
+### `WarpSpeed`
+**Purpose:** Start of session procedure - downloads rules and TODO list from GitHub
+
+**Where to run:** Any terminal in PowerShell 7+
+
+**What it does:**
+1. Downloads WARP-START-SESSION.md from GitHub
+2. Downloads TODO-LIST.md from GitHub
+3. Displays Section 1.0 (13 critical rules) as reminder
+4. Shows TODO breakdown by priority (1.0 CRITICAL, 2.0 IMPORTANT, etc.)
+5. Opens both files in editor for reference
+
+**Usage:**
 ```powershell
 WarpSpeed
 ```
 
-**CRITICAL: WarpSpeed function is installed in PowerShell profile:**
-- **Location:** `$PROFILE` (PowerShell profile)
-- **Function:** `WarpSpeed` (capital W, capital S)
-- **Script Path:** `C:\Users\17274\ME\2829-Niagara-Street\WarpSpeed.ps1`
-- **Parameters:** `-ShowPath`, `-Update`, `-QuickStart`, `-Install`
+**Output:**
+- "GitHub-first confirmed" message
+- 13 rules displayed
+- TODO count by priority
+- Files opened in Notepad or VS Code
 
 ---
 
-## 6.0 🚨 **CRITICAL REMINDERS**
+### `rulescheck`
+**Purpose:** Display and validate all 13 critical rules before Warp AI responds
 
-### 6.1 **Universal Standards:**
-- Always maintain mobile-first approach
-- Apply DEBUGGING-CHECKLIST.md solutions for consistency
-- Use centralized data management (project-data.json)
-- Follow marketing rounding rules for financial figures
+**Where to run:** Any terminal in PowerShell 7+
 
-### 6.2 **Quality Checklist:**
-- Text visibility on mobile (proper contrast/shadows)
-- Chart height constraints (max 280px to prevent infinite scroll)
-- Touch targets minimum 44px for accessibility
-- Navigation scrolls to section tops, not arbitrary positions
+**What it does:**
+1. Prints all 13 rules from environment variables
+2. Validates GitHub-first policy
+3. Confirms rule count matches (should be 13)
+4. Signals to Warp AI to verify compliance before responding
 
-### 6.3 **File Management:**
-- **GitHub is MASTER source** for universal templates (DEBUGGING-CHECKLIST.md, README-UNIVERSAL-TEMPLATE.md, TODO-LIST.md)
-- **Universal Access Principle:** GitHub first, then copy to local (NEVER local first)
-- **Always read latest from GitHub URLs** listed above - don't rely on local copies
-- **Copy universal files FROM GitHub TO local drive** when starting new projects
-- Each project maintains its own project-data.json locally
-- Universal templates apply across all projects
-- **CRITICAL VIOLATION:** Never update local files first - this wastes time and breaks consistency
-
----
-
-## 7.0 🤖 **WARP AI MANDATORY PROCEDURES**
-
-**🚨 CRITICAL: Follow these procedures in EVERY session to maintain system integrity**
-
-### 7.1 **Numbered Reference System:**
-- **ALWAYS** use numbered references: "SECTION 4.3" not "alignment issues"
-- **ALWAYS** reference TODO items by number: "TODO 3.1.2" not "data files"
-- **ALWAYS** cite specific issues: "ISSUE 4.1 (INFINITE SCROLLING)"
-
-### 7.2 **File Update Workflow:**
-1. Changes to universal files affect ALL projects
-2. GitHub files are MASTER - update there first
-3. Use proper commit messages with numbered references
-4. Update cross-references in related files
-
-### 7.3 **Adding New Items:**
-1. Find appropriate numbered section
-2. Add with next sequential number (X.1, X.2, X.3...)
-3. Update ALL related files simultaneously
-4. Never break hierarchical numbering system
-
-### 7.4 **Session Standards:**
-- Start each session with `WarpSpeed` command (installed in PowerShell profile)
-- Choose appropriate project type (NEW/EXISTING/ISSUES)
-- Reference numbered sections in all communications
-- End sessions by updating TODO-LIST.md with numbered priorities
-
-### 7.6 **WarpSpeed Command Reference:**
+**Usage:**
 ```powershell
-# ACTUAL COMMANDS (from PowerShell profile):
-WarpSpeed              # Interactive project selection + full session instructions
-WarpSpeed -QuickStart  # Skip project selection, show session file only
-WarpSpeed -ShowPath    # Display file location
-WarpSpeed -Update      # Update session timestamp
-WarpSpeed -Install     # Install/reinstall in PowerShell profile
+rulescheck
 ```
 
-**CRITICAL NOTE:** Function name is `WarpSpeed` (capital W, capital S) as installed in `$PROFILE`
+**Output:**
+- List of all 13 rules
+- "GitHub-first confirmed" status
+- Rule count verification
 
-**📝 Following these procedures prevents wasting time on reorganization and ensures consistent project management.**
-
-### 7.5 **Understanding Warp AI Behavioral Rules & Constraints**
-
-**🎯 CRITICAL: Understanding how Warp AI actually works to optimize collaboration**
-
-**Session Memory & Persistence:**
-- Each session is independent - no guaranteed memory between sessions
-- Time delays within sessions may create "mini-restarts" where context is reduced
-- Always assume fresh start unless proven otherwise
-- Use numbered reference system to quickly rebuild context
-
-**Warp AI Internal Rules (observed patterns):**
-- Prefers non-interactive commands (no pagers, no fullscreen apps)
-- Uses tools for file operations instead of shell commands
-- Creates todo lists for complex tasks (3+ steps)
-- Avoids destructive commands unless explicitly required
-- Must follow tool usage rules even when they conflict with efficiency
-
-**Rule Conflicts You May Observe:**
-- Warp may violate its own documented procedures due to internal constraints
-- When this happens, redirect using numbered references: "Apply SECTION X.X"
-- Use trigger phrases: "We already solved this" → Points to existing numbered solution
-
-**Compliance Commands for Maximum Adherence:**
-- "Apply DEBUGGING-CHECKLIST.md procedures exactly as documented"
-- "Follow the Universal Access Principle: GitHub first, never local first"
-- "Use numbered references for all solutions: SECTION X.X, ISSUE X.X"
-- "Check existing solutions before proposing new ones"
-
-**Session Continuity Strategies:**
-- Start every session with WarpSpeed command
-- Include numbered reference context in requests
-- Reference specific GitHub URLs for universal files
-- Use the established trigger phrases when Warp "forgets" procedures
+**For Warp AI:** When user types `rulescheck`, follow RULE 1.6 format
 
 ---
 
-**Last Updated:** [Auto-updated by WarpSpeed script]  
-**Session Duration:** Track time spent on current tasks  
-**Next Session:** Continue with TODO-LIST.md priorities
+### `eos`
+**Purpose:** End of session routine
+
+**Where to run:** Project root `C:\Users\17274\ME\2829-Niagara-Street`
+
+**What it does:**
+1. Commits all changes to GitHub
+2. Generates session documentation
+3. Updates completion tracker
+4. Creates TODO list for next session
+
+**Usage:**
+```powershell
+eos
+```
+
+**Note:** Run this at the end of EVERY work session
 
 ---
 
-*This file is automatically referenced by the `WarpSpeed` command for efficient session startup.*
+### `clean`
+**Purpose:** Run profile cleanup and health check
+
+**Where to run:** Any terminal in PowerShell 7+
+
+**What it does:**
+1. Checks for duplicate files
+2. Detects outdated files
+3. Verifies git status
+4. Checks disk space
+
+**Usage:**
+```powershell
+clean
+```
+
+**When to use:** When WarpSpeed prompts, or before committing changes
+
+---
+
+## 3.0 🔧 QUICK DEBUGGING PLAYBOOK
+
+### 3.1 Git & GitHub First Verification
+**Problem:** Changes not syncing to GitHub  
+**Fix:** Verify remote and push
+```powershell
+git remote -v  # Should show github.com/NeVoTM/2829-niagara-street
+git status
+git add .
+git commit -m "Description"
+git push
+```
+
+---
+
+### 3.2 PowerShell Execution Policy
+**Problem:** Scripts won't run, "execution policy" error  
+**Fix:** Set execution policy for current user
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+---
+
+### 3.3 Module Not Found or Import Errors
+**Problem:** Module commands not available  
+**Fix:** Reimport module or install if missing
+```powershell
+Import-Module ModuleName -Force
+# or
+Install-Module ModuleName -Scope CurrentUser
+```
+
+---
+
+### 3.4 Path Issues - Script Not Found
+**Problem:** "command not found" or script path errors  
+**Fix:** Use absolute paths or navigate to directory first
+```powershell
+cd C:\Users\17274\ME\2829-Niagara-Street
+.\WarpSpeed.ps1
+```
+
+---
+
+### 3.5 File Encoding Issues
+**Problem:** Special characters appear wrong or script fails to parse  
+**Fix:** Save files as UTF-8 with BOM in VS Code
+```
+File > Save with Encoding > UTF-8 with BOM
+```
+
+---
+
+### 3.6 Git Credential Issues
+**Problem:** Git asks for password repeatedly  
+**Fix:** Configure credential manager
+```powershell
+git config --global credential.helper manager-core
+```
+
+---
+
+### 3.7 Environment Variables Not Loading
+**Problem:** `$env:WARP_RULE_*` variables are empty  
+**Fix:** Reload profile
+```powershell
+. $PROFILE
+# or restart terminal
+```
+
+---
+
+### 3.8 Network/TLS Issues When Downloading from GitHub
+**Problem:** "SSL/TLS secure channel" errors  
+**Fix:** Force TLS 1.2
+```powershell
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+```
+
+---
+
+## 4.0 📂 PROJECT CONTEXT & FILE LOCATIONS
+
+### Local Paths:
+- **Repository Root:** `C:\Users\17274\ME\2829-Niagara-Street`
+- **Compliance Folder:** `C:\Users\17274\ME\2829-Niagara-Street\warp-compliance`
+- **WarpSpeed Script:** `C:\Users\17274\ME\2829-Niagara-Street\WarpSpeed.ps1`
+- **PowerShell Profile:** `C:\Users\17274\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+
+### GitHub Repository:
+- **Main Repo:** https://github.com/NeVoTM/2829-niagara-street
+- **Compliance Files:** https://github.com/NeVoTM/2829-niagara-street/tree/main/warp-compliance
+- **Raw URL Base:** https://raw.githubusercontent.com/NeVoTM/2829-niagara-street/main
+
+### Key Files:
+1. **WARP-START-SESSION.md** - This file (single source of truth)
+2. **TODO-LIST.md** - Current work items and priorities
+3. **DEBUGGING-CHECKLIST.md** - Complete debugging reference (kept for deep reference)
+4. **project-data.json** - Master data source for project content
+
+### Environment:
+- **OS:** Windows 11
+- **Shell:** PowerShell 7.5.4 (pwsh)
+- **Git:** Required for GitHub-first workflow
+- **Editor:** VS Code or Notepad
+
+### Project Details:
+- **Project Name:** 2829 Niagara Street Mixed-Use Development
+- **Location:** Tonawanda, NY
+- **Type:** Real estate development project
+- **Stack:** HTML, CSS, JavaScript, Chart.js, PowerShell
+
+---
+
+## 5.0 🎯 WORKFLOW SUMMARY
+
+### Start of Session:
+1. Open PowerShell 7
+2. Run `WarpSpeed`
+3. Review 13 rules displayed
+4. Check TODO priorities
+5. Begin work
+
+### During Work:
+- Use `rulescheck` when asking Warp AI for help
+- Follow RULE 1.1a (auto-commit after changes)
+- Reference SECTION numbers (SECTION 1.0, RULE 4.1, etc.)
+
+### End of Session:
+1. Run `eos` to commit and document
+2. Verify changes pushed to GitHub
+
+---
+
+**🔒 REMEMBER: GitHub-first always. Rules are enforced. Auto-commit required.**
