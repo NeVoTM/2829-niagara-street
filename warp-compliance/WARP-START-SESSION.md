@@ -414,4 +414,243 @@ git config --global credential.helper manager-core
 
 ---
 
+## 6.0 🔧 COMPLETE DEBUGGING REFERENCE
+
+**All debugging solutions from DEBUGGING-CHECKLIST.md organized by priority**
+
+### CRITICAL MOBILE ISSUES (Section 4.0 - Apply First)
+
+#### 4.1 🔴 Infinite Scrolling Problem
+**Symptoms:** Page won't stop scrolling, sections repeat endlessly
+**Fix:**
+```css
+.section {
+    max-height: 100vh;  /* CRITICAL */
+    overflow-y: auto;   /* CRITICAL */
+    padding-bottom: 100px;
+}
+```
+
+#### 4.2 🔴 Chart Sizing Disasters
+**Symptoms:** Charts huge, break layout, cause scrolling
+**Fix:**
+```css
+canvas {
+    max-height: 280px !important;  /* CRITICAL */
+}
+```
+```javascript
+options: { maintainAspectRatio: false }  /* CRITICAL */
+```
+
+#### 4.3 🔴 Alignment Nightmares
+**Symptoms:** Text misaligned, addresses unprofessional, checkmarks inconsistent
+**Fix:** Use separate tables for different alignment needs
+```html
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 30px;">✓</td>
+        <td><strong>Location:</strong><br>&nbsp;&nbsp;2829 Niagara Street</td>
+    </tr>
+</table>
+```
+
+#### 4.4 🔴 Text Visibility Disasters
+**Symptoms:** Can't read text on mobile, washed out
+**Fix:**
+```css
+@media (max-width: 480px) {
+    .card h2, .card h3 {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);  /* CRITICAL */
+    }
+}
+```
+
+#### 4.5 🔴 Navigation Positioning Failures
+**Symptoms:** Clicking tab jumps to middle, not top
+**Fix:**
+```javascript
+targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+```
+
+#### 4.6 🔴 Data Integrity Problems
+**Symptoms:** Number inconsistencies (35M vs 38M), math errors
+**Fix:** Use project-data.json as single source
+**Marketing Rules:**
+- Revenue: ALWAYS round UP ($37.4M → $38M)
+- Costs: Keep precise or round DOWN
+
+#### 4.7 🔴 Mobile Usability Failures
+**Symptoms:** Icons too small, hard to click on phone
+**Fix:**
+```css
+.contact-icon {
+    font-size: 1.8rem;  /* 44px minimum touch target */
+}
+```
+
+#### 4.8 🔴 Video Container Overflow
+**Symptoms:** Video box cuts off, shows on other tabs
+**Fix:**
+```css
+.video-placeholder {
+    max-height: 200px;   /* CRITICAL */
+    overflow: hidden;    /* CRITICAL */
+}
+```
+
+#### 4.9 🔴 Version Management Chaos
+**Symptoms:** Version info appears in wrong places
+**Fix:** Version info ONLY on Contact tab
+
+---
+
+### UNIVERSAL SYSTEMS (Sections 1.0-3.0 - Foundation)
+
+#### 1.0 🟡 Data/Text Master Control System
+**Problem:** Scattered text, inconsistent data
+**Solution:** Create project-data.json as single source of truth
+**Steps:**
+1. Create project-data.json with all text/data
+2. Create Update-ProjectData.ps1 validation script
+3. Edit JSON, validate, deploy
+
+#### 2.0 🟡 Mobile-First Design System
+**Problem:** Mobile issues discovered late
+**Solution:** Separate mobile and desktop interfaces
+- mobile-design.html (primary)
+- desktop-design.html (enhancement)
+- index.html (device detection)
+
+#### 3.0 🟡 Node.js Script Usage
+**Problem:** Command syntax errors, script not found
+**Fix:**
+```powershell
+cd C:\Users\17274\ME\2829-Niagara-Street
+node update-project-data.js  # Correct syntax
+```
+
+---
+
+### QUALITY ASSURANCE (Section 6.0 - Testing)
+
+#### 6.1 📊 Charts & Visualizations Checklist
+- [ ] All charts responsive with max-height constraints
+- [ ] Charts not cut off (max 280px height)
+- [ ] Chart legends readable
+- [ ] No infinite scrolling caused by charts
+
+#### 6.2 🔘 Buttons & Navigation Checklist
+- [ ] All navigation buttons visible
+- [ ] Contact buttons with LARGE icons
+- [ ] Tab navigation scrolls to TOP of sections
+- [ ] Navigation arrows have good contrast
+
+#### 6.3 📱 iPhone Optimization Checklist
+- [ ] All text readable without zooming
+- [ ] No horizontal/infinite scrolling
+- [ ] Touch targets appropriate size (44px min)
+- [ ] Section padding accounts for nav (120px)
+- [ ] Text has proper contrast with shadows
+
+#### 6.4 🖼️ Images & Slideshow Checklist
+- [ ] Slideshow navigation working
+- [ ] Captions not covering images
+- [ ] Single-line captions on iPhone
+
+#### 6.5 🔗 Links & Integration Checklist
+- [ ] Email links opening mail client
+- [ ] Phone links working on mobile
+- [ ] No broken or missing links
+
+#### 6.6 🎨 Professional Appearance Checklist
+- [ ] Proper spacing and alignment
+- [ ] Data aligned to data, not page edges
+- [ ] Address formatting proper
+- [ ] Green checkmarks consistently aligned
+
+#### 6.7 🔧 Technical Testing Checklist
+- [ ] No JavaScript errors in console
+- [ ] Responsive design works on all sizes
+- [ ] Performance acceptable
+- [ ] All functionality tested end-to-end
+
+---
+
+### CRITICAL FAILURE POINTS (Section 7.0 - Avoid These)
+
+#### 7.1 Major Issues to Avoid
+- Charts cut off or not visible (ALWAYS set max-height)
+- Missing financial data or wrong numbers
+- Broken navigation or buttons
+- Infinite scrolling or layout breaks
+- Navigation not scrolling to section tops
+
+#### 7.2 Common Oversights
+- Forgetting to test on iPhone specifically
+- Not checking all tabs/sections
+- Text overflow in stat boxes
+- Small contact icons on mobile
+- Revenue not rounded for marketing appeal
+
+#### 7.3 Professional Standards
+- Every element must serve a purpose
+- No placeholder or dummy content
+- Consistent styling throughout
+- Fast loading and responsive
+- Error-free operation
+
+---
+
+### QUICK COMMAND FORMATS FOR WARP AI
+
+**For Specific Issues:**
+```
+Apply SECTION 4.1 (infinite scroll fix)
+Apply SECTION 4.2 and 4.3 (charts and alignment)
+Check SECTION 6.3 (iPhone optimization)
+```
+
+**For Complete Reviews:**
+```
+Apply full QC checklist - comprehensive testing required
+Apply SECTION 6.0 (all quality assurance checks)
+```
+
+**For Quick Fixes:**
+```
+Apply SECTION 4 critical mobile fixes
+Fix: charts, alignment, text visibility (SECTION 4.2, 4.3, 4.4)
+```
+
+---
+
+### CRITICAL CSS FIXES (Always Apply)
+
+1. **Section Height Control**: `max-height: 100vh` + `overflow-y: auto`
+2. **Chart Sizing**: Limit charts to `max-height: 280px`
+3. **Text Visibility**: Use text shadows and proper contrast
+4. **Navigation Scrolling**: Tabs scroll to section tops
+5. **Mobile Padding**: Account for bottom nav `padding-bottom: 120px`
+
+### MARKETING RULES (Always Follow)
+
+- **Revenue/Sales**: ALWAYS round UP ($37.4M → $38M)
+- **Costs/Expenses**: ALWAYS round DOWN or keep precise
+- **Consistency**: Same value = identical everywhere
+
+### ALIGNMENT STANDARDS (Professional Appearance)
+
+- Data aligned to data, not page edges
+- Addresses: "Location:" then indented continuation
+- Green checkmarks consistently aligned
+- Contact icons 1.8rem for mobile (44px touch target)
+- Use separate tables for complex layouts
+
+---
+
+**📚 Full Details:** See DEBUGGING-CHECKLIST.md (1,375 lines) for complete solutions with code examples
+
+---
+
 **🔒 REMEMBER: GitHub-first always. Rules are enforced. Auto-commit required.**
