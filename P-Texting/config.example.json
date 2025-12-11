@@ -1,0 +1,23 @@
+{
+  "browser": "chrome",
+  "browser_profile_path": "C:\\Users\\YOUR_USER\\AppData\\Local\\Google\\Chrome\\User Data\\Default",
+  "browser_binary_path": "",
+  "input_path": "C:/path/to/your/contacts.csv",
+  "phone_column": "Phone",
+  "name_column": "Name",
+  "date_column": "Date",
+  "message_text": "Hello {name}, this is an example message. Reply STOP to opt out.",
+  "salutation": "Attn: {name},",
+  "image_path": null,
+  "batch_size": 7,
+  "delay_between_batches_seconds": 45,
+  "batch_delay_jitter_seconds": 10,
+  "daily_limit": 250,
+  "max_retries": 3,
+  "per_message_delay_seconds": 2,
+  "region_default_country_code": "US",
+  "account_label": "account1",
+  "database_path": "progress_shared.db",
+  "log_path": ".\\logs\\run_chrome.log",
+  "remote_debugging_port": 9222
+}

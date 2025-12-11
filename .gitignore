@@ -1,0 +1,33 @@
+# Global ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.DS_Store
+Thumbs.db
+
+# P-Texting artifacts
+P-Texting/logs/
+P-Texting/reports/
+P-Texting/databases/
+P-Texting/**/progress*.db
+P-Texting/**/progress_*.db
+P-Texting/**/progress_shared*.db
+P-Texting/**/progress_opera.db
+P-Texting/**/__pycache__/
+P-Texting/**/backups/
+P-Texting/**/junk/
+P-Texting/**/tests_output/
+P-Texting/**/tmp/
+P-Texting/**/message_report*.txt
+P-Texting/**/gvoice_recording_*.avi
+P-Texting/**/test_*.csv
+P-Texting/**/pending_*.csv
+P-Texting/config.json
+
+# Node (if any)
+node_modules/
+*.env
+.env
+.env.*

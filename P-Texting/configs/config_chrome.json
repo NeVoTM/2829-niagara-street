@@ -1,0 +1,23 @@
+{
+  "browser": "chrome",
+  "browser_profile_path": "C:\\Users\\17274\\AppData\\Local\\Google\\Chrome\\User Data\\Default",
+  "browser_binary_path": "",
+  "input_path": "C:/Users/17274/Downloads/Nash/test_data_enhanced-54.csv",
+  "phone_column": "Phone",
+  "name_column": "Name",
+  "date_column": "Date",
+  "message_text": "For more information Call Ralph - 716-316-2027\nSerious Buyers with POF only",
+  "salutation": "Attn: {name},",
+  "image_path": "C:/Users/17274/Downloads/Webster_FullBleed_Flyer_v7.pdf",
+  "batch_size": 7,
+  "delay_between_batches_seconds": 45,
+  "batch_delay_jitter_seconds": 10,
+  "daily_limit": 250,
+  "max_retries": 3,
+  "per_message_delay_seconds": 2,
+  "region_default_country_code": "US",
+  "account_label": "account1",
+  "database_path": "progress_shared.db",
+  "log_path": ".\\logs\\run_chrome.log",
+  "remote_debugging_port": 9222
+}

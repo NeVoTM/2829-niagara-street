@@ -1,0 +1,23 @@
+{
+  "browser": "vivaldi",
+  "browser_profile_path": "C:\\temp\\vivaldi_debug_profile",
+  "browser_binary_path": "",
+  "input_path": "C:/Users/17274/Documents/HairColorNY/list_from_grok_CLEANED.csv",
+  "phone_column": "Phone",
+  "name_column": "Name",
+  "date_column": "Date",
+  "message_text": "https://www.ebay.com/itm/306619246961?itmmeta=01KAKVABN2PTPY6EFNHF5823TG",
+  "salutation": "Attn: {name},",
+  "image_path": "C:/Users/17274/Documents/HairColorNY/mystic_divine_iPhone_text_friendly_cropped.png",
+  "batch_size": 7,
+  "delay_between_batches_seconds": 45,
+  "batch_delay_jitter_seconds": 10,
+  "daily_limit": 300,
+  "max_retries": 3,
+  "per_message_delay_seconds": 2,
+  "region_default_country_code": "US",
+  "account_label": "account5",
+  "database_path": "progress_vivaldi.db",
+  "log_path": ".\\logs\\run_vivaldi.log",
+  "remote_debugging_port": 9226
+}

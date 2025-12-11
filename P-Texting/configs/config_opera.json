@@ -1,0 +1,23 @@
+{
+  "browser": "opera",
+  "browser_profile_path": "C:\\temp\\opera_debug_profile",
+  "browser_binary_path": "",
+  "input_path": "C:/Users/17274/ME/2829-Niagara-Street/P-Texting/test_data_enhanced.csv",
+  "phone_column": "Phone",
+  "name_column": "Name",
+  "date_column": "Date",
+  "message_text": "For more information Call Ralph - 716-316-2027\nSerious Buyers with POF only",
+  "salutation": "Attn: {name},",
+  "image_path": "C:/Users/17274/Downloads/Nash/Webster_FullBleed_Flyer_v2_compressed.png",
+  "batch_size": 7,
+  "delay_between_batches_seconds": 45,
+  "batch_delay_jitter_seconds": 10,
+  "daily_limit": 300,
+  "max_retries": 3,
+  "per_message_delay_seconds": 2,
+  "region_default_country_code": "US",
+  "account_label": "account4",
+  "database_path": "progress_opera.db",
+  "log_path": ".\\logs\\run_opera.log",
+  "remote_debugging_port": 9225
+}
