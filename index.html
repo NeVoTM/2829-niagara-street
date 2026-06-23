@@ -3,1471 +3,1066 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2829 Niagara Street - Master Development Dashboard v1.0</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="description" content="Fort Myers, Florida 2 bedroom 2 bath short-term sublease rental with local guide, travel estimates, and white-glove concierge options.">
+    <title>Fort Myers Direct Stay - 2 Bed 2 Bath Short-Term Rental</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            --navy: #0f2742;
+            --blue: #176b87;
+            --teal: #64ccc5;
+            --sand: #f8f1e5;
+            --coral: #ff7f50;
+            --green: #1f8a70;
+            --ink: #1f2933;
+            --muted: #62717f;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(15, 39, 66, 0.15);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-gradient);
-            min-height: 100vh;
+            background: var(--sand);
+            color: var(--ink);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.6;
         }
 
-        /* Header */
-        .header {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 12px 0;
+        a {
+            color: inherit;
+        }
+
+        .topbar {
+            background: rgba(15, 39, 66, 0.94);
+            backdrop-filter: blur(16px);
+            color: var(--white);
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: var(--card-shadow);
+            z-index: 20;
+            box-shadow: 0 10px 30px rgba(15, 39, 66, 0.18);
         }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .nav {
+            align-items: center;
             display: flex;
+            gap: 20px;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo-section h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo-section p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .status-badge {
-            background: var(--accent-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Navigation Tabs */
-        .nav-tabs {
-            background: rgba(255,255,255,0.9);
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            border-bottom: 3px solid var(--secondary-color);
-        }
-
-        .tab-button {
-            background: transparent;
-            border: none;
-            padding: 15px 25px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            transition: all 0.3s ease;
-            position: relative;
-            flex: 1;
-            min-width: 140px;
-        }
-
-        .tab-button:hover {
-            background: rgba(52,152,219,0.1);
-            color: var(--secondary-color);
-        }
-
-        .tab-button.active {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent-color);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
             margin: 0 auto;
-            padding: 30px 20px;
+            max-width: 1180px;
+            padding: 14px 22px;
         }
 
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
+        .brand {
+            font-weight: 800;
+            letter-spacing: 0.02em;
         }
 
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cards */
-        .card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: var(--card-shadow);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .card h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+        .nav-links {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            border-radius: 999px;
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--white);
+        }
+
+        .hero {
+            background:
+                linear-gradient(135deg, rgba(15, 39, 66, 0.92), rgba(23, 107, 135, 0.82)),
+                radial-gradient(circle at 20% 20%, rgba(100, 204, 197, 0.55), transparent 28%),
+                radial-gradient(circle at 85% 5%, rgba(255, 127, 80, 0.45), transparent 25%);
+            color: var(--white);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero::after {
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 54px 54px;
+            content: "";
+            inset: 0;
+            opacity: 0.18;
+            position: absolute;
+        }
+
+        .hero-inner {
+            display: grid;
+            gap: 34px;
+            grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+            margin: 0 auto;
+            max-width: 1180px;
+            min-height: 670px;
+            padding: 78px 22px 86px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            display: inline-flex;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5.8rem);
+            letter-spacing: -0.06em;
+            line-height: 0.95;
+            margin-bottom: 22px;
+            max-width: 760px;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.86);
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            max-width: 670px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .button {
+            align-items: center;
+            border: 0;
+            border-radius: 999px;
+            cursor: pointer;
+            display: inline-flex;
+            font: inherit;
+            font-weight: 800;
+            justify-content: center;
+            min-height: 48px;
+            padding: 13px 22px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            box-shadow: 0 16px 38px rgba(15, 39, 66, 0.22);
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: var(--coral);
+            color: var(--white);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            color: var(--white);
+        }
+
+        .hero-card {
+            align-self: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            color: var(--ink);
+            padding: 26px;
+        }
+
+        .availability {
+            background: #eafaf5;
+            border: 1px solid rgba(31, 138, 112, 0.28);
+            border-radius: 18px;
+            color: var(--green);
+            font-weight: 800;
+            margin-bottom: 18px;
+            padding: 12px 14px;
+        }
+
+        .fact-grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .fact {
+            background: #f6fbfc;
+            border: 1px solid #dcecf0;
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .fact strong {
+            color: var(--navy);
+            display: block;
+            font-size: 1.45rem;
+            line-height: 1.1;
+        }
+
+        .fact span {
+            color: var(--muted);
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .section {
+            margin: 0 auto;
+            max-width: 1180px;
+            padding: 70px 22px;
+        }
+
+        .section-heading {
+            margin-bottom: 28px;
+            max-width: 790px;
+        }
+
+        .section-kicker {
+            color: var(--blue);
+            font-size: 0.82rem;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .section h2 {
+            color: var(--navy);
+            font-size: clamp(2rem, 4vw, 3.45rem);
+            letter-spacing: -0.05em;
+            line-height: 1.02;
+            margin: 8px 0 14px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .cards {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid rgba(15, 39, 66, 0.08);
+            border-radius: var(--radius);
+            box-shadow: 0 12px 40px rgba(15, 39, 66, 0.08);
+            padding: 24px;
         }
 
         .card h3 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+            color: var(--navy);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
         }
 
-        /* Grid System */
-        .grid {
+        .card p,
+        .card li {
+            color: var(--muted);
+        }
+
+        .card ul {
             display: grid;
-            gap: 25px;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        /* Video Section */
-        .video-hero {
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .video-container {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #000;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-
-        .video-placeholder {
-            aspect-ratio: 16/9;
-            background: var(--bg-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: relative;
-        }
-
-        .play-button {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .play-button:hover {
-            background: white;
-            transform: scale(1.1);
-        }
-
-        .play-button::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 25px solid var(--secondary-color);
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            margin-left: 5px;
-        }
-
-        /* Lists */
-        .feature-list {
+            gap: 9px;
             list-style: none;
-            padding: 0;
+            margin-top: 12px;
         }
 
-        .feature-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
+        .card li {
+            padding-left: 22px;
+            position: relative;
+        }
+
+        .card li::before {
+            background: var(--teal);
+            border-radius: 999px;
+            content: "";
+            height: 8px;
+            left: 0;
+            position: absolute;
+            top: 0.62em;
+            width: 8px;
+        }
+
+        .wide-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+        }
+
+        .pricing-box {
+            background: var(--white);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            padding: 26px;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin: 18px 0;
+        }
+
+        label {
+            color: var(--navy);
+            display: grid;
+            font-size: 0.9rem;
+            font-weight: 800;
+            gap: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            background: #f8fbfc;
+            border: 1px solid #d6e4ea;
+            border-radius: 14px;
+            color: var(--ink);
+            font: inherit;
+            padding: 12px 13px;
+            width: 100%;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .price-lines {
+            background: #f6fbfc;
+            border-radius: 20px;
+            display: grid;
             gap: 10px;
+            margin-top: 18px;
+            padding: 18px;
         }
 
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .feature-list li::before {
-            content: '✓';
-            background: var(--success-color);
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            margin: 5px;
-        }
-
-        .btn-primary {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-success {
-            background: var(--success-color);
-            color: white;
-        }
-
-        .btn-warning {
-            background: var(--warning-color);
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Highlight */
-        .highlight {
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-
-        /* Chart styling */
-        .chart-card {
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .chart-header {
+        .price-line,
+        .price-total {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-        
-        .chart-header h2 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-        
-        .chart-total {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--success-color);
-            background: rgba(39, 174, 96, 0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-        
-        .chart-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .chart-stats {
-            padding-left: 20px;
+            gap: 18px;
         }
 
-        /* Stats */
-        .stat-grid {
+        .price-total {
+            border-top: 1px solid #d6e4ea;
+            color: var(--navy);
+            font-size: 1.3rem;
+            font-weight: 900;
+            padding-top: 12px;
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-top: 12px;
+        }
+
+        .travel-table {
+            border: 1px solid #d6e4ea;
+            border-radius: 22px;
+            overflow: hidden;
+        }
+
+        .travel-row {
+            background: var(--white);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .stat-card {
-            background: rgba(255,255,255,0.1);
+            gap: 12px;
+            grid-template-columns: 1.1fr 0.9fr 1.25fr;
             padding: 18px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-color);
+        .travel-row:nth-child(even) {
+            background: #f7fbfc;
         }
 
-        .stat-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin: 5px 0;
-        }
-        
-        .stat-revenue {
-            font-size: 0.75rem;
-            color: var(--success-color);
-            font-weight: 600;
+        .travel-row strong {
+            color: var(--navy);
         }
 
-        /* Contact Section */
-        .contact-grid {
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .pill {
+            background: rgba(23, 107, 135, 0.09);
+            border: 1px solid rgba(23, 107, 135, 0.18);
+            border-radius: 999px;
+            color: var(--blue);
+            font-weight: 800;
+            padding: 8px 12px;
+        }
+
+        .highlight-band {
+            background: linear-gradient(135deg, var(--navy), var(--blue));
+            color: var(--white);
+            margin-top: 36px;
+            padding: 62px 0;
+        }
+
+        .highlight-band .section {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        .highlight-band h2,
+        .highlight-band h3 {
+            color: var(--white);
+        }
+
+        .highlight-band .section-kicker {
+            color: var(--teal);
+        }
+
+        .highlight-band .section-heading p,
+        .highlight-band .card p,
+        .highlight-band .card li {
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .highlight-band .card {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: none;
+        }
+
+        .itinerary-output {
+            background: #f6fbfc;
+            border: 1px solid #d6e4ea;
+            border-radius: 18px;
+            color: var(--ink);
+            margin-top: 16px;
+            min-height: 130px;
+            padding: 18px;
+            white-space: pre-line;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, rgba(255, 127, 80, 0.14), rgba(100, 204, 197, 0.2));
+            border: 1px solid rgba(23, 107, 135, 0.14);
+            border-radius: 28px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 24px;
+            grid-template-columns: minmax(0, 1fr) auto;
+            padding: 30px;
         }
 
-        .contact-card {
-            background: var(--primary-color);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
+        footer {
+            background: var(--navy);
+            color: rgba(255, 255, 255, 0.72);
+            padding: 28px 22px 90px;
             text-align: center;
         }
 
-        .contact-card h4 {
-            margin-bottom: 15px;
-            color: #ecf0f1;
-        }
-
-        .contact-card a {
-            color: #74b9ff;
-            text-decoration: none;
-        }
-
-        .contact-card a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* iPhone and Mobile Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .nav-tabs {
-                flex-direction: column;
-            }
-            
-            .tab-button {
-                min-width: auto;
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .container {
-                padding: 20px 10px;
-            }
-            
-            .grid-2, .grid-3 {
+        @media (max-width: 900px) {
+            .hero-inner,
+            .wide-grid,
+            .contact-box {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
-            
-            .card {
-                padding: 20px 15px;
-                margin-bottom: 20px;
+
+            .hero-inner {
+                min-height: auto;
+                padding-top: 54px;
             }
-            
-            .card h2 {
-                font-size: 1.3rem;
+
+            .cards {
+                grid-template-columns: 1fr;
             }
-            
-            /* Chart containers for mobile */
-            canvas {
-                max-width: 100% !important;
-                max-height: 350px !important;
+
+            .travel-row {
+                grid-template-columns: 1fr;
             }
         }
-        
-            /* iPhone specific optimizations */
-        @media (max-width: 414px) {
-            .header {
-                padding: 8px 0;
-            }
-            
-            .header-content {
-                padding: 0 15px;
-                text-align: center;
-            }
-            
-            .logo-section h1 {
-                font-size: 1.3rem;
-                margin-bottom: 2px;
-            }
-            
-            .logo-section p {
-                font-size: 0.75rem;
-                margin: 0;
-            }
-            
-            .status-badge {
-                font-size: 0.75rem;
-                padding: 6px 12px;
-            }
-            
-            .tab-button {
-                padding: 10px 15px;
-                font-size: 0.8rem;
-            }
-            
-            .container {
-                padding: 15px 8px;
-            }
-            
-            .card {
-                padding: 15px 12px;
-                margin-bottom: 15px;
-            }
-            
-            .card h2 {
-                font-size: 1.1rem;
-            }
-            
-            .card h3 {
-                font-size: 1rem;
-            }
-            
-            /* Charts on iPhone */
-            canvas {
-                max-width: 100% !important;
-                max-height: 280px !important;
-                width: 100% !important;
-            }
-            
-            .stat-card {
-                padding: 15px 10px;
-            }
-            
-            .stat-number {
-                font-size: 1.5rem;
-            }
-            
-            .feature-list li {
-                font-size: 0.85rem;
-                padding: 8px 0;
-                line-height: 1.4;
-            }
-            
-            /* Improved text spacing and readability */
-            .highlight-intro {
-                padding: 15px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .highlight-intro p {
-                font-size: 0.9rem !important;
-                line-height: 1.5 !important;
-            }
-            
-            /* Video section adjustments */
-            .video-hero {
-                padding: 20px 15px !important;
-            }
-            
-            .video-hero h2 {
-                font-size: 1.2rem !important;
-            }
-            
-            .video-hero p {
-                font-size: 0.85rem !important;
-                margin-bottom: 20px !important;
-            }
-            
-            /* Contact cards */
-            .contact-card {
-                padding: 20px 15px !important;
-                margin-bottom: 15px;
-            }
-            
-            .contact-card h4 {
-                font-size: 0.95rem !important;
-            }
-            
-            .contact-card p {
-                font-size: 0.8rem !important;
-                margin-bottom: 5px;
-            }
-            
-            /* Partner section cards */
-            .grid .card {
-                margin-bottom: 15px !important;
-            }
-            
-            /* Better text flow for long content */
-            p {
-                font-size: 0.85rem !important;
-                line-height: 1.4 !important;
-                margin-bottom: 12px !important;
-            }
-            
-            /* iPhone chart improvements */
-            .chart-header {
+
+        @media (max-width: 640px) {
+            .nav {
+                align-items: flex-start;
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
             }
-            
-            .chart-header h2 {
-                font-size: 1rem !important;
-                margin-bottom: 5px;
+
+            .nav-links {
+                justify-content: flex-start;
             }
-            
-            .chart-total {
-                font-size: 1rem !important;
-                padding: 6px 12px;
+
+            .fact-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .chart-stats {
-                padding-left: 0;
-            }
-            
-            .stat-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
-            }
-            
-            .stat-revenue {
-                font-size: 0.65rem !important;
-            }
-            
-            /* Fix slideshow caption overlay on iPhone */
-            .slideshow-container {
-                position: relative;
-                margin: 10px auto;
-                border-radius: 8px;
-            }
-            
-            #imageSlideshow img {
-                width: 100%;
-                height: auto;
-                min-height: 200px;
-                border-radius: 8px;
-            }
-            
-            /* Position caption below image on iPhone - single line, wider */
-            .image-caption {
-                position: static !important;
-                bottom: auto !important;
-                left: auto !important;
-                transform: none !important;
-                margin: 8px auto !important;
-                background: rgba(44, 62, 80, 0.95) !important;
-                text-align: center;
-                border-radius: 6px !important;
-                width: 95% !important;
-                max-width: 95% !important;
-                font-size: 0.75rem !important;
-                padding: 4px 8px !important;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                line-height: 1.2;
-            }
-            
-            /* Adjust navigation buttons for iPhone */
-            .nav-prev, .nav-next {
-                width: 35px !important;
-                height: 35px !important;
-                font-size: 0.8rem;
-            }
-            
-            .nav-prev {
-                left: 5px !important;
-            }
-            
-            .nav-next {
-                right: 5px !important;
-            }
-            
-            .image-counter {
-                top: 5px !important;
-                right: 5px !important;
-                font-size: 0.7rem !important;
-                padding: 3px 8px !important;
-            }
-            
-            .btn {
-                padding: 10px 18px;
-                font-size: 0.85rem;
-                margin: 3px;
+
+            .hero h1 {
+                font-size: 3rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <h1>2829 Niagara Street Development</h1>
-                <p>Tonawanda, NY</p>
+    <header class="topbar">
+        <nav class="nav" aria-label="Main navigation">
+            <div class="brand">Fort Myers Direct Stay</div>
+            <div class="nav-links">
+                <a href="#property">Property</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#guide">Local Guide</a>
+                <a href="#travel">Travel Costs</a>
+                <a href="#concierge">White Glove</a>
+                <a href="#contact">Book</a>
             </div>
-        </div>
-    </div>
+        </nav>
+    </header>
 
-    <!-- Navigation -->
-    <div class="nav-tabs">
-        <button class="tab-button active" onclick="showTab('overview')">🏗️ MMM Model Overview</button>
-        <button class="tab-button" onclick="showTab('financials')">💰 Financials</button>
-        <button class="tab-button" onclick="showTab('project')">🏢 Project Details</button>
-        <button class="tab-button" onclick="showTab('partners')">🤝 Partners</button>
-        <button class="tab-button" onclick="showTab('renderings')">🎨 Renderings</button>
-        <button class="tab-button" onclick="showTab('contact')">📞 Contact</button>
-    </div>
-
-    <div class="container">
-        <!-- Overview Tab -->
-        <div id="overview" class="tab-content active">
-            <!-- Video Hero -->
-            <div class="video-hero">
-                <h2>🎬 2829 Niagara Street Development Vision</h2>
-                <p style="margin-bottom: 25px; color: #666;">Watch our 4-floor mixed-use development proposal with major expansion potential</p>
-                
-                <div class="video-container">
-                    <div class="video-placeholder">
-                        <div>
-                            <div class="play-button" onclick="openVideo()"></div>
-                            <p style="margin-top: 20px;">2829 Niagara Development Presentation</p>
-                        </div>
+    <main>
+        <section class="hero">
+            <div class="hero-inner">
+                <div>
+                    <div class="eyebrow">First location: Fort Myers, Florida</div>
+                    <h1>Simple short-term rental for a Southwest Florida getaway.</h1>
+                    <p>
+                        A 2 bedroom, 2 bath, 1,200 square foot apartment set up for three-night stays,
+                        direct booking inquiries, guest-ready amenities, local food and shopping tips,
+                        and optional white-glove local host support.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#contact">Request dates</a>
+                        <a class="button button-secondary" href="#guide">See the local menu</a>
                     </div>
                 </div>
-                
-                <p style="margin-top: 15px; font-style: italic; color: #666;">
-                    Click to view complete development proposal and expansion strategies
+
+                <aside class="hero-card" aria-label="Rental highlights">
+                    <div class="availability">Now building the first direct-booking location</div>
+                    <div class="fact-grid">
+                        <div class="fact">
+                            <strong>2</strong>
+                            <span>Bedrooms</span>
+                        </div>
+                        <div class="fact">
+                            <strong>2</strong>
+                            <span>Bathrooms</span>
+                        </div>
+                        <div class="fact">
+                            <strong>1,200</strong>
+                            <span>Square feet</span>
+                        </div>
+                        <div class="fact">
+                            <strong>3 night</strong>
+                            <span>Minimum stay</span>
+                        </div>
+                    </div>
+                    <p class="note">
+                        Includes internet, cable TV, basic fishing equipment, and a curated Fort Myers area guide.
+                        Availability is subject to sublease, property, association, and local short-term rental approvals.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section" id="property">
+            <div class="section-heading">
+                <div class="section-kicker">The property</div>
+                <h2>Comfortable apartment base with vacation-ready amenities.</h2>
+                <p>
+                    This first location is designed as a simple Airbnb-style direct booking page for guests who
+                    want a furnished short stay in Fort Myers without losing the local knowledge.
                 </p>
             </div>
 
-            <!-- WNY Makers Model Introduction -->
-            <div class="card">
-                <h2>🏦 WNY Makers Model (WNYMM)</h2>
-                <h3>A Partnership Revolution in the 2829 Niagara St. Project</h3>
-                
-                <div class="highlight-intro" style="background: rgba(52, 152, 219, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 4px solid #3498db;">
-                    <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 15px;"><strong>The WNY Makers Model (WNYMM)</strong> is an innovative cooperative development approach for the 2829 Niagara St. project, a venture with over <strong>$38M in projected revenue</strong>, designed to revolutionize real estate by aligning professional expertise directly with project success.</p>
-                    <p style="font-style: italic; color: #2c3e50;">In essence, you become a vested partner, building equity and sharing in the success of a community-focused, wealth-building project.</p>
-                </div>
-                
-                <div class="grid grid-2">
-                    <div>
-                        <h3>🎯 How It Works for Partners</h3>
-                        <ul class="feature-list">
-                            <li><strong>In-Kind Investment:</strong> Professional expertise valued at market rates as direct equity investment</li>
-                            <li><strong>Direct Profit Share:</strong> Pro-rata share of substantial projected profits</li>
-                            <li><strong>Debt-Free Structure:</strong> No traditional bank loans, reducing financial risk</li>
-                            <li><strong>Active Deal-Making Role:</strong> Participate in marketing and partner recruitment</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3>🔄 Revolutionary Benefits</h3>
-                        <ul class="feature-list">
-                            <li><strong>Accelerated Timelines:</strong> 6-12 months faster development</li>
-                            <li><strong>Long-Term Wealth Building:</strong> Reduced unit pricing for partners</li>
-                            <li><strong>Strategic Market Timing:</strong> No forced sales pressure</li>
-                            <li><strong>Scalable Investment:</strong> Access to future WNYMM projects</li>
-                            <li><strong>Depreciation Benefits:</strong> Potential tax advantages</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Apartment setup</h3>
+                    <ul>
+                        <li>2 bedroom, 2 bath layout for couples, family, friends, or traveling workers.</li>
+                        <li>Approximately 1,200 square feet of living space.</li>
+                        <li>Short-term sublease positioning with a three-night minimum.</li>
+                        <li>Photo gallery placeholders ready for real unit photos.</li>
+                    </ul>
+                </article>
 
-            <!-- Project Stats -->
-            <div class="card">
-                <h2>📊 2829 Niagara Street Project Stats</h2>
-                <div class="stat-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">4</div>
-                        <div class="stat-label">Floor Mixed-Use Base</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">Partner Categories</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Expansion Potential</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">SEC Compliant</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <article class="card">
+                    <h3>Included with the unit</h3>
+                    <ul>
+                        <li>Internet for work, streaming, and trip planning.</li>
+                        <li>Cable TV for easy downtime after beach or fishing days.</li>
+                        <li>Fishing equipment for guests who want to explore local water access.</li>
+                        <li>Starter local guide for food, entertainment, shopping, and airport travel.</li>
+                    </ul>
+                </article>
 
-        <!-- Financials Tab -->
-        <div id="financials" class="tab-content">
-            <!-- Revenue Breakdown Chart -->
-            <div class="card chart-card">
-                <div class="chart-header">
-                    <h2>📈 Project Revenue Breakdown</h2>
-                    <div class="chart-total">$38M Total</div>
-                </div>
-                <div class="grid grid-2">
-                    <div class="chart-container">
-                        <canvas id="revenueChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
+                <article class="card">
+                    <h3>What still needs final details</h3>
+                    <ul>
+                        <li>Nightly rental rate and seasonal pricing rules.</li>
+                        <li>Exact apartment address and approved guest capacity.</li>
+                        <li>Final house rules, parking details, pet policy, and deposit policy.</li>
+                        <li>Actual photos, booking calendar, and payment processor integration.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="pricing">
+            <div class="wide-grid">
+                <div class="section-heading">
+                    <div class="section-kicker">Three-night stay</div>
+                    <h2>Simple pricing with a fixed $100 cleaning charge.</h2>
+                    <p>
+                        The calculator is ready for the final nightly rate. Guests can estimate the stay total,
+                        then send an inquiry with dates and the number of guests.
+                    </p>
+                    <div class="pill-list">
+                        <span class="pill">3-night minimum</span>
+                        <span class="pill">$100 cleaning charge</span>
+                        <span class="pill">Direct inquiry</span>
+                        <span class="pill">Future calendar ready</span>
                     </div>
-                    <div class="chart-stats">
-                        <div class="stat-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">65</div>
-                                <div class="stat-label">Residential Units</div>
-                                <div class="stat-revenue">$15.8M Revenue</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">72</div>
-                                <div class="stat-label">STR Hotel Rooms</div>
-                                <div class="stat-revenue">$15.1M Revenue</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">13</div>
-                                <div class="stat-label">Retail Units</div>
-                                <div class="stat-revenue">$6.5M Revenue</div>
-                            </div>
+                </div>
+
+                <div class="pricing-box" aria-label="Price calculator">
+                    <h3>Estimate your stay</h3>
+                    <div class="form-grid">
+                        <label>
+                            Nightly rate
+                            <input id="nightlyRate" type="number" min="0" step="25" value="150" aria-describedby="pricingNote">
+                        </label>
+                        <label>
+                            Nights
+                            <input id="nights" type="number" min="3" step="1" value="3">
+                        </label>
+                        <label>
+                            Cleaning charge
+                            <input id="cleaningFee" type="number" value="100" readonly>
+                        </label>
+                        <label>
+                            Optional service
+                            <select id="serviceLevel">
+                                <option value="0">No concierge add-on</option>
+                                <option value="75">Arrival support estimate (+$75)</option>
+                                <option value="175">Local guide day estimate (+$175)</option>
+                                <option value="350">Full white-glove day estimate (+$350)</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="price-lines" aria-live="polite">
+                        <div class="price-line">
+                            <span>Lodging subtotal</span>
+                            <strong id="lodgingTotal">$450</strong>
+                        </div>
+                        <div class="price-line">
+                            <span>Cleaning charge</span>
+                            <strong id="cleaningTotal">$100</strong>
+                        </div>
+                        <div class="price-line">
+                            <span>Optional service</span>
+                            <strong id="serviceTotal">$0</strong>
+                        </div>
+                        <div class="price-total">
+                            <span>Estimated total before taxes</span>
+                            <strong id="grandTotal">$550</strong>
                         </div>
                     </div>
+                    <p class="note" id="pricingNote">
+                        Example uses a placeholder nightly rate. Taxes, deposits, payment fees, seasonal adjustments,
+                        and final approvals are not included.
+                    </p>
                 </div>
+            </div>
+        </section>
+
+        <section class="section" id="guide">
+            <div class="section-heading">
+                <div class="section-kicker">Guest menu</div>
+                <h2>What to do around Fort Myers.</h2>
+                <p>
+                    This guide gives guests a quick menu of local activities, food, shopping, and fishing ideas.
+                    It can be expanded into an automated itinerary for each future location.
+                </p>
             </div>
 
-            <!-- Cost Breakdown Chart -->
-            <div class="card">
-                <h2>💰 Development Cost Analysis - $25.7M Total</h2>
-                <div class="grid grid-2">
-                    <div>
-                        <canvas id="costChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
-                    </div>
-                    <div>
-                        <h3>Cost Breakdown</h3>
-                        <ul class="feature-list">
-                            <li><strong>Hard Construction:</strong> $21,428,105 (83%)</li>
-                            <li><strong>Soft Costs:</strong> $4,285,621 (17%)</li>
-                            <li><strong>Cost per Sq Ft:</strong> $125 NSF</li>
-                            <li><strong>Net Square Footage:</strong> 143,997 sq ft (4-floor development)</li>
-                        </ul>
-                        <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
-                            <h4 style="color: #e74c3c; margin-bottom: 10px;">MMM Model Advantage</h4>
-                            <p style="font-size: 0.9rem;">Traditional financing would add $3-5M in interest and fees. Partner equity model eliminates these costs entirely.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Beaches and outdoors</h3>
+                    <ul>
+                        <li>Fort Myers Beach for sand, sunsets, casual food, and Gulf water.</li>
+                        <li>Sanibel and Captiva for shelling, wildlife, bikes, and slower island days.</li>
+                        <li>Lovers Key State Park for kayaking, beach walks, and nature trails.</li>
+                        <li>Edison and Ford Winter Estates for history, gardens, and a quieter afternoon.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3>Fishing and water days</h3>
+                    <ul>
+                        <li>Backwater fishing charters for snook, redfish, trout, and tarpon season planning.</li>
+                        <li>Deep-sea fishing options from Fort Myers Beach and nearby marinas.</li>
+                        <li>Guest-use basic fishing equipment available with the unit.</li>
+                        <li>Local license, charter, tide, and weather rules should be checked before fishing.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3>Entertainment</h3>
+                    <ul>
+                        <li>Downtown Fort Myers River District for restaurants, bars, music, and events.</li>
+                        <li>Spring training baseball in season with the Red Sox and Twins nearby.</li>
+                        <li>Key West Express from Fort Myers Beach for a bigger day-trip option.</li>
+                        <li>Boat tours, dolphin cruises, sunset cruises, and eco tours.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3>Food spots to research first</h3>
+                    <ul>
+                        <li>Downtown River District seafood and oyster bars.</li>
+                        <li>Waterfront dining near Fort Myers Beach and Cape Coral.</li>
+                        <li>Sanibel and Captiva island restaurants for beach-day meals.</li>
+                        <li>Casual breakfast cafes, taco spots, and family-friendly patios.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3>Shopping</h3>
+                    <ul>
+                        <li>Bell Tower Shops for dining, shopping, and easy errands.</li>
+                        <li>Miromar Outlets in Estero for outlet shopping.</li>
+                        <li>Gulf Coast Town Center for restaurants, stores, and entertainment.</li>
+                        <li>Downtown boutiques and local markets for smaller local finds.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <h3>Three-day sample plan</h3>
+                    <ul>
+                        <li>Day 1: Arrive, stock groceries, River District dinner.</li>
+                        <li>Day 2: Beach or Sanibel shelling, seafood dinner, sunset.</li>
+                        <li>Day 3: Fishing charter or Edison/Ford Estates, shopping, relaxed night in.</li>
+                        <li>Departure: Cleaning scheduled after checkout.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="travel">
+            <div class="section-heading">
+                <div class="section-kicker">Travel from Western New York</div>
+                <h2>Start with Niagara Falls to Punta Gorda on Allegiant.</h2>
+                <p>
+                    For Buffalo-area guests, the preferred low-fare strategy is to pre-book Allegiant Air
+                    from Niagara Falls International Airport (IAG) to Punta Gorda Airport (PGD), then arrange
+                    a rideshare, shuttle, rental car, or private car to Fort Myers.
+                </p>
             </div>
 
-            <!-- Comparable Properties Analysis -->
-            <div class="card">
-                <h2>📉 Tonawanda Market Comparables Analysis</h2>
-                <div class="grid grid-2">
-                    <div>
-                        <canvas id="comparablesChart" width="500" height="400" style="max-width: 500px; max-height: 400px;"></canvas>
-                    </div>
-                    <div>
-                        <h3>Market Data (Per Sq Ft)</h3>
-                        <ul class="feature-list">
-                            <li><strong>Rental Range:</strong> $1.84 - $2.94 annually</li>
-                            <li><strong>Sale Range:</strong> $250 - $451</li>
-                            <li><strong>Average Rent:</strong> $2.15/sq ft</li>
-                            <li><strong>Days on Market:</strong> 9-12 days average</li>
-                            <li><strong>Market Growth:</strong> 10-18% year-over-year</li>
+            <div class="travel-table" aria-label="Travel cost estimates">
+                <div class="travel-row">
+                    <strong>Niagara Falls/Buffalo to Punta Gorda</strong>
+                    <span>Airfare estimate</span>
+                    <span>Allegiant advertises low base fares that can start around $45 one-way on select dates. Plan early and verify baggage, seat, and schedule costs directly with Allegiant.</span>
+                </div>
+                <div class="travel-row">
+                    <strong>Punta Gorda Airport (PGD) to Fort Myers</strong>
+                    <span>Ground estimate</span>
+                    <span>Rideshare often plans around $40-$70. Pre-arranged car service commonly starts around $70-$80+ depending on destination and vehicle.</span>
+                </div>
+                <div class="travel-row">
+                    <strong>Southwest Florida International (RSW) to Fort Myers</strong>
+                    <span>Backup airport estimate</span>
+                    <span>Rideshare or taxi commonly plans around $25-$45 to central Fort Myers, with higher fares to beaches or islands.</span>
+                </div>
+                <div class="travel-row">
+                    <strong>Rental car</strong>
+                    <span>Recommended for exploring</span>
+                    <span>Many beaches, restaurants, shopping centers, and fishing docks are spread out. A rental car gives guests the most flexibility.</span>
+                </div>
+            </div>
+            <p class="note">
+                Travel costs are planning estimates only. Airline fares, baggage fees, rideshare surge pricing,
+                tolls, taxes, and seasonal demand change frequently.
+            </p>
+        </section>
+
+        <section class="highlight-band" id="concierge">
+            <div class="section">
+                <div class="section-heading">
+                    <div class="section-kicker">White-glove local support</div>
+                    <h2>Optional local host and companionship-style concierge.</h2>
+                    <p>
+                        Add a higher-touch service level for guests who want help navigating the property,
+                        the area, airport arrivals, restaurant choices, activities, and daily plans.
+                    </p>
+                </div>
+
+                <div class="cards">
+                    <article class="card">
+                        <h3>Arrival support</h3>
+                        <ul>
+                            <li>Pre-arrival call or text coordination.</li>
+                            <li>Airport transfer guidance from PGD or RSW.</li>
+                            <li>Check-in walkthrough and house orientation.</li>
+                            <li>Optional grocery or starter supply coordination.</li>
                         </ul>
-                        
-                        <h3 style="margin-top: 20px;">Key Comparables</h3>
-                        <div style="font-size: 0.85rem; line-height: 1.4;">
-                            <p><strong>600 River Road:</strong> $1.90-$2.94/sf</p>
-                            <p><strong>622 River Road:</strong> $1.84-$2.19/sf</p>
-                            <p><strong>Exchange Luxury:</strong> $1.80-$2.50/sf</p>
-                            <p><strong>Buffalo Downtown:</strong> $1.95-$2.26/sf</p>
-                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>Local guide day</h3>
+                        <ul>
+                            <li>Personalized food, shopping, beach, and entertainment recommendations.</li>
+                            <li>Fishing, boat tour, or beach-day planning assistance.</li>
+                            <li>Reservation and activity research support.</li>
+                            <li>Daily check-ins by text or phone.</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>Full white-glove option</h3>
+                        <ul>
+                            <li>Premium local host support for guests who want a companion-style area guide.</li>
+                            <li>Custom itinerary and transportation coordination.</li>
+                            <li>Restaurant, shopping, entertainment, and wellness planning.</li>
+                            <li>Pre-booked only, priced separately, and subject to host availability.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="automation">
+            <div class="wide-grid">
+                <div class="section-heading">
+                    <div class="section-kicker">Automation ready</div>
+                    <h2>Generate a simple guest itinerary.</h2>
+                    <p>
+                        This first version creates a basic plan from guest preferences. Later, the same pattern
+                        can connect to a booking calendar, payment processor, CRM, SMS, and multiple location pages.
+                    </p>
+                </div>
+
+                <div class="pricing-box">
+                    <h3>Trip preference builder</h3>
+                    <div class="form-grid">
+                        <label>
+                            Main interest
+                            <select id="tripInterest">
+                                <option value="beach">Beaches and sunsets</option>
+                                <option value="fishing">Fishing and boating</option>
+                                <option value="food">Food and shopping</option>
+                                <option value="family">Family-friendly exploring</option>
+                            </select>
+                        </label>
+                        <label>
+                            Travel style
+                            <select id="tripStyle">
+                                <option value="relaxed">Relaxed</option>
+                                <option value="active">Active</option>
+                                <option value="white-glove">White-glove support</option>
+                            </select>
+                        </label>
+                    </div>
+                    <button class="button button-primary" type="button" onclick="buildItinerary()">Build sample itinerary</button>
+                    <div class="itinerary-output" id="itineraryOutput">
+                        Choose preferences and build a sample three-day Fort Myers plan.
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="section" id="locations">
+            <div class="section-heading">
+                <div class="section-kicker">Future locations</div>
+                <h2>Built to repeat in many markets.</h2>
+                <p>
+                    Fort Myers is the first test location. The same direct-booking framework can be reused for
+                    beach towns, city stays, medical travel, snowbird rentals, and white-glove local support in
+                    other destinations.
+                </p>
             </div>
 
-            <!-- ROI and Profit Analysis -->
-            <div class="card">
-                <h2>📈 ROI & Profit Analysis</h2>
-                <div class="grid grid-3">
-                    <div class="stat-card">
-                        <div class="stat-number">$12M</div>
-                        <div class="stat-label">Gross Profit</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">31%</div>
-                        <div class="stat-label">Profit Margin</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">46%</div>
-                        <div class="stat-label">ROI on Investment</div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-2" style="margin-top: 20px;">
-                    <div>
-                        <h3>🞨 Rental Income Potential</h3>
-                        <ul class="feature-list">
-                            <li><strong>Residential:</strong> $29/sq ft annually</li>
-                            <li><strong>Retail:</strong> $30/sq ft annually</li>
-                            <li><strong>STR Hospitality:</strong> $60/sq ft annually</li>
-                            <li><strong>Total Annual Income:</strong> $4.2M - $5.8M</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>🎆 MMM Model Benefits</h3>
-                        <ul class="feature-list">
-                            <li><strong>No Interest Costs:</strong> Save $3-5M in financing</li>
-                            <li><strong>Partner Motivation:</strong> 2x efficiency gain</li>
-                            <li><strong>Quality Premium:</strong> Superior construction</li>
-                            <li><strong>Faster Timeline:</strong> 12-18 month completion</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="cards">
+                <article class="card">
+                    <h3>Location template</h3>
+                    <ul>
+                        <li>Property facts, photos, house rules, rates, cleaning fee, and calendar.</li>
+                        <li>Local entertainment, food, shopping, fishing, beaches, and transportation.</li>
+                        <li>Airport, airline, rideshare, shuttle, and rental car estimates.</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3>Operations template</h3>
+                    <ul>
+                        <li>Cleaning checklist and turnover schedule.</li>
+                        <li>Guest communication scripts and automated inquiry emails.</li>
+                        <li>Local host, companion-style concierge, and partner vendor directory.</li>
+                    </ul>
+                </article>
+                <article class="card">
+                    <h3>Next automation steps</h3>
+                    <ul>
+                        <li>Booking form connected to email, SMS, or CRM.</li>
+                        <li>Dynamic pricing and availability calendar.</li>
+                        <li>Payment collection, deposits, identity verification, and signed rental rules.</li>
+                    </ul>
+                </article>
             </div>
-        </div>
+        </section>
 
-        <!-- Project Details Tab -->
-        <div id="project" class="tab-content">
-            <div class="card">
-                <h2>🏢 Project Specifications</h2>
-                
-                <div class="grid grid-2">
-                    <div>
-                        <h3>🏗️ Phase 1: Base Development</h3>
-                        <ul class="feature-list">
-                            <li><strong>Location:</strong> 2829 Niagara Street, Tonawanda, NY</li>
-                            <li><strong>Type:</strong> 4-Floor Mixed-Use Building</li>
-                            <li><strong>Ground Floor:</strong> Commercial/Retail Space</li>
-                            <li><strong>Upper Floors:</strong> Residential/Office Units</li>
-                            <li><strong>Parking:</strong> On-site parking solution</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3>🚀 Expansion Potential</h3>
-                        <ul class="feature-list">
-                            <li>Zoning allows for larger development</li>
-                            <li>Additional adjoining properties available</li>
-                            <li>Infrastructure supports major expansion</li>
-                            <li>Market demand supports growth</li>
-                            <li>Partner model scales efficiently</li>
-                        </ul>
-                    </div>
+        <section class="section" id="contact">
+            <div class="contact-box">
+                <div>
+                    <div class="section-kicker">Request dates</div>
+                    <h2>Send a booking inquiry.</h2>
+                    <p>
+                        Use this direct inquiry to request dates, confirm the current nightly rate, ask about
+                        Allegiant travel from Niagara Falls to Punta Gorda, or add white-glove local support.
+                    </p>
+                </div>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="mailto:durillaprop@gmail.com?subject=Fort%20Myers%20Rental%20Inquiry&body=Hi%2C%20I%20am%20interested%20in%20the%20Fort%20Myers%202%20bed%202%20bath%20short-term%20rental.%0A%0ADates%3A%0AGuests%3A%0ATraveling%20from%3A%0AInterested%20in%20white-glove%20support%3A%20Yes%2FNo%0AQuestions%3A">
+                        Email inquiry
+                    </a>
+                    <a class="button button-secondary" style="background: var(--navy);" href="tel:17164211210">Call 716-421-1210</a>
                 </div>
             </div>
+            <p class="note">
+                This direct-booking website is not affiliated with Airbnb. Short-term sublease use must be confirmed
+                against the lease, building rules, association rules, insurance, taxes, permits, and local ordinances.
+            </p>
+        </section>
+    </main>
 
-            <div class="card">
-                <h2>🏘️ Location Advantages</h2>
-                <div class="grid grid-3">
-                    <div>
-                        <h3>🚗 Transportation</h3>
-                        <ul class="feature-list">
-                            <li>Major highway access</li>
-                            <li>Public transportation</li>
-                            <li>Buffalo proximity</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3>🏬 Commerce</h3>
-                        <ul class="feature-list">
-                            <li>Established business district</li>
-                            <li>Growing retail corridor</li>
-                            <li>Mixed-use zoning</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3>🏡 Community</h3>
-                        <ul class="feature-list">
-                            <li>Established neighborhood</li>
-                            <li>Schools and services nearby</li>
-                            <li>Growth-oriented community</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Partners Tab -->
-        <div id="partners" class="tab-content">
-            <div class="card">
-                <h2>🤝 Partner Categories</h2>
-                <p>Join the revolution - be a partner, not a paycheck recipient</p>
-                
-                <div class="grid grid-2">
-                    <div class="card">
-                        <h3>💵 Cash Partners</h3>
-                        <ul class="feature-list">
-                            <li>Private capital investors</li>
-                            <li>Family offices</li>
-                            <li>Angel investors</li>
-                            <li>Equity participation in all phases</li>
-                        </ul>
-                        <button class="btn btn-primary" onclick="contactPartner('cash')">💰 Join as Cash Partner</button>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>🔧 Service Partners</h3>
-                        <ul class="feature-list">
-                            <li>General contractors</li>
-                            <li>Architects & engineers</li>
-                            <li>Construction managers</li>
-                            <li>Specialty trades</li>
-                        </ul>
-                        <button class="btn btn-success" onclick="contactPartner('service')">🏗️ Join as Service Partner</button>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>⚡ MEP Technical Partners</h3>
-                        <ul class="feature-list">
-                            <li>Electrical contractors</li>
-                            <li>Plumbing specialists</li>
-                            <li>HVAC experts</li>
-                            <li>Smart building integrators</li>
-                        </ul>
-                        <button class="btn btn-warning" onclick="contactPartner('technical')">⚡ Join as Technical Partner</button>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>🏗️ Material Partners</h3>
-                        <ul class="feature-list">
-                            <li>Steel suppliers</li>
-                            <li>Concrete providers</li>
-                            <li>Fixture suppliers</li>
-                            <li>Building materials</li>
-                        </ul>
-                        <button class="btn btn-primary" onclick="contactPartner('material')">🧱 Join as Material Partner</button>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>🏡 Land Partners</h3>
-                        <ul class="feature-list">
-                            <li>Property owners</li>
-                            <li>Land developers</li>
-                            <li>Real estate holders</li>
-                            <li>Adjacent property owners</li>
-                        </ul>
-                        <button class="btn btn-success" onclick="contactPartner('land')">🏘️ Join as Land Partner</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Renderings Tab -->
-        <div id="renderings" class="tab-content">
-            <div class="card">
-                <h2>🎨 Project Renderings & Visualizations</h2>
-                <p>Visual representations of the 2829 Niagara Street development</p>
-                
-                <div class="card">
-                    <h3>🖼️ Interactive Image Gallery</h3>
-                    <p style="margin-bottom: 20px;">Professional architectural renderings - auto-advancing slideshow (click to pause/resume):</p>
-                    
-                    <div id="imageSlideshow" class="slideshow-container" style="position: relative; max-width: 800px; margin: 0 auto; background: #000; border-radius: 10px; overflow: hidden; cursor: pointer;" onclick="toggleSlideshow()">
-                        <img id="slideshowImage" src="" alt="2829 Niagara Street Renderings" style="width: 100%; height: auto; display: block;">
-                        
-                        <div id="imageCaption" class="image-caption" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
-                            <span id="imageTitle">Loading...</span>
-                        </div>
-                        
-                        <div class="image-counter" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">
-                            <span id="imageCounter">1/20</span>
-                        </div>
-                        
-                        <div class="nav-prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); prevImage()">
-                            ◀
-                        </div>
-                        
-                        <div class="nav-next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="event.stopPropagation(); nextImage()">
-                            ▶
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin: 20px 0;">
-                        <button class="btn btn-primary" onclick="toggleSlideshow()">
-                            <span id="slideshowToggle">⏸️ Pause Slideshow</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="grid grid-2">
-                    <div class="card">
-                        <h3>🏢 Building Exteriors</h3>
-                        <ul class="feature-list">
-                            <li><strong>Twilight View:</strong> Dramatic evening exterior rendering</li>
-                            <li><strong>Daytime Facade:</strong> Professional building exterior</li>
-                            <li><strong>Waterfront Context:</strong> Modern development integration</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>🏪 Commercial Spaces</h3>
-                        <ul class="feature-list">
-                            <li><strong>Health Bar & Cafe:</strong> Premium dining concept</li>
-                            <li><strong>Full Restaurant:</strong> Complete dining experience</li>
-                            <li><strong>Boutique Retail:</strong> High-end shopping space</li>
-                            <li><strong>Reception Area:</strong> Hotel-quality hospitality</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>💪 Wellness Center</h3>
-                        <ul class="feature-list">
-                            <li><strong>Fitness Centers:</strong> Two dedicated workout areas</li>
-                            <li><strong>Full-Service Spa:</strong> Multiple treatment rooms</li>
-                            <li><strong>Massage Therapy:</strong> Professional wellness services</li>
-                            <li><strong>Salon with Views:</strong> Premium beauty services</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>🏠 Rooftop Amenities</h3>
-                        <ul class="feature-list">
-                            <li><strong>Entertainment Decks:</strong> Multiple outdoor spaces</li>
-                            <li><strong>Dog Park:</strong> Pet-friendly rooftop area</li>
-                            <li><strong>Panoramic Views:</strong> City and waterfront vistas</li>
-                            <li><strong>Premium Recreation:</strong> Outdoor lifestyle amenities</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>📐 Technical Drawings</h2>
-                <div class="grid grid-3">
-                    <div class="stat-card">
-                        <div class="stat-number">📋</div>
-                        <div class="stat-label">Floor Plans</div>
-                        <p style="font-size: 0.8rem; margin-top: 10px;">Available in /docs/ folder</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">🔧</div>
-                        <div class="stat-label">MEP Drawings</div>
-                        <p style="font-size: 0.8rem; margin-top: 10px;">Technical specifications</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">📏</div>
-                        <div class="stat-label">Structural Plans</div>
-                        <p style="font-size: 0.8rem; margin-top: 10px;">Engineering details</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Tab -->
-        <div id="contact" class="tab-content">
-            <div class="card">
-                <h2>📞 Contact & Partnership Information</h2>
-                
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <h4>👥 Partnership Inquiries</h4>
-                        <p><strong>Tiffany Durilla</strong></p>
-                        <p>Development Partner</p>
-                        <p>📧 <a href="mailto:durillaprop@gmail.com">durillaprop@gmail.com</a></p>
-                        <p>📱 <a href="tel:+17164211210">716-421-1210</a></p>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <h4>🏗️ Project Location</h4>
-                        <p><strong>2829 Niagara Street</strong></p>
-                        <p>Tonawanda, NY</p>
-                        <p>Mixed-Use Development Site</p>
-                        <p>📍 Ready for Development</p>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <h4>💼 Investment Office</h4>
-                        <p><strong>MMM Development Partners</strong></p>
-                        <p>Tonawanda Operations</p>
-                        <p>Partnership Structure</p>
-                        <p>🚀 Expansion Ready</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>🚀 Ready to Join?</h2>
-                <div style="text-align: center; padding: 20px;">
-                    <p style="font-size: 1.1rem; margin-bottom: 25px;">Be part of the "Partners Not Paychecks" revolution in Tonawanda's premier development opportunity.</p>
-                    
-                    <button class="btn btn-primary" onclick="window.open('mailto:durillaprop@gmail.com?subject=2829 Niagara Street Partnership Interest', '_blank')">
-                        📧 Express Partnership Interest
-                    </button>
-                    <button class="btn btn-success" onclick="window.open('tel:+17164211210', '_blank')">
-                        📞 Call Development Team
-                    </button>
-                    <button class="btn btn-warning" onclick="openVideo()">
-                        🌬️ Watch Development Video
-                    </button>
-                </div>
-            </div>
-            
-            <div class="card" style="text-align: center; margin-top: 30px; background: rgba(255,255,255,0.05);">
-                <p style="color: #666; font-size: 0.8rem;">Website Version: v1.1 - Enhanced iPhone Experience</p>
-                <p style="color: #666; font-size: 0.75rem; margin-top: 5px;">2829 Niagara Street Development Portal</p>
-            </div>
-        </div>
-    </div>
+    <footer>
+        Fort Myers Direct Stay. First location in a repeatable short-term rental and local concierge platform.
+    </footer>
 
     <script>
-        function showTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
-
-        function openVideo() {
-            // Direct link to Google Drive video
-            window.open('https://drive.google.com/file/d/1MZm39BrwNxBRoqSg_ooco4PSCqcMMksk/view?usp=sharing', '_blank');
-        }
-
-        function contactPartner(partnerType) {
-            const messages = {
-                cash: "I'm interested in joining as a Cash Partner for the 2829 Niagara Street development.",
-                service: "I'm interested in joining as a Service Partner for the 2829 Niagara Street development.",
-                technical: "I'm interested in joining as a Technical Partner for the 2829 Niagara Street development.",
-                material: "I'm interested in joining as a Material Partner for the 2829 Niagara Street development.",
-                land: "I'm interested in joining as a Land Partner for the 2829 Niagara Street development."
-            };
-            
-            const subject = `2829 Niagara Street - ${partnerType.charAt(0).toUpperCase() + partnerType.slice(1)} Partnership Interest`;
-            window.open(`mailto:durillaprop@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(messages[partnerType])}`, '_blank');
-        }
-
-        // Auto-load functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('2829 Niagara Street MMM Dashboard Loaded');
-            console.log('Version: 1.0 - Full Multi-Page Portal');
-            console.log('Based on: Nevo Tower Portal Structure');
-
-            // Initialize charts and slideshow after DOM is ready
-            initCharts();
-            initSlideshow();
+        const money = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
         });
 
-        // =========================
-        // Interactive Charts Initialization
-        // =========================
-        function initCharts() {
-            // Revenue Breakdown Chart (Pie Chart)
-            const revenueCtx = document.getElementById('revenueChart');
-            if (revenueCtx) {
-                new Chart(revenueCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Residential Units (65)', 'STR Hospitality (72)', 'Retail Units (13)'],
-                        datasets: [{
-                            data: [15.84, 15.12, 6.48], // in millions
-                            backgroundColor: [
-                                '#3498db', // Blue
-                                '#27ae60', // Green
-                                '#e74c3c'  // Red
-                            ],
-                            borderWidth: 2,
-                            borderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.parsed;
-                                        return label + ': $' + value.toFixed(1) + 'M';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
+        const itineraryPlans = {
+            beach: {
+                relaxed: [
+                    "Day 1: Arrive, settle in, grocery stop, and dinner in the River District.",
+                    "Day 2: Fort Myers Beach or Sanibel shelling, waterfront lunch, sunset photos.",
+                    "Day 3: Lovers Key nature walk, casual shopping, and a relaxed dinner near the water."
+                ],
+                active: [
+                    "Day 1: Arrive, quick River District walk, and plan beach gear.",
+                    "Day 2: Early Sanibel/Captiva beach day, bike path or nature stop, sunset dinner.",
+                    "Day 3: Kayak or dolphin cruise, beach afternoon, and local music at night."
+                ],
+                "white-glove": [
+                    "Day 1: Host-guided arrival, grocery coordination, and dinner recommendations.",
+                    "Day 2: Planned beach day with route, parking, lunch, and sunset timing.",
+                    "Day 3: Concierge-built nature, shopping, and restaurant plan with daily check-ins."
+                ]
+            },
+            fishing: {
+                relaxed: [
+                    "Day 1: Arrive, review fishing gear, and check license/weather needs.",
+                    "Day 2: Easy local fishing access or pier-style outing, seafood dinner.",
+                    "Day 3: Optional charter research, bait shop stop, and sunset near the water."
+                ],
+                active: [
+                    "Day 1: Arrive and confirm tide, license, and charter options.",
+                    "Day 2: Backwater or deep-sea fishing charter, casual recovery meal.",
+                    "Day 3: Beach fishing, boat tour, or marina lunch before a quiet night in."
+                ],
+                "white-glove": [
+                    "Day 1: Host coordinates license reminders, gear notes, and charter options.",
+                    "Day 2: Pre-planned fishing day with pickup guidance and post-trip dinner ideas.",
+                    "Day 3: Custom water-day itinerary plus shopping or seafood reservations."
+                ]
+            },
+            food: {
+                relaxed: [
+                    "Day 1: Arrive and enjoy River District dinner.",
+                    "Day 2: Brunch, Bell Tower Shops, beach sunset, and seafood dinner.",
+                    "Day 3: Miromar Outlets or Gulf Coast Town Center, then casual local favorites."
+                ],
+                active: [
+                    "Day 1: River District food crawl and live music.",
+                    "Day 2: Sanibel/Captiva lunch route, shopping stops, and sunset dinner.",
+                    "Day 3: Outlet shopping, downtown boutiques, and waterfront drinks."
+                ],
+                "white-glove": [
+                    "Day 1: Host-built restaurant shortlist and arrival dinner plan.",
+                    "Day 2: Shopping route with lunch, reservations, and transportation guidance.",
+                    "Day 3: Custom food and entertainment plan with daily check-ins."
+                ]
+            },
+            family: {
+                relaxed: [
+                    "Day 1: Arrive, simple dinner, and settle into the apartment.",
+                    "Day 2: Beach morning, easy lunch, and low-key shopping or movie night.",
+                    "Day 3: Edison and Ford Winter Estates, ice cream, and casual dinner."
+                ],
+                active: [
+                    "Day 1: Arrive and walk the River District.",
+                    "Day 2: Beach, dolphin cruise, and family-friendly waterfront meal.",
+                    "Day 3: Nature park, shopping center, and optional spring training game in season."
+                ],
+                "white-glove": [
+                    "Day 1: Host-guided check-in and family supply coordination.",
+                    "Day 2: Custom beach and activity route with parking and food suggestions.",
+                    "Day 3: Planned family attractions, shopping, and dinner reservations."
+                ]
             }
-            
-            // Cost Breakdown Chart (Doughnut Chart)
-            const costCtx = document.getElementById('costChart');
-            if (costCtx) {
-                new Chart(costCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Hard Construction ($21.4M)', 'Soft Costs ($4.3M)'],
-                        datasets: [{
-                            data: [21.43, 4.29],
-                            backgroundColor: [
-                                '#2c3e50', // Dark blue
-                                '#95a5a6'  // Gray
-                            ],
-                            borderWidth: 2,
-                            borderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.parsed;
-                                        const percentage = ((value / 25.72) * 100).toFixed(1);
-                                        return label + ' (' + percentage + '%)';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-            
-            // Comparables Chart (Bar Chart)
-            const comparablesCtx = document.getElementById('comparablesChart');
-            if (comparablesCtx) {
-                new Chart(comparablesCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['600 River Rd', '622 River Rd', 'Exchange Luxury', 'Buffalo Downtown', '2829 Niagara Target'],
-                        datasets: [{
-                            label: 'Rental Rate ($/sq ft)',
-                            data: [2.42, 2.02, 2.15, 2.11, 2.35],
-                            backgroundColor: '#3498db',
-                            borderColor: '#2980b9',
-                            borderWidth: 1
-                        }, {
-                            label: 'Sale Price ($/sq ft)',
-                            data: [350, 300, 325, 310, 260],
-                            backgroundColor: '#27ae60',
-                            borderColor: '#229954',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Price ($)'
-                                }
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Properties'
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                position: 'top'
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': $' + context.parsed.y;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        
-        // =========================
-        // Image Slideshow (Auto-advance)
-        // =========================
-        let slideshowImages = [
-            '2829 Mixed-use building exterior - twilight.png',
-            '2829 Mixed-use building exterior.jpg',
-            '2829 Modern waterfront development.png',
-            '2829 Restaurant.png',
-            '2829 Cafe - Health Bar with view.png',
-            '2829 Clotihng Boutique.png',
-            '2829 Reception - STR - Hotel.png',
-            '2829 Fitness Center 1.png',
-            '2829 Fitness Center 2.png',
-            '2829 Spa 1.png',
-            '2829 Spa 2.png',
-            '2829 Spa 3.png',
-            '2829 Spa - Massage.png',
-            '2829 Salon with View.png',
-            '2829 3rd floor view 2.png',
-            '2829 Rooftop 1.png',
-            '2829 Rooftop 2.png',
-            '2829 Rooftop 3 - dog park.png',
-            '2829 Rooftop 4 - dog park.png',
-            '2829 Rooftop 5 - dog park with view.png'
-        ];
+        };
 
-        let slideshowIndex = 0;
-        let slideshowTimer = null;
-        let isPaused = false;
+        function calculateStay() {
+            const nightlyRate = Math.max(0, Number(document.getElementById("nightlyRate").value) || 0);
+            const nightsInput = document.getElementById("nights");
+            const nights = Math.max(3, Number(nightsInput.value) || 3);
+            const cleaningFee = 100;
+            const serviceFee = Number(document.getElementById("serviceLevel").value) || 0;
+            const lodging = nightlyRate * nights;
 
-        function initSlideshow() {
-            const imgEl = document.getElementById('slideshowImage');
-            const titleEl = document.getElementById('imageTitle');
-            const counterEl = document.getElementById('imageCounter');
-            if (!imgEl || !titleEl || !counterEl) return;
-            showImage(slideshowIndex);
-            startSlideshow();
+            nightsInput.value = nights;
+            document.getElementById("lodgingTotal").textContent = money.format(lodging);
+            document.getElementById("cleaningTotal").textContent = money.format(cleaningFee);
+            document.getElementById("serviceTotal").textContent = money.format(serviceFee);
+            document.getElementById("grandTotal").textContent = money.format(lodging + cleaningFee + serviceFee);
         }
 
-        function getDisplayTitle(filename) {
-            return filename.replace(/\.(png|jpg|jpeg)$/i, '').replace(/[-_]/g, ' ');
+        function buildItinerary() {
+            const interest = document.getElementById("tripInterest").value;
+            const style = document.getElementById("tripStyle").value;
+            const plan = itineraryPlans[interest][style];
+            document.getElementById("itineraryOutput").textContent = plan.join("\n");
         }
 
-        function showImage(index) {
-            const imgEl = document.getElementById('slideshowImage');
-            const titleEl = document.getElementById('imageTitle');
-            const counterEl = document.getElementById('imageCounter');
-            if (!imgEl) return;
-            const file = slideshowImages[index % slideshowImages.length];
-            imgEl.src = file; // images are stored in the repo root alongside index.html
-            if (titleEl) titleEl.textContent = getDisplayTitle(file);
-            if (counterEl) counterEl.textContent = `${(index % slideshowImages.length) + 1}/${slideshowImages.length}`;
-        }
-
-        function nextImage() {
-            slideshowIndex = (slideshowIndex + 1) % slideshowImages.length;
-            showImage(slideshowIndex);
-        }
-
-        function prevImage() {
-            slideshowIndex = (slideshowIndex - 1 + slideshowImages.length) % slideshowImages.length;
-            showImage(slideshowIndex);
-        }
-
-        function startSlideshow(intervalMs = 3000) {
-            clearInterval(slideshowTimer);
-            slideshowTimer = setInterval(() => {
-                if (!isPaused) nextImage();
-            }, intervalMs);
-            const toggle = document.getElementById('slideshowToggle');
-            if (toggle) toggle.textContent = '⏸️ Pause Slideshow';
-            isPaused = false;
-        }
-
-        function pauseSlideshow() {
-            isPaused = true;
-            const toggle = document.getElementById('slideshowToggle');
-            if (toggle) toggle.textContent = '▶️ Resume Slideshow';
-        }
-
-        function toggleSlideshow() {
-            if (isPaused) {
-                startSlideshow();
-            } else {
-                pauseSlideshow();
-            }
-        }
+        document.getElementById("nightlyRate").addEventListener("input", calculateStay);
+        document.getElementById("nights").addEventListener("input", calculateStay);
+        document.getElementById("serviceLevel").addEventListener("change", calculateStay);
+        calculateStay();
     </script>
 </body>
 </html>
