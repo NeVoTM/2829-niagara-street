@@ -1,272 +1,99 @@
 {
   "project": {
-    "name": "2829 Niagara Street",
-    "address": "2829 Niagara Street, Tonawanda, NY",
-    "type": "4-Floor Mixed-Use Building",
-    "size": "143,997 sq ft development"
-  },
-  "financial": {
-    "total_revenue": "$38M",
-    "total_revenue_numeric": 38000000,
-    "gross_profit": "$12M",
-    "gross_profit_numeric": 12000000,
-    "development_costs": "$25.7M",
-    "development_costs_numeric": 25700000,
-    "profit_margin": "31%",
-    "roi": "46%",
-    "interest_costs": "$0"
-  },
-  "units": {
-    "total": 150,
-    "residential": {
-      "count": 65,
-      "revenue": "$15.8M"
-    },
-    "str_hotel_rooms": {
-      "count": 72,
-      "revenue": "$15.1M"
-    },
-    "retail": {
-      "count": 13,
-      "revenue": "$6.5M"
-    }
-  },
-  "costs": {
-    "hard_construction": {
-      "amount": "$21.4M",
-      "numeric": 21400000
-    },
-    "soft_costs": {
-      "amount": "$4.3M",
-      "numeric": 4300000
-    }
-  },
-  "market_analysis": {
-    "rental_range": "$1.84 - $2.94/sq ft annually",
-    "sale_range": "$250 - $451/sq ft",
-    "days_on_market": "9-12 days average",
-    "market_growth": "10-18% year-over-year",
-    "comparables": {
-      "600_river": 2.42,
-      "622_river": 2.02,
-      "exchange": 2.15,
-      "buffalo": 2.11,
-      "target_2829": 2.35
-    }
-  },
-  "contact": {
-    "name": "Tiffany Durilla",
-    "title": "Development Partner",
-    "email": "durillaprop@gmail.com",
-    "phone": "716-421-1210"
-  },
-  "text_content": {
-    "hero": {
-      "title": "2829 Niagara Street",
-      "subtitle": "4-Floor Mixed-Use Development<br>Tonawanda, NY",
-      "cta_button": "🚀 Join the Revolution"
-    },
-    "model": {
-      "title": "🏦 The New Way to Build Without Banks",
-      "subtitle": "Simple. Fair. Revolutionary.",
-      "description": "Revolutionary partnership approach with <strong style=\"color: var(--gold);\">${total_revenue}+ projected revenue</strong>",
-      "what_it_is_title": "💡 What Is It?",
-      "what_it_is": [
-        "Instead of borrowing money from banks, we team up with builders and professionals",
-        "Everyone who helps build gets to own a piece of the building",
-        "When the building makes money, everyone gets paid"
-      ],
-      "how_to_join_title": "🤝 How You Join",
-      "how_to_join": [
-        "<strong>Your Work = Your Share:</strong> Do plumbing? Get ownership. Do marketing? Get ownership.",
-        "<strong>No Money Needed:</strong> Just bring your skills, or bring money and skills for bigger ownership",
-        "<strong>Simple Math:</strong> $10,000 of work = $10,000 of ownership",
-        "<strong>You Help Decide:</strong> Have a say in things you know about"
-      ],
-      "how_you_make_money_title": "💰 How You Make Money",
-      "how_you_make_money": [
-        "<strong>Monthly Income:</strong> Get paid every month from rent collected",
-        "<strong>Sale Profits:</strong> Get paid when building sells",
-        "<strong>Value Growth:</strong> Your share grows in value over time",
-        "<strong>Tax Savings:</strong> Save money on taxes (like any business owner)",
-        "<strong>Discounted Units:</strong> Buy your own residential unit at deep discount",
-        "<strong>STR Hotel Access:</strong> Own hospitality suites for long-term rental income with tax benefits"
-      ],
-      "why_its_faster_title": "⚡ Why It's Faster",
-      "why_its_faster": [
-        "<strong>No Bank Delays:</strong> No waiting for bank approvals (saves 6-12 months)",
-        "<strong>No Paperwork:</strong> No bank paperwork or meetings",
-        "<strong>Quick Start:</strong> Everyone starts working right away",
-        "<strong>Fast Decisions:</strong> Decisions made quickly by the team"
-      ],
-      "real_examples_title": "📈 Real Examples",
-      "real_examples": [
-        "<strong>Miami Building:</strong> 75 apartments, expecting $38 million in sales",
-        "<strong>Buffalo Project:</strong> 5 buildings on Niagara Street",
-        "<strong>Your Future:</strong> Join one project, then another, build wealth"
-      ],
-      "who_can_join_title": "👥 Who Can Join",
-      "who_can_join": [
-        "Cash Partners: Pay for city development fees, materials & professionals we couldn't get as partners",
-        "Electricians, plumbers, builders",
-        "Lawyers, accountants",
-        "Marketing people, salespeople",
-        "Anyone with useful skills"
-      ],
-      "why_it_works_title": "✨ Why It Works",
-      "why_it_works": [
-        "<strong>Everyone Invested:</strong> Everyone wants the project to succeed (we all own it!)",
-        "<strong>Better Quality:</strong> Better work quality (protecting our investment)",
-        "<strong>Community Impact:</strong> Neighbors happy (local people involved)",
-        "<strong>No Debt Stress:</strong> No debt hanging over the project"
-      ],
-      "bottom_line_title": "🎯 Bottom Line",
-      "bottom_line": [
-        "You work, you own, you earn",
-        "No banks, no debt, no delays",
-        "Build wealth without needing cash upfront",
-        "Be a business owner, not just a worker"
-      ],
-      "simple_summary": "It's simple: We're all partners building together, sharing the profits together!",
-      "video_title": "🎬 Watch Project Vision"
-    },
-    "financials": {
-      "title": "📈 Financial Overview",
-      "chart_title": "Revenue Breakdown - ${total_revenue}",
-      "investment_title": "💰 Investment Highlights",
-      "cost_analysis_title": "💰 Cost Analysis",
-      "cost_chart_title": "Development Costs - ${development_costs}",
-      "market_title": "📈 Market Comparables",
-      "market_chart_title": "Tonawanda Market Analysis",
-      "market_points": [
-        "<strong>Rental Range:</strong> $1.84 - $2.94/sq ft annually",
-        "<strong>Sale Range:</strong> $250 - $451/sq ft",
-        "<strong>Days on Market:</strong> 9-12 days average",
-        "<strong>Market Growth:</strong> 10-18% year-over-year"
-      ]
-    },
-    "project": {
-      "title": "🏢 Project Specs",
-      "phase_title": "Phase 1: Base Development",
-      "specs": [
-        "<strong>Location:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${address}",
-        "<strong>Type:</strong> ${type}",
-        "<strong>Size:</strong> ${size}",
-        "<strong>Ground Floor:</strong> Commercial/Retail Space",
-        "<strong>Upper Floors:</strong> Residential & STR Units"
-      ],
-      "partner_categories_title": "🎯 Partner Categories"
-    },
-    "renderings": {
-      "title": "🎨 Project Renderings",
-      "description": "Professional architectural visualizations",
-      "building_features_title": "🏢 Building Features",
-      "amenities_title": "🏗️ Amenities"
-    },
+    "name": "Fort Myers Direct Stay",
+    "description": "Direct-booking short-term rental website for a Fort Myers, Florida apartment.",
+    "status": "first_location_draft",
     "contact": {
-      "ready_title": "📞 Ready to Partner?",
-      "partnership_title": "Partnership Inquiries",
-      "next_steps_title": "🚀 Next Steps",
-      "next_steps_description": "Join the \"Partners Not Paychecks\" revolution",
-      "express_interest": "📧 Express Interest",
-      "call_now": "📞 Call Now"
-    },
-    "gage_exclusive": {
-      "title": "👑 Gage - Exclusive Ground-Level Partnership",
-      "subtitle": "Current Tenant | Future Pillar Partner",
-      "intro_title": "🎯 Your Unique Advantage",
-      "intro_description": "As our current tenant at 2829 Niagara, you have first-hand knowledge of this location's potential. We're offering you an exclusive ground-level partnership opportunity in what could become a multi-billion dollar scalable development model.",
-      "current_situation_title": "🏢 Current Building Solutions",
-      "current_building_benefits": [
-        "<strong>Hot Sauna & Massage Buildout:</strong> We'll provide website development and marketing assistance",
-        "<strong>Long-term Lease Security:</strong> Guaranteed lease until new development begins",
-        "<strong>Pro-rata Protection:</strong> If excavation starts early, you'll receive proportional compensation",
-        "<strong>Zero Investment Risk:</strong> We help you grow your current business while planning future partnership"
-      ],
-      "partnership_advantages_title": "💎 Ground-Level Partnership Advantages",
-      "partnership_benefits": [
-        "<strong>Founding Partner Status:</strong> Get in on the ground floor of a revolutionary development model",
-        "<strong>Commission Structure:</strong> Earn commissions on every partner you bring to the table",
-        "<strong>Sub-contractor Network:</strong> Convert your existing sub-contractors into partners",
-        "<strong>Prime Commercial Space:</strong> Lucrative rental terms in the new building for your wellness business",
-        "<strong>STR Hotel Unit Access:</strong> Take advantage of short-term rental opportunities",
-        "<strong>Tax Benefits:</strong> Depreciation advantages and investment tax benefits",
-        "<strong>Equity Growth:</strong> Share in $38M+ projected revenue as a founding partner",
-        "<strong>Future Projects:</strong> Priority access to upcoming developments in the scalable model"
-      ],
-      "financial_opportunity_title": "📈 Financial Opportunity Overview",
-      "financial_highlights": [
-        "<strong>Project Value:</strong> $38M total revenue projection",
-        "<strong>Your Equity Share:</strong> Based on contribution level (cash, services, or hybrid)",
-        "<strong>Partner Recruitment Bonus:</strong> Commission on successful partner referrals",
-        "<strong>Commercial Space ROI:</strong> Premium location for wellness/spa services",
-        "<strong>STR Revenue Share:</strong> Participate in hotel room revenue streams"
-      ],
-      "scaling_vision_title": "🚀 The Multi-Billion Dollar Vision",
-      "scaling_description": "This isn't just one building - it's a proven model that can scale across multiple markets. As a ground-level partner, you'll have opportunities in future developments, creating a portfolio of equity positions.",
-      "next_steps_title": "⚡ Your Next Steps",
-      "action_items": [
-        "<strong>Current Business Protection:</strong> Let's discuss your sauna/massage buildout plans",
-        "<strong>Partnership Structure:</strong> Review contribution options (cash, services, hybrid)",
-        "<strong>Network Assessment:</strong> Identify sub-contractors who could become partners",
-        "<strong>Timeline Planning:</strong> Align your business growth with development schedule"
-      ],
-      "exclusive_offer_title": "🎁 Exclusive Tenant-to-Partner Offer",
-      "exclusive_terms": [
-        "<strong>No Upfront Risk:</strong> Continue current operations while we plan transition",
-        "<strong>Marketing Support:</strong> Website and promotional assistance for current business",
-        "<strong>Lease Protection:</strong> Guaranteed terms until construction begins",
-        "<strong>Priority Positioning:</strong> First choice of commercial space in new building",
-        "<strong>Founding Partner Benefits:</strong> Enhanced profit sharing as early adopter"
-      ]
+      "name": "Tiffany Durilla",
+      "email": "durillaprop@gmail.com",
+      "phone": "716-421-1210"
     }
   },
-  "features": {
-    "building": [
-      "Dramatic evening exteriors",
-      "Modern waterfront integration",
-      "Premium dining concepts",
-      "Full-service spa facilities"
-    ],
-    "amenities": [
-      "Rooftop entertainment decks",
-      "Pet-friendly dog park",
-      "Fitness centers (2 locations)",
-      "Hotel-quality reception"
-    ]
-  },
-  "partner_categories": [
+  "locations": [
     {
-      "name": "Cash Partners",
-      "icon": "💵",
-      "description": "Private capital investors"
-    },
-    {
-      "name": "Service Partners", 
-      "icon": "🔧",
-      "description": "Contractors & specialists"
-    },
-    {
-      "name": "Technical Partners",
-      "icon": "⚡",
-      "description": "MEP & technical experts"
-    },
-    {
-      "name": "Material Partners",
-      "icon": "🧧",
-      "description": "Suppliers & materials"
+      "id": "fort-myers-fl-001",
+      "name": "Fort Myers 2 Bed 2 Bath Apartment",
+      "market": "Fort Myers, Florida",
+      "type": "Short-term sublease rental",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "square_feet": 1200,
+      "minimum_nights": 3,
+      "cleaning_fee": 100,
+      "nightly_rate_placeholder": 150,
+      "amenities": [
+        "Internet",
+        "Cable TV",
+        "Basic fishing equipment",
+        "Local food, shopping, entertainment, and travel guide"
+      ],
+      "approval_notes": [
+        "Confirm lease and sublease permission",
+        "Confirm building and association rules",
+        "Confirm local short-term rental regulations",
+        "Confirm taxes, insurance, and rental agreement workflow"
+      ],
+      "travel": {
+        "preferred_origin_market": "Niagara Falls / Buffalo, New York",
+        "preferred_air_route": {
+          "airline": "Allegiant Air",
+          "origin_airport": "Niagara Falls International Airport (IAG)",
+          "destination_airport": "Punta Gorda Airport (PGD)",
+          "positioning": "Pre-book low base fares when available; verify live fares, bags, seats, and route schedule directly with Allegiant."
+        },
+        "ground_transportation_estimates": [
+          {
+            "route": "Punta Gorda Airport (PGD) to Fort Myers",
+            "estimate": "$40-$70 rideshare; $70-$80+ pre-arranged car service"
+          },
+          {
+            "route": "Southwest Florida International Airport (RSW) to Fort Myers",
+            "estimate": "$25-$45 rideshare or taxi to central Fort Myers; higher to beaches and islands"
+          }
+        ]
+      },
+      "local_guide_categories": [
+        "Beaches and outdoors",
+        "Fishing and water days",
+        "Entertainment",
+        "Food spots",
+        "Shopping",
+        "Three-day sample itinerary"
+      ],
+      "white_glove_services": [
+        "Arrival coordination",
+        "Airport transfer guidance",
+        "Check-in walkthrough",
+        "Grocery or starter supply coordination",
+        "Personalized food, shopping, and entertainment recommendations",
+        "Companion-style local area guide by advance booking"
+      ]
     }
   ],
-  "labels": {
-    "residential_label": "Residential",
-    "str_label": "STR Hotel Rooms",
-    "retail_label": "Retail",
-    "gross_profit_label": "Gross Profit",
-    "roi_label": "ROI",
-    "interest_costs_label": "Interest Costs",
-    "total_units_label": "Total Units",
-    "profit_margin_label": "Profit Margin",
-    "total_revenue_label": "Total Revenue"
-  },
-  "version": "v2.0-mobile"
+  "future_location_template": {
+    "required_fields": [
+      "name",
+      "market",
+      "address",
+      "bedrooms",
+      "bathrooms",
+      "square_feet",
+      "minimum_nights",
+      "cleaning_fee",
+      "nightly_rate",
+      "photos",
+      "house_rules",
+      "travel_routes",
+      "local_guide",
+      "white_glove_services"
+    ],
+    "automation_targets": [
+      "Booking calendar",
+      "Payment processor",
+      "Signed rental agreement",
+      "Guest email and SMS workflow",
+      "Cleaning schedule",
+      "Local host assignment"
+    ]
+  }
 }
